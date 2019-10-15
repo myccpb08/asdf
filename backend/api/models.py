@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django import forms
 
 
 class Profile(models.Model):
@@ -11,13 +12,11 @@ class Profile(models.Model):
 
 #  wrapper for create user Profile
 def create_profile(**kwargs):
-
     user = User.objects.create_user(
         username=kwargs['username'],
         password=kwargs['password'],
         is_active=True,
     )
-
     profile = Profile.objects.create(
         user=user,
         gender=kwargs['gender'],

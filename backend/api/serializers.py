@@ -1,4 +1,4 @@
-from .models import Profile, Movie
+from .models import Profile, Movie, User
 from rest_framework import serializers
 
 
@@ -24,3 +24,10 @@ class MovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
         fields = ('id', 'title', 'genres_array')
+
+class UserSerializer(serializers.ModelSerializer):
+    genres_array = serializers.ReadOnlyField()
+
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'userid', 'password')

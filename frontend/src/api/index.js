@@ -8,4 +8,9 @@ export default {
       params,
     })
   },
+  addMember(params) {
+    return axios.get(`${apiUrl}/join/`, {
+      params,
+    })
+  },
 }
