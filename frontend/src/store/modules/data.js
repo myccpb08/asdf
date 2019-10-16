@@ -21,17 +21,9 @@ const actions = {
 
     commit('setMovieSearchList', movies)
   },
-  async addMember({ commit }, params) {
-    alert("enter addMember!!")
-    const resp = await api.addMember(params)
-    console.log(resp)
-    const user = resp.data.map(d => ({
-      id: d.id,
-      userid: d.userid,
-      username: d.username,
-      password: d.password,
-    }))
-    commit('printUserInfo', user)
+  async signUp({ commit }, params) {
+    console.log("enter addMember!!")
+    await api.signUp(params)
   },
 }
 

@@ -5,7 +5,7 @@
             <!-- 회원가입 폼-->
             <v-flex xs6>
                 <div>회원가입!!</div>
-                <JoinForm :submit="addMember"/>
+                <SignUpForm :submit="signUp"/>
             </v-flex>
         </v-layout> 
     </v-container>
@@ -13,12 +13,12 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import JoinForm from "../JoinForm";
+import SignUpForm from "../SignUpForm";
 export default {
     components: {
-        JoinForm
+        SignUpForm
     },
     data: () => ({}),
-    methods: mapActions("data", ["addMember"])
+    methods: mapActions("data", ["signUp"])
 };
 </script>

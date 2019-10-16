@@ -8,9 +8,9 @@ export default {
       params,
     })
   },
-  addMember(params) {
-    return axios.get(`${apiUrl}/join/`, {
-      params,
+  signUp(params) {
+    return axios.post(`${apiUrl}/auth/signup/`, {
+      user: params,
     })
   },
 }
