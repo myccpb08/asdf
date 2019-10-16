@@ -9,11 +9,12 @@ resp = requests.get(test_url)
 html = BeautifulSoup(resp.content, 'html.parser')
 print(html)
 # #댓글 전체 수
-# pageTotal= html.find('div', {'class':'score_total'}).find('strong').findChildren('em')[1].getText()
-# pageTotal = int(pageTotal.replace(',', ''))
+pageTotal= html.find('div', {'class':'score_total'}).find('strong').findChildren('em')[1].getText()
+pageTotal = int(pageTotal.replace(',', ''))
 
-# for i in range(1, 101):
-#     url = test_url + '&page=' + str(i)
-#     get_data(url)
+for i in range(1, 101):
+    url = test_url + '&page=' + str(i)
+    print(url)
+    # get_data(url)
 
 
