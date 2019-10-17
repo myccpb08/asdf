@@ -1,38 +1,20 @@
 <template>
   <v-app id="app">
-    <v-app-bar app clipped-left color="indigo">
-      <v-app-bar-nav-icon class="white--text" @click="drawer = !drawer" />
-      <span class="title ml-3 mr-5 white--text">영화 추천 서비스</span>
-      <v-spacer />
-    </v-app-bar>
+    <div class="header">
+      <img src="./DdakJeongE.png" style="width:250px;">
 
-    <v-navigation-drawer v-model="drawer" app clipped color="grey lighten-4">
-      <v-list dense class="grey lighten-4">
-        <template v-for="(choice, i) in choices">
-          <v-list-item
-            :key="i"
-            @click="() => {
-              if (choice.path) {
-                goTo(choice.path)
-              }
-            }"
-          >
-            <v-list-item-action>
-              <v-icon>{{ choice.icon }}</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title class="subtitle-2 font-weight-bold black--text">{{ choice.text }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </template>
-      </v-list>
-    </v-navigation-drawer>
+      <v-flex xs6 class="search_form_div">
+        <MovieSearchForm :submit="searchMovies" />
+      </v-flex>
+    </div>
 
-    <v-content>
+    <Mainheader/>
+
+     <v-content>
       <v-container fluid fill-height class="grey lighten-4">
         <v-layout justify-center align-center>
           <!-- each pages will be placed here -->
-          <router-view />
+           <router-view/>
         </v-layout>
       </v-container>
     </v-content>
@@ -41,8 +23,15 @@
 
 <script>
 import router from "./router";
+import Mainheader from './components/Mainheader'
+import MovieSearchForm from './components/MovieSearchForm'
 
 export default {
+  components : {
+    'Mainheader': Mainheader,
+    'MovieSearchForm' : MovieSearchForm,
+  },
+
   data: () => ({
     drawer: null,
     choices: [
@@ -53,6 +42,9 @@ export default {
       }
     ]
   }),
+
+
+
   methods: {
     goTo: function(path) {
       router.push({ name: path });
@@ -64,5 +56,20 @@ export default {
 <style>
 #keep .v-navigation-drawer__border {
   display: none;
+}
+
+.header{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+}
+
+.header img{
+  position: absolute;
+  top: 50%;
+  left: 2%;
+  transform: translateY(-50%);
 }
 </style>

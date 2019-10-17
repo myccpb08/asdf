@@ -1,9 +1,11 @@
 <template>
-  <v-form ref="form">
-    <v-text-field v-model="title" label="영화 제목" />
-    <v-layout justify-center pa-10>
-      <v-btn large color="indigo white--text" @click="onSubmit">Search</v-btn>
-    </v-layout>
+  <v-form ref="form" class="search_form_div">
+    <v-text-field 
+      v-model="title" 
+      append-icon="mdi-magnify"
+      label="여기는 app.vue"
+      @click:append="onSubmit">
+    </v-text-field>
   </v-form>
 </template>
 
@@ -23,9 +25,16 @@ export default {
       const params = {
         title: this.title,
       };
-      
       this.submit(params);
     }
   }
 };
 </script>
+<style>
+.search_form_div{
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>

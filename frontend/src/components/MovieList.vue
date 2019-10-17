@@ -16,6 +16,7 @@
   </v-container>
 </template>
 
+
 <script>
 import MovieListCard from "./MovieListCard"
 export default {
