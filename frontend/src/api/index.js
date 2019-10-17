@@ -13,4 +13,9 @@ export default {
       user: params,
     })
   },
+  getAllUsers() {
+    return axios.get(`${apiUrl}/auth/allUsers/`).then((result) => {
+      return result.data
+    });
+  }
 }

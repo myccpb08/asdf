@@ -25,6 +25,9 @@ const actions = {
     console.log("enter addMember!!")
     await api.signUp(params)
   },
+  async getAllUsers() {
+    return await api.getAllUsers()
+  },
 }
 
 // mutations
