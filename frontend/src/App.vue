@@ -32,16 +32,26 @@ export default {
     'MovieSearchForm' : MovieSearchForm,
   },
 
-  data: () => ({
-    drawer: null,
-    choices: [
-      {
-        icon: "mdi-movie",
-        text: "영화 검색",
-        path: "movie-search"
-      }
-    ]
-  }),
+  // data: () => ({
+  //   drawer: null,
+  //   choices: [
+  //     {
+  //       icon: "mdi-movie",
+  //       text: "영화 검색",
+  //       path: "movie-search"
+  //     },
+  //     {
+  //       icon: "mdi-account-supervisor",
+  //       text: "회원 리스트",
+  //       path: "user-list"
+  //     },
+  //     {
+  //       icon: "mdi-account-arrow-right",
+  //       text: "로그인",
+  //       path: "login"
+  //     },
+  //   ]
+  // }),
 
 
 
