@@ -4,6 +4,7 @@ import api from '../../api'
 const state = {
   // shape: [{ id, title, genres, viewCnt, rating }]
   movieSearchList: [],
+  userInfo: "",
 }
 
 // actions
@@ -20,6 +21,13 @@ const actions = {
 
     commit('setMovieSearchList', movies)
   },
+  async signUp({ commit }, params) {
+    console.log("enter addMember!!")
+    await api.signUp(params)
+  },
+  async getAllUsers() {
+    return await api.getAllUsers()
+  },
 }
 
 // mutations
@@ -27,11 +35,14 @@ const mutations = {
   setMovieSearchList(state, movies) {
     state.movieSearchList = movies.map(m => m)
   },
+  printUserInfo(state, user) {
+    state.userInfo = user.map(m => m)
+  }
 }
 
 export default {
   namespaced: true,
   state,
   actions,
-  mutations
+  mutations,
 }
