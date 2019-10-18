@@ -9,7 +9,7 @@
     </div>
 
     <Mainheader/>
-
+    <MainPage/>
      <v-content>
       <v-container fluid fill-height class="grey lighten-4">
         <v-layout justify-center align-center>
@@ -24,10 +24,12 @@
 <script>
 import router from "./router";
 import Mainheader from './components/Mainheader'
+import MainPage from './components/pages/MainPage'
 import MovieSearchForm from './components/MovieSearchForm'
 
 export default {
   components : {
+    'MainPage' : MainPage,
     'Mainheader': Mainheader,
     'MovieSearchForm' : MovieSearchForm,
   },
