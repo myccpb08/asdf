@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from api.models import Post, PostComment
 from rest_framework.response import Response
 
-@api_view(['GET', 'POST', 'DELETE'])
+@api_view(['GET', 'POST'])
 def posts(request):
     return
 
