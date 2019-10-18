@@ -2,10 +2,6 @@
   <v-app id="app">
     <div class="header">
       <img src="./DdakJeongE.png" style="width:250px;">
-
-      <v-flex xs6 class="search_form_div">
-        <MovieSearchForm :submit="searchMovies" />
-      </v-flex>
     </div>
 
     <Mainheader/>
