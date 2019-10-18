@@ -11,12 +11,12 @@
     <Mainheader/>
 
      <v-content>
-      <v-container fluid fill-height class="grey lighten-4">
-        <v-layout justify-center align-center>
+      <!-- <div class="grey lighten-4">
+        <v-layout justify-center> -->
           <!-- each pages will be placed here -->
-           <router-view/>
-        </v-layout>
-      </v-container>
+           <router-view />
+        <!-- </v-layout>
+      </div> -->
     </v-content>
   </v-app>
 </template>
