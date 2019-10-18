@@ -1,15 +1,15 @@
 <template>
     <v-form ref="form">
-        <v-text-field v-model="username" label="이름"/>
-        <v-text-field v-model="id" label="ID"/>
+        <v-text-field v-model="email" label="ID"/>
         <v-text-field v-model="password" label="PASSWORD"/>
         <v-layout justify-center pa-10>
-            <v-btn large color="indigo white--text" @click="onSubmit">Join</v-btn>
+            <v-btn large color="indigo white--text" @click="onSubmit">Login</v-btn>
         </v-layout>
     </v-form>
 </template>
 
 <script>
+import router from "../router"
 export default {
     props: {
         submit: {
@@ -18,18 +18,18 @@ export default {
         }
     },
     data: () => ({
-        username: "",
-        id: "",
-        password: ""
+        email: "",
+        password: "",
     }),
     methods: {
         onSubmit: function() {
             const params = {
-                username: this.username,
-                id: this.id,
+                email: this.email,
                 password: this.password,
             };
             this.submit(params);
+
+            router.push("/login")
         }
     }
 };

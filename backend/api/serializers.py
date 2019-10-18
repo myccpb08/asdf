@@ -5,17 +5,17 @@ from rest_framework import serializers
 class ProfileSerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField()
     username = serializers.SerializerMethodField('get_username')
-    is_staff = serializers.SerializerMethodField('get_is_staff')
+    password = serializers.SerializerMethodField('get_password')
 
     class Meta:
         model = Profile
-        fields = ('id', 'username', 'is_staff', 'gender', 'age', 'occupation')
-
+        fields = ('id', 'username', 'password', 'email', 'gender', 'location', 'marriage', 'job', 'disability', 'familysize', 'insurance', 'incomequintile')
+        
     def get_username(self, obj):
         return obj.user.username
 
-    def get_is_staff(self, obj):
-        return obj.user.is_staff
+    def get_password(self, obj):
+        return obj.user.password
 
 
 class MovieSerializer(serializers.ModelSerializer):
@@ -30,4 +30,4 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'userid', 'password')
+        fields = ('id', 'username', 'password', 'email')
