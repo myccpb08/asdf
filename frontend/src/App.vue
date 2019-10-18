@@ -55,7 +55,12 @@ export default {
         icon: "mdi-account-supervisor",
         text: "회원 리스트",
         path: "user-list"
-      }
+      },
+      {
+        icon: "mdi-account-arrow-right",
+        text: "로그인",
+        path: "login"
+      },
     ]
   }),
   methods: {
