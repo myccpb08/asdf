@@ -3,22 +3,15 @@ import requests
 import math
 from bs4 import BeautifulSoup
 
-import os
-import sys
-sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-from backend.api.models import Category
-
-
-def main():
-    putCategory()
-    test_url = "http://www.bokjiro.go.kr/welInfo/retrieveWelInfoBoxList.do?searchIntClId=01&pageUnit=10&pageIndex=1"
-    resp = requests.get(test_url)
-    html = BeautifulSoup(resp.content, 'html.parser')
-    lis = html.find('div', {'class': 'catBoxIn'}).findAll('a')
-
-if __name__ == "__main__":
-    main()
-
+# def main():
+#     putCategory()
+#     test_url = "http://www.bokjiro.go.kr/welInfo/retrieveWelInfoBoxList.do?searchIntClId=01&pageUnit=10&pageIndex=1"
+#     resp = requests.get(test_url)
+#     html = BeautifulSoup(resp.content, 'html.parser')
+#     lis = html.find('div', {'class': 'catBoxIn'}).findAll('a')
+#
+# if __name__ == "__main__":
+#     main()
 
 def getList(url):
     resp = requests.get(url)
@@ -39,11 +32,14 @@ def putCategory():
     resp = requests.get(test_url)
     html = BeautifulSoup(resp.content, 'html.parser')
     lis = html.find('div', {'class': 'catBoxIn'}).findAll('a')
+
     for li in lis:
         categoryNum = li.get('href')[29:-7]
         name = li.get('title')
         category = Category.objects.create(id= categoryNum, name=name)
         category.save()
+
+
 
 
 # test_url = "http://www.bokjiro.go.kr/welInfo/retrieveWelInfoDetail.do?welInfSno=95"    #상세보기
@@ -54,6 +50,11 @@ def putCategory():
 # test_url="http://www.bokjiro.go.kr/welInfo/retrieveGvmtWelInfo.do?searchIntClId=01&searchCtgId=999&welInfSno=283&pageGb=1&domainName=&firstIndex=0&recordCountPerPage=10&cardListTypeCd=list&welSrvTypeCd=01&searchGb=01&searchWelInfNm=&pageUnit=10&key1=list&stsfCn="
 
 
+putCategory()
+test_url = "http://www.bokjiro.go.kr/welInfo/retrieveWelInfoBoxList.do?searchIntClId=01&pageUnit=10&pageIndex=1"
+resp = requests.get(test_url)
+html = BeautifulSoup(resp.content, 'html.parser')
+lis = html.find('div', {'class': 'catBoxIn'}).findAll('a')
 
 
 
