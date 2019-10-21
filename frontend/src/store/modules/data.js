@@ -5,6 +5,7 @@ const state = {
   // shape: [{ id, title, genres, viewCnt, rating }]
   movieSearchList: [],
   userInfo: "",
+  postList: [],
 }
 
 // actions
@@ -21,6 +22,7 @@ const actions = {
 
     commit('setMovieSearchList', movies)
   },
+
   async signUp({ commit }, params) {
     console.log("enter addMember!!")
     await api.signUp(params)
@@ -28,6 +30,37 @@ const actions = {
   async getAllUsers() {
     return await api.getAllUsers()
   },
+
+  async getallnotices(){
+    return await api.getallnotices()
+  },
+
+  async noticewrite({commit}, params){
+    await api.noticewrite(params)
+  },
+
+  async getallboards(){
+    var a = await api.getallboards()
+    console.log('data.js')
+    console.log(a)
+    return a
+  },
+
+  async boardwrite({commit}, params){
+    console.log('월요일')
+    console.log(params)
+    console.log("data.js까지 왔음")
+    await api.boardwrite(params)
+  },
+
+  async getboarddetail({commit}, params){
+    const resp = await api.getboarddetail(params)
+    const summary = {
+        title: resp.data.title,
+        content: resp.data.content
+    }
+    commit('setSummary', summary)
+  }
 }
 
 // mutations

@@ -2,24 +2,36 @@
   <div>
     <v-app-bar max-width clipped-left color="warning">
       <v-app-bar-nav-icon class="white--text" @click="drawer = !drawer" />
-      <span class="title ml-3 mr-5 white--text">복지정책검색</span>
-      <v-spacer/>
-      <span class="title ml-3 mr-5 white--text">공지사항</span>
-      <v-spacer/>
-      <span class="title ml-3 mr-5 white--text">자유게시판</span>
-      <v-spacer/>
-      <span class="title ml-3 mr-5 white--text">딱정함</span>
-      <v-spacer/>
-      <!-- <v-btn text large v-on="on">
-        로그인
-      </v-btn>
-      <v-btn text large v-on="on">
-        회원가입
-      </v-btn> -->
-    
-      <router-link to='/mypage' style="text-decoration:none;">
-        <span class="title ml-3 mr-5 white--text" >마이페이지</span>
-      </router-link>
+        <router-link to='/policy/search' style="text-decoration:none;">
+          <span class="title ml-3 mr-5 white--text">복지정책검색</span>
+        </router-link>
+        <v-spacer/>
+
+        <router-link to='/notice' style="text-decoration:none;">
+          <span class="title ml-3 mr-5 white--text">공지사항</span>
+        </router-link>
+        <v-spacer/>
+
+        <router-link to='/board' style="text-decoration:none;">
+          <span class="title ml-3 mr-5 white--text">자유게시판</span>
+        </router-link>
+        <v-spacer/>
+
+        <router-link to='/favorite' style="text-decoration:none;">
+          <span class="title ml-3 mr-5 white--text">딱정함</span>
+        </router-link>
+        <v-spacer/>
+
+        <!-- <v-btn text large v-on="on">
+          로그인
+        </v-btn>
+        <v-btn text large v-on="on">
+          회원가입
+        </v-btn> -->
+      
+        <router-link to='/mypage' style="text-decoration:none;">
+          <span class="title ml-3 mr-5 white--text" >마이페이지</span>
+        </router-link>
    
       <!-- <v-btn text large v-on="on">
         <router-link to='/mypage'>My page</router-link>
@@ -78,7 +90,7 @@ export default {
       {
         icon: "mdi-movie",
         text: "정책 상세 검색",
-        path: "movie-search"
+        path: "policy-search"
       },
       {
         icon: "mdi-account-supervisor",
