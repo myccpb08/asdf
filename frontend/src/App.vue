@@ -1,39 +1,47 @@
 <template>
   <v-app id="app">
-    <div class="header">
-      <img src="./DdakJeongE.png" style="width:250px;">
+    <template v-if="user_page">
+      <div class="header">
+        <img src="./DdakJeongE.png" style="width:250px;" />
 
-      <v-flex xs6 class="search_form_div">
-        <MovieSearchForm :submit="searchMovies" />
-      </v-flex>
-    </div>
+        <v-flex xs6 class="search_form_div">
+          <MovieSearchForm :submit="searchMovies" />
+        </v-flex>
+      </div>
 
-    <Mainheader/>
-    <MainPage/>
-     <v-content>
+      <Mainheader />
+      <MainPage />
+      <!-- <v-content>
       <v-container fluid fill-height class="grey lighten-4">
-        <v-layout justify-center align-center>
-          <!-- each pages will be placed here -->
-           <router-view/>
-        </v-layout>
+      <v-layout justify-center align-center>-->
+      <!-- each pages will be placed here -->
+      <router-view />
+      <!-- </v-layout>
       </v-container>
-    </v-content>
+      </v-content>-->
+    </template>
+
+    <template v-else>
+      <router-view />
+    </template>
   </v-app>
 </template>
 
 <script>
 import router from "./router";
-import Mainheader from './components/Mainheader'
-import MainPage from './components/pages/MainPage'
-import MovieSearchForm from './components/MovieSearchForm'
+import Mainheader from "./components/Mainheader";
+import MainPage from "./components/pages/MainPage";
+import MovieSearchForm from "./components/MovieSearchForm";
 
 export default {
-  components : {
-    'MainPage' : MainPage,
-    'Mainheader': Mainheader,
-    'MovieSearchForm' : MovieSearchForm,
+  components: {
+    MainPage: MainPage,
+    Mainheader: Mainheader,
+    MovieSearchForm: MovieSearchForm
   },
-
+  data: () => ({
+    user_page: false
+  }),
   // data: () => ({
   //   drawer: null,
   //   choices: [
@@ -55,8 +63,6 @@ export default {
   //   ]
   // }),
 
-
-
   methods: {
     goTo: function(path) {
       router.push({ name: path });
@@ -70,7 +76,7 @@ export default {
   display: none;
 }
 
-.header{
+.header {
   position: relative;
   display: flex;
   justify-content: center;
@@ -78,7 +84,7 @@ export default {
   height: 20vh;
 }
 
-.header img{
+.header img {
   position: absolute;
   top: 50%;
   left: 2%;

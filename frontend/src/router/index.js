@@ -15,7 +15,7 @@ const router = new VueRouter({
     { path: '/', component: EmptyPage, name: 'home' },
     { path: '/movies/search', component: MovieSearchPage, name: 'movie-search' },
     { path: '/mypage', component: Mypage, name:'mypage'},
-    { path: '/user/list', component: AdminPage, name: "user-list"},
+    { path: '/admin', component: AdminPage, name: "admin"},
     { path: '/signup', component: SignUpPage, name: 'SignUp' },
     { path: '/login', component: LoginPage, name: 'Login'}
   ],

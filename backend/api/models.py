@@ -49,7 +49,6 @@ class Movie(models.Model):
         return self.genres.strip().split('|')
 
 class Post(models.Model):
-    user = models.ForeignKey(User, on_delete = models.CASCADE)
     title = models.CharField(max_length=100)
     content = models.TextField()
 

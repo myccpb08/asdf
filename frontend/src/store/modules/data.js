@@ -5,6 +5,7 @@ const state = {
   // shape: [{ id, title, genres, viewCnt, rating }]
   movieSearchList: [],
   userInfo: "",
+  post: "ddddddd",
 }
 
 // actions
@@ -28,6 +29,10 @@ const actions = {
   async getAllUsers() {
     return await api.getAllUsers()
   },
+  
+  showData(context, payload) {
+    return context.commit('setPost', payload)
+  }
 }
 
 // mutations
@@ -37,6 +42,9 @@ const mutations = {
   },
   printUserInfo(state, user) {
     state.userInfo = user.map(m => m)
+  },
+  setPost(state, payload) {
+    return state.post=payload['text']
   }
 }
 
