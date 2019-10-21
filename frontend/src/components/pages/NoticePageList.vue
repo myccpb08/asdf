@@ -1,74 +1,107 @@
 <template>
-  <v-container class="mt-3 ml-5">
-    <div class="row">
-      <div class="span_10">
-        <h1>자유게시판</h1>
-      </div>
-      <div class="span_2" style="text-align:right;">
-        <router-link to="/board/write" style="text-decoration:none;">
-          <v-btn class="ma-2" tile outlined color="success">
-            <v-icon left>mdi-pencil</v-icon>Edit
-          </v-btn>
-        </router-link>
-      </div>
-    </div>
-    <br/>
-    <BoardPageList :getallboards="getallboards" />
+  <v-container class="pa-2" fluid grid-list-md>
+    <table class="sub_news" border="2" cellspacing="0">
+      <colgroup>
+        <col />
+        <col width="9%" />
+        <col width="8%" />
+        <col width="7%" />
+      </colgroup>
+      <thead>
+        <tr>
+          <th scope="col">제목</th>
+          <th scope="col">글쓴이</th>
+          <th scope="col">날짜</th>
+          <th scope="col">조회수</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="post in ListSliced" pa-2>
+            <td class="title">{{ post.title }}</td>
+            <td class="name">{{post.content}}</td>
+            <td class="date">2019/10/18</td>
+            <td class="hit">1234</td>
+        </tr>
+        <v-pagination v-if="maxPages > 1" v-model="page" :length="maxPages" />
+
+      </tbody>
+    </table>
   </v-container>
 </template>
 
 
 <script>
-import { mapState, mapActions } from "vuex";
-import BoardPageList from "./BoardPageList";
-
 export default {
-  components: {
-    BoardPageList
-  },
-
-  methods: {
-    ...mapActions("data", ["getallboards"])
-  },
-
-  mounted() {
-    console.log("로딩중");
-    console.log(this.$store.dispatch("data/getallboards"));
-    this.boardList = this.$store.dispatch("data/getallboards");
-  },
-
   props: {
-    BoardList: {
-      type: Array,
-      default: () => new Array()
+    getallnotices: {
+      type: Function,
+      default: () => {}
+    }
+  },
+  data: () => ({
+    boardList: [],
+    listPerPage: 10,
+    page: 1,
+  }),
+
+  async mounted() {
+    await this.getnotice();
+  },
+  methods: {
+    // setLoading() {
+    //     if(this.loading){
+    //         this.loading = false
+    //     }else{
+    //         this.loading = true
+    //     }
+    // },
+    async getnotice() {
+      // await this.setLoading()
+      this.boardList = await this.getallnotices();
+      this.boardList = this.boardList.reverse()
+      // await this.setLoading()
     }
   },
 
-  data: () => ({
-    listPerPage: 10,
-    page: 1,
-    totalletters: ["글1", "글2", "글3"],
-    boardList: []
-  }),
-
-  computed: {
+    computed: {
     // pagination related variables
     ListEmpty: function() {
-      return this.BoardList.length === 0;
+      return this.boardList.length === 0;
     },
     maxPages: function() {
       return Math.floor(
-        (this.BoardList.length + this.listPerPage - 1) / this.listPerPage
+        (this.boardList.length + this.listPerPage - 1) / this.listPerPage
       );
     },
     ListSliced: function() {
-      return this.BoardList.slice(
+      return this.boardList.slice(
         this.listPerPage * (this.page - 1),
         this.listPerPage * this.page
       );
     }
   }
 };
+// export default {
+//   props: {
+// id: {
+//   type: Number,
+//   default: 0
+// },
+//     title: {
+//       type: String,
+//       default: ""
+//     },
+//     content: {
+//       type: String,
+//       default: ""
+//     },
+//   },
+//   computed: {
+// genresStr: function() {
+//   return this.genres.join(" / ");
+// },
+//   }
+// };
 </script>
 
 <style>
@@ -137,11 +170,6 @@ export default {
 }
 
 /* 게시판 리스트 목록 */
-#atag {
-    text-align: left;
-    color : gray;
-}
-
 .sub_news,
 .sub_news th,
 .sub_news td {
@@ -165,8 +193,8 @@ export default {
   padding: 5px 0 6px;
   border-top: solid 1px #999;
   border-bottom: solid 1px #b2b2b2;
-  background-color: orange;
-  color: rgb(255, 255, 255);
+  background-color: #f1f1f4;
+  color: #333;
   font-weight: bold;
   line-height: 20px;
   vertical-align: top;
@@ -185,8 +213,8 @@ export default {
   line-height: normal;
 }
 .sub_news .title {
-  text-align: center;
-  padding-left: 0%;
+  text-align: left;
+  padding-left: 15px;
   font-size: 13px;
 }
 .sub_news .title .pic,
@@ -195,7 +223,7 @@ export default {
   vertical-align: middle;
 }
 .sub_news .title a.comment {
-  padding-left: 0%;
+  padding: 0;
   background: none;
   color: #f00;
   font-size: 12px;

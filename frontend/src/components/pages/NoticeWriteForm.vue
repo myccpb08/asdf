@@ -7,7 +7,7 @@
     <v-textarea rows="15" solo v-model="body"></v-textarea>
     <v-flex xs12 text-xs-center round my-5 class="text-center;" >
       <v-btn rounded color="primary" dark @click="onSubmit">작성</v-btn>
-      <router-link to="/board" style="text-decoration:none;">
+      <router-link to="/notice" style="text-decoration:none;">
         <v-btn rounded color="warning" dark>뒤로</v-btn>
       </router-link>
     </v-flex>

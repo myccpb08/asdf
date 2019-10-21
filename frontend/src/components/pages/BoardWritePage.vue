@@ -3,7 +3,7 @@
     <!-- <div style="margin-top:108px"></div> -->
         <div class="test">
           <h2>글쓰기</h2>
-          <BoardWriteForm></BoardWriteForm>
+          <BoardWriteForm :submit="boardwrite"></BoardWriteForm>
 
       </div>
     <!-- <div style="margin-top:78px"></div> -->
@@ -11,21 +11,23 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 import BoardWriteForm from './BoardWriteForm'
 
 
 export default {
   name: 'BoardWriter',
-  data(){
-    return{
-      title: '',
-      body: '',
-      img: ''
-    }
-  },
-  components: {
+    components: {
     BoardWriteForm
   },
+  data: () => ({}),
+  // computed: {
+  //   ...mapState({
+  //     movieList: state => state.data.movieSearchList
+  //   })
+  // },
+  methods: mapActions("data", ["boardwrite"])
+
 //   methods:{
 //     async postBoard(title, body, img){
 //       if(title == ''){

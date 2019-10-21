@@ -48,4 +48,17 @@ class Movie(models.Model):
     def genres_array(self):
         return self.genres.strip().split('|')
 
+class Notice(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+
+
+class Post(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+
+class PostComment(models.Model):
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    content = models.TextField()
 
