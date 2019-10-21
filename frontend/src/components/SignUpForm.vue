@@ -11,12 +11,15 @@
             hint="At least 8 characters"
             :rules="[passwordRules.required, passwordRules.min]"/>
         <v-select
-            v-model="favoriteValue"
-            :items="favoriteList"
+            v-model="items.value"
+            :items="items"
+            :menu-props="{ top: true, offsetY: true }"
             attach
             chips
+            outlined
             label="FAVORITE"
             multiple
+            @input="setSelected"
         ></v-select>
         <v-layout justify-center pa-10>
             <v-btn large color="indigo white--text" @click="onSubmit">Join</v-btn>
@@ -36,12 +39,25 @@ export default {
     data: () => ({
         username: "",
         password: "",
-        favoriteValue: ['01', '02', '03', '04', '05', ' 06', 
-                        '07', '08', '09', '10', '11', '12', 
-                        '13', '14', '15', '16'],
-        favoriteList: ['임신/출산', '영유아', '아동/청소년', '청년', '중장년', '노년', 
-                        '장애인', '한부모', '다문화(새터민)', '저소득층', '교육', '고용', 
-                        '주거', '건강', '서민금융', '문화'],
+        selected: "",
+        items: [
+            {text: '임신/출산', value: '01'},
+            {text: '영유아', value: '02'},
+            {text: '아동/청소년', value: '03'},
+            {text: '청년', value: '04'},
+            {text: '중장년', value: '05'},
+            {text: '노년', value: '06'},
+            {text: '장애인', value: '07'},
+            {text: '한부모', value: '08'},
+            {text: '다문화(새터민)', value: '09'},
+            {text: '저소득층', value: '10'},
+            {text: '교육', value: '11'},
+            {text: '고용', value: '12'},
+            {text: '주거', value: '13'},
+            {text: '건강', value: '14'},
+            {text: '서민금융', value: '15'},
+            {text: '문화', value: '16'}
+        ],
         emailRules: [ 
             v => !!v || "ID is Required!",
             v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
@@ -54,13 +70,18 @@ export default {
     }),
     methods: {
         onSubmit: function() {
+            console.log("selected : " + this.selected)
             const params = {
                 username: this.username,
                 password: this.password,
+                favoriteValue: this.selected,
             };
             this.submit(params);
 
             router.push("/user/list")
+        },
+        setSelected(value) {
+            this.selected = value
         }
     }
 };

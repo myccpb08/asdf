@@ -15,7 +15,7 @@ def signup(request):
         password = user.get('password', None)
         favorite = user.get('favoriteValue', None)
         print(user)
-        create_profile(username=username, password=password, favortie=favorite)
+        create_profile(username=username, password=password, favorite=favorite)
 
         return Response(status=status.HTTP_201_CREATED)
 

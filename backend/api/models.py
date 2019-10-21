@@ -1,9 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
+import re
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    favorite = models.ForeignKey(favorite, on_delete=models.CASCADE)
+    favorite = models.CharField(max_length=500, default="00")
+
+    # @property
+    # def favorite_array(self):
+    #     print(re.sub("'[]", '', self.favorite))
+    #     return re.sub("'[]", '', self.favorite)
 
 
 #  wrapper for create user Profile
