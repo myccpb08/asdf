@@ -9,7 +9,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ('id', 'username', 'password', 'email', 'gender', 'location', 'marriage', 'job', 'disability', 'familysize', 'insurance', 'incomequintile')
+        fields = ('id', 'username', 'favorite', 'password')
         
     def get_username(self, obj):
         return obj.user.username

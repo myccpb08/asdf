@@ -46,5 +46,7 @@ export default {
 
   getboarddetail(params){
     console.log(params)
+
+    
   }
 }
