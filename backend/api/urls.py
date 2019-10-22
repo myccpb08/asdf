@@ -3,6 +3,7 @@ from api.views import movie_views
 from api.views import auth_views
 from api.views import post_views
 from api.views import user_views
+from api.views import crawling_views
 
 urlpatterns = [
     url('auth/signup-many/$', auth_views.signup_many, name='sign_up_many'),
@@ -12,4 +13,6 @@ urlpatterns = [
     
     url('auth/signup/$', user_views.signup, name='sign_up'),
     url('auth/allUsers/$', user_views.getAllUsers, name='get_all_user'),
+
+    url('crawling/category/$', crawling_views.setCategories, name='set_categories'),
 ]
