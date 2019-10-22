@@ -54,12 +54,15 @@ const actions = {
   },
 
   async getboarddetail({commit}, params){
+    console.log('여기?')
     const resp = await api.getboarddetail(params)
+    console.log(resp)
     const summary = {
         title: resp.data.title,
         content: resp.data.content
     }
-    commit('setSummary', summary)
+    return summary
+    // commit('setSummary', summary)
   }
 }
 

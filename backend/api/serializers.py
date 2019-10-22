@@ -1,4 +1,4 @@
-from .models import Profile, Movie, User, Post
+from .models import Profile, Movie, User, Post, Notice
 from rest_framework import serializers
 
 
@@ -27,15 +27,18 @@ class MovieSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     genres_array = serializers.ReadOnlyField()
-
     class Meta:
         model = User
         fields = ('id', 'username', 'password', 'email')
 
 
 class BoardSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Post
-        fields = ('title', 'content')
+        fields = ('id', 'title', 'content')
+
+class NoticeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Notice
+        fields = ('id', 'title', 'content')
 

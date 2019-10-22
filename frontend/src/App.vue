@@ -3,17 +3,12 @@
     <div class="header">
       <router-link to="/" style="text-decoration:none;">
       <img src="./DdakJeongE.png" style="width:250px;">
-<<<<<<< HEAD
       </router-link>
       <v-flex xs6 class="search_form_div">
         <MovieSearchForm :submit="searchMovies" />
       </v-flex>
-=======
->>>>>>> 3a52365a2a33c20e383e9caf9dbf20d2d27f496c
     </div>
-
     <Mainheader/>
-    <MainPage/>
      <v-content>
       <!-- <div class="grey lighten-4">
         <v-layout justify-center> -->

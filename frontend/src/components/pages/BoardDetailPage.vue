@@ -10,17 +10,17 @@
                 <div>
                 <br>
                   <div style='min-width:20px; text-align:center;'>
-                    <strong class="display-1" style="display:inline-block; margin-top: 15px;">{{notice.title}}</strong>
+                    <strong class="display-1" style="display:inline-block; margin-top: 15px;">{{board.title}}</strong>
                     <br>
                     <div style="height:1px; width:100%; background:lightgray;"></div>
                   </div>
 
-                  <div style='text-align:right'>
+                  <!-- <div style='text-align:right'>
                     <div>작성일 : {{formatedDate(notice.created_at)}}</div>
                     <div>작성자 {{notice.displayName}} | {{notice.email}}</div>
-                  </div>
+                  </div> -->
                   <br>
-                  {{notice.body}}
+                  {{board.content}}
                 </div>
               </v-flex>
               <!-- <v-flex  xs12 text-xs-center round my-5>
@@ -55,13 +55,16 @@ export default {
    components: {
    },
   mounted(){
-    this.getBoard(this.boardId)
+    this.getBoard(this.boardId).then((result) => {
+      this.board = result
+    })
   },
   methods:{
 
     /*지금 제목이 id 로 되어있음 */
     async getBoard(id) {
-        this.$store.dispatch("data/getboarddetail", id);
+        console.log(2468)
+        return this.$store.dispatch("data/getboarddetail", id)
     },
     // async deleteBoard(){
     //   this.$router.go(-1);

@@ -1,11 +1,7 @@
 from django.contrib.auth.models import User
 from api.models import Profile
-user=User.objects.create_user('admin2', password='admin2', is_active=True)
+user=User.objects.create_user('admin3', password='admin3', is_active=True)
 user.is_superuser=True
 user.is_staff=True
 user.save()
-<<<<<<< HEAD
-profile = Profile.objects.create(user=user, gender='M')
-=======
 profile = Profile.objects.create(user=user)
->>>>>>> 3a52365a2a33c20e383e9caf9dbf20d2d27f496c
