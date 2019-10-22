@@ -1,6 +1,6 @@
 <template>
   <v-app id="app">
-    <template v-if="user_page">
+    <template v-if="this.$store.state.data.userPage">
       <div class="header">
         <img src="./DdakJeongE.png" style="width:250px;" />
 
@@ -40,7 +40,7 @@ export default {
     MovieSearchForm: MovieSearchForm
   },
   data: () => ({
-    user_page: false
+    
   }),
   // data: () => ({
   //   drawer: null,
@@ -66,7 +66,7 @@ export default {
   methods: {
     goTo: function(path) {
       router.push({ name: path });
-    }
+    },
   }
 };
 </script>

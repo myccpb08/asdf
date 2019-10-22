@@ -2,7 +2,7 @@
   <v-app id="inspire">
     <v-navigation-drawer v-model="drawer" app clipped>
       <v-list dense>
-        <v-list-item @click="showData(posts)">
+        <v-list-item @click="getDash">
           <v-list-item-action>
             <v-icon>mdi-view-dashboard</v-icon>
           </v-list-item-action>
@@ -10,7 +10,7 @@
             <v-list-item-title>Dashboard</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item @click>
+        <v-list-item @click="getChart">
           <v-list-item-action>
             <v-icon>mdi-settings</v-icon>
           </v-list-item-action>
@@ -18,7 +18,7 @@
             <v-list-item-title>Settings</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <p>{{get_post}}</p>
+        <p>{{ admin_selected }}</p>
       </v-list>
     </v-navigation-drawer>
 
@@ -33,6 +33,8 @@
         hide-details
         prepend-inner-icon="mdi-search"
         label="Search"
+        v-model="search_text"
+        v-on:keyup.enter="getSearchResult"
         class="hidden-sm-and-down"
       ></v-text-field>
       <v-spacer></v-spacer>
@@ -43,9 +45,9 @@
         <v-icon>mdi-bell</v-icon>
       </v-btn>
     </v-app-bar>
-  
+
     <v-content>
-      <v-container class="fill-height" fluid>
+      <v-container v-if="admin_selected == 0" class="fill-height" fluid>
         <v-row align="center" justify="center">
           <v-col class="shrink">
             <v-tooltip right>
@@ -71,8 +73,38 @@
               <span>Codepen</span>
             </v-tooltip>
           </v-col>
-          
         </v-row>
+      </v-container>
+
+      <v-container v-else class="fill-height" fluid>
+        <v-layout wrap>
+          <v-flex xs12 sm6>
+            <v-card>
+              <v-tabs v-model="tab" background-color="transparent">
+                <v-tab v-for="item in items" :key="item">{{ item }}</v-tab>
+              </v-tabs>
+              <v-tabs-items v-model="tab">
+                <!-- 데이터 테이블 -->
+                <v-card>
+                  <v-card-title>
+                    {{ title[tab] }}
+                    <v-spacer></v-spacer>
+                    <v-text-field
+                      v-model="search"
+                      append-icon="mdi-magnify"
+                      label="Search"
+                      single-line
+                      hide-details
+                      v-on:keyup.enter="getSearchList"
+                      @click:append="getSearchList"
+                    ></v-text-field>
+                  </v-card-title>
+                  <v-data-table :headers="headers" :items="desserts" :search="search"></v-data-table>
+                </v-card>
+              </v-tabs-items>
+            </v-card>
+          </v-flex>
+        </v-layout>
       </v-container>
     </v-content>
     <v-footer app>
@@ -95,31 +127,110 @@ export default {
   data: () => ({
     drawer: null,
     admin_selected: 0,
-    items: [
-      { title: "Home", icon: "mdi-home-city" },
-      { title: "My Account", icon: "mdi-account" },
-      { title: "Users", icon: "mdi-account-group-outline" }
+    tab: null,
+    items: ["User", "Policy", "Notice", "Post"],
+    search_text: null,
+    posts: { text: "hi", title: "TITLE" },
+    title: ["User", "Policy", "Notice", "Post"],
+    search: "",
+    headers: [
+      {
+        text: "Dessert (100g serving)",
+        align: "left",
+        sortable: false,
+        value: "name"
+      },
+      { text: "Calories", value: "calories" },
+      { text: "Fat (g)", value: "fat" },
+      { text: "Carbs (g)", value: "carbs" },
+      { text: "Protein (g)", value: "protein" },
+      { text: "Iron (%)", value: "iron" }
     ],
-    posts:{text: "hi", title: "TITLE"},
-    mini: true
+    desserts: [
+      {
+        name: "Frozen Yogurt",
+        calories: 159,
+        fat: 6.0,
+        carbs: 24,
+        protein: 4.0,
+        iron: "1%"
+      },
+      {
+        name: "Ice cream sandwich",
+        calories: 237,
+        fat: 9.0,
+        carbs: 37,
+        protein: 4.3,
+        iron: "1%"
+      },
+      {
+        name: "Eclair",
+        calories: 262,
+        fat: 16.0,
+        carbs: 23,
+        protein: 6.0,
+        iron: "7%"
+      },
+      {
+        name: "Cupcake",
+        calories: 305,
+        fat: 3.7,
+        carbs: 67,
+        protein: 4.3,
+        iron: "8%"
+      },
+      {
+        name: "Gingerbread",
+        calories: 356,
+        fat: 16.0,
+        carbs: 49,
+        protein: 3.9,
+        iron: "16%"
+      },
+      {
+        name: "Jelly bean",
+        calories: 375,
+        fat: 0.0,
+        carbs: 94,
+        protein: 0.0,
+        iron: "0%"
+      },
+      {
+        name: "Lollipop",
+        calories: 392,
+        fat: 0.2,
+        carbs: 98,
+        protein: 0,
+        iron: "2%"
+      },
+      {
+        name: "Honeycomb",
+        calories: 408,
+        fat: 3.2,
+        carbs: 87,
+        protein: 6.5,
+        iron: "45%"
+      },
+      {
+        name: "Donut",
+        calories: 452,
+        fat: 25.0,
+        carbs: 51,
+        protein: 4.9,
+        iron: "22%"
+      },
+      {
+        name: "KitKat",
+        calories: 518,
+        fat: 26.0,
+        carbs: 65,
+        protein: 7,
+        iron: "6%"
+      }
+    ]
   }),
-  methods: {
-    toggleMenu() {
-      this.menuVisible = !this.menuVisible;
-    }
-  },
-  components: {
-    UserList
-  },
-  methods: {
-    ...mapActions("data", ["getAllUsers", "showData"])
-  },
-   computed: {
+  computed: {
     // 계산된 getter
-    get_post: function () {
-      // `this` 는 vm 인스턴스를 가리킵니다.
-      return this.$store.state.post
-    }
   },
   watch: {
     group() {
@@ -128,6 +239,33 @@ export default {
   },
   created() {
     this.$vuetify.theme.dark = true;
+  },
+  mounted(){
+      this.$store.state.data.userPage = false;
+
+  },
+  methods: {
+    ...mapActions("data", ["getAllUsers"]),
+    toggleMenu() {
+      this.menuVisible = !this.menuVisible;
+    },
+    getSearchResult() {
+      console.log(this.search_text);
+    },
+    getSearchList() {
+      console.log(this.search);
+    },
+    getDash() {
+      this.admin_selected = 0;
+      console.log(this.admin_selected);
+    },
+    getChart() {
+      this.admin_selected = 1;
+      console.log(this.admin_selected);
+    }
+  },
+  components: {
+    UserList
   }
 };
 </script>
