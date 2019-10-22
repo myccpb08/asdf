@@ -19,7 +19,7 @@
         <tr v-for="post in ListSliced" pa-2>
           <td class="title">
             <router-link
-              :to="{ name: 'boardDetail', params: {boardId: post.title} }"
+              :to="{ name: 'boardDetail', params: {boardId: post.id} }"
             >{{ post.title }}</router-link>
           </td>
           <td class="name">{{post.content}}</td>

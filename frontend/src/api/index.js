@@ -44,9 +44,11 @@ export default {
     })
   },
 
-  getboarddetail(params){
-    console.log(params)
+  getboarddetail(params) {
+    console.log('api폴더 getboarddetail')
+    return axios.get(`${apiUrl}/boardDetail/`, {
+        params
+    })
+},
 
-    
-  }
 }
