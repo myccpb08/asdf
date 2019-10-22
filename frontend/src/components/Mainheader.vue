@@ -100,7 +100,7 @@ export default {
       {
         icon: "mdi-account-arrow-right",
         text: "로그인",
-        path: "login"
+        path: "Login"
       },
     ]
   }),

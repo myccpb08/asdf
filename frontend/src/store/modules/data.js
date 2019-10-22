@@ -3,34 +3,38 @@ import api from '../../api'
 // initial state
 const state = {
   // shape: [{ id, title, genres, viewCnt, rating }]
-  movieSearchList: [],
   userInfo: "",
   postList: [],
 }
 
 // actions
 const actions = {
-  async searchMovies({ commit }, params) {
-    const resp = await api.searchMovies(params)
-    const movies = resp.data.map(d => ({
-      id: d.id,
-      title: d.title,
-      genres: d.genres_array,
-      viewCnt: d.view_cnt,
-      rating: d.average_rating,
-    }))
-
-    commit('setMovieSearchList', movies)
-  },
-
   async signUp({ commit }, params) {
     console.log("enter addMember!!")
     await api.signUp(params)
   },
+  async checkLogin({ commit }, params) {
+    console.log("enter checkLogin!!")
+    return await api.checkLogin(params).then((result) => {
+      var resp = result.data
+      console.log("resp : " + resp.favorite)
+      if(resp.is_authenticated){
+        var user={
+          username: resp.username,
+          token: resp.token,
+          is_staff: resp.is_staff,
+        }
+        commit('setUser', user)
+        localStorage.setItem("token", state.user.token)
+        return true
+      }else{
+        return false
+      }
+    });
+  },
   async getAllUsers() {
     return await api.getAllUsers()
   },
-
   async getallnotices(){
     return await api.getallnotices()
   },
@@ -68,12 +72,13 @@ const actions = {
 
 // mutations
 const mutations = {
-  setMovieSearchList(state, movies) {
-    state.movieSearchList = movies.map(m => m)
-  },
   printUserInfo(state, user) {
     state.userInfo = user.map(m => m)
-  }
+  },
+  setUser(state, user) {
+    state.user = user
+  },
+
 }
 
 export default {

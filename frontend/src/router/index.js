@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import EmptyPage from '../components/pages/EmptyPage'
-import MovieSearchPage from '../components/pages/MovieSearchPage'
 import Mypage from '../components/pages/Mypage'
 import AdminPage from '../components/pages/AdminPage'
 import SignUpPage from '../components/pages/SignUpPage'
@@ -19,7 +18,6 @@ const router = new VueRouter({
   mode: 'history',
   routes: [
     { path: '/', component: EmptyPage, name: 'home' },
-    { path: '/policy/search', component: MovieSearchPage, name: 'policy-search' },
     { path: '/mypage', component: Mypage, name:'mypage'},
     { path: '/user/list', component: AdminPage, name: "user-list"},
     { path: '/signup', component: SignUpPage, name: 'SignUp' },

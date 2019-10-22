@@ -8,13 +8,6 @@
                 <UserList :getAllUsers="getAllUsers"/>
             </v-flex>
         </v-layout>
-        <v-layout>
-            <v-flex>
-                <router-link to="/signup">
-                    <v-btn color="primary">SignUp</v-btn>
-                </router-link>
-            </v-flex>
-        </v-layout>
     </v-container>
 </template>
 

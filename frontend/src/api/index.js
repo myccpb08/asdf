@@ -3,14 +3,15 @@ import axios from 'axios'
 const apiUrl = '/api'
 
 export default {
-  searchMovies(params) {
-    return axios.get(`${apiUrl}/movies/`, {
-      params,
-    })
-  },
   signUp(params) {
     return axios.post(`${apiUrl}/auth/signup/`, {
       user: params,
+    })
+  },
+  checkLogin(params) {
+    return axios.post(`${apiUrl}/auth/checkLogin/`, {
+      username: params.username,
+      password: params.password
     })
   },
   getAllUsers() {
@@ -18,7 +19,6 @@ export default {
       return result.data
     });
   },
-
   getallnotices(){
     return axios.get(`${apiUrl}/allnotices/`).then((result) => {
       return result.data
