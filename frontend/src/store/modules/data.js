@@ -63,7 +63,35 @@ const actions = {
     }
     return summary
     // commit('setSummary', summary)
-  }
+  },
+
+  async getnoticedetail({commit}, params){
+    console.log('여기는 store/data.js')
+    const resp = await api.getnoticedetail(params)
+    const summary = {
+        title: resp.data.title,
+        content: resp.data.content
+    }
+    return summary
+    // commit('setSummary', summary)
+  },
+
+  async noticeupdate({commit}, params){
+    console.log(params)
+    await api.updatenotice(params)
+  },
+
+  async DeleteNotice({commit}, params){
+    console.log('여기는 store/data.js 삭제중')
+    console.log(params)
+    await api.deletenotice(params)
+  },
+
+  async DeleteBoard({commit}, params){
+    console.log('여기는 store/data.js 삭제중')
+    console.log(params)
+    await api.deleteboard(params)
+  },
 }
 
 // mutations

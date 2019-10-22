@@ -2,12 +2,12 @@
   <v-container class="mt-3 ml-5">
     <div class="row">
       <div class="span_10">
-        <h1>공지사항</h1>
+        <img class="imgOne" src="../../loudspeaker_gray_row.png" style="width:17%;">
       </div>
       <div class="span_2" style="text-align:right;">
         <router-link to="/notice/write" style="text-decoration:none;">
           <v-btn class="ma-2" tile outlined color="success">
-            <v-icon left>mdi-pencil</v-icon>Edit
+            <v-icon left>mdi-pencil</v-icon>Write
           </v-btn>
         </router-link>
       </div>
@@ -162,6 +162,12 @@ export default {
   color: #f00;
   font-size: 12px;
   font-weight: bold;
+}
+
+.imgOne {
+        margin-top: 1%;
+        margin-left: 3%;
+        float: left;
 }
 /* .sub_news tr.reply .title a{padding-left:16px;background:url(첨부파일/ic_reply.png) 0 1px no-repeat} */
 /* //게시판 리스트 목록 */

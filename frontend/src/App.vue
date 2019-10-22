@@ -17,12 +17,14 @@
         <!-- </v-layout>
       </div> -->
     </v-content>
+    <MainFooter />
   </v-app>
 </template>
 
 <script>
 import router from "./router";
 import Mainheader from './components/Mainheader'
+import MainFooter from './components/MainFooter'
 import MainPage from './components/pages/MainPage'
 import MovieSearchForm from './components/MovieSearchForm'
 
@@ -31,6 +33,7 @@ export default {
     'MainPage' : MainPage,
     'Mainheader': Mainheader,
     'MovieSearchForm' : MovieSearchForm,
+    'MainFooter': MainFooter,
   },
 
   // data: () => ({

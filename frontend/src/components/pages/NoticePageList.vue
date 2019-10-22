@@ -17,7 +17,11 @@
       </thead>
       <tbody>
         <tr v-for="post in ListSliced" pa-2>
-            <td class="title">{{ post.title }}</td>
+            <td class="title">
+              <router-link
+              :to="{ name: 'noticeDetail', params: {noticeId: post.id} }"
+            >{{ post.title }}</router-link>
+            </td>
             <td class="name">{{post.content}}</td>
             <td class="date">2019/10/18</td>
             <td class="hit">1234</td>
