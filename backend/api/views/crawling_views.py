@@ -6,11 +6,11 @@ from rest_framework.response import Response
 @api_view(['POST'])
 def setCategories(request):
     if request.method == 'POST':
-        categories = request.data.get('movies', None)
+        categories = request.data.get('categories', None)
         for category in categories:
             id = category.get('id', None)
             name = category.get('name', None)
-
+            print("{}, {}".format(id, name))
             Category(id=id, name=name).save()
 
         return Response(status=status.HTTP_200_OK)

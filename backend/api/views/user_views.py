@@ -12,25 +12,17 @@ def signup(request):
         print("enter signup method!!")
         user = request.data.get('user', None)
         username = user.get('username', None)
-        email = user.get('email', None)
         password = user.get('password', None)
-        gender = user.get('gender', None)
-        location = user.get('location', None)
-        marriage = user.get('marriage', None)
-        job = user.get('job', None)
-        disability = user.get('disability', None)
-        familysize = user.get('familysize', None)
-        insurance = user.get('insurance', None)
-        incomequintile = user.get('incomequintile', None)
+        favorite = user.get('favoriteValue', None)
         print(user)
-        create_profile(username=username, password=password, email=email, gender=gender, location=location, marriage=marriage, job=job, disability=disability,
-        familysize=familysize, insurance=insurance, incomequintile=incomequintile)
+        create_profile(username=username, password=password, favorite=favorite)
 
         return Response(status=status.HTTP_201_CREATED)
 
 
 @api_view(['GET'])
 def getAllUsers(request):
+    print("Enter getAllUser Method")
     profiles = Profile.objects.all()
     print(profiles)
     serializer = ProfileSerializer(profiles, many=True)

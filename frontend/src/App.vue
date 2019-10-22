@@ -1,22 +1,21 @@
 <template>
   <v-app id="app">
     <div class="header">
+      <router-link to="/" style="text-decoration:none;">
       <img src="./DdakJeongE.png" style="width:250px;">
-
+      </router-link>
       <v-flex xs6 class="search_form_div">
         <MovieSearchForm :submit="searchMovies" />
       </v-flex>
     </div>
-
     <Mainheader/>
-    <MainPage/>
      <v-content>
-      <v-container fluid fill-height class="grey lighten-4">
-        <v-layout justify-center align-center>
+      <!-- <div class="grey lighten-4">
+        <v-layout justify-center> -->
           <!-- each pages will be placed here -->
-           <router-view/>
-        </v-layout>
-      </v-container>
+           <router-view />
+        <!-- </v-layout>
+      </div> -->
     </v-content>
   </v-app>
 </template>

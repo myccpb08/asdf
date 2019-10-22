@@ -1,4 +1,4 @@
-from .models import Profile, Movie, User
+from .models import Profile, Movie, User, Post, Notice
 from rest_framework import serializers
 
 
@@ -9,7 +9,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ('id', 'username', 'password', 'email', 'gender', 'location', 'marriage', 'job', 'disability', 'familysize', 'insurance', 'incomequintile')
+        fields = ('id', 'username', 'favorite', 'password')
         
     def get_username(self, obj):
         return obj.user.username
@@ -27,7 +27,18 @@ class MovieSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     genres_array = serializers.ReadOnlyField()
-
     class Meta:
         model = User
         fields = ('id', 'username', 'password', 'email')
+
+
+class BoardSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ('id', 'title', 'content')
+
+class NoticeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Notice
+        fields = ('id', 'title', 'content')
+

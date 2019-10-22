@@ -15,4 +15,9 @@ urlpatterns = [
     url('auth/allUsers/$', user_views.getAllUsers, name='get_all_user'),
 
     url('crawling/category/$', crawling_views.setCategories, name='set_categories'),
+    url('board/$', post_views.posts, name='boardwrite'),
+    url('allboards/$', post_views.getallboards, name="get_all_boards"),
+    url('boardDetail/$', post_views.getboard, name="get_board"),
+    url('allnotices/$', post_views.getallnotices, name="get_all_notices"),
+    url('notice/$', post_views.notices, name='noticewrite'),
 ]

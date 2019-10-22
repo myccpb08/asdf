@@ -1,17 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
+import re
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    email = models.CharField(max_length=200)
-    gender = models.CharField(max_length=10, default='M')
-    location = models.CharField(max_length=50)
-    marriage = models.CharField(max_length=10, default='N')
-    job = models.CharField(max_length=50, default='unimployed')
-    disability = models.CharField(max_length=10, default='N')
-    familysize = models.IntegerField(default=1)
-    insurance = models.IntegerField(default=0)
-    incomequintile = models.IntegerField(default=1)
+    favorite = models.CharField(max_length=500, default="00")
+
+    # @property
+    # def favorite_array(self):
+    #     print(re.sub("'[]", '', self.favorite))
+    #     return re.sub("'[]", '', self.favorite)
 
 
 #  wrapper for create user Profile
@@ -26,15 +24,7 @@ def create_profile(**kwargs):
     print(user)
     profile = Profile.objects.create(
         user=user,
-        email=kwargs['email'],
-        gender=kwargs['gender'],
-        location=kwargs['location'],
-        marriage=kwargs['marriage'],
-        job=kwargs['job'],
-        disability=kwargs['disability'],
-        familysize=kwargs['familysize'],
-        insurance=kwargs['insurance'],
-        incomequintile=kwargs['incomequintile']
+        favorite=kwargs['favorite']
     )
     print("finish create_profile")
     return profile
@@ -48,8 +38,12 @@ class Movie(models.Model):
     def genres_array(self):
         return self.genres.strip().split('|')
 
+class Notice(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+
+
 class Post(models.Model):
-    user = models.ForeignKey(User, on_delete = models.CASCADE)
     title = models.CharField(max_length=100)
     content = models.TextField()
 
