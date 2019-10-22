@@ -2,23 +2,17 @@
   <v-app id="app">
     <template v-if="this.$store.state.data.userPage">
       <div class="header">
-        <img src="./DdakJeongE.png" style="width:250px;" />
-
+        <router-link to="/" style="text-decoration:none;">
+          <img src="./DdakJeongE.png" style="width:250px;" />
+        </router-link>
         <v-flex xs6 class="search_form_div">
           <MovieSearchForm :submit="searchMovies" />
         </v-flex>
       </div>
-
       <Mainheader />
-      <MainPage />
-      <!-- <v-content>
-      <v-container fluid fill-height class="grey lighten-4">
-      <v-layout justify-center align-center>-->
-      <!-- each pages will be placed here -->
-      <router-view />
-      <!-- </v-layout>
-      </v-container>
-      </v-content>-->
+      <v-content>
+        <router-view />
+      </v-content>
     </template>
 
     <template v-else>
@@ -39,9 +33,7 @@ export default {
     Mainheader: Mainheader,
     MovieSearchForm: MovieSearchForm
   },
-  data: () => ({
-    
-  }),
+  data: () => ({}),
   // data: () => ({
   //   drawer: null,
   //   choices: [
@@ -66,7 +58,7 @@ export default {
   methods: {
     goTo: function(path) {
       router.push({ name: path });
-    },
+    }
   }
 };
 </script>
