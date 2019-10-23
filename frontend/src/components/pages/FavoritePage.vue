@@ -1,9 +1,9 @@
 <template>
     <div>
         <v-card class="mx-auto">
-      <v-toolbar color="pink" dark>
+      <v-toolbar color="light gray" white>
         <v-app-bar-nav-icon></v-app-bar-nav-icon>
-        <v-toolbar-title>내가 지원할 정책</v-toolbar-title>
+        <v-toolbar-title><img src="../../glass_row.png" style="width:18%;"></v-toolbar-title>
         <v-spacer></v-spacer>
       </v-toolbar>
       <br>

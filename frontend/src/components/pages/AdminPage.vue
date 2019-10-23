@@ -19,6 +19,7 @@
           </v-list-item-content>
         </v-list-item>
         <p>{{ admin_selected }}</p>
+        <p>{{ test }}</p>
       </v-list>
     </v-navigation-drawer>
 
@@ -130,7 +131,8 @@ export default {
     tab: null,
     items: ["User", "Policy", "Notice", "Post"],
     search_text: null,
-    posts: { text: "hi", title: "TITLE" },
+    dash_datas: [],
+    test: [],
     title: ["User", "Policy", "Notice", "Post"],
     search: "",
     headers: [
@@ -240,9 +242,9 @@ export default {
   created() {
     this.$vuetify.theme.dark = true;
   },
-  mounted(){
-      this.$store.state.data.userPage = false;
-
+  mounted() {
+    this.$store.state.data.userPage = false;
+    this.getTest();
   },
   methods: {
     ...mapActions("data", ["getAllUsers"]),
@@ -262,7 +264,16 @@ export default {
     getChart() {
       this.admin_selected = 1;
       console.log(this.admin_selected);
-    }
+    },
+    getTest() {
+      for (var i = 0; i < 4; i++) {
+        this.test.push(i)
+        console.log(this.test)
+      }
+    },
+    async getUserList() {
+      
+    },
   },
   components: {
     UserList

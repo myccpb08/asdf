@@ -37,6 +37,18 @@ export default {
     });
   },
 
+  updatenotice(params){
+    axios.post(`${apiUrl}/noticeDetail/`, {
+      params
+    })
+  },
+
+  updateboard(params){
+    axios.post(`${apiUrl}/boardDetail/`, {
+      params
+    })
+  },
+
   boardwrite(params){
     console.log('api index.js')
     return axios.post(`${apiUrl}/board/`, {
@@ -49,6 +61,24 @@ export default {
     return axios.get(`${apiUrl}/boardDetail/`, {
         params
     })
-},
+  },
+  
+  getnoticedetail(params) {
+    console.log('api폴더 getnoticedetail')
+    return axios.get(`${apiUrl}/noticeDetail/`, {
+        params
+    })
+  },
 
+  deletenotice(params) {
+    console.log('삭제옵니까?')
+    console.log(params)
+    return axios.delete(`${apiUrl}/noticeDetail/`, 
+    { params})
+  },
+
+  deleteboard(params) {
+    return axios.delete(`${apiUrl}/boardDetail/`, 
+    { params})
+  },
 }

@@ -2,12 +2,12 @@
   <v-container class="mt-3 ml-5">
     <div class="row">
       <div class="span_10">
-        <h1>자유게시판</h1>
+        <img class="imgOne" src="../../calendar_row.png" style="width:17%;">
       </div>
       <div class="span_2" style="text-align:right;">
         <router-link to="/board/write" style="text-decoration:none;">
           <v-btn class="ma-2" tile outlined color="success">
-            <v-icon left>mdi-pencil</v-icon>Edit
+            <v-icon left>mdi-pencil</v-icon>Write
           </v-btn>
         </router-link>
       </div>
@@ -32,8 +32,6 @@ export default {
   },
 
   mounted() {
-    console.log("로딩중");
-    console.log(this.$store.dispatch("data/getallboards"));
     this.boardList = this.$store.dispatch("data/getallboards");
   },
 
@@ -203,4 +201,9 @@ export default {
 }
 /* .sub_news tr.reply .title a{padding-left:16px;background:url(첨부파일/ic_reply.png) 0 1px no-repeat} */
 /* //게시판 리스트 목록 */
+.imgOne {
+        margin-top: 1%;
+        margin-left: 3%;
+        float: left;
+}
 </style>

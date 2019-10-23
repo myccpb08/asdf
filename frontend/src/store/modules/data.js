@@ -42,29 +42,49 @@ const actions = {
 
   async getallboards(){
     var a = await api.getallboards()
-    console.log('data.js')
-    console.log(a)
     return a
   },
 
   async boardwrite({commit}, params){
-    console.log('월요일')
-    console.log(params)
-    console.log("data.js까지 왔음")
     await api.boardwrite(params)
   },
 
   async getboarddetail({commit}, params){
-    console.log('여기?')
     const resp = await api.getboarddetail(params)
-    console.log(resp)
     const summary = {
         title: resp.data.title,
         content: resp.data.content
     }
     return summary
     // commit('setSummary', summary)
-  }
+  },
+
+  async getnoticedetail({commit}, params){
+    const resp = await api.getnoticedetail(params)
+    const summary = {
+        title: resp.data.title,
+        content: resp.data.content
+    }
+    return summary
+    // commit('setSummary', summary)
+  },
+
+  async noticeupdate({commit}, params){
+    console.log(params)
+    await api.updatenotice(params)
+  },
+
+  async boardupdate({commit}, params){
+    await api.updateboard(params)
+  },
+
+  async DeleteNotice({commit}, params){
+    await api.deletenotice(params)
+  },
+
+  async DeleteBoard({commit}, params){
+    await api.deleteboard(params)
+  },
 }
 
 // mutations

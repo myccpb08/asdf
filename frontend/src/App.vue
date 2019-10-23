@@ -23,15 +23,17 @@
 
 <script>
 import router from "./router";
-import Mainheader from "./components/Mainheader";
-import MainPage from "./components/pages/MainPage";
-import MovieSearchForm from "./components/MovieSearchForm";
+import Mainheader from './components/Mainheader'
+import MainFooter from './components/MainFooter'
+import MainPage from './components/pages/MainPage'
+import MovieSearchForm from './components/MovieSearchForm'
 
 export default {
-  components: {
-    MainPage: MainPage,
-    Mainheader: Mainheader,
-    MovieSearchForm: MovieSearchForm
+  components : {
+    'MainPage' : MainPage,
+    'Mainheader': Mainheader,
+    'MovieSearchForm' : MovieSearchForm,
+    'MainFooter': MainFooter,
   },
   data: () => ({}),
   // data: () => ({
