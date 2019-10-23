@@ -7,7 +7,7 @@
       <div class="span_2" style="text-align:right;">
         <router-link to="/board/write" style="text-decoration:none;">
           <v-btn class="ma-2" tile outlined color="success">
-            <v-icon left>mdi-pencil</v-icon>Write
+            <v-icon left>mdi-pencil</v-icon>작성
           </v-btn>
         </router-link>
       </div>

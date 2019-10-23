@@ -16,9 +16,13 @@ urlpatterns = [
     url('allboards/$', post_views.getallboards, name="get_all_boards"), # 자유게시판 전체 글 로드
     url('boardDetail/$', post_views.getboard, name="get_board"), # 자유게시판 자세히 & 삭제 & 수정
     url('board/$', post_views.posts, name='boardwrite'), # 자유게시판 작성
+    url('getBoardComments/$', post_views.getBoardComments, name='get_borad_comments'), # 자유게시판 댓글 가져오기
+    url('BoardComment/$', post_views.boardComments, name='board_comment'),
 
     # 공지사항 관련 링크
     url('allnotices/$', post_views.getallnotices, name="get_all_notices"), # 공지사항 전체 글 로드
     url('noticeDetail/$', post_views.getnotice, name="get_notice"), # 공지사항 자세히 & 삭제 & 수정
     url('notice/$', post_views.notices, name='noticewrite'), # 공지사항 작성
+    url('getNoticeComments/$', post_views.getNoticeComments, name='get_notice_comments'), # 공지사항 댓글 가져오기
+    url('NoticeComment/$', post_views.noticeComments, name='notice_comment'),
 ]

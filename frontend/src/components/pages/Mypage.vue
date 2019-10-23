@@ -1,40 +1,66 @@
 <template>
 <div class="hihi">
+  <!-- <img class="imgTwo" src="../../wood.jpg" style="opacity: 0.64; position:absolute; width:100%; height:100%;"> -->
 <div class="aboutme">
   <div class="left-content">
-    <img src="../../DdakJeongE.png" alt="avatar">
-  </div>
-  <div class="right-content">
-    <span class="greeting">Hello</span>
-    <h2 class="my-name">
-      I'm 그루트
-    </h2>
-    <div class="detail-infor">
+    <img src="../../D_logo.png" alt="avatar" style="width: 200px; height: 200px; overflow:hidden; border-radius: 100%;">
     <div class="labels">
-      <p>Name</p>
-      <p>Email</p>
-      <p>Tier</p>
-      <p>Make with</p>
-      <p>Created at</p>
+      <p>Nickname : </p>
+      <p>Email : </p>
+      <p>Age : </p>
+      <p>Gender : </p>
+      <p>Area : </p>
     </div>
-    <div class="infor">
-      <!-- <p v-if="modifymode==false">{{this.$store.state.user.displayName}}</p>
-          <v-text-field
-            v-else
-            v-model="usrName"
-            label="Name"
-            required
-            class="notranslate"
-            :rules="nameRules"
-          ></v-text-field>
-      <p>{{this.$store.state.user.email}}</p>
-      <p>{{this.$store.state.user.tier}}</p>
-      <p>{{this.$store.state.user.type}}</p>
-      <p>{{this.$store.state.user.created_at.toString().slice(4,16)}}</p> -->
+    <div class="detail-infor">
+      <div class="infor">
+            <!-- <p v-if="modifymode==false">{{this.$store.state.user.displayName}}</p>
+                <v-text-field
+                  v-else
+                  v-model="usrName"
+                  label="Name"
+                  required
+                  class="notranslate"
+                  :rules="nameRules"
+                ></v-text-field>
+            <p>{{this.$store.state.user.email}}</p>
+            <p>{{this.$store.state.user.tier}}</p>
+            <p>{{this.$store.state.user.type}}</p>
+            <p>{{this.$store.state.user.created_at.toString().slice(4,16)}}</p> -->
+      </div>
     </div>
   </div>
+  <div style="border-left: 1px solid gray; height: 100%; width: 1px;"></div>
+  <div class="right-content">
+    <div class="btn_div">
+      <div class="mypage_button">
+        <div class="btn_hover_line_up"></div>
+        <span>rrrrrr</span>
+        <div class="btn_hover_line_down"></div>
+      </div>
+      <button class="mypage_btn">내가 찾아본 정책</button>
+      <div class="divider"></div>
+      <button class="mypage_btn">내 정보</button>
+      <div class="divider"></div>
+      <button class="mypage_btn">내 정보 수정</button>
+    </div>
+    <div class="subabout">
+      <div style="width:100%;">
+        <div class="sub_contents_left">
+        <h2 class="my-name">
+          Your name
+        </h2>
+        </div>
+        <div class="sub_contents_right">
+          <h2>Right</h2>
+        </div>
+      </div>
+      
+    </div>
+  <div>
+    <!-- <span class="greeting">Hello</span> -->
+    
   </div>
-  
+  </div>
 <!---->
   <!-- <div class="bottom-content" > -->
     <!-- <v-dialog
@@ -223,60 +249,185 @@
 </script>
 
 <style>
-
-
 .hihi{
   font-family: "Roboto", sans-serif;
   background-color: #e9e9e9;
   color: #222;
+  width:100%;
   display: flex;
-  height: 100vh;
+  height: 80vh;
   justify-content: center;
+  align-items: center;
   padding: 0;
   margin: 0;
   text-align : left;
 }
 
 .aboutme{
+  width: 70%;
   display: flex;
   height : 500px;
-  grid-template-columns : 2fr 3fr;
+  /* grid-template-columns : 2fr 3fr; */
   align-items: center;
-  grid-gap : 1rem;
+  /* grid-gap : 1rem; */
   background-color : #f9f9f9;
-  padding-top : 1rem;
-  box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+  box-shadow: 0px 16px 32px rgba(0,0,0,0.3);
   border-radius : 5px;
-  position: relative;
-  padding : 10px;
-  margin : 50px;
-
+}
+.subabout{
+  width: 100%;
+  height: 88%;
+    /* padding : 10px; */
+    /* background-color:rgb(212, 212, 212); */
+    /* border-radius : 5px; */
+    /* box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.5) inset; */
 }
 
 .left-content{
-    margin-left : 2rem;
-    margin-right : 2rem;
+    /* margin-left : 2rem; */
+    padding-left: 3%;
+    width: 30%;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
 }
 
+
+
 .left-content img{
-  width : 200px;
+  width : 100%;
   background-size : cover;
 }
 
 .right-content{
-  margin-top: 5px;
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* margin-top: 5px;
   margin-right: 10px;
+  padding-left: 10%;
+  padding-right: 10%; */
 }
-.greeting{
-  background-color : #FF73C8;
+.sub_contents_left{
+  display: inline-flex;
+  width: 50%;
+  padding: 1%;
+}
+.sub_contents_right{
+  display: inline-flex;
+  width: 50%;
+  padding: 1%;
+}
+.btn_div{
+  width: 100%;
+  height: 12%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 1px 0px 0px rgba(0,0,0,0.2);
+}
+
+.divider{
+  width: 1px;
+  height: 80%;
+  background-color: rgba(0,0,0,0.2);
+}
+
+.mypage_button{
+  width: 33%;
+  height: 100%;
+  background-color:#fff;
+  color:#1AAB8A;
+  border:none;
+  font-size:1em;
+  cursor:pointer;
+  transition: all 0.8s;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+.btn_hover_line_up{
+  background-color: #fff;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 3px;
+  
+}
+
+.btn_hover_line_down{
+  background-color: #fff;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 3px;
+}
+
+.mypage_button:hover .btn_hover_line_up,
+.mypage_button:hover .btn_hover_line_down{
+  width: 100%;
+  transition: width 0.8s;
+}
+
+.mypage_button:hover{
+  background-color: #1AAB8A;
+  color:#fff;
+}
+/* .mypage_btn{
+  width: 33.3%;
+  height: 100%;
+  background:#1AAB8A;
+  color:#fff;
+  border:none;
+  position:relative;
+  font-size:1em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+.mypage_btn:hover{
+  background:#fff;
+  color:#1AAB8A;
+}
+.mypage_btn:before,.mypage_btn:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
+}
+.mypage_btn:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+.mypage_btn:hover:before,.mypage_btn:hover:after{
+  width:100%;
+  transition:800ms ease all;
+} */
+
+/* .greeting{
+  background-color : orange;
   display : inline-block;
   padding : .5rem 1rem;
   position : relative;
   font-size: 1.2rem;
   margin-bottom : .5rem;
   color : #f2f2f2;
-}
-
+} */
+/* 
 .greeting:before{
   content: '';
   width:0;
@@ -286,9 +437,9 @@
   top: 100%;
   left:0;
   border-color: transparent;
-  border-top-color: #FF73C8;
-  border-left-color: #FF73C8;
-}
+  border-top-color: orange;
+  border-left-color: orange;
+} */
 
 .my-name{
     font-size : 1.5rem;
@@ -306,6 +457,7 @@ p{
   display: grid;
   grid-template-columns : 1fr 2fr;
   align-items : center;
+  color: gray;
 }
 
 .labels{
@@ -393,4 +545,8 @@ opacity: 1;
   border-color: #646171;
   box-shadow: 0px 0 5px 0 #646171;
 }
+</style>
+
+<style scoped>
+
 </style>

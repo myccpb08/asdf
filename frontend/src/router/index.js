@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import EmptyPage from '../components/pages/EmptyPage'
 import MovieSearchPage from '../components/pages/MovieSearchPage'
 import Mypage from '../components/pages/Mypage'
+import MyPage2 from '../components/pages/MyPage2'
 import AdminPage from '../components/pages/AdminPage'
 import SignUpPage from '../components/pages/SignUpPage'
 import LoginPage from '../components/pages/LoginPage'
@@ -15,6 +16,7 @@ import BoardWritePage from '../components/pages/BoardWritePage'
 import BoardDetailPage from '../components/pages/BoardDetailPage'
 import BoardUpdatePage from '../components/pages/BoardUpdatePage'
 import FavoritePage from '../components/pages/FavoritePage'
+// import Chat from '../components/pages/Chat'
 
 Vue.use(VueRouter)
 
@@ -23,7 +25,7 @@ const router = new VueRouter({
   routes: [
     { path: '/', component: EmptyPage, name: 'home' },
     { path: '/policy/search', component: MovieSearchPage, name: 'policy-search' },
-    { path: '/mypage', component: Mypage, name:'mypage'},
+    { path: '/mypage', component: MyPage2, name:'mypage'},
     { path: '/user/list', component: AdminPage, name: "user-list"},
     { path: '/signup', component: SignUpPage, name: 'SignUp' },
     { path: '/login', component: LoginPage, name: 'Login'},
@@ -36,10 +38,11 @@ const router = new VueRouter({
     { path: '/boardupdate/:boardId', component: BoardUpdatePage, name:'boardUpdate', props:true},
     { path: '/noticeupdate/:noticeId', component: NoticeUpdatePage, name:'noticeUpdate', props:true},
     { path: '/noticeDetail/:noticeId',component: NoticeDetailPage, name: 'noticeDetail', props: true},
+    // { path: '/chat',component: Chat, name: chat},
   ],
   scrollBehavior() {
     return { x: 0, y: 0 }
   },
 })
 
-export default router
+export default router 

@@ -25,8 +25,27 @@ export default {
     });
   },
 
+  getNoticeComments(params){
+    return axios.get(`${apiUrl}/getNoticeComments/`,{params}).then((result) => {
+      return result.data
+    });
+  },
+
+  getBoardComments(params){
+    return axios.get(`${apiUrl}/getBoardComments/`,{params}).then((result) => {
+      return result.data
+    });
+  },
+
   noticewrite(params){
     return axios.post(`${apiUrl}/notice/`, {
+      params,
+    })
+  },
+
+  noticeCommentWrite(params){
+    console.log(653)
+    return axios.post(`${apiUrl}/NoticeComment/`, {
       params,
     })
   },
@@ -46,6 +65,13 @@ export default {
   updateboard(params){
     axios.post(`${apiUrl}/boardDetail/`, {
       params
+    })
+  },
+
+  boardCommentWrite(params){
+    console.log(653)
+    return axios.post(`${apiUrl}/BoardComment/`, {
+      params,
     })
   },
 
@@ -79,6 +105,16 @@ export default {
 
   deleteboard(params) {
     return axios.delete(`${apiUrl}/boardDetail/`, 
+    { params})
+  },
+
+  deleteBoardComment(params){
+    return axios.delete(`${apiUrl}/BoardComment/`, 
+    { params})
+  },
+
+  deleteNoticeComment(params){
+    return axios.delete(`${apiUrl}/NoticeComment/`, 
     { params})
   },
 }

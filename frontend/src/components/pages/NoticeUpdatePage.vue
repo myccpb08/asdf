@@ -55,7 +55,7 @@ export default {
         id : this.noticeId
       };
         this.$store.dispatch("data/noticeupdate", params)
-        router.push({name : 'Notice'})
+        router.push({name : 'noticeDetail', params: {noticeId: this.noticeId}})
     }
   },
 }

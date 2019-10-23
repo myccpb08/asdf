@@ -39,6 +39,24 @@ const actions = {
     await api.noticewrite(params)
   },
 
+  async noticeCommentWrite({commit}, params){
+    console.log('fkfkfk')
+    await api.noticeCommentWrite(params)
+  },
+
+  async boardCommentWrite({commit}, params){
+    console.log('자유댓글작성중')
+    await api.boardCommentWrite(params)
+  },
+
+  async getNoticeComments({commit}, params){
+    return await api.getNoticeComments(params)
+  },
+
+  async getBoardComments({commit}, params){
+    return await api.getBoardComments(params)
+  },
+
   async getallboards(){
     var a = await api.getallboards()
     return a
@@ -84,6 +102,14 @@ const actions = {
   async DeleteBoard({commit}, params){
     await api.deleteboard(params)
   },
+
+  async deleteBoardComment({commit}, params){
+    await api.deleteBoardComment(params)
+  },
+
+  async deleteNoticeComment({commit}, params){
+    await api.deleteNoticeComment(params)
+  }
 }
 
 // mutations
