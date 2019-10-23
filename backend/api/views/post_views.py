@@ -23,22 +23,33 @@ def getallboards(request):
     return Response(data=serializer.data, status=status.HTTP_200_OK)
 
 
-# 자유게시판 자세히, 삭제
+# 자유게시판 자세히, 삭제, 수정
 @api_view(['GET', 'DELETE', 'POST'])
 def getboard(request):
-    boardid = int(request.GET.get('0'))
-    item = Post.objects.get(id=boardid)
-
-    if request.method == 'GET':
-        serializer = BoardSerializer(item)
-        return Response(data=serializer.data, status=status.HTTP_200_OK)
-
-    if request.method == 'DELETE':
-        item.delete()
-        return Response(status=status.HTTP_200_OK)
-
     if request.method == 'POST':
-        pass
+        params = request.data.get('params', None)
+        title = params.get('title', None)
+        content = params.get('body', None)
+        boardid = params.get('id', None)
+        item = Post.objects.get(id=boardid)
+        item.title = title
+        item.content = content
+        item.save()
+        return Response(status=status.HTTP_201_CREATED)
+
+    else:
+        boardid = int(request.GET.get('0'))
+        item = Post.objects.get(id=boardid)
+
+        if request.method == 'GET':
+            serializer = BoardSerializer(item)
+            return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+        if request.method == 'DELETE':
+            item.delete()
+            return Response(status=status.HTTP_200_OK)
+
+    
 
 
 ''' 여기부터 공지사항 '''
@@ -62,7 +73,7 @@ def getallnotices(request):
     return Response(data=serializer.data, status=status.HTTP_200_OK)
 
 
-# 공지사항 자세히 & 삭제
+# 공지사항 자세히 & 삭제 & 수정
 @api_view(['GET', 'DELETE', 'POST'])
 def getnotice(request):
     print('안녕')
@@ -73,7 +84,9 @@ def getnotice(request):
         content = params.get('body', None)
         boardid = params.get('id', None)
         item = Notice.objects.get(id=boardid)
-        item.update(title=title, content=content)
+        item.title = title
+        item.content = content
+        item.save()
         return Response(status=status.HTTP_201_CREATED)
     
 

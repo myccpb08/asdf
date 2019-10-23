@@ -32,8 +32,6 @@ export default {
   },
 
   mounted() {
-    console.log("로딩중");
-    console.log(this.$store.dispatch("data/getallboards"));
     this.boardList = this.$store.dispatch("data/getallboards");
   },
 

@@ -13,6 +13,7 @@ import NoticeUpdatePage from '../components/pages/NoticeUpdatePage'
 import BoardPage from '../components/pages/BoardPage'
 import BoardWritePage from '../components/pages/BoardWritePage'
 import BoardDetailPage from '../components/pages/BoardDetailPage'
+import BoardUpdatePage from '../components/pages/BoardUpdatePage'
 import FavoritePage from '../components/pages/FavoritePage'
 
 Vue.use(VueRouter)
@@ -32,6 +33,7 @@ const router = new VueRouter({
     { path: '/board/write', component: BoardWritePage, name: 'BoardWrite'},
     { path: '/favorite', component: FavoritePage, name: 'Favorite'},
     { path: '/boardDetail/:boardId',component: BoardDetailPage, name: 'boardDetail', props: true},
+    { path: '/boardupdate/:boardId', component: BoardUpdatePage, name:'boardUpdate', props:true},
     { path: '/noticeupdate/:noticeId', component: NoticeUpdatePage, name:'noticeUpdate', props:true},
     { path: '/noticeDetail/:noticeId',component: NoticeDetailPage, name: 'noticeDetail', props: true},
   ],

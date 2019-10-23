@@ -11,7 +11,7 @@
     <v-textarea rows="15" solo v-model="board.content"></v-textarea>
     <v-flex xs12 text-xs-center round my-5 class="text-center;" >
       <v-btn rounded color="primary" dark @click="edit">수정완료</v-btn>
-      <v-btn :to="{ name: 'Notice'}" color="warning" dark rounded style="text-decoration:none;">목록으로</v-btn>
+      <v-btn :to="{ name: 'Board'}" color="warning" dark rounded style="text-decoration:none;">목록으로</v-btn>
     </v-flex>
   </form>
 
@@ -28,7 +28,7 @@ export default {
   name: 'NoticeDetail',
   data(){
     return{
-      noticeId: this.$route.params.noticeId,
+      boardId: this.$route.params.boardId,
       board :{},
       content: '',
       update_content: '',
@@ -38,24 +38,25 @@ export default {
    components: {
    },
   mounted(){
-    this.getNotice(this.noticeId).then((result) => {
+    this.getBoard(this.boardId).then((result) => {
       this.board = result
+      console.log('updatepage')
     })
   },
   methods:{
 
-    async getNotice(id) {
-        return this.$store.dispatch("data/getnoticedetail", id)
+    async getBoard(id) {
+        return this.$store.dispatch("data/getboarddetail", id)
     },
 
     async edit(){
         const params = {
         title: this.board.title,
         body: this.board.content,
-        id : this.noticeId
+        id : this.boardId
       };
-        this.$store.dispatch("data/noticeupdate", params)
-        router.push({name : 'Notice'})
+        this.$store.dispatch("data/boardupdate", params)
+        router.push({name : 'Board'})
     }
   },
 }

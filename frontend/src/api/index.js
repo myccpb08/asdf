@@ -43,6 +43,12 @@ export default {
     })
   },
 
+  updateboard(params){
+    axios.post(`${apiUrl}/boardDetail/`, {
+      params
+    })
+  },
+
   boardwrite(params){
     console.log('api index.js')
     return axios.post(`${apiUrl}/board/`, {
