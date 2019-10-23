@@ -32,25 +32,24 @@ const actions = {
     return await api.getAllUsers()
   },
 
-  async getallnotices(){
-    return await api.getallnotices()
+  async getAllNotices(){
+    return await api.getAllNotices()
   },
 
-  async noticewrite({commit}, params){
-    await api.noticewrite(params)
+  async noticeWrite({commit}, params){
+    await api.noticeWrite(params)
   },
 
-  async getallboards(){
-    var a = await api.getallboards()
-    return a
+  async getAllBoards(){
+    return await api.getAllBoards()
   },
 
-  async boardwrite({commit}, params){
-    await api.boardwrite(params)
+  async boardWrite({commit}, params){
+    await api.boardWrite(params)
   },
 
-  async getboarddetail({commit}, params){
-    const resp = await api.getboarddetail(params)
+  async getBoardDetail({commit}, params){
+    const resp = await api.getBoardDetail(params)
     const summary = {
         title: resp.data.title,
         content: resp.data.content
@@ -59,8 +58,8 @@ const actions = {
     // commit('setSummary', summary)
   },
 
-  async getnoticedetail({commit}, params){
-    const resp = await api.getnoticedetail(params)
+  async getNoticeDetail({commit}, params){
+    const resp = await api.getNoticeDetail(params)
     const summary = {
         title: resp.data.title,
         content: resp.data.content
@@ -69,21 +68,21 @@ const actions = {
     // commit('setSummary', summary)
   },
 
-  async noticeupdate({commit}, params){
+  async noticeUpdate({commit}, params){
     console.log(params)
-    await api.updatenotice(params)
+    await api.updateNotice(params)
   },
 
-  async boardupdate({commit}, params){
-    await api.updateboard(params)
+  async boardUpdate({commit}, params){
+    await api.updateBoard(params)
   },
 
   async DeleteNotice({commit}, params){
-    await api.deletenotice(params)
+    await api.deleteNotice(params)
   },
 
   async DeleteBoard({commit}, params){
-    await api.deleteboard(params)
+    await api.deleteBoard(params)
   },
 }
 

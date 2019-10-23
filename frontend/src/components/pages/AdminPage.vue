@@ -19,7 +19,6 @@
           </v-list-item-content>
         </v-list-item>
         <p>{{ admin_selected }}</p>
-        <p>{{ test }}</p>
       </v-list>
     </v-navigation-drawer>
 
@@ -85,10 +84,9 @@
                 <v-tab v-for="item in items" :key="item">{{ item }}</v-tab>
               </v-tabs>
               <v-tabs-items v-model="tab">
-                <!-- 데이터 테이블 -->
                 <v-card>
                   <v-card-title>
-                    {{ title[tab] }}
+                    {{ items[tab] }}
                     <v-spacer></v-spacer>
                     <v-text-field
                       v-model="search"
@@ -96,11 +94,68 @@
                       label="Search"
                       single-line
                       hide-details
-                      v-on:keyup.enter="getSearchList"
-                      @click:append="getSearchList"
                     ></v-text-field>
                   </v-card-title>
-                  <v-data-table :headers="headers" :items="desserts" :search="search"></v-data-table>
+                  <v-data-table
+                    :headers="headers[tab]"
+                    :items="dashBoardAllData[tab]"
+                    :search="search"
+                    sort-by="calories"
+                    class="elevation-1"
+                  >
+                    <template v-slot:top>
+                      <!-- <v-toolbar flat color="white"> -->
+                      <!-- <v-toolbar-title>My CRUD</v-toolbar-title> -->
+                      <!-- <v-divider class="mx-4" inset vertical></v-divider>
+                      <v-spacer></v-spacer>-->
+                      <v-dialog v-model="dialog" max-width="500px">
+                        <!-- <template v-slot:activator="{ on }">
+                        <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
+                        </template>-->
+                        <v-card>
+                          <v-card-title>
+                            <span class="headline">{{ formTitle }}</span>
+                          </v-card-title>
+
+                          <v-card-text>
+                            <v-container>
+                              <v-row>
+                                <v-col cols="12" sm="6" md="4">
+                                  <v-text-field v-model="editedItem[tab].title" :label="text"></v-text-field>
+                                </v-col>
+                                <!-- <v-col cols="12" sm="6" md="4">
+                                  <v-text-field v-model="editedItem.name" :label="text"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                  <v-text-field v-model="editedItem.calories" label="Calories"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                  <v-text-field v-model="editedItem.fat" label="Fat (g)"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                  <v-text-field v-model="editedItem.carbs" label="Carbs (g)"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                  <v-text-field v-model="editedItem.protein" label="Protein (g)"></v-text-field>
+                                </v-col> -->
+                              </v-row>
+                            </v-container>
+                          </v-card-text>
+
+                          <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
+                            <v-btn color="blue darken-1" text @click="save(tab)">Save</v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </v-dialog>
+                      <!-- </v-toolbar> -->
+                    </template>
+                    <template v-slot:item.action="{ item }">
+                      <v-icon small class="mr-2" @click="editItem(item, tab)">edit</v-icon>
+                      <v-icon small @click="deleteItem(item, tab)">delete</v-icon>
+                    </template>
+                  </v-data-table>
                 </v-card>
               </v-tabs-items>
             </v-card>
@@ -128,115 +183,92 @@ export default {
   data: () => ({
     drawer: null,
     admin_selected: 0,
+    search_text: null,
+
     tab: null,
     items: ["User", "Policy", "Notice", "Post"],
-    search_text: null,
-    dash_datas: [],
-    test: [],
-    title: ["User", "Policy", "Notice", "Post"],
     search: "",
+    text: "babo",
+    dialog: false,
     headers: [
-      {
-        text: "Dessert (100g serving)",
-        align: "left",
-        sortable: false,
-        value: "name"
-      },
-      { text: "Calories", value: "calories" },
-      { text: "Fat (g)", value: "fat" },
-      { text: "Carbs (g)", value: "carbs" },
-      { text: "Protein (g)", value: "protein" },
-      { text: "Iron (%)", value: "iron" }
+      [
+        {
+          text: "Id",
+          // align: "left",
+          // sortable: false,
+          value: "id"
+        },
+        { text: "User Name", value: "username" },
+        { text: "Favorite", value: "favorite" },
+        { text: "Password", value: "password" },
+        { text: 'Actions', value: 'action', sortable: false },
+      ],
+      [
+        {
+          text: "Id",
+          // align: "left",
+          // sortable: false,
+          value: "id"
+        },
+        { text: "User Name", value: "username" },
+        { text: "Favorite", value: "favorite" },
+        { text: "Password", value: "password" },
+        { text: 'Actions', value: 'action', sortable: false },
+      ],
+      [
+        { text: "Id", value: "id" },
+        { text: "Title", value: "title" },
+        { text: "Content", value: "content" },
+        { text: 'Actions', value: 'action', sortable: false },
+      ],
+      [
+        { text: "Id", value: "id" },
+        { text: "Title", value: "title" },
+        { text: "Content", value: "content" },
+        { text: 'Actions', value: 'action', sortable: false },
+      ]
     ],
-    desserts: [
-      {
-        name: "Frozen Yogurt",
-        calories: 159,
-        fat: 6.0,
-        carbs: 24,
-        protein: 4.0,
-        iron: "1%"
-      },
-      {
-        name: "Ice cream sandwich",
-        calories: 237,
-        fat: 9.0,
-        carbs: 37,
-        protein: 4.3,
-        iron: "1%"
-      },
-      {
-        name: "Eclair",
-        calories: 262,
-        fat: 16.0,
-        carbs: 23,
-        protein: 6.0,
-        iron: "7%"
-      },
-      {
-        name: "Cupcake",
-        calories: 305,
-        fat: 3.7,
-        carbs: 67,
-        protein: 4.3,
-        iron: "8%"
-      },
-      {
-        name: "Gingerbread",
-        calories: 356,
-        fat: 16.0,
-        carbs: 49,
-        protein: 3.9,
-        iron: "16%"
-      },
-      {
-        name: "Jelly bean",
-        calories: 375,
-        fat: 0.0,
-        carbs: 94,
-        protein: 0.0,
-        iron: "0%"
-      },
-      {
-        name: "Lollipop",
-        calories: 392,
-        fat: 0.2,
-        carbs: 98,
-        protein: 0,
-        iron: "2%"
-      },
-      {
-        name: "Honeycomb",
-        calories: 408,
-        fat: 3.2,
-        carbs: 87,
-        protein: 6.5,
-        iron: "45%"
-      },
-      {
-        name: "Donut",
-        calories: 452,
-        fat: 25.0,
-        carbs: 51,
-        protein: 4.9,
-        iron: "22%"
-      },
-      {
-        name: "KitKat",
-        calories: 518,
-        fat: 26.0,
-        carbs: 65,
-        protein: 7,
-        iron: "6%"
-      }
-    ]
+    editedIndex: -1,
+    editedItem: [
+      [{
+        id: "",
+        username: "",
+        favorite : "",
+        password: "",
+      }],
+      [{
+        id: "",
+        username: "",
+        favorite : "",
+        password: "",
+      }],
+      [{
+        id: "",
+        title: "",
+        content: "",
+      }],
+       [{
+        id: "",
+        title: "",
+        content: "",
+      }],
+    ],
+    dashBoardAllData: [[], [], [], []],
+    userData: [],
+    noticeData: [],
+    boardData: []
   }),
   computed: {
-    // 계산된 getter
+    formTitle() {
+      return this.editedIndex === -1 ? "Edit Item" : "Edit Item";
+    }
   },
   watch: {
     group() {
       this.drawer = false;
+    },
+    dialog(val) {
+      val || this.close();
     }
   },
   created() {
@@ -244,36 +276,77 @@ export default {
   },
   mounted() {
     this.$store.state.data.userPage = false;
-    this.getTest();
+    this.getAllData();
   },
   methods: {
-    ...mapActions("data", ["getAllUsers"]),
+    ...mapActions("data", ["getAllUsers", "getAllNotices", "getAllBoards"]),
     toggleMenu() {
       this.menuVisible = !this.menuVisible;
     },
     getSearchResult() {
       console.log(this.search_text);
     },
-    getSearchList() {
-      console.log(this.search);
-    },
     getDash() {
       this.admin_selected = 0;
-      console.log(this.admin_selected);
     },
     getChart() {
       this.admin_selected = 1;
-      console.log(this.admin_selected);
     },
-    getTest() {
-      for (var i = 0; i < 4; i++) {
-        this.test.push(i)
-        console.log(this.test)
+    getAllData() {
+      this.getUsers();
+      this.getNotices();
+      this.getBoards();
+    },
+    getUsers() {
+      this.getAllUsers().then(response => {
+        this.dashBoardAllData[0] = response;
+      });
+    },
+    getNotices() {
+      this.getAllNotices().then(response => {
+        this.dashBoardAllData[2] = response;
+      });
+    },
+    getBoards() {
+      this.getAllBoards().then(response => {
+        this.dashBoardAllData[3] = response;
+      });
+    },
+    editItem(item, idx) {
+      console.log(item)
+      this.editedIndex = this.dashBoardAllData[idx].indexOf(item);
+      this.editedItem[idx] = Object.assign({}, item);
+      this.dialog = true;
+    },
+
+    deleteItem(item, idx) {
+      console.log(idx)
+      console.log(item)
+      console.log(this.dashBoardAllData[idx])
+      console.log(idx)
+      const index = this.dashBoardAllData[idx].indexOf(item);
+      confirm("Are you sure you want to delete this item?") &&
+        this.dashBoardAllData[idx].splice(index, 1);
+      console.log(this.dashBoardAllData[idx])
+      console.log(idx)
+    },
+
+    close() {
+      this.dialog = false;
+      // setTimeout(() => {
+      //   this.editedItem = Object.assign({}, this.defaultItem);
+      //   this.editedIndex = -1;
+      // }, 300);
+    },
+
+    save(idx) {
+      if (this.editedIndex > -1) {
+        Object.assign(this.dashBoardAllData[idx][this.editedIndex], this.editedItem[idx]);
+      } else {
+        this.desserts.push(this.editedItem[idx]);
       }
-    },
-    async getUserList() {
-      
-    },
+      this.close();
+    }
   },
   components: {
     UserList
