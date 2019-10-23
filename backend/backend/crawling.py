@@ -3,6 +3,8 @@ import requests
 import json
 import math
 from bs4 import BeautifulSoup
+from html.parser import HTMLParser
+import html
 
 API_URL = 'http://localhost:8000/api/'
 headers = {'content-type': 'application/json'}
@@ -16,11 +18,43 @@ def getList(url):
         # getService("http://www.bokjiro.go.kr/welInfo/retrieveGvmtWelInfo.do?searchIntClId=&welInfSno={}".format(codeNum)) #ui들어간거
         getService("http://www.bokjiro.go.kr/welInfo/retrieveWelInfoDetail.do?welInfSno={}".format(codeNum))
 
+def unescape(text):
+    text = text.strip()
+    text = text.replace("&lt;","<")
+    text = text.replace("&gt;", ">")
+    text = text.replace("&quot;",'"')
+    # text = text.replace("\r", '')
+    # text = text.replace("\n", '')
+    # text = text.replace("\t", '')
+    return text
+
 def getService(url):
     resp = requests.get(url)
-    html = BeautifulSoup(resp.content, 'html.parser')
-    print(url)
-    print(html)
+    parser = BeautifulSoup(resp.content, 'html.parser')
+    lis = parser.find('input', {'id': 'welInfDtlCn'})
+    # lis = BeautifulSoup(HTMLParser().unescape(str(lis)), 'html.parser')
+    lis = html.unescape(str(lis))
+    print(lis)
+    # print(lis)
+    # lis = unescape(str(lis))
+    # print(lis)
+    lis = BeautifulSoup(lis, 'html.parser')
+    # print(lis)
+    target = lis.find('li', {'class':'first'}).find('ul', {'class':'bokjiBlit01'})
+
+    # 지원대상
+    targetStr=""
+    for t in target:
+        if "<ul" in str(t):
+            temp = str(t).split("<ul")
+            temp[0] = temp[0].strip()
+            targetStr = targetStr + temp[0][4:]+"&"
+        elif str(type(t)) == "<class 'bs4.element.Tag'>":
+            targetStr = targetStr + t.getText()+"&"
+
+    print(targetStr)
+
+getService("http://www.bokjiro.go.kr/welInfo/retrieveGvmtWelInfo.do?welInfSno=315")
 
 #카테고리 넣기!
 def putCategory():
@@ -72,9 +106,11 @@ def putCategory():
 #         url = test_url + '&pageIndex=' + str(page)
 #         getList(url)
 
-getService("http://www.bokjiro.go.kr/welInfo/retrieveWelInfoDetail.do?welInfSno=237")
-getService("http://www.bokjiro.go.kr/welInfo/retrieveWelInfoDetail.do?welInfSno=315")
+# getService("http://www.bokjiro.go.kr/welInfo/retrieveGvmtWelInfo.do?welInfSno=310")
 
+# getService("http://www.bokjiro.go.kr/welInfo/retrieveWelInfoDetail.do?welInfSno=310")
+# getService("http://www.bokjiro.go.kr/welInfo/retrieveGvmtWelInfo.do?searchIntClId=01&searchCtgId=999&welInfSno=237&pageGb=1&domainName=&firstIndex=10&recordCountPerPage=10&cardListTypeCd=list&welSrvTypeCd=01&searchGb=01&searchWelInfNm=&pageUnit=10&key1=list&stsfCn=")
+# getService("http://www.bokjiro.go.kr/welInfo/retrieveGvmtWelInfo.do?welInfSno=237")
 
 
 

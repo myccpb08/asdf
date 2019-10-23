@@ -2,37 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54e946d9-7b00-4101-a69e-a58a3d56c91f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/pages/BoardDetailPage.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/pages/BoardPage.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/pages/BoardPageList.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/pages/BoardUpdate.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/pages/BoardWriteForm.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/pages/BoardWritePage.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/pages/FavoritePage.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/pages/NoticeDetailPage.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/pages/NoticePage.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/pages/NoticePageList.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/pages/NoticeUpdate.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/pages/NoticeWriteForm.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/pages/NoticeWritePage.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/api/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/api/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/api/views/crawling_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api/views/crawling_views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/api/views/post_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api/views/post_views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/api/views/user_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api/views/user_views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/backend/crawling.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/crawling.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/create_admin.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/create_admin.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/api/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Mainheader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Mainheader.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/SignUpForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/SignUpForm.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/EmptyPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/EmptyPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/store/modules/data.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/store/modules/data.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -54,7 +27,7 @@
         <counts>
           <entry key="dat" value="4" />
           <entry key="js" value="2" />
-          <entry key="py" value="60" />
+          <entry key="py" value="62" />
           <entry key="txt" value="4" />
           <entry key="vue" value="1" />
         </counts>
@@ -63,19 +36,19 @@
         <counts>
           <entry key="JavaScript" value="2" />
           <entry key="PLAIN_TEXT" value="9" />
-          <entry key="Python" value="60" />
+          <entry key="Python" value="62" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="1907" />
+          <entry key="py" value="4636" />
           <entry key="txt" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="6" />
-          <entry key="Python" value="1907" />
+          <entry key="Python" value="4636" />
         </counts>
       </usages-collector>
     </session>
@@ -85,8 +58,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/api/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="301">
-              <caret line="63" column="71" selection-start-line="63" selection-start-column="70" selection-end-line="63" selection-end-column="71" />
+            <state relative-caret-position="462">
+              <caret line="58" column="29" selection-start-line="58" selection-start-column="29" selection-end-line="58" selection-end-column="29" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
                 <marker date="1571705393507" expanded="true" signature="1504:1740" ph="..." />
@@ -96,31 +69,24 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/api/urls.py">
+        <entry file="file://$PROJECT_DIR$/backend/create_admin.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="16" column="26" lean-forward="true" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="26" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="112">
+              <caret line="7" selection-start-line="7" selection-end-line="7" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/backend/create_admin.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-            </state>
-          </provider>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/backend/urls.py">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/api/views/crawling_views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="176">
-              <caret line="11" column="45" lean-forward="true" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
+              <caret line="11" column="45" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
               </folding>
@@ -128,15 +94,16 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/backend/backend/crawling.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="46" column="19" lean-forward="true" selection-start-line="46" selection-start-column="19" selection-end-line="46" selection-end-column="19" />
+            <state relative-caret-position="256">
+              <caret line="50" column="37" selection-start-line="50" selection-start-column="37" selection-end-line="50" selection-end-column="37" />
               <folding>
                 <element signature="e#1#16#0" expanded="true" />
                 <element signature="e#181#528#0" />
                 <element signature="e#570#1243#0" />
+                <marker date="1571815591104" expanded="true" signature="708:945" ph="..." />
               </folding>
             </state>
           </provider>
@@ -163,9 +130,21 @@
       <find>전체</find>
       <find>의료급여</find>
       <find>지원</find>
-      <find>서비스 대상</find>
-      <find>지원대상</find>
       <find>지원내용</find>
+      <find>서비스 내용</find>
+      <find>서비스 대상</find>
+      <find>사이트</find>
+      <find>보건복지부</find>
+      <find>129</find>
+      <find>129.go.kr</find>
+      <find>보건복지상담센터</find>
+      <find>국가건강정보포털</find>
+      <find>고용보험</find>
+      <find>G-Health</find>
+      <find>bokjiBlit01</find>
+      <find>지원대상</find>
+      <find>amp</find>
+      <find>&amp;amp</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -184,11 +163,12 @@
         <option value="$PROJECT_DIR$/backend/create_admin.txt" />
         <option value="$PROJECT_DIR$/backend/api/urls.py" />
         <option value="$PROJECT_DIR$/backend/api/views/crawling_views.py" />
+        <option value="$PROJECT_DIR$/backend/backend/test.py" />
         <option value="$PROJECT_DIR$/backend/backend/crawling.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="952" />
     <option name="width" value="977" />
     <option name="height" value="1038" />
@@ -250,7 +230,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/multicampus/s1p4151007/backend/api/views/crawling_views.py" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/ai-sub3" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -337,14 +317,37 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="s1p4151007" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/backend/backend" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/backend/backend/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.crawling" />
       <item itemvalue="Python.crawling2" />
       <item itemvalue="Python.crawling (1)" />
+      <item itemvalue="Python.test" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.crawling" />
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.crawling (1)" />
         <item itemvalue="Python.crawling2" />
       </list>
@@ -373,23 +376,23 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="762" y="0" width="781" height="830" extended-state="0" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31182796" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15333775" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.50287354" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.47017047" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32711622" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32670453" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.39204547" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32902297" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32670453" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.3252841" />
+      <window_info anchor="bottom" id="Python Console" order="8" weight="0.3252841" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.6661932" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -522,10 +525,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/backend/api/views/crawling_views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="11" column="45" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/create_admin.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/backend/urls.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/backend/api/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="16" column="26" lean-forward="true" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="26" />
+        <state relative-caret-position="224">
+          <caret line="14" column="41" selection-start-line="14" selection-start-column="41" selection-end-line="14" selection-end-column="41" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
@@ -534,8 +557,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/api/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="63" column="71" selection-start-line="63" selection-start-column="70" selection-end-line="63" selection-end-column="71" />
+        <state relative-caret-position="462">
+          <caret line="58" column="29" selection-start-line="58" selection-start-column="29" selection-end-line="58" selection-end-column="29" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
             <marker date="1571705393507" expanded="true" signature="1504:1740" ph="..." />
@@ -543,32 +566,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/api/views/crawling_views.py">
+    <entry file="file://$PROJECT_DIR$/backend/backend/test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="11" column="45" lean-forward="true" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
+        <state relative-caret-position="112">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
           <folding>
-            <element signature="e#0#33#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/backend/crawling.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="46" column="19" lean-forward="true" selection-start-line="46" selection-start-column="19" selection-end-line="46" selection-end-column="19" />
+        <state relative-caret-position="256">
+          <caret line="50" column="37" selection-start-line="50" selection-start-column="37" selection-end-line="50" selection-end-column="37" />
           <folding>
             <element signature="e#1#16#0" expanded="true" />
             <element signature="e#181#528#0" />
             <element signature="e#570#1243#0" />
+            <marker date="1571815591104" expanded="true" signature="708:945" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/create_admin.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
         </state>
       </provider>
     </entry>
