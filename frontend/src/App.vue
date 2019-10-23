@@ -14,18 +14,25 @@
         <!-- </v-layout>
       </div> -->
     </v-content>
+    <MainFooter />
   </v-app>
 </template>
 
 <script>
 import router from "./router";
 import Mainheader from './components/Mainheader'
+import MainFooter from './components/MainFooter'
 import MainPage from './components/pages/MainPage'
 
 export default {
   components : {
     'MainPage' : MainPage,
     'Mainheader': Mainheader,
+<<<<<<< HEAD
+=======
+    'MovieSearchForm' : MovieSearchForm,
+    'MainFooter': MainFooter,
+>>>>>>> 54e9b3be79a6991c42017a6c3e02947f56ff212d
   },
 
   // data: () => ({
