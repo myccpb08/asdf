@@ -28,11 +28,7 @@ export default {
   components : {
     'MainPage' : MainPage,
     'Mainheader': Mainheader,
-<<<<<<< HEAD
-=======
-    'MovieSearchForm' : MovieSearchForm,
     'MainFooter': MainFooter,
->>>>>>> 54e9b3be79a6991c42017a6c3e02947f56ff212d
   },
 
   // data: () => ({

@@ -15,9 +15,10 @@ def signup(request):
         user = request.data.get('user', None)
         username = user.get('username', None)
         password = user.get('password', None)
+        name = user.get('name', None)
         favorite = user.get('favoriteValue', None)
         print(user)
-        create_profile(username=username, password=password, favorite=favorite)
+        create_profile(username=username, password=password, name=name, favorite=favorite)
 
         return Response(status=status.HTTP_201_CREATED)
 
@@ -57,6 +58,7 @@ def login(request):
                 print("favorite : " + profile.favorite)
                 result = {
                     'username': username,
+                    'name': profile.name,
                     'favorite': profile.favorite,
                     'token': newToken,
                     'is_staff': profile.user.is_staff,
@@ -69,6 +71,7 @@ def login(request):
                 print("favorite : " + profile.favorite)
                 result = {
                     'username': username,
+                    'name': profile.name,
                     'favorite': profile.favorite,
                     'token': token,
                     'is_staff': profile.user.is_staff,
@@ -78,6 +81,7 @@ def login(request):
             print("user is false")
             result = {
                 'username': None,
+                'name': None,
                 'favorite': None,
                 'token': None,
                 'is_staff': False,
@@ -107,6 +111,7 @@ def session(request):
         if username == None:
             result = {
                 'username': None,
+                'name': None,
                 'favorite': None,
                 'token': None,
                 'is_authenticated': False,
@@ -118,6 +123,7 @@ def session(request):
             if user.is_authenticated and token == str(Token.objects.get(user=user)):
                 result = {
                     'username': username,
+                    'name': Profile.objects.get(user=user).name,
                     'favorite': Profile.objects.get(user=user).favorite,
                     'token': token,
                     'is_authenticated': True,
@@ -126,6 +132,7 @@ def session(request):
             else:
                 result = {
                     'username': None,
+                    'name': None,
                     'favorite': None,
                     'token': None,
                     'is_authenticated': False,

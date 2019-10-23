@@ -21,6 +21,7 @@ const actions = {
       if(resp.is_authenticated){
         var user={
           username: resp.username,
+          name: resp.name,
           favorite: resp.favorite,
           token: resp.token,
           is_staff: resp.is_staff,
@@ -44,6 +45,7 @@ const actions = {
       if (result.data.is_authenticated) {
         commit('setUser', {
           username: result.data.username,
+          name: result.data.name,
           favorite: result.data.favorite,
           token: result.data.token,
           is_staff: result.data.is_staff,
