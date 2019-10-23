@@ -4,9 +4,6 @@
       <router-link to="/" style="text-decoration:none;">
       <img src="./DdakJeongE.png" style="width:250px;">
       </router-link>
-      <v-flex xs6 class="search_form_div">
-        <MovieSearchForm :submit="searchMovies" />
-      </v-flex>
     </div>
     <Mainheader/>
      <v-content>
@@ -26,14 +23,16 @@ import router from "./router";
 import Mainheader from './components/Mainheader'
 import MainFooter from './components/MainFooter'
 import MainPage from './components/pages/MainPage'
-import MovieSearchForm from './components/MovieSearchForm'
 
 export default {
   components : {
     'MainPage' : MainPage,
     'Mainheader': Mainheader,
+<<<<<<< HEAD
+=======
     'MovieSearchForm' : MovieSearchForm,
     'MainFooter': MainFooter,
+>>>>>>> 54e9b3be79a6991c42017a6c3e02947f56ff212d
   },
 
   // data: () => ({
