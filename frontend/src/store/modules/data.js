@@ -5,6 +5,7 @@ const state = {
   // shape: [{ id, title, genres, viewCnt, rating }]
   userInfo: "",
   postList: [],
+  user: null,
 }
 
 // actions
@@ -17,10 +18,10 @@ const actions = {
     console.log("enter checkLogin!!")
     return await api.checkLogin(params).then((result) => {
       var resp = result.data
-      console.log("resp : " + resp.favorite)
       if(resp.is_authenticated){
         var user={
           username: resp.username,
+          favorite: resp.favorite,
           token: resp.token,
           is_staff: resp.is_staff,
         }
@@ -30,6 +31,28 @@ const actions = {
       }else{
         return false
       }
+    });
+  },
+  async logoutUser({ commit }) {
+      await api.logoutUser(state.user.username).then(() => {
+          localStorage.removeItem("token");
+          commit('setUser', null);
+      })
+  },
+  async getSession({ commit }, param) {
+    return await api.getSession(param).then((result) => {
+      if (result.data.is_authenticated) {
+        commit('setUser', {
+          username: result.data.username,
+          favorite: result.data.favorite,
+          token: result.data.token,
+          is_staff: result.data.is_staff,
+        })
+      } else {
+        localStorage.removeItem('token');
+        commit('setUser', null);
+      }
+      return result.data.is_authenticated;
     });
   },
   async getAllUsers() {

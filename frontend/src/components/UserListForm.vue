@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import store from '../store/modules/data.js'
+
 export default {
     props: {
       getAllUsers: {

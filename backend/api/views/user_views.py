@@ -83,6 +83,55 @@ def login(request):
                 'is_staff': False,
                 'is_authenticated': False
             }
+
         serializer = SessionSerializer(result)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+def logout(request):
+    if request.method == "POST":
+        username = request.data.get('username', None)
+        user = User.objects.get(username=username)
+        token = Token.objects.get(user=user)
+        del request.session[str(token)]
+        user.auth_token.delete()
+        auth.logout(request)
+    return Response(status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+def session(request):
+    if request.method == "POST":
+        print("enter in session function")
+        token = request.data.get('token', None)
+        username = request.session.get(str(token), None)
+        if username == None:
+            result = {
+                'username': None,
+                'favorite': None,
+                'token': None,
+                'is_authenticated': False,
+                'is_staff':  False
+            }
+
+        else:
+            user = User.objects.get(username=username)
+            if user.is_authenticated and token == str(Token.objects.get(user=user)):
+                result = {
+                    'username': username,
+                    'favorite': Profile.objects.get(user=user).favorite,
+                    'token': token,
+                    'is_authenticated': True,
+                    'is_staff': Profile.objects.get(user=user).user.is_staff
+                }
+            else:
+                result = {
+                    'username': None,
+                    'favorite': None,
+                    'token': None,
+                    'is_authenticated': False,
+                    'is_staff':  False
+                }
+        serializer = SessionSerializer(result)
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+
 

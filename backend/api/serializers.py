@@ -19,17 +19,22 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 class SessionSerializer(serializers.ModelSerializer):
     username = serializers.SerializerMethodField('get_user')
+    favorite = serializers.SerializerMethodField('get_favorite')
     token = serializers.SerializerMethodField('get_token')
-    is_authenticated = serializers.SerializerMethodField(
-        'get_is_authenticated')
+    is_authenticated = serializers.SerializerMethodField('get_is_authenticated')
     is_staff = serializers.SerializerMethodField('get_is_staff')
 
     class Meta:
         model = Profile
-        fields = ('username', 'token', 'is_authenticated', 'is_staff')
+        fields = ('username', 'favorite', 'token', 'is_authenticated', 'is_staff')
 
     def get_user(self, obj):
         return str(obj['username'])
+
+    def get_favorite(self, obj):
+        print("obj-favorite")
+        print(obj['favorite'])
+        return str(obj['favorite'])
 
     def get_token(self, obj):
         print(obj['token'])
