@@ -41,6 +41,7 @@ const actions = {
       })
   },
   async getSession({ commit }, param) {
+    console.log("getSession")
     return await api.getSession(param).then((result) => {
       if (result.data.is_authenticated) {
         commit('setUser', {

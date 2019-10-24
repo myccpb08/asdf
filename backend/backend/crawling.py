@@ -11,7 +11,7 @@ headers = {'content-type': 'application/json'}
 
 def getList(url):
     resp = requests.get(url)
-    html = BeautifulSoup(resp.content, 'html.parser')
+    html = BeautifulSoup(resp.text, 'html.parser')
     lis = html.findAll('dt', {'class': 'tit'})
     for li in lis:
         codeNum = li.find('a').get('href')[26:-2]
@@ -31,28 +31,29 @@ def unescape(text):
 def getService(url):
     resp = requests.get(url)
     parser = BeautifulSoup(resp.content, 'html.parser')
-    lis = parser.find('input', {'id': 'welInfDtlCn'})
-    # lis = BeautifulSoup(HTMLParser().unescape(str(lis)), 'html.parser')
-    lis = html.unescape(str(lis))
-    print(lis)
+    print(parser)
+    # lis = parser.find('input', {'id': 'welInfDtlCn'})
+    # # lis = BeautifulSoup(HTMLParser().unescape(str(lis)), 'html.parser')
+    # lis = html.unescape(str(lis))
     # print(lis)
-    # lis = unescape(str(lis))
-    # print(lis)
-    lis = BeautifulSoup(lis, 'html.parser')
-    # print(lis)
-    target = lis.find('li', {'class':'first'}).find('ul', {'class':'bokjiBlit01'})
-
-    # 지원대상
-    targetStr=""
-    for t in target:
-        if "<ul" in str(t):
-            temp = str(t).split("<ul")
-            temp[0] = temp[0].strip()
-            targetStr = targetStr + temp[0][4:]+"&"
-        elif str(type(t)) == "<class 'bs4.element.Tag'>":
-            targetStr = targetStr + t.getText()+"&"
-
-    print(targetStr)
+    # # print(lis)
+    # # lis = unescape(str(lis))
+    # # print(lis)
+    # lis = BeautifulSoup(lis, 'html.parser')
+    # # print(lis)
+    # target = lis.find('li', {'class':'first'}).find('ul', {'class':'bokjiBlit01'})
+    #
+    # # `
+    # targetStr=""
+    # for t in target:
+    #     if "<ul" in str(t):
+    #         temp = str(t).split("<ul")
+    #         temp[0] = temp[0].strip()
+    #         targetStr = targetStr + temp[0][4:]+"&"
+    #     elif str(type(t)) == "<class 'bs4.element.Tag'>":
+    #         targetStr = targetStr + t.getText()+"&"
+    #
+    # print(targetStr)
 
 getService("http://www.bokjiro.go.kr/welInfo/retrieveGvmtWelInfo.do?welInfSno=315")
 

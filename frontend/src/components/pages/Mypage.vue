@@ -7,7 +7,7 @@
   <div class="right-content">
     <span class="greeting">Hello</span>
     <h2 class="my-name">
-      I'm 그루트
+      {{user}}
     </h2>
     <div class="detail-infor">
     <div class="labels">
@@ -126,6 +126,16 @@
 
 </template>
 <script>
+import router from "../../router"
+import { mapState } from "vuex";
+
+export default {
+  computed: {
+    ...mapState({
+      user : state => state.data.user,
+    })
+  }
+};
 // import firebase from "firebase";
 // import FirebaseService from '@/services/FirebaseService'
 // export default {

@@ -16,6 +16,7 @@ new Vue({
     console.log("Create!!!!!!!!!!")
     if (localStorage.getItem("token") !== undefined && localStorage.getItem("token") !== null) {
       var result = this.getSession(localStorage.getItem("token"));
+      console.log("result")
       if (result == false) {
         //토큰이 잘못된 값일 때
         router.push("/");
