@@ -15,6 +15,13 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
+            name='Category',
+            fields=[
+                ('id', models.CharField(max_length=5, primary_key=True, serialize=False)),
+                ('name', models.CharField(max_length=500)),
+            ],
+        ),
+        migrations.CreateModel(
             name='Movie',
             fields=[
                 ('id', models.IntegerField(primary_key=True, serialize=False)),
@@ -28,6 +35,13 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=100)),
                 ('content', models.TextField()),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Policy',
+            fields=[
+                ('id', models.CharField(max_length=5, primary_key=True, serialize=False)),
+                ('name', models.CharField(max_length=500)),
             ],
         ),
         migrations.CreateModel(
@@ -54,6 +68,14 @@ class Migration(migrations.Migration):
                 ('content', models.TextField()),
                 ('post', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.Post')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Category_Policy',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('category_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.Category')),
+                ('policy_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.Policy')),
             ],
         ),
     ]
