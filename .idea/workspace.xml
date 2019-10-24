@@ -2,10 +2,48 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54e946d9-7b00-4101-a69e-a58a3d56c91f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/frontend/src/calendar_row.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/MainFooter.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/pages/BoardUpdatePage.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/pages/NoticeUpdatePage.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/footerimg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/glass_row.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/loudspeaker_gray_row.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/crawling.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/crawling.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/api/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/api/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/api/views/auth_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api/views/auth_views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/api/views/post_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api/views/post_views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/api/views/user_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api/views/user_views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/create_admin.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/create_admin.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/backend/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/api/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/LoginForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/LoginForm.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Mainheader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Mainheader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/MovieList.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/MovieListCard.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/MovieSearchForm.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/SignUpForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/SignUpForm.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/UserListForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/UserListForm.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/AdminPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/AdminPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/BoardDetailPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/BoardDetailPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/BoardPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/BoardPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/BoardUpdate.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/FavoritePage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/FavoritePage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/LoginPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/LoginPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/MainPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/MainPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/MovieSearchPage.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/NoticeDetailPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/NoticeDetailPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/NoticePage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/NoticePage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/NoticePageList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/NoticePageList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/NoticeUpdate.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/store/modules/data.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/store/modules/data.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -59,10 +97,10 @@
         <entry file="file://$PROJECT_DIR$/backend/api/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="462">
-              <caret line="58" column="29" selection-start-line="58" selection-start-column="29" selection-end-line="58" selection-end-column="29" />
+              <caret line="60" column="29" selection-start-line="60" selection-start-column="29" selection-end-line="60" selection-end-column="29" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
-                <marker date="1571705393507" expanded="true" signature="1504:1740" ph="..." />
+                <marker date="1571876089915" expanded="true" signature="1576:1812" ph="..." />
               </folding>
             </state>
           </provider>
@@ -97,8 +135,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/backend/backend/crawling.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="50" column="37" selection-start-line="50" selection-start-column="37" selection-end-line="50" selection-end-column="37" />
+            <state relative-caret-position="176">
+              <caret line="54" column="20" lean-forward="true" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="20" />
               <folding>
                 <element signature="e#1#16#0" expanded="true" />
                 <element signature="e#181#528#0" />
@@ -168,9 +206,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="952" />
-    <option name="width" value="977" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="717" />
+    <option name="width" value="1212" />
     <option name="height" value="1038" />
   </component>
   <component name="ProjectView">
@@ -376,15 +414,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="574" y="0" width="969" height="830" extended-state="1" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15333775" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24892704" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.47017047" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.4755747" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -558,10 +596,10 @@
     <entry file="file://$PROJECT_DIR$/backend/api/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
-          <caret line="58" column="29" selection-start-line="58" selection-start-column="29" selection-end-line="58" selection-end-column="29" />
+          <caret line="60" column="29" selection-start-line="60" selection-start-column="29" selection-end-line="60" selection-end-column="29" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
-            <marker date="1571705393507" expanded="true" signature="1504:1740" ph="..." />
+            <marker date="1571876089915" expanded="true" signature="1576:1812" ph="..." />
           </folding>
         </state>
       </provider>
@@ -578,8 +616,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/backend/crawling.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="50" column="37" selection-start-line="50" selection-start-column="37" selection-end-line="50" selection-end-column="37" />
+        <state relative-caret-position="176">
+          <caret line="54" column="20" lean-forward="true" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="20" />
           <folding>
             <element signature="e#1#16#0" expanded="true" />
             <element signature="e#181#528#0" />

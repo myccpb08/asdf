@@ -23,11 +23,11 @@
                   {{board.content}}
                 </div>
               </v-flex>
-              <!-- <v-flex  xs12 text-xs-center round my-5>
-                <v-btn :to="{ name: 'noticeUpdate', params: {noticeId: noticeId} }" flat color="gray" v-if="check" class="movebtn">update</v-btn>
-                <v-btn flat color="gray" @click='deleteNotice()' v-if="check" class="movebtn">delete</v-btn>
-                <v-btn flat color="gray" @click='$router.go(-1)' class="movebtn">back</v-btn>
-              </v-flex> -->
+              <v-flex  xs12 text-xs-center round my-5>
+                <v-btn :to="{ name: 'boardUpdate', params: {boardId: this.boardId} }" color="gray" class="movebtn">update</v-btn>
+                <v-btn color="gray" @click='deleteBoard()' class="movebtn">delete</v-btn>
+                <v-btn color="gray" @click='$router.go(-1)' class="movebtn">back</v-btn>
+              </v-flex>
             </v-layout>
             <hr>
           </div>
@@ -57,18 +57,18 @@ export default {
   mounted(){
     this.getBoard(this.boardId).then((result) => {
       this.board = result
+      this.board.id = this.boardId
     })
   },
   methods:{
 
-    /*지금 제목이 id 로 되어있음 */
     async getBoard(id) {
-        console.log(2468)
         return this.$store.dispatch("data/getboarddetail", id)
     },
-    // async deleteBoard(){
-    //   this.$router.go(-1);
-    // },
+    async deleteBoard(){
+      this.$store.dispatch("data/DeleteBoard", this.boardId)
+      this.$router.go(-1);
+    },
   },
 }
 </script>

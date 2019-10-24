@@ -1,15 +1,20 @@
 <template>
     <v-form ref="form">
-        <v-text-field v-model="email" label="ID"/>
+        <v-text-field v-model="username" label="ID"/>
         <v-text-field v-model="password" label="PASSWORD"/>
         <v-layout justify-center pa-10>
-            <v-btn large color="indigo white--text" @click="onSubmit">Login</v-btn>
+            <v-btn large color="indigo white--text" @click="onSubmit">로그인</v-btn>
+            <router-link to="/signup">
+                <v-btn large color="indigo white--text">회원가입</v-btn>
+            </router-link>
         </v-layout>
     </v-form>
 </template>
 
 <script>
 import router from "../router"
+import store from "../store";
+
 export default {
     props: {
         submit: {
@@ -18,19 +23,29 @@ export default {
         }
     },
     data: () => ({
-        email: "",
+        username: "",
         password: "",
     }),
+    beforemount() {
+        if(store.state.user=='undefined' || store.state.user==null){
+            router.push('/')
+        }
+    },
     methods: {
         onSubmit: function() {
             const params = {
-                email: this.email,
+                username: this.username,
                 password: this.password,
             };
-            this.submit(params);
-
-            router.push("/login")
-        }
+            this.submit(params).then(data => {
+                if(data){
+                    window.location.replace('/')
+                }else{
+                    alert('ID 또는 Password가 맞지 않습니다.')
+                    window.location.reload()
+                }
+            });
+        },
     }
 };
 </script>

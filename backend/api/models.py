@@ -4,6 +4,7 @@ import re
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=20)
     favorite = models.CharField(max_length=500, default="00")
 
     # @property
@@ -24,6 +25,7 @@ def create_profile(**kwargs):
     print(user)
     profile = Profile.objects.create(
         user=user,
+        name=kwargs['name'],
         favorite=kwargs['favorite']
     )
     print("finish create_profile")
