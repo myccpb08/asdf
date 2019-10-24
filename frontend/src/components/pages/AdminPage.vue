@@ -1,24 +1,20 @@
 <template>
   <v-app id="inspire">
+    <!-- TODO: navigation drawer component로 분리 -->
     <v-navigation-drawer v-model="drawer" app clipped>
       <v-list dense>
-        <v-list-item @click="getDash">
-          <v-list-item-action>
-            <v-icon>mdi-view-dashboard</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Dashboard</v-list-item-title>
-          </v-list-item-content>
+        <v-list-item @click="getDash" v-for="menu in menus" :key="menu.title">
+          <router-link :to="menu.route" style="text-decoration:none">
+            <v-list-item-action>
+              <v-icon>{{ menu.icon }}</v-icon>
+            </v-list-item-action>
+          </router-link>
+          <router-link :to="menu.route" style="color: white;text-decoration:none">
+            <v-list-item-content>
+              <v-list-item-title>{{ menu.title }}</v-list-item-title>
+            </v-list-item-content>
+          </router-link>
         </v-list-item>
-        <v-list-item @click="getChart">
-          <v-list-item-action>
-            <v-icon>mdi-settings</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Settings</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <p>{{ admin_selected }}</p>
       </v-list>
     </v-navigation-drawer>
 
@@ -39,7 +35,7 @@
       ></v-text-field>
       <v-spacer></v-spacer>
       <v-btn icon>
-        <i class="fas fa-home fa-2x"></i>
+        <i class="fas fa-home fa-2x" @click="$router.push({ name: 'home'})"></i>
       </v-btn>
       <v-btn icon>
         <v-icon>mdi-bell</v-icon>
@@ -47,7 +43,10 @@
     </v-app-bar>
 
     <v-content>
-      <v-container v-if="admin_selected == 0" class="fill-height" fluid>
+      
+        <router-view />
+      
+      <!-- <v-container v-if="admin_selected == 0" class="fill-height" fluid>
         <v-row align="center" justify="center">
           <v-col class="shrink">
             <v-tooltip right>
@@ -104,14 +103,8 @@
                     class="elevation-1"
                   >
                     <template v-slot:top>
-                      <!-- <v-toolbar flat color="white"> -->
-                      <!-- <v-toolbar-title>My CRUD</v-toolbar-title> -->
-                      <!-- <v-divider class="mx-4" inset vertical></v-divider>
-                      <v-spacer></v-spacer>-->
+                      
                       <v-dialog v-model="dialog" max-width="500px">
-                        <!-- <template v-slot:activator="{ on }">
-                        <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
-                        </template>-->
                         <v-card>
                           <v-card-title>
                             <span class="headline">{{ formTitle }}</span>
@@ -123,21 +116,7 @@
                                 <v-col cols="12" sm="6" md="4">
                                   <v-text-field v-model="editedItem[tab].title" :label="text"></v-text-field>
                                 </v-col>
-                                <!-- <v-col cols="12" sm="6" md="4">
-                                  <v-text-field v-model="editedItem.name" :label="text"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                  <v-text-field v-model="editedItem.calories" label="Calories"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                  <v-text-field v-model="editedItem.fat" label="Fat (g)"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                  <v-text-field v-model="editedItem.carbs" label="Carbs (g)"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                  <v-text-field v-model="editedItem.protein" label="Protein (g)"></v-text-field>
-                                </v-col> -->
+                                
                               </v-row>
                             </v-container>
                           </v-card-text>
@@ -149,7 +128,7 @@
                           </v-card-actions>
                         </v-card>
                       </v-dialog>
-                      <!-- </v-toolbar> -->
+
                     </template>
                     <template v-slot:item.action="{ item }">
                       <v-icon small class="mr-2" @click="editItem(item, tab)">edit</v-icon>
@@ -161,17 +140,22 @@
             </v-card>
           </v-flex>
         </v-layout>
-      </v-container>
+      </v-container> -->
     </v-content>
-    <v-footer app>
-      <span>&copy; 2019</span>
+
+    <v-footer absolute padless>
+      <v-col class="text-center" cols="12">
+        <span>&copy; 2019</span> —
+        <strong>딱정이</strong>
+      </v-col>
     </v-footer>
   </v-app>
 </template>
 
 <script>
 import { mapState, mapActions } from "vuex";
-import UserList from "../UserListForm";
+
+import UserList from "../../admins/UserList";
 import router from "../../router";
 
 export default {
@@ -184,7 +168,34 @@ export default {
     drawer: null,
     admin_selected: 0,
     search_text: null,
+    menus: [
+      {
+        title: "DASHBOARD",
+        route: "/admin",
+        icon: "mdi-view-dashboard"
+      },
 
+      {
+        title: "USER",
+        route: "/admin/user",
+        icon: "mdi-account"
+      },
+      {
+        title: "POLICY",
+        route: "/admin/policy",
+        icon: "mdi-message-draw"
+      },
+      {
+        title: "NOTICE",
+        route: "/admin/notice",
+        icon: "mdi-sign-text"
+      },
+      {
+        title: "BOARD",
+        route: "/admin/board",
+        icon: "mdi-message-draw"
+      }
+    ],
     tab: null,
     items: ["User", "Policy", "Notice", "Post"],
     search: "",
@@ -201,7 +212,7 @@ export default {
         { text: "User Name", value: "username" },
         { text: "Favorite", value: "favorite" },
         { text: "Password", value: "password" },
-        { text: 'Actions', value: 'action', sortable: false },
+        { text: "Actions", value: "action", sortable: false }
       ],
       [
         {
@@ -213,45 +224,53 @@ export default {
         { text: "User Name", value: "username" },
         { text: "Favorite", value: "favorite" },
         { text: "Password", value: "password" },
-        { text: 'Actions', value: 'action', sortable: false },
+        { text: "Actions", value: "action", sortable: false }
       ],
       [
         { text: "Id", value: "id" },
         { text: "Title", value: "title" },
         { text: "Content", value: "content" },
-        { text: 'Actions', value: 'action', sortable: false },
+        { text: "Actions", value: "action", sortable: false }
       ],
       [
         { text: "Id", value: "id" },
         { text: "Title", value: "title" },
         { text: "Content", value: "content" },
-        { text: 'Actions', value: 'action', sortable: false },
+        { text: "Actions", value: "action", sortable: false }
       ]
     ],
     editedIndex: -1,
     editedItem: [
-      [{
-        id: "",
-        username: "",
-        favorite : "",
-        password: "",
-      }],
-      [{
-        id: "",
-        username: "",
-        favorite : "",
-        password: "",
-      }],
-      [{
-        id: "",
-        title: "",
-        content: "",
-      }],
-       [{
-        id: "",
-        title: "",
-        content: "",
-      }],
+      [
+        {
+          id: "",
+          username: "",
+          favorite: "",
+          password: ""
+        }
+      ],
+      [
+        {
+          id: "",
+          username: "",
+          favorite: "",
+          password: ""
+        }
+      ],
+      [
+        {
+          id: "",
+          title: "",
+          content: ""
+        }
+      ],
+      [
+        {
+          id: "",
+          title: "",
+          content: ""
+        }
+      ]
     ],
     dashBoardAllData: [[], [], [], []],
     userData: [],
@@ -313,22 +332,22 @@ export default {
       });
     },
     editItem(item, idx) {
-      console.log(item)
+      console.log(item);
       this.editedIndex = this.dashBoardAllData[idx].indexOf(item);
       this.editedItem[idx] = Object.assign({}, item);
       this.dialog = true;
     },
 
     deleteItem(item, idx) {
-      console.log(idx)
-      console.log(item)
-      console.log(this.dashBoardAllData[idx])
-      console.log(idx)
+      // console.log(idx)
+      // console.log(item)
+      // console.log(this.dashBoardAllData[idx])
+      // console.log(idx)
       const index = this.dashBoardAllData[idx].indexOf(item);
-      confirm("Are you sure you want to delete this item?") &&
-        this.dashBoardAllData[idx].splice(index, 1);
-      console.log(this.dashBoardAllData[idx])
-      console.log(idx)
+      // confirm("Are you sure you want to delete this item?") &&
+      this.dashBoardAllData[idx].splice(index, 1);
+      // console.log(this.dashBoardAllData[idx])
+      // console.log(idx)
     },
 
     close() {
@@ -341,7 +360,10 @@ export default {
 
     save(idx) {
       if (this.editedIndex > -1) {
-        Object.assign(this.dashBoardAllData[idx][this.editedIndex], this.editedItem[idx]);
+        Object.assign(
+          this.dashBoardAllData[idx][this.editedIndex],
+          this.editedItem[idx]
+        );
       } else {
         this.desserts.push(this.editedItem[idx]);
       }
@@ -364,5 +386,8 @@ export default {
 .md-drawer {
   width: 230px;
   max-width: calc(100vw - 125px);
+}
+.admin-footer {
+  text-align: center;
 }
 </style>

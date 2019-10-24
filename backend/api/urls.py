@@ -3,6 +3,7 @@ from api.views import movie_views
 from api.views import auth_views
 from api.views import post_views
 from api.views import user_views
+from django.urls import path
 
 urlpatterns = [
     url('auth/signup-many/$', auth_views.signup_many, name='sign_up_many'),
