@@ -23,6 +23,8 @@ urlpatterns = [
     url('auth/allUsers/$', user_views.getAllUsers, name='get_all_user'),
 
     url('crawling/category/$', crawling_views.setCategories, name='set_categories'),
+    url('crawling/policy/$', crawling_views.setPolicies, name='set_policies'),
+
     url('board/$', post_views.posts, name='boardwrite'),
     url('allboards/$', post_views.getallboards, name="get_all_boards"),
     url('boardDetail/$', post_views.getboard, name="get_board"),
@@ -30,7 +32,7 @@ urlpatterns = [
     url('notice/$', post_views.notices, name='noticewrite'),
 
     # 자유게시판 관련 링크
-    url('allboards/$', post_views.getallboards, name="get_all_boards"), # 자유게시판 전체 글 로드
+    url('allboards/$', post_views.getallboards, name="get_all_boards"), # 자유게시판 전 글 로드
     url('boardDetail/$', post_views.getboard, name="get_board"), # 자유게시판 자세히 & 삭제 & 수정
     url('board/$', post_views.posts, name='boardwrite'), # 자유게시판 작성
 
