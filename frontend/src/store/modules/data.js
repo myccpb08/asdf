@@ -1,4 +1,5 @@
 import api from '../../api'
+import router from '../../router'
 
 // initial state
 const state = {
@@ -9,7 +10,7 @@ const state = {
 }
 
 // actions
-const actions = {
+const actions = { 
   async signUp({ commit }, params) {
     console.log("enter addMember!!")
     await api.signUp(params)
@@ -41,7 +42,7 @@ const actions = {
       })
   },
   async getSession({ commit }, param) {
-    return await api.getSession(param).then((result) => {
+    await api.getSession(param).then((result) => {
       if (result.data.is_authenticated) {
         commit('setUser', {
           username: result.data.username,
@@ -54,8 +55,13 @@ const actions = {
         localStorage.removeItem('token');
         commit('setUser', null);
       }
+      console.log("겟겟게세겟게세")
       return result.data.is_authenticated;
-    });
+    }).finally((result)=>{
+      if(result){
+        router.push("/");
+      }
+    })
   },
   async getAllUsers() {
     return await api.getAllUsers()
@@ -122,6 +128,7 @@ const mutations = {
   },
   setUser(state, user) {
     state.user = user
+    console.log("Save user infomation!")
   },
 
 }

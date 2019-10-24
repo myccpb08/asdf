@@ -23,6 +23,7 @@ import router from "./router";
 import Mainheader from './components/Mainheader'
 import MainFooter from './components/MainFooter'
 import MainPage from './components/pages/MainPage'
+import { mapState, mapActions } from "vuex";
 
 export default {
   components : {
@@ -30,7 +31,35 @@ export default {
     'Mainheader': Mainheader,
     'MainFooter': MainFooter,
   },
-
+  created() {
+    console.log("Create!!!!!!!!!!")
+    if (localStorage.getItem("token") !== undefined && localStorage.getItem("token") !== null) {
+      this.getSession(localStorage.getItem("token"));
+    } else {
+      //토큰 없을 때
+      console.log("token is null")
+      router.push("/");
+    }
+  },
+  mounted(){
+    this.checkLogin()
+  },
+  methods: {
+    ...mapActions("data", ["getSession"]),
+    goTo: function(path) {
+      router.push({ name: path });
+    },
+    checkLogin() {
+      console.log("나는 로그인 체크다!!")
+      this.token = localStorage.getItem('token')
+      if(this.token!==null){
+        this.isLogin = true
+        console.log("STAFF? : " + store.state.user.is_staff)
+      }else{
+        this.isLogin = false
+      }
+    },
+  }
   // data: () => ({
   //   drawer: null,
   //   choices: [
@@ -54,11 +83,7 @@ export default {
 
 
 
-  methods: {
-    goTo: function(path) {
-      router.push({ name: path });
-    }
-  }
+  
 };
 </script>
 

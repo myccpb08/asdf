@@ -88,6 +88,7 @@ import { mapState, mapActions } from "vuex";
 export default {
   data: () => ({
     isLogin: false,
+    isAdmin: false,
     drawer: null,
     token: "",
     choices: [
@@ -108,25 +109,26 @@ export default {
       },
     ]
   }),
-  async mounted(){
-        await this.checkLogin()
+  mounted(){
+    this.checkLogin()
   },
   methods: {
     ...mapActions("data", ["logoutUser"]),
     goTo: function(path) {
       router.push({ name: path });
     },
+    async logout() {
+      await this.logoutUser()
+      window.location.reload('/')
+    },
     checkLogin() {
+      console.log("나는 로그인 체크다!!")
       this.token = localStorage.getItem('token')
       if(this.token!==null){
         this.isLogin = true
       }else{
         this.isLogin = false
       }
-    },
-    async logout() {
-      await this.logoutUser()
-      window.location.reload('/')
     },
   }
 };
