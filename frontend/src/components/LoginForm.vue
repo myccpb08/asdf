@@ -1,7 +1,7 @@
 <template>
     <v-form ref="form">
         <v-text-field v-model="username" label="ID"/>
-        <v-text-field v-model="password" label="PASSWORD"/>
+        <v-text-field v-model="password" label="PASSWORD" type="password" @keyup.enter="onSubmit"/>
         <v-layout justify-center pa-10>
             <v-btn large color="indigo white--text" @click="onSubmit">로그인</v-btn>
             <router-link to="/signup">

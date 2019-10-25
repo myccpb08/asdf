@@ -11,7 +11,8 @@
 </template>
 
 <script>
-import store from '../store/modules/data.js'
+// import store from '../store/modules/data.js'
+import router from '../router/index.js'
 
 export default {
     props: {
@@ -24,6 +25,12 @@ export default {
         loading: false,
         userList: [],
     }),
+    created() {
+        if (this.$store.state.data.user == null) {
+            alert('경고 했습니다?!')
+            router.push("/");
+        }
+    },
     async mounted(){
         await this.getList()
     },

@@ -8,6 +8,11 @@ const state = {
   user: null,
 }
 
+// getter
+const getters = {
+  test: state => state.user
+}
+
 // actions
 const actions = {
   async signUp({ commit }, params) {
@@ -113,7 +118,7 @@ const actions = {
 
   async DeleteBoard({commit}, params){
     await api.deleteboard(params)
-  },
+  }
 }
 
 // mutations
@@ -123,8 +128,7 @@ const mutations = {
   },
   setUser(state, user) {
     state.user = user
-  },
-
+  }
 }
 
 export default {
@@ -132,4 +136,5 @@ export default {
   state,
   actions,
   mutations,
+  getters
 }
