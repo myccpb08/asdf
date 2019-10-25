@@ -25,7 +25,7 @@
               <v-dialog v-model="dialog" max-width="500px">
                 <v-card>
                   <v-card-title>
-                    <span class="headline">{{ formTitle }}</span>
+                    <span class="headline">Edit Item</span>
                   </v-card-title>
 
                   <v-card-text>
@@ -82,7 +82,6 @@ export default {
       },
       { text: "User Name", value: "username" },
       { text: "Favorite", value: "favorite" },
-      { text: "Password", value: "password" },
       { text: "Actions", value: "action", sortable: false }
     ],
     editedIndex: -1,
@@ -91,15 +90,11 @@ export default {
         id: "",
         username: "",
         favorite: "",
-        password: ""
       }
     ],
     dataLIst: []
   }),
   computed: {
-    formTitle() {
-      return this.editedIndex === -1 ? "Edit Item" : "Edit Item";
-    }
   },
   mounted() {
     this.getUsers();
@@ -119,22 +114,12 @@ export default {
     },
 
     deleteItem(item, idx) {
-      // console.log(idx)
-      // console.log(item)
-      // console.log(this.dashBoardAllData[idx])
-      // console.log(idx)
       const index = this.dataLIst.indexOf(item);
-      // confirm("Are you sure you want to delete this item?") &&
+      confirm("Are you sure you want to delete this item?") &&
       this.dataLIst.splice(index, 1);
-      // console.log(this.dashBoardAllData[idx])
-      // console.log(idx)
     },
     close() {
       this.dialog = false;
-      // setTimeout(() => {
-      //   this.editedItem = Object.assign({}, this.defaultItem);
-      //   this.editedIndex = -1;
-      // }, 300);
     },
 
     save() {

@@ -35,7 +35,7 @@
       ></v-text-field>
       <v-spacer></v-spacer>
       <v-btn icon>
-        <i class="fas fa-home fa-2x" @click="$router.push({ name: 'home'})"></i>
+        <i class="fas fa-home fa-2x" @click="goHome"></i>
       </v-btn>
       <v-btn icon>
         <v-icon>mdi-bell</v-icon>
@@ -107,7 +107,7 @@
                       <v-dialog v-model="dialog" max-width="500px">
                         <v-card>
                           <v-card-title>
-                            <span class="headline">{{ formTitle }}</span>
+                            <span class="headline">Edit Item</span>
                           </v-card-title>
 
                           <v-card-text>
@@ -278,9 +278,6 @@ export default {
     boardData: []
   }),
   computed: {
-    formTitle() {
-      return this.editedIndex === -1 ? "Edit Item" : "Edit Item";
-    }
   },
   watch: {
     group() {
@@ -301,6 +298,9 @@ export default {
     ...mapActions("data", ["getAllUsers", "getAllNotices", "getAllBoards"]),
     toggleMenu() {
       this.menuVisible = !this.menuVisible;
+    },
+    goHome() {
+      location.replace('http://localhost:8080/')
     },
     getSearchResult() {
       console.log(this.search_text);
@@ -339,23 +339,13 @@ export default {
     },
 
     deleteItem(item, idx) {
-      // console.log(idx)
-      // console.log(item)
-      // console.log(this.dashBoardAllData[idx])
-      // console.log(idx)
       const index = this.dashBoardAllData[idx].indexOf(item);
       // confirm("Are you sure you want to delete this item?") &&
       this.dashBoardAllData[idx].splice(index, 1);
-      // console.log(this.dashBoardAllData[idx])
-      // console.log(idx)
     },
 
     close() {
       this.dialog = false;
-      // setTimeout(() => {
-      //   this.editedItem = Object.assign({}, this.defaultItem);
-      //   this.editedIndex = -1;
-      // }, 300);
     },
 
     save(idx) {
