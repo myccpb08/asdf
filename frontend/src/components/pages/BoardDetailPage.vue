@@ -118,7 +118,7 @@ export default {
       return this.$store.dispatch("data/getBoardDetail", id);
     },
     async deleteBoard() {
-      this.$store.dispatch("data/DeleteBoard", this.boardId);
+      this.$store.dispatch("data/deleteBoard", this.boardId);
       this.$router.go(-1);
     },
 

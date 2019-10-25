@@ -122,7 +122,7 @@ export default {
       return this.$store.dispatch("data/getNoticeDetail", id);
     },
     async deleteNotice() {
-      this.$store.dispatch("data/DeleteNotice", this.noticeId);
+      this.$store.dispatch("data/deleteNotice", this.noticeId);
       this.$router.go(-1);
     },
 

@@ -3,15 +3,26 @@ import axios from 'axios'
 const apiUrl = '/api'
 
 export default {
-  searchMovies(params) {
-    return axios.get(`${apiUrl}/movies/`, {
-      params,
-    })
-  },
   signUp(params) {
     return axios.post(`${apiUrl}/auth/signup/`, {
       user: params,
     })
+  },
+  async checkLogin(params) {
+    return await axios.post(`${apiUrl}/auth/checkLogin/`, {
+      username: params.username,
+      password: params.password
+    })
+  },
+  async logoutUser(param) {
+    return await axios.post(`${apiUrl}/auth/logout/`, {
+        username: param
+    })
+  },
+  async getSession(param) {
+      return await axios.post(`${apiUrl}/auth/session/`, {
+          token: param
+      })
   },
   getAllUsers() {
     return axios.get(`${apiUrl}/auth/allUsers/`).then((result) => {
