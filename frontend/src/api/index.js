@@ -29,66 +29,113 @@ export default {
       return result.data
     });
   },
-  getallnotices(){
-    return axios.get(`${apiUrl}/allnotices/`).then((result) => {
+
+  getAllNotices(){
+    return axios.get(`${apiUrl}/allNotices/`).then((result) => {
       return result.data
     });
   },
 
-  noticewrite(params){
+  getNoticeComments(params){
+    return axios.get(`${apiUrl}/getNoticeComments/`,{params}).then((result) => {
+      return result.data
+    });
+  },
+
+  getBoardComments(params){
+    return axios.get(`${apiUrl}/getBoardComments/`,{params}).then((result) => {
+      return result.data
+    });
+  },
+
+  noticeWrite(params){
     return axios.post(`${apiUrl}/notice/`, {
       params,
     })
   },
 
-  getallboards() {
-    return axios.get(`${apiUrl}/allboards/`).then((result) => {
+  noticeCommentWrite(params){
+    console.log(653)
+    return axios.post(`${apiUrl}/noticeComment/`, {
+      params,
+    })
+  },
+
+  getAllBoards() {
+    return axios.get(`${apiUrl}/allBoards/`).then((result) => {
       return result.data
     });
   },
 
-  updatenotice(params){
+  updateNotice(params){
     axios.post(`${apiUrl}/noticeDetail/`, {
       params
     })
   },
 
-  updateboard(params){
+  updateBoard(params){
     axios.post(`${apiUrl}/boardDetail/`, {
       params
     })
   },
 
-  boardwrite(params){
+  boardCommentWrite(params){
+    console.log(653)
+    return axios.post(`${apiUrl}/boardComment/`, {
+      params,
+    })
+  },
+
+  boardWrite(params){
     console.log('api index.js')
     return axios.post(`${apiUrl}/board/`, {
       params,
     })
   },
 
-  getboarddetail(params) {
+  getBoardDetail(params) {
     console.log('api폴더 getboarddetail')
     return axios.get(`${apiUrl}/boardDetail/`, {
         params
     })
   },
   
-  getnoticedetail(params) {
+  getNoticeDetail(params) {
     console.log('api폴더 getnoticedetail')
     return axios.get(`${apiUrl}/noticeDetail/`, {
         params
     })
   },
 
-  deletenotice(params) {
+  deleteNotice(params) {
     console.log('삭제옵니까?')
     console.log(params)
     return axios.delete(`${apiUrl}/noticeDetail/`, 
     { params})
   },
 
-  deleteboard(params) {
+  deleteBoard(params) {
     return axios.delete(`${apiUrl}/boardDetail/`, 
     { params})
   },
+
+  deleteBoardComment(params){
+    return axios.delete(`${apiUrl}/boardComment/`, 
+    { params})
+  },
+
+  deleteNoticeComment(params){
+    return axios.delete(`${apiUrl}/noticeComment/`, 
+    { params})
+  },
+
+  editBoardComment(params){
+    return axios.put(`${apiUrl}/boardComment/`, 
+    { params})
+  },
+
+  editNoticeComment(params){
+    return axios.put(`${apiUrl}/noticeComment/`, 
+    { params})
+  }
 }

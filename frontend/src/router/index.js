@@ -21,6 +21,7 @@ const router = new VueRouter({
   mode: 'history',
   routes: [
     { path: '/', component: EmptyPage, name: 'home' },
+    { path: '/policy/search', component: MovieSearchPage, name: 'policy-search' },
     { path: '/mypage', component: Mypage, name:'mypage'},
     { path: '/user/list', component: AdminPage, name: "user-list"},
     { path: '/signup', component: SignUpPage, name: 'SignUp' },
@@ -34,10 +35,11 @@ const router = new VueRouter({
     { path: '/boardupdate/:boardId', component: BoardUpdatePage, name:'boardUpdate', props:true},
     { path: '/noticeupdate/:noticeId', component: NoticeUpdatePage, name:'noticeUpdate', props:true},
     { path: '/noticeDetail/:noticeId',component: NoticeDetailPage, name: 'noticeDetail', props: true},
+    // { path: '/chat',component: Chat, name: chat},
   ],
   scrollBehavior() {
     return { x: 0, y: 0 }
   },
 })
 
-export default router
+export default router 

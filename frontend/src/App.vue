@@ -22,11 +22,9 @@
 import router from "./router";
 import Mainheader from './components/Mainheader'
 import MainFooter from './components/MainFooter'
-import MainPage from './components/pages/MainPage'
 
 export default {
   components : {
-    'MainPage' : MainPage,
     'Mainheader': Mainheader,
     'MainFooter': MainFooter,
   },
