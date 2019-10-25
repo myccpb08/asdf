@@ -37,7 +37,7 @@
 <script>
 export default {
   props: {
-    getallnotices: {
+    getAllNotices: {
       type: Function,
       default: () => {}
     }
@@ -61,7 +61,7 @@ export default {
     // },
     async getnotice() {
       // await this.setLoading()
-      this.boardList = await this.getallnotices();
+      this.boardList = await this.getAllNotices();
       this.boardList = this.boardList.reverse()
       // await this.setLoading()
     }

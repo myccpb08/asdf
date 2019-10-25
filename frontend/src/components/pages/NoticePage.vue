@@ -13,7 +13,7 @@
       </div>
     </div>
     <br/>
-    <NoticePageList :getallnotices="getallnotices" />
+    <NoticePageList :getAllNotices="getAllNotices" />
   </v-container>
 </template>
 
@@ -28,7 +28,7 @@ export default {
   },
 
   methods: {
-    ...mapActions("data", ["getallnotices"])
+    ...mapActions("data", ["getAllNotices"])
   },
 };
 </script>

@@ -46,7 +46,7 @@ export default {
   methods:{
 
     async getBoard(id) {
-        return this.$store.dispatch("data/getboarddetail", id)
+        return this.$store.dispatch("data/getBoardDetail", id)
     },
 
     async edit(){
@@ -56,7 +56,7 @@ export default {
         id : this.boardId
       };
         this.$store.dispatch("data/boardupdate", params)
-        router.push({name : 'Board'})
+        router.push({name : 'boardDetail', params: {boardId: this.boardId}})
     }
   },
 }
