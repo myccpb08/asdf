@@ -15,6 +15,13 @@ import BoardDetailPage from '../components/pages/BoardDetailPage'
 import BoardUpdatePage from '../components/pages/BoardUpdatePage'
 import FavoritePage from '../components/pages/FavoritePage'
 
+// admin
+import DashBoard from "../admins/DashBoard.vue"
+import UserList from "../admins/UserList.vue"
+import PolicyList from "../admins/PolicyList.vue"
+import NoticeList from "../admins/NoticeList.vue"
+import BoardList from "../admins/BoardList.vue"
+
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -23,7 +30,6 @@ const router = new VueRouter({
     { path: '/', component: EmptyPage, name: 'home' },
     { path: '/policy/search', component: MovieSearchPage, name: 'policy-search' },
     { path: '/mypage', component: Mypage, name:'mypage'},
-    { path: '/user/list', component: AdminPage, name: "user-list"},
     { path: '/signup', component: SignUpPage, name: 'SignUp' },
     { path: '/login', component: LoginPage, name: 'Login'},
     { path: '/notice', component: NoticePage, name: 'Notice'},
@@ -35,7 +41,38 @@ const router = new VueRouter({
     { path: '/boardupdate/:boardId', component: BoardUpdatePage, name:'boardUpdate', props:true},
     { path: '/noticeupdate/:noticeId', component: NoticeUpdatePage, name:'noticeUpdate', props:true},
     { path: '/noticeDetail/:noticeId',component: NoticeDetailPage, name: 'noticeDetail', props: true},
-    // { path: '/chat',component: Chat, name: chat},
+    { 
+      path: '/admin', 
+      component: AdminPage, 
+      name: "admin",
+      children:[
+        {
+          path: '/',
+          name : "dashboard",
+          component : DashBoard
+        },
+        {
+          path: 'user',
+          name : 'user-list',
+          component : UserList
+        },
+        {
+          path: 'policy',
+          name : 'policy',
+          component : PolicyList
+        },
+        {
+          path: "notice",
+          name : "/notice-list",
+          component : NoticeList
+        },
+        {
+          path: "board",
+          name : "/board-list",
+          component : BoardList
+        },
+      ]
+    },
   ],
   scrollBehavior() {
     return { x: 0, y: 0 }

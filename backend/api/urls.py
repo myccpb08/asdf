@@ -3,6 +3,7 @@ from api.views import movie_views
 from api.views import auth_views
 from api.views import post_views
 from api.views import user_views
+from django.urls import path
 
 urlpatterns = [
     url('auth/signup/$', user_views.signup, name='sign_up'),
@@ -11,17 +12,6 @@ urlpatterns = [
     url('auth/checkLogin/$', user_views.login, name='login'),
     url('auth/logout/$', user_views.logout, name='logout'),
     url('auth/session/$', user_views.session, name='session'),
-    url('auth/signup/$', user_views.signup, name='sign_up'),
-    url('auth/allUsers/$', user_views.getAllUsers, name='get_all_user'),
-
-    url('movies/$', movie_views.movies, name='movie_list'),
-<<<<<<< HEAD
-    url('auth/signup/$', user_views.signup, name='sign_up'),
-    url('auth/allUsers/$', user_views.getAllUsers, name='get_all_user'),
-=======
-    url('posts/$', post_views.posts, name='post_list'),
-    url('posts/comment/$', post_views.post_comments, name='post_comment_list'),
->>>>>>> 20fdad400ac2a637bca01604090acd291fc85cca
 
     # 자유게시판 관련 링크
     url('allBoards/$', post_views.getAllBoards, name="get_all_boards"), # 자유게시판 전체 글 로드

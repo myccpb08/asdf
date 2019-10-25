@@ -1,19 +1,20 @@
 <template>
   <v-app id="app">
-    <div class="header">
-      <router-link to="/" style="text-decoration:none;">
-      <img src="./DdakJeongE.png" style="width:250px;">
-      </router-link>
-    </div>
-    <Mainheader/>
-     <v-content>
-      <!-- <div class="grey lighten-4">
-        <v-layout justify-center> -->
-          <!-- each pages will be placed here -->
-           <router-view />
-        <!-- </v-layout>
-      </div> -->
-    </v-content>
+    <template v-if="this.$store.state.data.userPage">
+      <div class="header">
+        <router-link to="/" style="text-decoration:none;">
+          <img src="./DdakJeongE.png" style="width:250px;" />
+        </router-link>
+      </div>
+      <Mainheader />
+      <v-content>
+        <router-view />
+      </v-content>
+    </template>
+
+    <template v-else>
+      <router-view />
+    </template>
     <MainFooter />
   </v-app>
 </template>
@@ -28,7 +29,7 @@ export default {
     'Mainheader': Mainheader,
     'MainFooter': MainFooter,
   },
-
+  data: () => ({}),
   // data: () => ({
   //   drawer: null,
   //   choices: [
@@ -50,8 +51,6 @@ export default {
   //   ]
   // }),
 
-
-
   methods: {
     goTo: function(path) {
       router.push({ name: path });
@@ -65,7 +64,7 @@ export default {
   display: none;
 }
 
-.header{
+.header {
   position: relative;
   display: flex;
   justify-content: center;
@@ -73,7 +72,7 @@ export default {
   height: 20vh;
 }
 
-.header img{
+.header img {
   position: absolute;
   top: 50%;
   left: 2%;

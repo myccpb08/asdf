@@ -4,6 +4,7 @@ import api from '../../api'
 const state = {
   // shape: [{ id, title, genres, viewCnt, rating }]
   userInfo: "",
+  userPage: true, 
   postList: [],
   user: null,
 }
@@ -156,7 +157,6 @@ const mutations = {
   setUser(state, user) {
     state.user = user
   },
-
 }
 
 export default {
