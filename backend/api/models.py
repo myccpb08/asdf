@@ -4,6 +4,7 @@ import re
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=20)
     favorite = models.CharField(max_length=500, default="00")
 
     # @property
@@ -24,6 +25,7 @@ def create_profile(**kwargs):
     print(user)
     profile = Profile.objects.create(
         user=user,
+        name=kwargs['name'],
         favorite=kwargs['favorite']
     )
     print("finish create_profile")
@@ -43,12 +45,21 @@ class Notice(models.Model):
     content = models.TextField()
 
 
-class Post(models.Model):
+class Board(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
 
-class PostComment(models.Model):
-    user = models.ForeignKey(User, on_delete = models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+class NoticeComment(models.Model):
+    user = models.TextField()
+    # user = models.ForeignKey(User, on_delete = models.CASCADE)
+    post = models.ForeignKey(Notice, on_delete=models.CASCADE)
     content = models.TextField()
+    edit = models.BooleanField(default=False)
+
+class BoardComment(models.Model):
+    user = models.TextField()
+    # user = models.ForeignKey(User, on_delete = models.CASCADE)
+    post = models.ForeignKey(Board, on_delete=models.CASCADE)
+    content = models.TextField()
+    edit = models.BooleanField(default=False)
 

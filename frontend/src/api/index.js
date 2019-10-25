@@ -3,15 +3,26 @@ import axios from 'axios'
 const apiUrl = '/api'
 
 export default {
-  searchMovies(params) {
-    return axios.get(`${apiUrl}/movies/`, {
-      params,
-    })
-  },
   signUp(params) {
     return axios.post(`${apiUrl}/auth/signup/`, {
       user: params,
     })
+  },
+  async checkLogin(params) {
+    return await axios.post(`${apiUrl}/auth/checkLogin/`, {
+      username: params.username,
+      password: params.password
+    })
+  },
+  async logoutUser(param) {
+    return await axios.post(`${apiUrl}/auth/logout/`, {
+        username: param
+    })
+  },
+  async getSession(param) {
+      return await axios.post(`${apiUrl}/auth/session/`, {
+          token: param
+      })
   },
   getAllUsers() {
     return axios.get(`${apiUrl}/auth/allUsers/`).then((result) => {
@@ -20,7 +31,19 @@ export default {
   },
 
   getAllNotices(){
-    return axios.get(`${apiUrl}/allnotices/`).then((result) => {
+    return axios.get(`${apiUrl}/allNotices/`).then((result) => {
+      return result.data
+    });
+  },
+
+  getNoticeComments(params){
+    return axios.get(`${apiUrl}/getNoticeComments/`,{params}).then((result) => {
+      return result.data
+    });
+  },
+
+  getBoardComments(params){
+    return axios.get(`${apiUrl}/getBoardComments/`,{params}).then((result) => {
       return result.data
     });
   },
@@ -31,8 +54,15 @@ export default {
     })
   },
 
+  noticeCommentWrite(params){
+    console.log(653)
+    return axios.post(`${apiUrl}/noticeComment/`, {
+      params,
+    })
+  },
+
   getAllBoards() {
-    return axios.get(`${apiUrl}/allboards/`).then((result) => {
+    return axios.get(`${apiUrl}/allBoards/`).then((result) => {
       return result.data
     });
   },
@@ -46,6 +76,13 @@ export default {
   updateBoard(params){
     axios.post(`${apiUrl}/boardDetail/`, {
       params
+    })
+  },
+
+  boardCommentWrite(params){
+    console.log(653)
+    return axios.post(`${apiUrl}/boardComment/`, {
+      params,
     })
   },
 
@@ -81,4 +118,24 @@ export default {
     return axios.delete(`${apiUrl}/boardDetail/`, 
     { params})
   },
+
+  deleteBoardComment(params){
+    return axios.delete(`${apiUrl}/boardComment/`, 
+    { params})
+  },
+
+  deleteNoticeComment(params){
+    return axios.delete(`${apiUrl}/noticeComment/`, 
+    { params})
+  },
+
+  editBoardComment(params){
+    return axios.put(`${apiUrl}/boardComment/`, 
+    { params})
+  },
+
+  editNoticeComment(params){
+    return axios.put(`${apiUrl}/noticeComment/`, 
+    { params})
+  }
 }

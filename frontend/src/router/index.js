@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import EmptyPage from '../components/pages/EmptyPage'
-import MovieSearchPage from '../components/pages/MovieSearchPage'
 import Mypage from '../components/pages/Mypage'
 import AdminPage from '../components/pages/AdminPage'
 import SignUpPage from '../components/pages/SignUpPage'
@@ -73,7 +72,6 @@ const router = new VueRouter({
           component : BoardList
         },
       ]
-
     },
   ],
   scrollBehavior() {
@@ -81,4 +79,4 @@ const router = new VueRouter({
   },
 })
 
-export default router
+export default router 

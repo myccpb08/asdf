@@ -44,27 +44,27 @@
     <v-navigation-drawer v-model="drawer" app right clipped color="grey lighten-4">
       <v-list dense class="grey lighten-4">
         <template v-for="(choice, i) in choices">
-          <v-list-item
-            :key="i"
-            @click="() => {
-              if (choice.path) {
-                goTo(choice.path)
-              }
-            }"
-          >
-            <v-list-item-action>
-              <v-icon>{{ choice.icon }}</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title class="subtitle-2 font-weight-bold black--text">{{ choice.text }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
+            <v-list-item v-if="(i!==2 && isLogin===true) || isLogin===false"
+              :key="i"
+              @click="() => {
+                if (choice.path) {
+                  goTo(choice.path)
+                }
+              }"
+            >
+              <v-list-item-action>
+                <v-icon>{{ choice.icon }}</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title class="subtitle-2 font-weight-bold black--text">{{ choice.text }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
         </template>
       </v-list>
       
-      <template v-slot:append>
+      <template v-if="isLogin" v-slot:append>
         <div class="pa-2">
-          <v-btn block dark>로그아웃</v-btn>
+          <v-btn block dark @click="logout">로그아웃</v-btn>
         </div>
       </template>
     </v-navigation-drawer>
@@ -82,10 +82,14 @@
 
 <script>
 import router from "../router";
+import store from "../store/modules/data.js";
+import { mapState, mapActions } from "vuex";
 
 export default {
   data: () => ({
+    isLogin: false,
     drawer: null,
+    token: "",
     choices: [
       {
         icon: "mdi-movie",
@@ -100,15 +104,30 @@ export default {
       {
         icon: "mdi-account-arrow-right",
         text: "로그인",
-        path: "login"
+        path: "Login"
       },
     ]
   }),
-
+  async mounted(){
+        await this.checkLogin()
+  },
   methods: {
+    ...mapActions("data", ["logoutUser"]),
     goTo: function(path) {
       router.push({ name: path });
-    }
+    },
+    checkLogin() {
+      this.token = localStorage.getItem('token')
+      if(this.token!==null){
+        this.isLogin = true
+      }else{
+        this.isLogin = false
+      }
+    },
+    async logout() {
+      await this.logoutUser()
+      window.location.reload('/')
+    },
   }
 };
 </script>

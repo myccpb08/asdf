@@ -10,6 +10,9 @@
             type="password"
             hint="At least 8 characters"
             :rules="[passwordRules.required, passwordRules.min]"/>
+        <v-text-field
+            v-model="name"
+            label="NAME"/>
         <v-select
             v-model="items.value"
             :items="items"
@@ -39,6 +42,7 @@ export default {
     data: () => ({
         username: "",
         password: "",
+        name: "",
         selected: "",
         items: [
             {text: '임신/출산', value: '01'},
@@ -74,6 +78,7 @@ export default {
             const params = {
                 username: this.username,
                 password: this.password,
+                name: this.name,
                 favoriteValue: this.selected,
             };
             this.submit(params);

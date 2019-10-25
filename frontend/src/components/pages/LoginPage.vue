@@ -5,7 +5,7 @@
             <!-- 로그인 폼-->
             <v-flex xs6>
                 <div>로그인!!</div>
-                <SignUpForm :submit="signUp"/>
+                <LoginForm :submit="checkLogin"/>
             </v-flex>
         </v-layout> 
     </v-container>
@@ -19,6 +19,6 @@ export default {
         LoginForm
     },
     data: () => ({}),
-    // methods: mapActions("data", ["signUp"])
+    methods: mapActions("data", ["checkLogin"])
 };
 </script>
