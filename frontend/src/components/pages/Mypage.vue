@@ -31,30 +31,29 @@
   </div>
   <div style="border-left: 1px solid gray; height: 100%; width: 1px;"></div>
   <div class="right-content">
-    <div class="btn_div">
-      <div class="mypage_button">
-        <div class="btn_hover_line_up"></div>
-        <span>rrrrrr</span>
-        <div class="btn_hover_line_down"></div>
-      </div>
-      <button class="mypage_btn">내가 찾아본 정책</button>
-      <div class="divider"></div>
-      <button class="mypage_btn">내 정보</button>
-      <div class="divider"></div>
-      <button class="mypage_btn">내 정보 수정</button>
+    <span class="greeting">Hello</span>
+    <div class="detail-infor">
+    <div class="labels">
+      <p>Name : </p>
+      <p>Email : </p>
+      <p>Admin? : </p>
+      <p>Favorite : </p>
+      <!-- <p>Created at</p> -->
     </div>
-    <div class="subabout">
-      <div style="width:100%;">
-        <div class="sub_contents_left">
-        <h2 class="my-name">
-          Your name
-        </h2>
-        </div>
-        <div class="sub_contents_right">
-          <h2>Right</h2>
-        </div>
-      </div>
-      
+    <div class="infor">
+      <p v-if="modifymode!=false">{{user.name}}</p>
+          <v-text-field
+            v-else
+            v-model="usrName"
+            label="Name"
+            required
+            class="notranslate"
+            :rules="nameRules"
+          ></v-text-field>
+      <p>{{user.username}}</p>
+      <p>{{user.is_staff}}</p>
+      <p>{{user.favorite}}</p>
+      <!-- <p>{{this.$store.state.user.created_at.toString().slice(4,16)}}</p> -->
     </div>
   <div>
     <!-- <span class="greeting">Hello</span> -->
@@ -152,99 +151,16 @@
 
 </template>
 <script>
-// import firebase from "firebase";
-// import FirebaseService from '@/services/FirebaseService'
-// export default {
-//   data(){
-//     return {
-//         withdraw: false,
-//         passchange : false,
-//         usrName:"",
-//         modifymode: false,
-//         pass: "",
-//         passchk :"",
-//         passRules: [
-//           v => !!v || "PassWord is required",
-//           v => v.length > 7 || "Password is more than 8 characters"
-//         ],
+import router from "../../router"
+import { mapState } from "vuex";
 
-//         passcheckRules: [
-//           v => !!v || "You have to check Password",
-//           v => v === pass || "Isn't match with Password"
-//         ],
-//         nameRules: [v => !!v || "Name is required"]
-//     }
-//   },
-//     methods: {
-//       changePass(){ //비밀번호를 바꿈
-//         if( !this.pass ){
-//           alert("You have to enter your password");
-//           return;
-//         }
-//         if( !this.passchk){
-//           alert("You have to check password");
-//           return;
-//         }
-//         if( this.pass!=this.passchk){
-//           alert("Password is not verified");
-//           return;
-//         }
-//         var currentuser = firebase.auth().currentUser;
-
-//         currentuser.updatePassword(this.pass)
-//         .then(()=>{
-//           alert(this.$store.state.user.displayName+" 님의 비밀번호가 바뀌었습니다.");
-//           this.passchange = false;
-//         }).catch(function(err){
-//           alert(err);
-//         });
-//       },
-//       Leaving(agree){ //탈퇴함
-//         if( agree == true){
-          
-//           this.withdraw = false;
-          
-//           var currentuser = firebase.auth().currentUser;
-//           // db에서 삭제
-//           FirebaseService.deleteUser(currentuser.uid);
-//           //erase local storage 
-//           this.$store.state.accessToken = "";
-//           this.$store.state.user = "";
-//           localStorage.setItem("accessToken", this.$store.state.accessToken);
-//           localStorage.setItem("user", this.$store.state.user);
-         
-//           currentuser.delete().then(function(){
-//             window.location.replace("/");
-//           }).catch(function(err){
-//             alert(err)
-//           });
-          
-//         }else{
-//           this.withdraw = false;
-//         }
-
-//       },
-//       modify(){
-//         if( !this.usrName){
-//           alert("이름을 적으세요");
-//         }
-//         var currentuser = firebase.auth().currentUser;
-//         const firestore = firebase.firestore();
-//         firestore.collection("users").doc(currentuser.uid).update({
-//           dispplayName : this.usrName
-//         }).then(()=>{
-//           modifymode = false;
-//         });
-//       }
-//     },
-//     computed: {
-//       passVerification() {
-//         return this.pass === this.passchk
-//           ? true
-//           : "Have to verify password";
-//       }
-//     }
-// };
+export default {
+  computed: {
+    ...mapState({
+      user : state => state.data.user,
+    })
+  }
+};
 
 </script>
 

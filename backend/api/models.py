@@ -63,3 +63,14 @@ class BoardComment(models.Model):
     content = models.TextField()
     edit = models.BooleanField(default=False)
 
+class Policy(models.Model):
+    id = models.CharField(max_length=5, primary_key=True)
+    name = models.CharField(max_length=500)
+
+class Category(models.Model):
+    id = models.CharField(max_length=5, primary_key=True)
+    name = models.CharField(max_length=500)
+
+class Category_Policy(models.Model):
+    category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
+    policy_id = models.ForeignKey(Policy, on_delete=models.CASCADE)

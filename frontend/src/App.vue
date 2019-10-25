@@ -23,12 +23,20 @@
 import router from "./router";
 import Mainheader from './components/Mainheader'
 import MainFooter from './components/MainFooter'
+<<<<<<< HEAD
+import MainPage from './components/pages/MainPage'
+import { mapActions, mapState, mapGetters } from "vuex";
+import store from "./store/modules/data.js";
+=======
+>>>>>>> fd88dd8d31338ca1e494491ebe59d57a1fffa0ec
 
 export default {
   components : {
     'Mainheader': Mainheader,
     'MainFooter': MainFooter,
   },
+<<<<<<< HEAD
+=======
   data: () => ({}),
   // data: () => ({
   //   drawer: null,
@@ -56,6 +64,7 @@ export default {
       router.push({ name: path });
     }
   }
+>>>>>>> fd88dd8d31338ca1e494491ebe59d57a1fffa0ec
 };
 </script>
 

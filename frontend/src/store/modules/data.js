@@ -9,6 +9,11 @@ const state = {
   user: null,
 }
 
+// getter
+const getters = {
+  test: state => state.user
+}
+
 // actions
 const actions = {
   async signUp({ commit }, params) {
@@ -42,6 +47,7 @@ const actions = {
       })
   },
   async getSession({ commit }, param) {
+    console.log("getSession")
     return await api.getSession(param).then((result) => {
       if (result.data.is_authenticated) {
         commit('setUser', {
@@ -164,4 +170,5 @@ export default {
   state,
   actions,
   mutations,
+  getters
 }
