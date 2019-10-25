@@ -12,7 +12,7 @@ class NoticeAdmin(admin.ModelAdmin):
     list_display = ('id','title', 'content')
 
 class PolicyAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name')
+    list_display = ('id', 'title', 'brief', 'target', 'criteria', 'content', 'supply_way', 'procedure', 'site')
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')

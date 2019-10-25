@@ -56,12 +56,20 @@ class PostComment(models.Model):
 
 class Policy(models.Model):
     id = models.CharField(max_length=5, primary_key=True)
-    name = models.CharField(max_length=500)
+    title = models.TextField()
+    brief = models.TextField()
+    target = models.TextField()
+    criteria = models.TextField()
+    content = models.TextField()
+    supply_way = models.TextField()
+    procedure = models.TextField()
+    site =models.TextField()
+
 
 class Category(models.Model):
     id = models.CharField(max_length=5, primary_key=True)
     name = models.CharField(max_length=500)
 
 class Category_Policy(models.Model):
-    category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
-    policy_id = models.ForeignKey(Policy, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    policy = models.ForeignKey(Policy, on_delete=models.CASCADE)

@@ -24,6 +24,7 @@ urlpatterns = [
 
     url('crawling/category/$', crawling_views.setCategories, name='set_categories'),
     url('crawling/policy/$', crawling_views.setPolicies, name='set_policies'),
+    url('crawling/categoryPolicy/$', crawling_views.setCategory_Policy, name='set_category_policy'),
 
     url('board/$', post_views.posts, name='boardwrite'),
     url('allboards/$', post_views.getallboards, name="get_all_boards"),
