@@ -45,7 +45,7 @@ export default {
   methods:{
 
     async getNotice(id) {
-        return this.$store.dispatch("data/getnoticedetail", id)
+        return this.$store.dispatch("data/getNoticeDetail", id)
     },
 
     async edit(){
@@ -54,7 +54,7 @@ export default {
         body: this.board.content,
         id : this.noticeId
       };
-        this.$store.dispatch("data/noticeupdate", params)
+        this.$store.dispatch("data/noticeUpdate", params)
         router.push({name : 'noticeDetail', params: {noticeId: this.noticeId}})
     }
   },

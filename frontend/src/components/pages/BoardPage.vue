@@ -13,7 +13,7 @@
       </div>
     </div>
     <br/>
-    <BoardPageList :getallboards="getallboards" />
+    <BoardPageList :getAllBoards="getAllBoards" />
   </v-container>
 </template>
 
@@ -28,11 +28,11 @@ export default {
   },
 
   methods: {
-    ...mapActions("data", ["getallboards"])
+    ...mapActions("data", ["getAllBoards"])
   },
 
   mounted() {
-    this.boardList = this.$store.dispatch("data/getallboards");
+    this.boardList = this.$store.dispatch("data/getAllBoards");
   },
 
   props: {

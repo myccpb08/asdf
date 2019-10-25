@@ -27,6 +27,7 @@ import Mainheader from './components/Mainheader'
 import MainFooter from './components/MainFooter'
 import MainPage from './components/pages/MainPage'
 import MovieSearchForm from './components/MovieSearchForm'
+// import Firebaseservice from '../FirebaseService'
 
 export default {
   components : {

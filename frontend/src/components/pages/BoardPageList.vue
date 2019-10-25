@@ -36,7 +36,7 @@
 <script>
 export default {
   props: {
-    getallboards: {
+    getAllBoards: {
       type: Function,
       default: () => {}
     }
@@ -60,7 +60,7 @@ export default {
     // },
     async getboard() {
       // await this.setLoading()
-      this.boardList = await this.getallboards();
+      this.boardList = await this.getAllBoards();
       this.boardList = this.boardList.reverse();
       // await this.setLoading()
     }

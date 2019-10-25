@@ -1,4 +1,4 @@
-from .models import Profile, Movie, User, Post, Notice, NoticeComment, BoardComment
+from .models import Profile, Movie, User, Board, Notice, NoticeComment, BoardComment
 from rest_framework import serializers
 
 
@@ -34,7 +34,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 class BoardSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Post
+        model = Board
         fields = ('id', 'title', 'content')
 
 class NoticeSerializer(serializers.ModelSerializer):

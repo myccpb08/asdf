@@ -17,6 +17,7 @@ import BoardDetailPage from '../components/pages/BoardDetailPage'
 import BoardUpdatePage from '../components/pages/BoardUpdatePage'
 import FavoritePage from '../components/pages/FavoritePage'
 // import Chat from '../components/pages/Chat'
+// import Chat from '../components/pages/Chat'
 
 Vue.use(VueRouter)
 

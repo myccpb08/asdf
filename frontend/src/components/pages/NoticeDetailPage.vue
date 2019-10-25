@@ -41,9 +41,10 @@
                 <div v-if="this.commentsgroup.length == 0">첫 댓글을 남겨보세요</div>
                 <div v-else>
                   <div v-for="comment in commentsgroup" v-bind:key="comment.id">
+                    <div v-if="!comment.edit">
                     {{comment.user}} - {{comment.content}}
                     <!-- 댓글수정버튼 -->
-                    <v-btn class="ma-1" text icon>
+                    <v-btn class="ma-1" text icon @click="comment.edit = !comment.edit">
                       <v-icon color="blue">{{icons.edit}}</v-icon>
                     </v-btn>
                     <!-- 댓글삭제버튼 -->
@@ -51,6 +52,18 @@
                       <v-icon color="red">{{icons.del}}</v-icon>
                     </v-btn>
                   </div>
+                      <!-- 댓글 수정 폼 -->
+                    <form v-if="comment.edit">
+                      <v-text-field
+                        v-model="comment.content"
+                        placeholder="comment.content"
+                        :append-icon="icons.editsubmit"
+                        @click:append="editCommentContents(noticeId, comment.content, comment.id)"
+                      ></v-text-field>
+                    </form>
+
+
+                </div>
                 </div>
 
                 <!-- 댓글 작성 폼 -->
@@ -75,7 +88,7 @@
 
 <script>
 import store from "../../store/modules/data.js";
-import {mdiPencil,mdiDelete,} from '@mdi/js';
+import {mdiPencil,mdiDelete,mdiCheck} from '@mdi/js';
 import NoticeCommentForm from "./NoticeCommentForm"
 import { mapState, mapActions } from "vuex";
 
@@ -89,7 +102,7 @@ export default {
       update_content: "",
       check: false,
       commentsgroup: {},
-      icons : {'edit': mdiPencil, 'del':mdiDelete}
+      icons : {'edit': mdiPencil, 'del':mdiDelete, editsubmit: mdiCheck}
     };
   },
   components: {NoticeCommentForm},
@@ -106,7 +119,7 @@ export default {
     ...mapActions("data", ["noticeCommentWrite"]),
 
     async getNotice(id) {
-      return this.$store.dispatch("data/getnoticedetail", id);
+      return this.$store.dispatch("data/getNoticeDetail", id);
     },
     async deleteNotice() {
       this.$store.dispatch("data/DeleteNotice", this.noticeId);
@@ -124,6 +137,18 @@ export default {
     
     async deleteComment(id){
       this.$store.dispatch("data/deleteNoticeComment", id)
+      window.location.reload()
+    },
+
+        async editCommentContents(noticeId, content, commentId){
+          console.log(22222)
+      const params = {
+        noticeId : noticeId,
+        content : content,
+        commentId : commentId
+      }
+      this.$store.dispatch("data/editNoticeComment", params);
+      this.getComments(noticeId)
       window.location.reload()
     }
   }

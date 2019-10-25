@@ -41,21 +41,32 @@
                 <div v-if="this.commentsgroup.length == 0">첫 댓글을 남겨보세요</div>
                 <div v-else>
                   <div v-for="comment in commentsgroup" v-bind:key="comment.id">
-                    {{comment.user}} - {{comment.content}}
-                    <!-- 댓글수정버튼 -->
-                    <v-btn class="ma-1" text icon>
-                      <v-icon color="blue">{{icons.edit}}</v-icon>
-                    </v-btn>
-                    <!-- 댓글삭제버튼 -->
-                    <v-btn @click="deleteComment(comment.id)" class="ma-1" text icon>
-                      <v-icon color="red">{{icons.del}}</v-icon>
-                    </v-btn>
+                    <div v-if="!comment.edit">
+                      {{comment.user}} - {{comment.content}}
+                      <!-- 댓글수정버튼 -->
+                      <v-btn class="ma-1" text icon @click="comment.edit = !comment.edit">
+                        <v-icon color="blue">{{icons.edit}}</v-icon>
+                      </v-btn>
+                      <!-- 댓글삭제버튼 -->
+                      <v-btn @click="deleteComment(comment.id)" class="ma-1" text icon>
+                        <v-icon color="red">{{icons.del}}</v-icon>
+                      </v-btn>
+                    </div>
+
+                    <!-- 댓글 수정 폼 -->
+                    <form v-if="comment.edit">
+                      <v-text-field
+                        v-model="comment.content"
+                        placeholder="comment.content"
+                        :append-icon="icons.editsubmit"
+                        @click:append="editCommentContents(boardId, comment.content, comment.id)"
+                      ></v-text-field>
+                    </form>
                   </div>
                 </div>
 
                 <!-- 댓글 작성 폼 -->
-                <BoardCommentForm :Id="boardId" :submit="boardCommentWrite"/>
-
+                <BoardCommentForm :Id="boardId" :submit="boardCommentWrite" />
               </div>
               <!-- 댓글 끝 -->
             </v-layout>
@@ -72,8 +83,8 @@
 
 <script>
 import store from "../../store/modules/data.js";
-import { mdiPencil, mdiDelete } from "@mdi/js";
-import BoardCommentForm from "./BoardCommentForm"
+import { mdiPencil, mdiDelete, mdiCheck } from "@mdi/js";
+import BoardCommentForm from "./BoardCommentForm";
 import { mapState, mapActions } from "vuex";
 
 export default {
@@ -86,10 +97,10 @@ export default {
       update_content: "",
       check: false,
       commentsgroup: {},
-      icons: { edit: mdiPencil, del: mdiDelete }
+      icons: { edit: mdiPencil, del: mdiDelete, editsubmit: mdiCheck }
     };
   },
-  components: {BoardCommentForm},
+  components: { BoardCommentForm },
   mounted() {
     this.getBoard(this.boardId).then(result => {
       this.board = result;
@@ -104,7 +115,7 @@ export default {
     ...mapActions("data", ["boardCommentWrite"]),
 
     async getBoard(id) {
-      return this.$store.dispatch("data/getboarddetail", id);
+      return this.$store.dispatch("data/getBoardDetail", id);
     },
     async deleteBoard() {
       this.$store.dispatch("data/DeleteBoard", this.boardId);
@@ -119,8 +130,19 @@ export default {
       ); /* 반환값 = 해당 글의 댓글 전체 */
     },
 
-    async deleteComment(id){
-      this.$store.dispatch("data/deleteBoardComment", id)
+    async deleteComment(id) {
+      this.$store.dispatch("data/deleteBoardComment", id);
+      window.location.reload();
+    },
+
+    async editCommentContents(boardId, content, commentId){
+      const params = {
+        boardId : boardId,
+        content : content,
+        commentId : commentId
+      }
+      this.$store.dispatch("data/editBoardComment", params);
+      this.getComments(boardId)
       window.location.reload()
     }
   }
