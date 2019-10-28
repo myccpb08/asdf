@@ -50,15 +50,13 @@ class Board(models.Model):
     content = models.TextField()
 
 class NoticeComment(models.Model):
-    user = models.TextField()
-    # user = models.ForeignKey(User, on_delete = models.CASCADE)
+    writer = models.ForeignKey(User, on_delete = models.CASCADE)
     post = models.ForeignKey(Notice, on_delete=models.CASCADE)
     content = models.TextField()
     edit = models.BooleanField(default=False)
 
 class BoardComment(models.Model):
-    user = models.TextField()
-    # user = models.ForeignKey(User, on_delete = models.CASCADE)
+    writer = models.ForeignKey(User, on_delete = models.CASCADE)
     post = models.ForeignKey(Board, on_delete=models.CASCADE)
     content = models.TextField()
     edit = models.BooleanField(default=False)

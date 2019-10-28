@@ -1,8 +1,9 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
-from api.models import Board, NoticeComment, Notice, BoardComment
+from api.models import Board, NoticeComment, Notice, BoardComment, Profile
 from rest_framework.response import Response
 from api.serializers import BoardSerializer, NoticeSerializer, NoticeCommentSerializer, BoardCommentSerializer
+from django.contrib.auth.models import User
 
 # 자유게시판 글쓰기
 @api_view(['GET', 'POST'])
@@ -70,7 +71,8 @@ def boardComments(request):
         content = params.get('content', None)
         boardId = params.get('boardId', None)
         board = Board.objects.get(id=boardId)
-        BoardComment.objects.create(user='테스트', post=board, content=content)
+        writer = params.get('writer',None)
+        BoardComment.objects.create(writer=writer, post=board, content=content)
         
         return Response(status=status.HTTP_201_CREATED)
 
@@ -114,6 +116,7 @@ def getNoticeComments(request):
     noticeId = int(request.GET.get('0'))
     comments = NoticeComment.objects.filter(post__id=noticeId)  # 댓글 가져올 글 불러오기
     serializer = NoticeCommentSerializer(comments, many=True)
+    print(serializer.data)
     return Response(data=serializer.data, status=status.HTTP_200_OK)
 
 # 공지사항 자세히 & 삭제 & 수정
@@ -145,6 +148,7 @@ def getNotice(request):
 # 댓글 삭제 / 작성
 @api_view(['GET', 'POST', 'DELETE', 'PUT'])
 def noticeComments(request):
+    
     if request.method == 'DELETE':
         commentId = int(request.GET.get('0'))
         item = NoticeComment.objects.get(id=commentId)
@@ -155,8 +159,15 @@ def noticeComments(request):
         params = request.data.get('params', None)
         content = params.get('content', None)
         noticeId = params.get('noticeId', None)
+        writer_username = params.get('writer', None).get('username',None)
+        print(writer_username)
         notice = Notice.objects.get(id=noticeId)
-        NoticeComment.objects.create(user='테스트', post=notice, content=content)
+        writer = User.objects.get(username=writer_username)
+        # writer = User.objects.all()
+        print(22222)
+        print(writer)
+        
+        NoticeComment.objects.create(writer=writer, post=notice, content=content)
         
         return Response(status=status.HTTP_201_CREATED)
 
