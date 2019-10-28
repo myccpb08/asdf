@@ -23,48 +23,39 @@
 import router from "./router";
 import Mainheader from './components/Mainheader'
 import MainFooter from './components/MainFooter'
-<<<<<<< HEAD
-import MainPage from './components/pages/MainPage'
-import { mapActions, mapState, mapGetters } from "vuex";
+import { mapActions } from "vuex";
 import store from "./store/modules/data.js";
-=======
->>>>>>> fd88dd8d31338ca1e494491ebe59d57a1fffa0ec
 
 export default {
   components : {
     'Mainheader': Mainheader,
     'MainFooter': MainFooter,
   },
-<<<<<<< HEAD
-=======
-  data: () => ({}),
-  // data: () => ({
-  //   drawer: null,
-  //   choices: [
-  //     {
-  //       icon: "mdi-movie",
-  //       text: "영화 검색",
-  //       path: "movie-search"
-  //     },
-  //     {
-  //       icon: "mdi-account-supervisor",
-  //       text: "회원 리스트",
-  //       path: "user-list"
-  //     },
-  //     {
-  //       icon: "mdi-account-arrow-right",
-  //       text: "로그인",
-  //       path: "login"
-  //     },
-  //   ]
-  // }),
-
-  methods: {
-    goTo: function(path) {
-      router.push({ name: path });
+  created() {
+    console.log("Create!!!!!!!!!!")
+    if (localStorage.getItem("token") !== undefined && localStorage.getItem("token") !== null) {
+      var result = this.getSession(localStorage.getItem('token')).then(function(value){
+        console.log(value)
+        // console.log("hihi : " + store.state.data.user.username)
+        if(value==false){
+          router.push('/')
+        }
+      });
     }
-  }
->>>>>>> fd88dd8d31338ca1e494491ebe59d57a1fffa0ec
+    else{
+      router.push("/");
+    }
+    //   var result = this.getSession(localStorage.getItem("token"));
+    //   console.log(result.getValue)
+    //   if (result == false) {
+    //     router.push("/");
+    //   }
+    // } else {
+    //   //토큰 없을 때
+    //   router.push("/");
+    // }
+  },
+  methods: mapActions("data", ["getSession"])
 };
 </script>
 

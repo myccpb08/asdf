@@ -28,7 +28,6 @@ const router = new VueRouter({
   mode: 'history',
   routes: [
     { path: '/', component: EmptyPage, name: 'home' },
-    { path: '/policy/search', component: MovieSearchPage, name: 'policy-search' },
     { path: '/mypage', component: Mypage, name:'mypage'},
     { path: '/signup', component: SignUpPage, name: 'SignUp' },
     { path: '/login', component: LoginPage, name: 'Login'},
