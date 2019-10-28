@@ -276,8 +276,6 @@ export default {
     noticeData: [],
     boardData: []
   }),
-  computed: {
-  },
   watch: {
     group() {
       this.drawer = false;
@@ -287,7 +285,12 @@ export default {
     }
   },
   created() {
-    this.$vuetify.theme.dark = true;
+    if (this.$store.state.data.user == null) {
+      alert('경고 했습니다?!')
+      window.location.replace("/");
+    }else{
+      this.$vuetify.theme.dark = true;
+    }
   },
   mounted() {
     this.$store.state.data.userPage = false;

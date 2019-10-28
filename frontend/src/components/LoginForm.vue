@@ -26,8 +26,8 @@ export default {
         username: "",
         password: "",
     }),
-    beforemount() {
-        if(store.state.user=='undefined' || store.state.user==null){
+    created() {
+        if(localStorage.getItem('token')!==null){
             router.push('/')
         }
     },
