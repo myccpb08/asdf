@@ -22,7 +22,7 @@
               :to="{ name: 'boardDetail', params: {boardId: post.id} }"
             >{{ post.title }}</router-link>
           </td>
-          <td class="name">{{post.content}}</td>
+          <td class="name">글쓴이</td>
           <td class="date">2019/10/18</td>
           <td class="hit">1234</td>
         </tr>

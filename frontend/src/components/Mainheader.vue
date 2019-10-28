@@ -98,8 +98,8 @@ export default {
       },
       {
         icon: "mdi-account-supervisor",
-        text: "회원 리스트",
-        path: "user-list"
+        text: "관리자페이지",
+        path: "admin"
       },
       {
         icon: "mdi-account-arrow-right",

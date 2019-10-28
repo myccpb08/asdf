@@ -47,14 +47,14 @@
                   <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-                    <v-btn color="blue darken-1" text @click="save">Save</v-btn>
+                    <v-btn color="blue darken-1" text @click="save" @keyup.enter="save">Save</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-dialog>
             </template>
             <template v-slot:item.action="{ item }">
-              <v-icon small class="mr-2" @click="editItem(item)">edit</v-icon>
-              <v-icon small @click="deleteItem(item)">delete</v-icon>
+              <v-icon small class="mr-2" @click="editItem(item)">{{ "mdi-pencil" }}</v-icon>
+              <v-icon small @click="deleteItem(item)">{{ "mdi-delete" }}</v-icon>
             </template>
           </v-data-table>
         </v-card>
@@ -66,6 +66,7 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import router from "../router";
+import store from "../store/modules/data.js";
 
 export default {
     name: "PolicyList"

@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Profile, Board, Notice, NoticeComment, BoardComment
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'favorite') 
+    list_display = ('id', 'user', 'favorite') 
 
 class BoardAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'content')

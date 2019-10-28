@@ -1,29 +1,27 @@
 <template>
   <v-app id="inspire">
     <!-- TODO: navigation drawer component로 분리 -->
-    <v-navigation-drawer v-model="drawer" app clipped>
+    <v-navigation-drawer v-model="drawer" app>
       <v-list dense>
         <v-list-item @click="getDash" v-for="menu in menus" :key="menu.title">
-          <router-link :to="menu.route" style="text-decoration:none">
-            <v-list-item-action>
+          <v-list-item-action @click="move_route(menu.route)">
               <v-icon>{{ menu.icon }}</v-icon>
             </v-list-item-action>
-          </router-link>
-          <router-link :to="menu.route" style="color: white;text-decoration:none">
-            <v-list-item-content>
+            <v-list-item-content @click="move_route(menu.route)">
               <v-list-item-title>{{ menu.title }}</v-list-item-title>
             </v-list-item-content>
-          </router-link>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app clipped-left scroll-target="#scrolling-techniques-5">
+    <v-app-bar app
+      color="warning"
+      dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title style="width: 200px" class="ml-0 pl-4">
         <span class="hidden-sm-and-down">DJE Admin</span>
       </v-toolbar-title>
-      <v-text-field
+      <!-- <v-text-field
         flat
         solo-inverted
         hide-details
@@ -32,13 +30,10 @@
         v-model="search_text"
         v-on:keyup.enter="getSearchResult"
         class="hidden-sm-and-down"
-      ></v-text-field>
+      ></v-text-field> -->
       <v-spacer></v-spacer>
       <v-btn icon>
         <i class="fas fa-home fa-2x" @click="goHome"></i>
-      </v-btn>
-      <v-btn icon>
-        <v-icon>mdi-bell</v-icon>
       </v-btn>
     </v-app-bar>
 
@@ -143,10 +138,10 @@
       </v-container> -->
     </v-content>
 
-    <v-footer absolute padless>
-      <v-col class="text-center" cols="12">
-        <span>&copy; 2019</span> —
-        <strong>딱정이</strong>
+    <v-footer color="warning" app padless max-height="35"> 
+      <v-col class="text-center" cols="12" style="padding: 4px; font-size: 80%;">
+        <span class="white--text">&copy; 2019</span>
+        <strong style="color:white"> — 딱정이</strong>
       </v-col>
     </v-footer>
   </v-app>
@@ -167,7 +162,6 @@ export default {
   data: () => ({
     drawer: null,
     admin_selected: 0,
-    search_text: null,
     menus: [
       {
         title: "DASHBOARD",
@@ -198,8 +192,6 @@ export default {
     ],
     tab: null,
     items: ["User", "Policy", "Notice", "Post"],
-    search: "",
-    text: "babo",
     dialog: false,
     headers: [
       [
@@ -288,11 +280,12 @@ export default {
     }
   },
   created() {
-    this.$vuetify.theme.dark = true;
+    // this.$vuetify.theme.dark = true;
   },
   mounted() {
     this.$store.state.data.userPage = false;
-    this.getAllData();
+    console.log('admin !!')
+    // this.getAllData();
   },
   methods: {
     ...mapActions("data", ["getAllUsers", "getAllNotices", "getAllBoards"]),
@@ -358,6 +351,10 @@ export default {
         this.desserts.push(this.editedItem[idx]);
       }
       this.close();
+    },
+    move_route(link){
+      console.log(link)
+      this.$router.push(link)
     }
   },
   components: {

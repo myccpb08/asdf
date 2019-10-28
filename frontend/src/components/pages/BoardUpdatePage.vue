@@ -55,7 +55,7 @@ export default {
         body: this.board.content,
         id : this.boardId
       };
-        this.$store.dispatch("data/boardupdate", params)
+        this.$store.dispatch("data/boardUpdate", params)
         router.push({name : 'boardDetail', params: {boardId: this.boardId}})
     }
   },

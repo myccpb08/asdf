@@ -44,14 +44,14 @@
                   <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-                    <v-btn color="blue darken-1" text @click="save">Save</v-btn>
+                    <v-btn color="blue darken-1" text @click="save" @keyup.enter="save">Save</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-dialog>
             </template>
             <template v-slot:item.action="{ item }">
-              <v-icon small class="mr-2" @click="editItem(item)">edit</v-icon>
-              <v-icon small @click="deleteItem(item)">delete</v-icon>
+              <v-icon small class="mr-2" color="blue darken-2" @click="editItem(item)">{{ "mdi-pencil" }}</v-icon>
+              <v-icon small color="red" @click="deleteItem(item)">{{ "mdi-delete" }}</v-icon>
             </template>
           </v-data-table>
         </v-card>
@@ -63,6 +63,7 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import router from "../router";
+import store from "../store/modules/data.js";
 
 export default {
   name: "UserList",
@@ -89,13 +90,12 @@ export default {
       {
         id: "",
         username: "",
-        favorite: "",
+        favorite: ""
       }
     ],
     dataLIst: []
   }),
-  computed: {
-  },
+  computed: {},
   mounted() {
     this.getUsers();
   },
@@ -116,7 +116,8 @@ export default {
     deleteItem(item, idx) {
       const index = this.dataLIst.indexOf(item);
       confirm("Are you sure you want to delete this item?") &&
-      this.dataLIst.splice(index, 1);
+        this.dataLIst.splice(index, 1);
+      // TODO: 위 라인과 &&로 연결해서 유저 삭제
     },
     close() {
       this.dialog = false;
@@ -124,10 +125,7 @@ export default {
 
     save() {
       if (this.editedIndex > -1) {
-        Object.assign(
-          this.dataLIst[this.editedIndex],
-          this.editedItem
-        );
+        Object.assign(this.dataLIst[this.editedIndex], this.editedItem);
       } else {
         this.dataLIst.push(this.editedItem);
       }
