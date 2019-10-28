@@ -36,7 +36,6 @@ export default {
     if (localStorage.getItem("token") !== undefined && localStorage.getItem("token") !== null) {
       var result = this.getSession(localStorage.getItem('token')).then(function(value){
         console.log(value)
-        // console.log("hihi : " + store.state.data.user.username)
         if(value==false){
           router.push('/')
         }
@@ -45,17 +44,11 @@ export default {
     else{
       router.push("/");
     }
-    //   var result = this.getSession(localStorage.getItem("token"));
-    //   console.log(result.getValue)
-    //   if (result == false) {
-    //     router.push("/");
-    //   }
-    // } else {
-    //   //토큰 없을 때
-    //   router.push("/");
-    // }
   },
-  methods: mapActions("data", ["getSession"])
+  methods: {
+    ...mapActions("data", ["getSession"]),
+  }
+
 };
 </script>
 
