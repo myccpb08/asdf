@@ -3,6 +3,7 @@ import requests
 import json
 import math
 from bs4 import BeautifulSoup
+# from openpyxl import Workbook
 
 API_URL = 'http://localhost:8000/api/'
 headers = {'content-type': 'application/json'}
@@ -11,6 +12,7 @@ def getList(url, code):
     resp = requests.get(url)
     html = BeautifulSoup(resp.text, 'html.parser')
     lis = html.findAll('div', {'class': 'cardStyleIn'})
+
 
     for li in lis:
         id = li.find('a').get('href')[26:-2]
@@ -23,16 +25,22 @@ def getList(url, code):
             brief=""
 
         print("{}, {}, {}".format(id, title, brief))
+
+        # if(check(id)):
+        #     sheet.append([id, title, brief])
+        #     serviceId.append(id)
+
+
         policies['policies'].append({
             'id': id,
             'title': title,
             'brief': brief
         })
 
-        # category_policy['category_policy'].append({
-        #     'category':code,
-        #     'policy' : id
-        # })
+        category_policy['category_policy'].append({
+            'category':code,
+            'policy' : id
+        })
     
 
 
@@ -56,15 +64,40 @@ def putCategory():
 
     requests.post(API_URL + 'crawling/category/', data=json.dumps(request_data), headers=headers)
 
-# categoryCode = []
-# putCategory()
+
+# def check(code):
+#     for id in serviceId:
+#         if code == id:
+#             return False
+#     return True
 
 
 
-categoryCode=["01","02", "03","04","05","06","07","08","09","10","11","12","13","14","15","16"] #나중에 지우기
+categoryCode = []
+putCategory()
+
+# serviceId = []
 #
+# wb = Workbook()
+# sheet = wb.active
+# file_name = 'service.xlsx'
+# sheet.title = 'serviceSheet'
+# sheet.cell(row=1, column=1).value = "ID"
+# sheet.cell(row=1, column=2).value = "이름"
+# sheet.cell(row=1, column=3).value = "간단설명"
+# sheet.cell(row=1, column=4).value = "지원대상"
+# sheet.cell(row=1, column=5).value = "선정기준"
+# sheet.cell(row=1, column=6).value = "지원내용"
+# sheet.cell(row=1, column=7).value = "신청방법"
+# sheet.cell(row=1, column=8).value = "지원절차"
+# sheet.cell(row=1, column=9).value = "사이트"
+
+
+# categoryCode=["01","02", "03","04","05","06","07","08","09","10","11","12","13","14","15","16"] #나중에 지우기
+
+# categoryCode=["01"]
 policies = {'policies': []}
-# category_policy = {'category_policy': []}
+category_policy = {'category_policy': []}
 
 # getList("http://www.bokjiro.go.kr/welInfo/retrieveWelInfoBoxList.do?searchIntClId=01&pageUnit=10&pageIndex=1", "01")
 
@@ -96,5 +129,6 @@ for code in categoryCode:
 requests.post(API_URL + 'crawling/policy/', data=json.dumps(policies), headers=headers)
 # requests.post(API_URL + 'crawling/categoryPolicy/', data=json.dumps(category_policy), headers=headers)
 
+# wb.save(file_name)
 
 

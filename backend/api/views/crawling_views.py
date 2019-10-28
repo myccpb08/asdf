@@ -34,10 +34,13 @@ def setCategory_Policy(request):
     if request.method == 'POST':
         list = request.data.get('category_policy', None)
         for li in list:
-            category = li.get('category', None)
-            policy = li.get('policy', None)
-            # print("{}, {}".format(category, policy))
-            Category_Policy(category_id=category, policy_id=policy).save()
+            # category = li.get('category', None)
+            # policy = li.get('policy', None)
+            category = Category.objects.get(pk=li.get('category', None))
+            policy = Policy.objects.get(pk= li.get('policy', None))
+
+            print("{}, {}".format(category.id, policy.id))
+            Category_Policy(category=category, policy=policy).save()
         return Response(status=status.HTTP_200_OK)
 
     return Response(status=status.HTTP_200_OK)
