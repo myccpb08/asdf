@@ -4,7 +4,7 @@
   <div class="aboutme">
     <div class="left-content">
       <div style="align-items: top;">
-        <img src="../../D_logo.png" alt="avatar" style="width: 200px; height: 200px; overflow:hidden; border-radius: 100%;">
+        <img src="../../images/D_logo.png" alt="avatar" style="width: 200px; height: 200px; overflow:hidden; border-radius: 100%;">
         <span class="greeting">Hello</span>
       </div>
       <div class="detail-infor">

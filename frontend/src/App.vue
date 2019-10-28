@@ -3,7 +3,7 @@
     <template v-if="this.$store.state.data.userPage">
       <div class="header">
         <router-link to="/" style="text-decoration:none;">
-          <img src="./DdakJeongE.png" style="width:250px;" />
+          <img src="./images/DdakJeongE.png" style="width:250px;" />
         </router-link>
       </div>
       <Mainheader />

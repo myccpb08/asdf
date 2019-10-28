@@ -5,7 +5,7 @@
             <address>abcd@abc.com</address> -->
             <hr>
             <div class="OntheImage">
-                <img class="imgTwo" src="../footerimg.png" style="width:40%;">
+                <img class="imgTwo" src="../images/footerimg.png" style="width:40%;">
                 <p style="padding-top:2%; padding-left:1.2%; font-size:13px; text-align:left; position:left; z-index: 1;">사회보장정보원(04554) 서울특별시 중구 퇴계로 173(충무로3가) bokjiro@ssis.or.kr
                 <br>보건복지부(30113) 세종특별자치시 도움4로 13(어진동) 정부세종청사 10동 보건복지상담센터 129</p>
             </div>
