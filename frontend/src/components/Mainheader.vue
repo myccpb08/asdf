@@ -102,7 +102,7 @@ export default {
       {
         icon: "mdi-account-supervisor",
         text: "관계자외 출입금지",
-        path: "user-list"
+        path: "admin"
       },
       {
         icon: "mdi-account-arrow-right",
@@ -118,7 +118,7 @@ export default {
     ...mapActions("data", ["logoutUser"]),
     goTo: function(path) {
       if(store.state.user!=null){
-        if(store.state.user.is_staff!=true && path=='user-list'){
+        if(store.state.user.is_staff!=true && path=='admin'){
           alert('관계자 외 출입금지 입니다(경고함)')
           router.push('/')
         }else{
@@ -136,6 +136,7 @@ export default {
     },
     checkLogin() {
       this.token = localStorage.getItem('token')
+      console.log("checkLogin!!")
       if(this.token!==null){
         this.isLogin = true
       }else{

@@ -163,7 +163,6 @@ export default {
   props: {
     source: String
   },
-
   data: () => ({
     drawer: null,
     admin_selected: 0,

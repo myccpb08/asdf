@@ -1,65 +1,34 @@
 <template>
-<div class="hihi">
-  <!-- <img class="imgTwo" src="../../wood.jpg" style="opacity: 0.64; position:absolute; width:100%; height:100%;"> -->
-<div class="aboutme">
-  <div class="left-content">
-    <img src="../../D_logo.png" alt="avatar" style="width: 200px; height: 200px; overflow:hidden; border-radius: 100%;">
-    <div class="labels">
-      <p>Nickname : </p>
-      <p>Email : </p>
-      <p>Age : </p>
-      <p>Gender : </p>
-      <p>Area : </p>
-    </div>
-    <div class="detail-infor">
-      <div class="infor">
-            <!-- <p v-if="modifymode==false">{{this.$store.state.user.displayName}}</p>
-                <v-text-field
-                  v-else
-                  v-model="usrName"
-                  label="Name"
-                  required
-                  class="notranslate"
-                  :rules="nameRules"
-                ></v-text-field>
-            <p>{{this.$store.state.user.email}}</p>
-            <p>{{this.$store.state.user.tier}}</p>
-            <p>{{this.$store.state.user.type}}</p>
-            <p>{{this.$store.state.user.created_at.toString().slice(4,16)}}</p> -->
+  <div class="hihi">
+    <div class="aboutme">
+      <div class="left-content">
+        <img src="../../DdakJeongE.png" alt="avatar">
       </div>
-    </div>
-  </div>
-  <div style="border-left: 1px solid gray; height: 100%; width: 1px;"></div>
-  <div class="right-content">
-    <span class="greeting">Hello</span>
-    <div class="detail-infor">
-    <div class="labels">
-      <p>Name : </p>
-      <p>Email : </p>
-      <p>Admin? : </p>
-      <p>Favorite : </p>
-      <!-- <p>Created at</p> -->
-    </div>
-    <div class="infor">
-      <p v-if="modifymode!=false">{{user.name}}</p>
-          <v-text-field
-            v-else
-            v-model="usrName"
-            label="Name"
-            required
-            class="notranslate"
-            :rules="nameRules"
-          ></v-text-field>
-      <p>{{user.username}}</p>
-      <p>{{user.is_staff}}</p>
-      <p>{{user.favorite}}</p>
-      <!-- <p>{{this.$store.state.user.created_at.toString().slice(4,16)}}</p> -->
-    </div>
-  <div>
-    <!-- <span class="greeting">Hello</span> -->
-    
-  </div>
-  </div>
+      <div class="right-content">
+        <span class="greeting">Hello</span>
+        <!-- <h2 class="my-name">
+          I'm 그루트
+        </h2> -->
+        <div class="detail-infor">
+          <div class="labels">
+            <p>Name : </p>
+            <p>Email : </p>
+            <p>Admin? : </p>
+            <p>Favorite : </p>
+            <!-- <p>Created at</p> -->
+          </div>
+          <div class="infor">
+            <p>{{this.$store.state.data.user.name}}</p>
+            <p>{{this.$store.state.data.user.username}}</p>
+            <p>{{this.$store.state.data.user.is_staff}}</p>
+            <ul v-for="favorite in this.$store.state.data.user.favorite">
+              <li>{{favorite}}</li>
+            </ul>
+            <!-- <p>{{this.$store.state.user.created_at.toString().slice(4,16)}}</p> -->
+          </div>
+        </div>
+      </div>
+  
 <!---->
   <!-- <div class="bottom-content" > -->
     <!-- <v-dialog
@@ -146,204 +115,162 @@
           </v-card>
         </v-dialog> -->
   <!-- </div> -->
-</div>
-</div>
+    </div>
+  </div>
 
 </template>
 <script>
-import router from "../../router"
-import { mapState } from "vuex";
+// import firebase from "firebase";
+// import FirebaseService from '@/services/FirebaseService'
+// export default {
+//   data(){
+//     return {
+//         withdraw: false,
+//         passchange : false,
+//         usrName:"",
+//         modifymode: false,
+//         pass: "",
+//         passchk :"",
+//         passRules: [
+//           v => !!v || "PassWord is required",
+//           v => v.length > 7 || "Password is more than 8 characters"
+//         ],
 
-export default {
-  computed: {
-    ...mapState({
-      user : state => state.data.user,
-    })
-  }
-};
+//         passcheckRules: [
+//           v => !!v || "You have to check Password",
+//           v => v === pass || "Isn't match with Password"
+//         ],
+//         nameRules: [v => !!v || "Name is required"]
+//     }
+//   },
+//     methods: {
+//       changePass(){ //비밀번호를 바꿈
+//         if( !this.pass ){
+//           alert("You have to enter your password");
+//           return;
+//         }
+//         if( !this.passchk){
+//           alert("You have to check password");
+//           return;
+//         }
+//         if( this.pass!=this.passchk){
+//           alert("Password is not verified");
+//           return;
+//         }
+//         var currentuser = firebase.auth().currentUser;
+
+//         currentuser.updatePassword(this.pass)
+//         .then(()=>{
+//           alert(this.$store.state.user.displayName+" 님의 비밀번호가 바뀌었습니다.");
+//           this.passchange = false;
+//         }).catch(function(err){
+//           alert(err);
+//         });
+//       },
+//       Leaving(agree){ //탈퇴함
+//         if( agree == true){
+          
+//           this.withdraw = false;
+          
+//           var currentuser = firebase.auth().currentUser;
+//           // db에서 삭제
+//           FirebaseService.deleteUser(currentuser.uid);
+//           //erase local storage 
+//           this.$store.state.accessToken = "";
+//           this.$store.state.user = "";
+//           localStorage.setItem("accessToken", this.$store.state.accessToken);
+//           localStorage.setItem("user", this.$store.state.user);
+         
+//           currentuser.delete().then(function(){
+//             window.location.replace("/");
+//           }).catch(function(err){
+//             alert(err)
+//           });
+          
+//         }else{
+//           this.withdraw = false;
+//         }
+
+//       },
+//       modify(){
+//         if( !this.usrName){
+//           alert("이름을 적으세요");
+//         }
+//         var currentuser = firebase.auth().currentUser;
+//         const firestore = firebase.firestore();
+//         firestore.collection("users").doc(currentuser.uid).update({
+//           dispplayName : this.usrName
+//         }).then(()=>{
+//           modifymode = false;
+//         });
+//       }
+//     },
+//     computed: {
+//       passVerification() {
+//         return this.pass === this.passchk
+//           ? true
+//           : "Have to verify password";
+//       }
+//     }
+// };
 
 </script>
 
 <style>
+
+
 .hihi{
   font-family: "Roboto", sans-serif;
   background-color: #e9e9e9;
   color: #222;
-  width:100%;
   display: flex;
-  height: 80vh;
+  height: 100vh;
   justify-content: center;
-  align-items: center;
   padding: 0;
   margin: 0;
   text-align : left;
 }
 
 .aboutme{
-  width: 70%;
   display: flex;
   height : 500px;
-  /* grid-template-columns : 2fr 3fr; */
+  grid-template-columns : 2fr 3fr;
   align-items: center;
-  /* grid-gap : 1rem; */
+  grid-gap : 1rem;
   background-color : #f9f9f9;
-  box-shadow: 0px 16px 32px rgba(0,0,0,0.3);
+  padding-top : 1rem;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
   border-radius : 5px;
-}
-.subabout{
-  width: 100%;
-  height: 88%;
-    /* padding : 10px; */
-    /* background-color:rgb(212, 212, 212); */
-    /* border-radius : 5px; */
-    /* box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.5) inset; */
+  position: relative;
+  padding : 10px;
+  margin : 50px;
+
 }
 
 .left-content{
-    /* margin-left : 2rem; */
-    padding-left: 3%;
-    width: 30%;
-    height: 450px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    position: relative;
+    margin-left : 2rem;
+    margin-right : 2rem;
 }
 
-
-
 .left-content img{
-  width : 100%;
+  width : 200px;
   background-size : cover;
 }
 
 .right-content{
-  width: 70%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  /* margin-top: 5px;
+  margin-top: 5px;
   margin-right: 10px;
-  padding-left: 10%;
-  padding-right: 10%; */
 }
-.sub_contents_left{
-  display: inline-flex;
-  width: 50%;
-  padding: 1%;
-}
-.sub_contents_right{
-  display: inline-flex;
-  width: 50%;
-  padding: 1%;
-}
-.btn_div{
-  width: 100%;
-  height: 12%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0px 1px 0px 0px rgba(0,0,0,0.2);
-}
-
-.divider{
-  width: 1px;
-  height: 80%;
-  background-color: rgba(0,0,0,0.2);
-}
-
-.mypage_button{
-  width: 33%;
-  height: 100%;
-  background-color:#fff;
-  color:#1AAB8A;
-  border:none;
-  font-size:1em;
-  cursor:pointer;
-  transition: all 0.8s;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  align-items: center;
-  justify-content: center;
-}
-.btn_hover_line_up{
-  background-color: #fff;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 0;
-  height: 3px;
-  
-}
-
-.btn_hover_line_down{
-  background-color: #fff;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 0;
-  height: 3px;
-}
-
-.mypage_button:hover .btn_hover_line_up,
-.mypage_button:hover .btn_hover_line_down{
-  width: 100%;
-  transition: width 0.8s;
-}
-
-.mypage_button:hover{
-  background-color: #1AAB8A;
-  color:#fff;
-}
-/* .mypage_btn{
-  width: 33.3%;
-  height: 100%;
-  background:#1AAB8A;
-  color:#fff;
-  border:none;
-  position:relative;
-  font-size:1em;
-  padding:0 2em;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
-}
-.mypage_btn:hover{
-  background:#fff;
-  color:#1AAB8A;
-}
-.mypage_btn:before,.mypage_btn:after{
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:0;
-  background: #1AAB8A;
-  transition:400ms ease all;
-}
-.mypage_btn:after{
-  right:inherit;
-  top:inherit;
-  left:0;
-  bottom:0;
-}
-.mypage_btn:hover:before,.mypage_btn:hover:after{
-  width:100%;
-  transition:800ms ease all;
-} */
-
-/* .greeting{
-  background-color : orange;
+.greeting{
+  background-color : #FF73C8;
   display : inline-block;
   padding : .5rem 1rem;
   position : relative;
   font-size: 1.2rem;
   margin-bottom : .5rem;
   color : #f2f2f2;
-} */
-/* 
+}
+
 .greeting:before{
   content: '';
   width:0;
@@ -353,9 +280,9 @@ export default {
   top: 100%;
   left:0;
   border-color: transparent;
-  border-top-color: orange;
-  border-left-color: orange;
-} */
+  border-top-color: #FF73C8;
+  border-left-color: #FF73C8;
+}
 
 .my-name{
     font-size : 1.5rem;
@@ -373,7 +300,6 @@ p{
   display: grid;
   grid-template-columns : 1fr 2fr;
   align-items : center;
-  color: gray;
 }
 
 .labels{
@@ -461,8 +387,4 @@ opacity: 1;
   border-color: #646171;
   box-shadow: 0px 0 5px 0 #646171;
 }
-</style>
-
-<style scoped>
-
 </style>
