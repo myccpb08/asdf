@@ -3,7 +3,7 @@
   <!-- <img class="imgTwo" src="../../wood.jpg" style="opacity: 0.64; position:absolute; width:100%; height:100%;"> -->
 <div class="aboutme">
   <div class="left-content">
-    <img src="../../D_logo.png" alt="avatar" style="width: 200px; height: 200px; overflow:hidden; border-radius: 100%;">
+    <img src="../../images/D_logo.png" alt="avatar" style="width: 200px; height: 200px; overflow:hidden; border-radius: 100%;">
     <div class="labels">
       <p>Nickname : </p>
       <p>Email : </p>
