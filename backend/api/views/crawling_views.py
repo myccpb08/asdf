@@ -24,7 +24,13 @@ def setPolicies(request):
             id = policy.get('id', None)
             title = policy.get('title', None)
             brief = policy.get('brief', None)
-            Policy(id=id, title=title, brief=brief).save()
+            target = policy.get('target', None)
+            criteria = policy.get('criteria', None)
+            content = policy.get('content', None)
+            supply_way = policy.get('supply_way', None)
+            procedure = policy.get('procedure', None)
+            site = policy.get('site', None)
+            Policy(id=id, title=title, brief=brief, target=target, criteria=criteria, content=content, supply_way=supply_way, procedure=procedure, site=site).save()
 
         return Response(status=status.HTTP_200_OK)
 

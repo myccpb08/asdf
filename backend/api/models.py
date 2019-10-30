@@ -59,11 +59,11 @@ class Policy(models.Model):
     title = models.TextField()
     brief = models.TextField()
     target = models.TextField()
-    criteria = models.TextField()
-    content = models.TextField()
-    supply_way = models.TextField()
-    procedure = models.TextField()
-    site =models.TextField()
+    criteria = models.TextField(null=True, blank=True)
+    content = models.TextField(null=True, blank=True)
+    supply_way = models.TextField(null=True, blank=True)
+    procedure = models.TextField(null=True, blank=True)
+    site =models.TextField(null=True, blank=True)
 
 
 class Category(models.Model):

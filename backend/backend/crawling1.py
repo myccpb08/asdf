@@ -16,26 +16,26 @@ def getList(url, code):
 
     for li in lis:
         id = li.find('a').get('href')[26:-2]
-        try:
-            title = li.find('span',{'class' : 'tit'}).getText()
-            brief = li.find('span', {'class': 'viewdtl'}).getText()
-
-        except:
-            title=""
-            brief=""
-
-        print("{}, {}, {}".format(id, title, brief))
+        # try:
+        #     title = li.find('span',{'class' : 'tit'}).getText()
+        #     brief = li.find('span', {'class': 'viewdtl'}).getText()
+        #
+        # except:
+        #     title=""
+        #     brief=""
+        #
+        # print("{}, {}, {}".format(id, title, brief))
 
         # if(check(id)):
         #     sheet.append([id, title, brief])
         #     serviceId.append(id)
 
 
-        policies['policies'].append({
-            'id': id,
-            'title': title,
-            'brief': brief
-        })
+        # policies['policies'].append({
+        #     'id': id,
+        #     'title': title,
+        #     'brief': brief
+        # })
 
         category_policy['category_policy'].append({
             'category':code,
@@ -73,8 +73,8 @@ def putCategory():
 
 
 
-categoryCode = []
-putCategory()
+# categoryCode = []
+# putCategory()
 
 # serviceId = []
 #
@@ -93,14 +93,14 @@ putCategory()
 # sheet.cell(row=1, column=9).value = "사이트"
 
 
-# categoryCode=["01","02", "03","04","05","06","07","08","09","10","11","12","13","14","15","16"] #나중에 지우기
+categoryCode=["01","02", "03","04","05","06","07","08","09","10","11","12","13","14","15","16"] #나중에 지우기
 
 # categoryCode=["01"]
-policies = {'policies': []}
+# policies = {'policies': []}
 category_policy = {'category_policy': []}
 
 # getList("http://www.bokjiro.go.kr/welInfo/retrieveWelInfoBoxList.do?searchIntClId=01&pageUnit=10&pageIndex=1", "01")
-
+#
 for code in categoryCode:
     print(code)
     test_url = "http://www.bokjiro.go.kr/welInfo/retrieveWelInfoBoxList.do?searchIntClId={}&pageUnit=10".format(code)
@@ -126,8 +126,8 @@ for code in categoryCode:
         getList(url, code)
 
 
-requests.post(API_URL + 'crawling/policy/', data=json.dumps(policies), headers=headers)
-# requests.post(API_URL + 'crawling/categoryPolicy/', data=json.dumps(category_policy), headers=headers)
+# requests.post(API_URL + 'crawling/policy/', data=json.dumps(policies), headers=headers)
+requests.post(API_URL + 'crawling/categoryPolicy/', data=json.dumps(category_policy), headers=headers)
 
 # wb.save(file_name)
 
