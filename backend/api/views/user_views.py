@@ -1,6 +1,6 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
-from api.models import create_profile, Profile
+from api.models import create_profile, create_profile_none, Profile
 from rest_framework.response import Response
 from api.serializers import ProfileSerializer, SessionSerializer
 from django.contrib import auth
@@ -17,9 +17,13 @@ def signup(request):
         password = user.get('password', None)
         name = user.get('name', None)
         favorite = user.get('favoriteValue', None)
-        print(favorite[0])
+        when = None
         print(user)
-        create_profile(username=username, password=password, name=name, favorite=favorite)
+        if favorite=="":
+            favorite=None
+            create_profile_none(username=username, password=password, name=name)
+        else:
+            create_profile(username=username, password=password, name=name, favorite=favorite)
 
         return Response(status=status.HTTP_201_CREATED)
 
@@ -57,10 +61,12 @@ def login(request):
                 request.session[str(newToken)] = username
                 profile = Profile.objects.get(user=user)
                 print("favorite : " + profile.favorite)
+                print(profile.when)
                 result = {
                     'username': username,
                     'name': profile.name,
                     'favorite': profile.favorite,
+                    'when': profile.when,
                     'token': newToken,
                     'is_staff': profile.user.is_staff,
                     'is_authenticated': True
@@ -74,6 +80,7 @@ def login(request):
                     'username': username,
                     'name': profile.name,
                     'favorite': profile.favorite,
+                    'when': profile.when,
                     'token': token,
                     'is_staff': profile.user.is_staff,
                     'is_authenticated': True
@@ -84,6 +91,7 @@ def login(request):
                 'username': None,
                 'name': None,
                 'favorite': None,
+                'when': None,
                 'token': None,
                 'is_staff': False,
                 'is_authenticated': False
@@ -91,6 +99,51 @@ def login(request):
 
         serializer = SessionSerializer(result)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+def chkPass(request):
+    if request.method == 'POST':
+        print("enter user_views chkPass!")
+        username = request.data.get('username', None)
+        password = request.data.get('inputPass', None)
+        print("username : " + username + "  password : " + password)
+        user = auth.authenticate(username=username, password=password)
+        if user:
+            result=True
+        else:
+            result=False
+        return Response(data=result, status=status.HTTP_200_OK)
+
+@api_view(['PUT'])
+def user(request):
+    print("enter user!!")
+    if(request.method == 'GET'):
+        print("enter user get!!")
+        return Response(status=status.HTTP_200_OK)
+    
+    if(request.method == 'PUT'):
+        print("enter user edit")
+        username = request.data.get('username', None)
+        name = request.data.get('name', None)
+        password = request.data.get('password', None)
+        favorite = request.data.get('favorite', None)
+        print(username + " " + name + " " + password + " ")
+        print(favorite)
+        user = User.objects.get(username=username)
+        print(user)
+        print("PPPPP : " + password)
+        Profile.objects.filter(user=user).update(
+            name=name, favorite=favorite
+        )
+        # user.set_password(password)
+        # user.save()
+
+        return Response(status=status.HTTP_200_OK)
+    
+    if(request.method == 'DELETE'):
+        print("enter user delete")
+        return Response(status=status.HTTP_200_OK)
+
 
 @api_view(['POST'])
 def logout(request):
@@ -114,6 +167,7 @@ def session(request):
                 'username': None,
                 'name': None,
                 'favorite': None,
+                'when': None,
                 'token': None,
                 'is_authenticated': False,
                 'is_staff':  False
@@ -126,6 +180,7 @@ def session(request):
                     'username': username,
                     'name': Profile.objects.get(user=user).name,
                     'favorite': Profile.objects.get(user=user).favorite,
+                    'when': Profile.objects.get(user=user).when,
                     'token': token,
                     'is_authenticated': True,
                     'is_staff': Profile.objects.get(user=user).user.is_staff
@@ -135,6 +190,7 @@ def session(request):
                     'username': None,
                     'name': None,
                     'favorite': None,
+                    'when': None,
                     'token': None,
                     'is_authenticated': False,
                     'is_staff':  False

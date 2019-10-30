@@ -9,7 +9,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ('id', 'username', 'password', 'name', 'favorite')
+        fields = ('id', 'username', 'password', 'name', 'favorite', 'when')
         
     def get_username(self, obj):
         return obj.user.username
@@ -21,13 +21,14 @@ class SessionSerializer(serializers.ModelSerializer):
     username = serializers.SerializerMethodField('get_user')
     name = serializers.SerializerMethodField('get_name')
     favorite = serializers.SerializerMethodField('get_favorite')
+    when = serializers.SerializerMethodField('get_when')
     token = serializers.SerializerMethodField('get_token')
     is_authenticated = serializers.SerializerMethodField('get_is_authenticated')
     is_staff = serializers.SerializerMethodField('get_is_staff')
 
     class Meta:
         model = Profile
-        fields = ('username', 'name', 'favorite', 'token', 'is_authenticated', 'is_staff')
+        fields = ('username', 'name', 'favorite', 'when', 'token', 'is_authenticated', 'is_staff')
 
     def get_user(self, obj):
         return str(obj['username'])
@@ -35,6 +36,10 @@ class SessionSerializer(serializers.ModelSerializer):
     def get_name(self, obj):
         print(obj['name'])
         return str(obj['name'])
+
+    def get_when(self, obj):
+        print(obj['when'])
+        return str(obj['when'])
 
     def get_favorite(self, obj):
         inputFavorite = str(obj['favorite'])
