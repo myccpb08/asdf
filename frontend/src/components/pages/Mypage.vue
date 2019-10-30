@@ -11,8 +11,8 @@
         <div class="labels">
           <p>Nickname : </p>
           <p>Email : </p>
-          <p>Age : </p>
-          <p>Gender : </p>
+          <p>is_staff : </p>
+          <p>Favorite : </p>
         </div>
         <div class="infor">
               <p>{{this.$store.state.data.user.name}}</p>
@@ -46,7 +46,7 @@
         </div>
       </div>
       <div class="subabout">
-        <EditUserInfoForm v-if="toglePage"/>
+        <EditUserInfoForm :submit="editUser" v-if="toglePage"/>
         <SearchListForm v-if="!toglePage"/>
         <!-- <div style="width:100%;">
           <div class="sub_contents_left">
@@ -151,6 +151,7 @@
 <script>
 import EditUserInfoForm from "../EditUserInfoForm";
 import SearchListForm from "../SearchListForm";
+import { mapState, mapActions } from "vuex";
 
 export default {
   components: {
@@ -159,46 +160,18 @@ export default {
   },
   data: () => ({
     toglePage: false,
-    seleted: "",
-    items: [
-            {text: '임신/출산', value: '01'},
-            {text: '영유아', value: '02'},
-            {text: '아동/청소년', value: '03'},
-            {text: '청년', value: '04'},
-            {text: '중장년', value: '05'},
-            {text: '노년', value: '06'},
-            {text: '장애인', value: '07'},
-            {text: '한부모', value: '08'},
-            {text: '다문화(새터민)', value: '09'},
-            {text: '저소득층', value: '10'},
-            {text: '교육', value: '11'},
-            {text: '고용', value: '12'},
-            {text: '주거', value: '13'},
-            {text: '건강', value: '14'},
-            {text: '서민금융', value: '15'},
-            {text: '문화', value: '16'}
-    ],
   }),
   mounted() {
-    this.setFavorite()
+    
   },
   methods: {
-    setFavorite() {
-      var favoriteList = this.$store.state.data.user.favorite
-      var f=""
-      for(f in favoriteList){
-        console.log(f)
-      }
-    },
-    setSelected(value){
-      this.selected = value
-    },
     SearchList() {
       this.toglePage = false
     },
     EditInfo() {
       this.toglePage = true
-    }
+    },
+    ...mapActions("data", ["editUser"])
   }
 }
 
@@ -233,6 +206,8 @@ export default {
 .subabout{
   width: 100%;
   height: 88%;
+  padding-top: 50px;
+  text-align: -webkit-center;
     /* padding : 10px; */
     /* background-color:rgb(212, 212, 212); */
     /* border-radius : 5px; */

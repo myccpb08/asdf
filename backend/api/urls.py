@@ -11,8 +11,10 @@ urlpatterns = [
     url('auth/allUsers/$', user_views.getAllUsers, name='get_all_user'),
     url('auth/signup-many/$', auth_views.signup_many, name='sign_up_many'),
     url('auth/checkLogin/$', user_views.login, name='login'),
+    url('auth/checkPassword/$', user_views.chkPass, name='chkPass'),
     url('auth/logout/$', user_views.logout, name='logout'),
     url('auth/session/$', user_views.session, name='session'),
+    url('auth/user/$', user_views.user, name="user"),
 
     url('crawling/category/$', crawling_views.setCategories, name='set_categories'),
     
