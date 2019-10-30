@@ -28,7 +28,10 @@
         <v-btn text large v-on="on">
           회원가입
         </v-btn> -->
-      
+<!--       
+        <router-link to='/mypage' style="text-decoration:none;">
+          <span class="title ml-3 mr-5 white--text" >마이페이지</span>
+        </router-link> -->
         <router-link to='/mypage' style="text-decoration:none;">
           <span class="title ml-3 mr-5 white--text" >마이페이지</span>
         </router-link>
@@ -98,8 +101,8 @@ export default {
       },
       {
         icon: "mdi-account-supervisor",
-        text: "회원 리스트",
-        path: "user-list"
+        text: "관계자외 출입금지",
+        path: "admin"
       },
       {
         icon: "mdi-account-arrow-right",
@@ -109,15 +112,31 @@ export default {
     ]
   }),
   async mounted(){
-        await this.checkLogin()
+    this.checkLogin()
   },
   methods: {
     ...mapActions("data", ["logoutUser"]),
     goTo: function(path) {
-      router.push({ name: path });
+      if(store.state.user!=null){
+        if(store.state.user.is_staff!=true && path=='admin'){
+          alert('관계자 외 출입금지 입니다(경고함)')
+          router.push('/')
+        }else{
+          router.push({name: path})
+        }
+      }else{
+        if(path=='Login'){
+          router.push({name: path})
+        }else{
+          alert("로그인 후 이용 가능합니다!")
+          router.push('/login')
+        }
+      }
+      // router.push({ name: path });
     },
     checkLogin() {
       this.token = localStorage.getItem('token')
+      console.log("checkLogin!!")
       if(this.token!==null){
         this.isLogin = true
       }else{

@@ -1,4 +1,4 @@
-from .models import Profile, Movie, User, Post, Notice
+from .models import Profile, Movie, User, Board, Notice, NoticeComment, BoardComment
 from rest_framework import serializers
 
 
@@ -37,9 +37,47 @@ class SessionSerializer(serializers.ModelSerializer):
         return str(obj['name'])
 
     def get_favorite(self, obj):
-        print("obj-favorite")
-        print(obj['favorite'])
-        return str(obj['favorite'])
+        inputFavorite = str(obj['favorite'])
+        strFavorite = inputFavorite.replace('\', \'', " ").strip('[\'\']')
+        objFavorite = strFavorite.split(" ")
+        convertFavorite = {}
+        for f in objFavorite:
+            if f=='00':
+                convertFavorite['00']='등록된 관심 카테고리가 없습니다..'
+                break
+            elif f=='01':
+                convertFavorite['01']='임신/출산'
+            elif f=='02':
+                convertFavorite['02']='영유아'
+            elif f=='03':
+                convertFavorite['03']='아동/청소년'
+            elif f=='04':
+                convertFavorite['04']='청년'
+            elif f=='05':
+                convertFavorite['05']='중장년'
+            elif f=='06':
+                convertFavorite['06']='노년'
+            elif f=='07':
+                convertFavorite['07']='장애인'
+            elif f=='08':
+                convertFavorite['08']='한부모'
+            elif f=='09':
+                convertFavorite['09']='다문화(새터민)'
+            elif f=='10':
+                convertFavorite['10']='저소득층'
+            elif f=='11':
+                convertFavorite['11']='교육'
+            elif f=='12':
+                cconvertFavorite['12']='고용'
+            elif f=='13':
+                convertFavorite['13']='주거'
+            elif f=='14':
+                convertFavorite['14']='건강'
+            elif f=='15':
+                convertFavorite['15']='서민금융'
+            elif f=='16':
+                convertFavorite['16']='문화'
+        return convertFavorite
 
     def get_token(self, obj):
         print(obj['token'])
@@ -50,7 +88,7 @@ class SessionSerializer(serializers.ModelSerializer):
         return obj['is_authenticated']
 
     def get_is_staff(self, obj):
-        print(obj['is_authenticated'])
+        print(obj['is_staff'])
         return obj['is_staff']
 
 
@@ -70,7 +108,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 class BoardSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Post
+        model = Board
         fields = ('id', 'title', 'content')
 
 class NoticeSerializer(serializers.ModelSerializer):
@@ -78,3 +116,12 @@ class NoticeSerializer(serializers.ModelSerializer):
         model = Notice
         fields = ('id', 'title', 'content')
 
+class NoticeCommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NoticeComment
+        fields = ('id', 'user', 'post', 'content', 'edit')
+
+class BoardCommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BoardComment
+        fields = ('id', 'user', 'post', 'content', 'edit')

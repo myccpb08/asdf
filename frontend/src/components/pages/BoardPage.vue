@@ -2,18 +2,18 @@
   <v-container class="mt-3 ml-5">
     <div class="row">
       <div class="span_10">
-        <img class="imgOne" src="../../calendar_row.png" style="width:17%;">
+        <img class="imgOne" src="../../images/calendar_row.png" style="width:17%;">
       </div>
       <div class="span_2" style="text-align:right;">
         <router-link to="/board/write" style="text-decoration:none;">
           <v-btn class="ma-2" tile outlined color="success">
-            <v-icon left>mdi-pencil</v-icon>Write
+            <v-icon left>mdi-pencil</v-icon>작성
           </v-btn>
         </router-link>
       </div>
     </div>
     <br/>
-    <BoardPageList :getallboards="getallboards" />
+    <BoardPageList :getAllBoards="getAllBoards" />
   </v-container>
 </template>
 
@@ -28,11 +28,11 @@ export default {
   },
 
   methods: {
-    ...mapActions("data", ["getallboards"])
+    ...mapActions("data", ["getAllBoards"])
   },
 
   mounted() {
-    this.boardList = this.$store.dispatch("data/getallboards");
+    this.boardList = this.$store.dispatch("data/getAllBoards");
   },
 
   props: {

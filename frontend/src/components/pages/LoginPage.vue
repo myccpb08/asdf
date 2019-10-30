@@ -19,6 +19,8 @@ export default {
         LoginForm
     },
     data: () => ({}),
-    methods: mapActions("data", ["checkLogin"])
+    methods: {
+        ...mapActions("data", ["checkLogin"]),
+    }
 };
 </script>

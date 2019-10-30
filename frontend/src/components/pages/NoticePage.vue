@@ -2,7 +2,7 @@
   <v-container class="mt-3 ml-5">
     <div class="row">
       <div class="span_10">
-        <img class="imgOne" src="../../loudspeaker_gray_row.png" style="width:17%;">
+        <img class="imgOne" src="../../images/loudspeaker_gray_row.png" style="width:17%;">
       </div>
       <div class="span_2" style="text-align:right;">
         <router-link to="/notice/write" style="text-decoration:none;">
@@ -13,7 +13,7 @@
       </div>
     </div>
     <br/>
-    <NoticePageList :getallnotices="getallnotices" />
+    <NoticePageList :getAllNotices="getAllNotices" />
   </v-container>
 </template>
 
@@ -28,7 +28,7 @@ export default {
   },
 
   methods: {
-    ...mapActions("data", ["getallnotices"])
+    ...mapActions("data", ["getAllNotices"])
   },
 };
 </script>

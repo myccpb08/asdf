@@ -4,8 +4,14 @@ import api from '../../api'
 const state = {
   // shape: [{ id, title, genres, viewCnt, rating }]
   userInfo: "",
+  userPage: true, 
   postList: [],
   user: null,
+}
+
+// getter
+const getters = {
+  test: state => state.user
 }
 
 // actions
@@ -61,25 +67,42 @@ const actions = {
   async getAllUsers() {
     return await api.getAllUsers()
   },
-  async getallnotices(){
-    return await api.getallnotices()
+
+  async getAllNotices(){
+    return await api.getAllNotices()
   },
 
-  async noticewrite({commit}, params){
-    await api.noticewrite(params)
+  async noticeWrite({commit}, params){
+    await api.noticeWrite(params)
   },
 
-  async getallboards(){
-    var a = await api.getallboards()
+  async noticeCommentWrite({commit}, params){
+    await api.noticeCommentWrite(params)
+  },
+
+  async boardCommentWrite({commit}, params){
+    await api.boardCommentWrite(params)
+  },
+
+  async getNoticeComments({commit}, params){
+    return await api.getNoticeComments(params)
+  },
+
+  async getBoardComments({commit}, params){
+    return await api.getBoardComments(params)
+  },
+
+  async getAllBoards(){
+    var a = await api.getAllBoards()
     return a
   },
 
-  async boardwrite({commit}, params){
-    await api.boardwrite(params)
+  async boardWrite({commit}, params){
+    await api.boardWrite(params)
   },
 
-  async getboarddetail({commit}, params){
-    const resp = await api.getboarddetail(params)
+  async getBoardDetail({commit}, params){
+    const resp = await api.getBoardDetail(params)
     const summary = {
         title: resp.data.title,
         content: resp.data.content
@@ -88,8 +111,8 @@ const actions = {
     // commit('setSummary', summary)
   },
 
-  async getnoticedetail({commit}, params){
-    const resp = await api.getnoticedetail(params)
+  async getNoticeDetail({commit}, params){
+    const resp = await api.getNoticeDetail(params)
     const summary = {
         title: resp.data.title,
         content: resp.data.content
@@ -98,22 +121,38 @@ const actions = {
     // commit('setSummary', summary)
   },
 
-  async noticeupdate({commit}, params){
+  async noticeUpdate({commit}, params){
     console.log(params)
-    await api.updatenotice(params)
+    await api.updateNotice(params)
   },
 
-  async boardupdate({commit}, params){
-    await api.updateboard(params)
+  async boardUpdate({commit}, params){
+    await api.updateBoard(params)
   },
 
-  async DeleteNotice({commit}, params){
-    await api.deletenotice(params)
+  async deleteNotice({commit}, params){
+    await api.deleteNotice(params)
   },
 
-  async DeleteBoard({commit}, params){
-    await api.deleteboard(params)
+  async deleteBoard({commit}, params){
+    await api.deleteBoard(params)
   },
+
+  async deleteBoardComment({commit}, params){
+    await api.deleteBoardComment(params)
+  },
+
+  async deleteNoticeComment({commit}, params){
+    await api.deleteNoticeComment(params)
+  },
+
+  async editBoardComment({commit}, params){
+    await api.editBoardComment(params)
+  },
+
+  async editNoticeComment({commit}, params){
+    await api.editNoticeComment(params)
+  }
 }
 
 // mutations
@@ -124,7 +163,6 @@ const mutations = {
   setUser(state, user) {
     state.user = user
   },
-
 }
 
 export default {
@@ -132,4 +170,5 @@ export default {
   state,
   actions,
   mutations,
+  getters
 }

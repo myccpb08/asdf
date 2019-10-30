@@ -73,8 +73,8 @@ def putCategory():
 
 
 
-# categoryCode = []
-# putCategory()
+categoryCode = []
+putCategory()
 
 # serviceId = []
 #
@@ -93,7 +93,7 @@ def putCategory():
 # sheet.cell(row=1, column=9).value = "사이트"
 
 
-categoryCode=["01","02", "03","04","05","06","07","08","09","10","11","12","13","14","15","16"] #나중에 지우기
+# categoryCode=["01","02", "03","04","05","06","07","08","09","10","11","12","13","14","15","16"] #나중에 지우기
 
 # categoryCode=["01"]
 # policies = {'policies': []}

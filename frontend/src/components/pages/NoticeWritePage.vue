@@ -3,7 +3,7 @@
     <!-- <div style="margin-top:108px"></div> -->
         <div class="test">
           <h2>글쓰기</h2>
-          <NoticeWriteForm :submit="noticewrite"></NoticeWriteForm>
+          <NoticeWriteForm :submit="noticeWrite"></NoticeWriteForm>
 
       </div>
     <!-- <div style="margin-top:78px"></div> -->
@@ -26,7 +26,7 @@ export default {
   //     movieList: state => state.data.movieSearchList
   //   })
   // },
-  methods: mapActions("data", ["noticewrite"])
+  methods: mapActions("data", ["noticeWrite"])
 
 //   methods:{
 //     async postBoard(title, body, img){

@@ -1,19 +1,20 @@
 <template>
   <v-app id="app">
-    <div class="header">
-      <router-link to="/" style="text-decoration:none;">
-      <img src="./DdakJeongE.png" style="width:250px;">
-      </router-link>
-    </div>
-    <Mainheader/>
-     <v-content>
-      <!-- <div class="grey lighten-4">
-        <v-layout justify-center> -->
-          <!-- each pages will be placed here -->
-           <router-view />
-        <!-- </v-layout>
-      </div> -->
-    </v-content>
+    <template v-if="this.$store.state.data.userPage">
+      <div class="header">
+        <router-link to="/" style="text-decoration:none;">
+          <img src="./images/DdakJeongE.png" style="width:250px;" />
+        </router-link>
+      </div>
+      <Mainheader />
+      <v-content>
+        <router-view />
+      </v-content>
+    </template>
+
+    <template v-else>
+      <router-view />
+    </template>
     <MainFooter />
   </v-app>
 </template>
@@ -22,43 +23,32 @@
 import router from "./router";
 import Mainheader from './components/Mainheader'
 import MainFooter from './components/MainFooter'
-import MainPage from './components/pages/MainPage'
+import { mapActions } from "vuex";
+import store from "./store/modules/data.js";
 
 export default {
   components : {
-    'MainPage' : MainPage,
     'Mainheader': Mainheader,
     'MainFooter': MainFooter,
   },
-
-  // data: () => ({
-  //   drawer: null,
-  //   choices: [
-  //     {
-  //       icon: "mdi-movie",
-  //       text: "영화 검색",
-  //       path: "movie-search"
-  //     },
-  //     {
-  //       icon: "mdi-account-supervisor",
-  //       text: "회원 리스트",
-  //       path: "user-list"
-  //     },
-  //     {
-  //       icon: "mdi-account-arrow-right",
-  //       text: "로그인",
-  //       path: "login"
-  //     },
-  //   ]
-  // }),
-
-
-
-  methods: {
-    goTo: function(path) {
-      router.push({ name: path });
+  created() {
+    console.log("Create!!!!!!!!!!")
+    if (localStorage.getItem("token") !== undefined && localStorage.getItem("token") !== null) {
+      var result = this.getSession(localStorage.getItem('token')).then(function(value){
+        console.log(value)
+        if(value==false){
+          router.push('/')
+        }
+      });
     }
+    else{
+      router.push("/");
+    }
+  },
+  methods: {
+    ...mapActions("data", ["getSession"]),
   }
+
 };
 </script>
 
@@ -67,7 +57,7 @@ export default {
   display: none;
 }
 
-.header{
+.header {
   position: relative;
   display: flex;
   justify-content: center;
@@ -75,7 +65,7 @@ export default {
   height: 20vh;
 }
 
-.header img{
+.header img {
   position: absolute;
   top: 50%;
   left: 2%;
