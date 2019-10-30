@@ -1,4 +1,4 @@
-from .models import Profile, Movie, User, Board, Notice, NoticeComment, BoardComment
+from .models import Profile, Movie, User, Board, Notice, NoticeComment, BoardComment, Policy
 from rest_framework import serializers
 
 
@@ -68,7 +68,7 @@ class SessionSerializer(serializers.ModelSerializer):
             elif f=='11':
                 convertFavorite['11']='교육'
             elif f=='12':
-                cconvertFavorite['12']='고용'
+                convertFavorite['12']='고용'
             elif f=='13':
                 convertFavorite['13']='주거'
             elif f=='14':
@@ -125,3 +125,30 @@ class BoardCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = BoardComment
         fields = ('id', 'user', 'post', 'content', 'edit')
+
+
+class PolicySerializer(serializers.ModelSerializer):
+    target = serializers.SerializerMethodField('get_target')
+
+    class Meta:
+        model = Policy
+        fields = ('id', 'title', 'brief', 'target', 'criteria', 'content', 'supply_way', 'procedure', 'site')
+
+
+    def get_target(self, obj):
+        str = obj.target
+
+        temp = ""
+        for i in range(0, len(str)):
+            if (str[i] == "|"):
+                temp += "\n○ "
+            elif (str[i] == "&"):
+                temp += "\n  -  "
+            elif (str[i] == "@"):
+                temp += "\n    ＊ "
+            elif (str[i] == "+"):
+                temp += "\n        "
+            else:
+                temp += str[i]
+        print(temp)
+        return temp

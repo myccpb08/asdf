@@ -137,5 +137,11 @@ export default {
   editNoticeComment(params){
     return axios.put(`${apiUrl}/noticeComment/`, 
     { params})
-  }
+  },
+
+  getService(params){
+    return axios.get(`${apiUrl}/getService/`,{params}).then((result) => {
+      return result.data
+    });
+  },
 }

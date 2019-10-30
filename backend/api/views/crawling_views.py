@@ -2,6 +2,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from api.models import Category, Policy, Category_Policy
 from rest_framework.response import Response
+from api.serializers import PolicySerializer
 
 @api_view(['POST'])
 def setCategories(request):
@@ -50,3 +51,11 @@ def setCategory_Policy(request):
         return Response(status=status.HTTP_200_OK)
 
     return Response(status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def getService(request):
+    serviceId = int(request.GET.get('0'))
+    service = Policy.objects.get(id=serviceId)
+    serializer = PolicySerializer(service)
+    return Response(data=serializer.data, status=status.HTTP_200_OK)

@@ -19,11 +19,7 @@ urlpatterns = [
     url('crawling/category/$', crawling_views.setCategories, name='set_categories'),
     url('crawling/policy/$', crawling_views.setPolicies, name='set_policies'),
     url('crawling/categoryPolicy/$', crawling_views.setCategory_Policy, name='set_category_policy'),
-
-    # 자유게시판 관련 링크
-    url('allboards/$', post_views.getallboards, name="get_all_boards"), # 자유게시판 전 글 로드
-    url('boardDetail/$', post_views.getboard, name="get_board"), # 자유게시판 자세히 & 삭제 & 수정
-    url('board/$', post_views.posts, name='boardwrite'), # 자유게시판 작성
+    url('getService/$', crawling_views.getService, name='get_service'),
     
     # 자유게시판 관련 링크
     url('allBoards/$', post_views.getAllBoards, name="get_all_boards"), # 자유게시판 전체 글 로드
