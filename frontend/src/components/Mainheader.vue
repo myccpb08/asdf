@@ -102,7 +102,7 @@ export default {
       },
       {
         icon: "mdi-account-supervisor",
-        text: "관계자외 출입금지",
+        text: "관리자페이지",
         path: "admin"
       },
       {

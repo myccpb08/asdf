@@ -154,6 +154,7 @@ export default {
 
     
     async deleteBoard() {
+      console.log(this.boardId)
       this.$store.dispatch("data/deleteBoard", this.boardId);
       this.$router.go(-1);
     },
