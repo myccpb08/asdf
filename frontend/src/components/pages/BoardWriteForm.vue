@@ -30,12 +30,16 @@ export default {
 
   methods: {
     onSubmit: function() {
+
       const params = {
         title: this.title,
-        body: this.body
+        body: this.body,
+        writer: this.$store.state.data.user,
+        // when : today
       };
+      console.log('boardwriterform 의 params')
       console.log(params);
-      this.submit(params);
+            this.submit(params);
       this.$router.go(-1)
     }
   }

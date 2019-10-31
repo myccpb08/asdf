@@ -5,7 +5,7 @@
         <v-text-field v-model="content" placeholder="내용을 입력해주세요"></v-text-field>
       </form>
     </v-flex>
-    <v-btn rounded color="primary" dark @click="onSubmit">테스트작성</v-btn>
+    <v-btn rounded color="primary" dark @click="onSubmit">작성</v-btn>
   </v-layout>
 </template>
 
@@ -16,9 +16,7 @@ export default {
       type: Function,
       default: () => {}
     },
-    Id: {
-      // type: String,
-    }
+    Id: {}
   },
 
   data: () => ({
@@ -32,11 +30,12 @@ export default {
     onSubmit: function() {
       const params = {
         content : this.content,
-        boardId : this.Id
+        boardId : this.Id,
+        writer : this.$store.state.data.user
       };
       console.log(params);
       this.submit(params);
-      window.location.reload()
+      // window.location.reload()
     }
   }
 };

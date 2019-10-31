@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import date
 import re
 
 class Profile(models.Model):
@@ -31,35 +32,34 @@ def create_profile(**kwargs):
     print("finish create_profile")
     return profile
 
-class Movie(models.Model):
-    id = models.IntegerField(primary_key=True)
-    title = models.CharField(max_length=200)
-    genres = models.CharField(max_length=500)
-
-    @property
-    def genres_array(self):
-        return self.genres.strip().split('|')
 
 class Notice(models.Model):
+    writer = models.ForeignKey(User, on_delete = models.CASCADE)
     title = models.CharField(max_length=100)
     content = models.TextField()
-
+    clicked = models.IntegerField(default=0)
+    when = models.DateTimeField(default=date.today())
 
 class Board(models.Model):
+    writer = models.ForeignKey(User, on_delete = models.CASCADE)
     title = models.CharField(max_length=100)
     content = models.TextField()
+    clicked = models.IntegerField(default=0)
+    when = models.DateTimeField(default=date.today())
 
 class NoticeComment(models.Model):
     writer = models.ForeignKey(User, on_delete = models.CASCADE)
     post = models.ForeignKey(Notice, on_delete=models.CASCADE)
     content = models.TextField()
     edit = models.BooleanField(default=False)
+    when = models.DateTimeField(default=date.today())
 
 class BoardComment(models.Model):
     writer = models.ForeignKey(User, on_delete = models.CASCADE)
     post = models.ForeignKey(Board, on_delete=models.CASCADE)
     content = models.TextField()
     edit = models.BooleanField(default=False)
+    when = models.DateTimeField(default=date.today())
 
 class Policy(models.Model):
     id = models.CharField(max_length=5, primary_key=True)

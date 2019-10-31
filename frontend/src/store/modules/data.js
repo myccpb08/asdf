@@ -98,26 +98,20 @@ const actions = {
   },
 
   async boardWrite({commit}, params){
+    console.log('store board')
+    console.log(params)
     await api.boardWrite(params)
   },
 
   async getBoardDetail({commit}, params){
     const resp = await api.getBoardDetail(params)
-    const summary = {
-        title: resp.data.title,
-        content: resp.data.content
-    }
-    return summary
+    return resp.data
     // commit('setSummary', summary)
   },
 
   async getNoticeDetail({commit}, params){
     const resp = await api.getNoticeDetail(params)
-    const summary = {
-        title: resp.data.title,
-        content: resp.data.content
-    }
-    return summary
+    return resp.data
     // commit('setSummary', summary)
   },
 
@@ -127,6 +121,7 @@ const actions = {
   },
 
   async boardUpdate({commit}, params){
+    console.log(params)
     await api.updateBoard(params)
   },
 
