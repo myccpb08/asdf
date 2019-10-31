@@ -46,6 +46,15 @@ const actions = {
           commit('setUser', null);
       })
   },
+  async checkPassword({commit}, params) {
+    console.log("enter checkPassword!!")
+    console.log(params)
+    return await api.checkPassword(params)
+  },
+  async editUser({commit}, params) {
+    console.log(params)
+    return await api.editUser(params)
+  },
   async getSession({ commit }, param) {
     console.log("getSession")
     return await api.getSession(param).then((result) => {
@@ -98,26 +107,20 @@ const actions = {
   },
 
   async boardWrite({commit}, params){
+    console.log('store board')
+    console.log(params)
     await api.boardWrite(params)
   },
 
   async getBoardDetail({commit}, params){
     const resp = await api.getBoardDetail(params)
-    const summary = {
-        title: resp.data.title,
-        content: resp.data.content
-    }
-    return summary
+    return resp.data
     // commit('setSummary', summary)
   },
 
   async getNoticeDetail({commit}, params){
     const resp = await api.getNoticeDetail(params)
-    const summary = {
-        title: resp.data.title,
-        content: resp.data.content
-    }
-    return summary
+    return resp.data
     // commit('setSummary', summary)
   },
 
@@ -127,6 +130,7 @@ const actions = {
   },
 
   async boardUpdate({commit}, params){
+    console.log(params)
     await api.updateBoard(params)
   },
 

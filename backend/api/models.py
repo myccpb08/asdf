@@ -1,11 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import date
 import re
+from datetime import date
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=20)
     favorite = models.CharField(max_length=500, default="00")
+    when = models.DateTimeField(default=date.today())
 
     # @property
     # def favorite_array(self):
@@ -23,6 +26,7 @@ def create_profile(**kwargs):
         is_active=True,
     )
     print(user)
+    # print(kwargs['favorite'])
     profile = Profile.objects.create(
         user=user,
         name=kwargs['name'],
@@ -31,37 +35,51 @@ def create_profile(**kwargs):
     print("finish create_profile")
     return profile
 
-class Movie(models.Model):
-    id = models.IntegerField(primary_key=True)
-    title = models.CharField(max_length=200)
-    genres = models.CharField(max_length=500)
+def create_profile_none(**kwargs):
+    print("enter create_profile_none")
+    print(kwargs)
+    user = User.objects.create_user(
+        username=kwargs['username'],
+        password=kwargs['password'],
+        is_active=True,
+    )
+    print(user)
+    # print(kwargs['favorite'])
+    profile = Profile.objects.create(
+        user=user,
+        name=kwargs['name']
+    )
+    print("finish create_profile")
+    return profile
 
-    @property
-    def genres_array(self):
-        return self.genres.strip().split('|')
 
 class Notice(models.Model):
+    writer = models.ForeignKey(User, on_delete = models.CASCADE)
     title = models.CharField(max_length=100)
     content = models.TextField()
-
+    clicked = models.IntegerField(default=0)
+    when = models.DateTimeField(default=date.today())
 
 class Board(models.Model):
+    writer = models.ForeignKey(User, on_delete = models.CASCADE)
     title = models.CharField(max_length=100)
     content = models.TextField()
+    clicked = models.IntegerField(default=0)
+    when = models.DateTimeField(default=date.today())
 
 class NoticeComment(models.Model):
-    user = models.TextField()
-    # user = models.ForeignKey(User, on_delete = models.CASCADE)
+    writer = models.ForeignKey(User, on_delete = models.CASCADE)
     post = models.ForeignKey(Notice, on_delete=models.CASCADE)
     content = models.TextField()
     edit = models.BooleanField(default=False)
+    when = models.DateTimeField(default=date.today())
 
 class BoardComment(models.Model):
-    user = models.TextField()
-    # user = models.ForeignKey(User, on_delete = models.CASCADE)
+    writer = models.ForeignKey(User, on_delete = models.CASCADE)
     post = models.ForeignKey(Board, on_delete=models.CASCADE)
     content = models.TextField()
     edit = models.BooleanField(default=False)
+    when = models.DateTimeField(default=date.today())
 
 class Policy(models.Model):
     id = models.CharField(max_length=5, primary_key=True)

@@ -5,25 +5,11 @@
         <v-text-field v-model="content" placeholder="내용을 입력해주세요"></v-text-field>
       </form>
     </v-flex>
-
-    <v-btn rounded color="primary" dark @click="onSubmit">테스트작성</v-btn>
-    <!-- <v-flex shrink pa-1>
-      <v-btn
-        style="padding-top:5px;"
-        small
-        outlined
-        rounded
-        flat
-        color="gray"
-        v-on:click="postComment(mentor, content)"
-        class="movebtn"
-      >submit</v-btn>
-    </v-flex> -->
+    <v-btn rounded color="primary" dark @click="onSubmit">작성</v-btn>
   </v-layout>
 </template>
 
 <script>
-import router from "../../router/index.js";
 
 export default {
   props: {
@@ -31,9 +17,7 @@ export default {
       type: Function,
       default: () => {}
     },
-    Id: {
-      // type: String,
-    }
+    Id: {}
   },
 
   data: () => ({
@@ -47,7 +31,8 @@ export default {
     onSubmit: function() {
       const params = {
         content : this.content,
-        noticeId : this.Id
+        noticeId : this.Id,
+        writer : this.$store.state.data.user
       };
       console.log(params);
       this.submit(params);

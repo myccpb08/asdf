@@ -9,7 +9,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ('id', 'username', 'password', 'name', 'favorite')
+        fields = ('id', 'username', 'password', 'name', 'favorite', 'when')
         
     def get_username(self, obj):
         return obj.user.username
@@ -21,13 +21,14 @@ class SessionSerializer(serializers.ModelSerializer):
     username = serializers.SerializerMethodField('get_user')
     name = serializers.SerializerMethodField('get_name')
     favorite = serializers.SerializerMethodField('get_favorite')
+    when = serializers.SerializerMethodField('get_when')
     token = serializers.SerializerMethodField('get_token')
     is_authenticated = serializers.SerializerMethodField('get_is_authenticated')
     is_staff = serializers.SerializerMethodField('get_is_staff')
 
     class Meta:
         model = Profile
-        fields = ('username', 'name', 'favorite', 'token', 'is_authenticated', 'is_staff')
+        fields = ('username', 'name', 'favorite', 'when', 'token', 'is_authenticated', 'is_staff')
 
     def get_user(self, obj):
         return str(obj['username'])
@@ -35,6 +36,10 @@ class SessionSerializer(serializers.ModelSerializer):
     def get_name(self, obj):
         print(obj['name'])
         return str(obj['name'])
+
+    def get_when(self, obj):
+        print(obj['when'])
+        return str(obj['when'])
 
     def get_favorite(self, obj):
         inputFavorite = str(obj['favorite'])
@@ -92,12 +97,6 @@ class SessionSerializer(serializers.ModelSerializer):
         return obj['is_staff']
 
 
-class MovieSerializer(serializers.ModelSerializer):
-    genres_array = serializers.ReadOnlyField()
-
-    class Meta:
-        model = Movie
-        fields = ('id', 'title', 'genres_array')
 
 class UserSerializer(serializers.ModelSerializer):
     genres_array = serializers.ReadOnlyField()
@@ -106,21 +105,91 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'password', 'email')
 
 
+''' 💓💓💓💓💓 자유게시판 Serializers '''
 class BoardSerializer(serializers.ModelSerializer):
+    writer = serializers.SerializerMethodField('get_writer')
+    email = serializers.SerializerMethodField('get_email')
+    when = serializers.SerializerMethodField('get_when')
     class Meta:
         model = Board
-        fields = ('id', 'title', 'content')
+        fields = ('id', 'when', 'clicked','writer', 'email', 'title', 'content')
+    
+    def get_writer(self, obj):
+        return obj.writer.profile.name
+    
+    def get_email(self, obj):
+        return obj.writer.username 
+    
+    def get_when(self, obj):
+        when =str(obj.when)[:10]
+        return when
 
+
+class BoardCommentSerializer(serializers.ModelSerializer):
+    writer = serializers.SerializerMethodField('get_writer')
+    email = serializers.SerializerMethodField('get_email')
+    when = serializers.SerializerMethodField('get_when')
+
+    class Meta:
+        model = BoardComment
+        fields = ('id', 'when','writer', 'email', 'post', 'content', 'edit')
+
+    def get_writer(self, obj):
+        return obj.writer.profile.name
+    
+    def get_email(self, obj):
+        return obj.writer.username 
+
+    def get_when(self, obj):
+        when =str(obj.when)[:10]
+        return when
+
+
+''' 💓💓💓💓💓 공지사항 Serializers '''
 class NoticeSerializer(serializers.ModelSerializer):
+    writer = serializers.SerializerMethodField('get_writer')
+    is_staff = serializers.SerializerMethodField('get_is_staff')
+    when = serializers.SerializerMethodField('get_when')
+    email = serializers.SerializerMethodField('get_email')
+
     class Meta:
         model = Notice
-        fields = ('id', 'title', 'content')
+        fields = ('id', 'when', 'email', 'clicked', 'writer', 'is_staff', 'title', 'content')
+
+    def get_writer(self, obj):
+        return obj.writer.profile.name
+    
+    def get_is_staff(self, obj):
+        return obj.writer.is_staff
+
+    def get_when(self, obj):
+        when =str(obj.when)[:10]
+        return when
+
+    def get_email(self, obj):
+        return obj.writer.username 
+
 
 class NoticeCommentSerializer(serializers.ModelSerializer):
+    writer = serializers.SerializerMethodField('get_writer')
+    email = serializers.SerializerMethodField('get_email')
+    when = serializers.SerializerMethodField('get_when')
+
     class Meta:
         model = NoticeComment
-        fields = ('id', 'user', 'post', 'content', 'edit')
+        fields = ('id','when', 'writer', 'email', 'post', 'content', 'edit')
 
+    def get_writer(self, obj):
+        return obj.writer.profile.name
+    
+    def get_email(self, obj):
+        return obj.writer.username
+
+    def get_when(self, obj):
+        when =str(obj.when)[:10]
+        return when
+
+<<<<<<< HEAD
 class BoardCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = BoardComment
@@ -152,3 +221,5 @@ class PolicySerializer(serializers.ModelSerializer):
                 temp += str[i]
         print(temp)
         return temp
+=======
+>>>>>>> 3a25dd8970934e43d670c2167fca98a502a2da11
