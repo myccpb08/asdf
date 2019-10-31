@@ -34,7 +34,7 @@ const router = new VueRouter({
     { path: '/signup', component: SignUpPage, name: 'SignUp' },
     { path: '/login', component: LoginPage, name: 'Login'},
     { path: '/notice', component: NoticePage, name: 'Notice'},
-    { path: '/policy/search', component: PolicySearchPage, name: 'PolicySearch'},
+    { path: '/policy/search/:categoryId', component: PolicySearchPage, name: 'PolicySearch'},
     { path: '/notice/write', component: NoticeWritePage, name: 'NoticeWrite'},
     { path: '/board', component: BoardPage, name: 'Board'},
     { path: '/board/write', component: BoardWritePage, name: 'BoardWrite'},

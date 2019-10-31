@@ -1,4 +1,4 @@
-from .models import Profile, User, Board, Notice, NoticeComment, BoardComment, Policy
+from .models import Profile, User, Board, Notice, NoticeComment, BoardComment, Policy, Category_Policy
 from rest_framework import serializers
 
 
@@ -220,3 +220,30 @@ class PolicySerializer(serializers.ModelSerializer):
                 temp += str[i]
         print(temp)
         return temp
+
+class CategoryPolicySerializer(serializers.ModelSerializer):
+    id = serializers.SerializerMethodField('get_policy_id')
+    title = serializers.SerializerMethodField('get_policy_title')
+    brief = serializers.SerializerMethodField('get_policy_brief')
+
+    class Meta:
+        model = Category_Policy
+        fields = ('id', 'title', 'brief')
+    
+    def get_policy_id(self, obj):
+        return obj.policy.id
+
+    def get_policy_title(self, obj):
+        return obj.policy.title
+
+    def get_policy_brief(self, obj):
+        return obj.policy.brief
+
+
+class AllPolicySerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Policy
+        fields = ('id', 'title', 'brief')
+
+    

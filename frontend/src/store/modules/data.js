@@ -160,6 +160,10 @@ const actions = {
 
   async getService({commit}, params){
     return await api.getService(params)
+  },
+  
+  async policySearch({commit}, params){
+    return await api.policySearch(params)
   }
 }
 
