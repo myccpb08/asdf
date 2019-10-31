@@ -3,9 +3,10 @@ from rest_framework.decorators import api_view
 from api.models import create_profile, create_profile_none, Profile
 from rest_framework.response import Response
 from api.serializers import ProfileSerializer, SessionSerializer
-from django.contrib import auth
 from rest_framework.authtoken.models import Token
+from django.contrib import auth
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import PasswordChangeForm
 
 
 @api_view(['POST'])
@@ -125,16 +126,18 @@ def user(request):
         print("enter user edit")
         username = request.data.get('username', None)
         name = request.data.get('name', None)
-        password = request.data.get('password', None)
         favorite = request.data.get('favorite', None)
-        print(username + " " + name + " " + password + " ")
-        print(favorite)
+
         user = User.objects.get(username=username)
-        print(user)
-        print("PPPPP : " + password)
         Profile.objects.filter(user=user).update(
             name=name, favorite=favorite
         )
+        
+        password = request.data.get('password', None)
+        print("input Password : " + password)
+        user.password = password
+        # User.object.filter(username=username).update(password=password)
+        # form = PasswordChangeForm()
         # user.set_password(password)
         # user.save()
 

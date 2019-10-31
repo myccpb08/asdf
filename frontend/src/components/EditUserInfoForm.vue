@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import store from "../store/modules/data.js";
 export default {
     props: {
         submit: {
@@ -32,7 +33,7 @@ export default {
     },
     data: () => ({
         userSeleted: [],
-        selected: "",
+        selected: [],
         name: "",
         password: "",
         items: [
@@ -67,28 +68,36 @@ export default {
             console.log("password : " + this.password)
             console.log(this.selected)
             const params = {
-                username: this.$store.state.data.user.username,
+                username: store.state.user.username,
                 name: this.name,
                 password: this.password,
                 favoriteValue: this.selected,
             }
             this.submit(params)
+            alert("수정되었습니다!")
             window.location.replace("/")
         },
         setFavorite() {
-            var userFavorite = this.$store.state.data.user.favorite
+            var userFavorite = store.state.user.favorite
             if(userFavorite!=null){
                 for(var f in userFavorite){
                     if(f=='00'){
                         break
                     }else{
                         this.userSeleted.push(this.items[f*1-1])
+                        this.selected.push(this.items[f*1-1].value)
+                        console.log(this.selected)
+                        console.log("==========setFavorite========")
                     }
                 }
             }
         },
         setSelected(value) {
+            console.log(value)
             this.selected = value
+            console.log(value)
+            console.log(this.selected)
+            console.log("============this.selected===========")
         }
     }
 }

@@ -52,7 +52,6 @@ def create_profile_none(**kwargs):
     print("finish create_profile")
     return profile
 
-
 class Notice(models.Model):
     writer = models.ForeignKey(User, on_delete = models.CASCADE)
     title = models.CharField(max_length=100)

@@ -45,6 +45,7 @@ import { mapState, mapActions } from "vuex";
 
 import UserList from "../../admins/UserList";
 import router from "../../router";
+import store from "../../store/modules/data.js";
 
 export default {
   name: "AdminPage",
@@ -167,15 +168,6 @@ export default {
     },
     dialog(val) {
       val || this.close();
-    }
-  },
-  created() {
-    // this.$vuetify.theme.dark = true;
-    if (this.$store.state.data.user == null) {
-      alert('경고 했습니다?!')
-      window.location.replace("/");
-    }else{
-      // this.$vuetify.theme.dark = true;
     }
   },
   mounted() {

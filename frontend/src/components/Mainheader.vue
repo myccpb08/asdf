@@ -32,7 +32,7 @@
         <router-link to='/mypage' style="text-decoration:none;">
           <span class="title ml-3 mr-5 white--text" >마이페이지</span>
         </router-link> -->
-        <div @click="checkPass" style="text-decoration:none; background: none;">
+        <div @click="clickMyPage" style="text-decoration:none; background: none;">
           <a class="title ml-3 mr-5 white--text" >마이페이지</a>
         </div>
    
@@ -147,8 +147,11 @@ export default {
         this.isLogin = false
       }
     },
-    checkPass() {
+    clickMyPage() {
       if(this.token!==null){
+        if(this.$router.currentRoute.path == "/mypage"){
+          return
+        }
         this.chkPass = prompt("비밀번호를 입력해주세요!", "")
         if(this.chkPass){
           const params = {
@@ -159,7 +162,7 @@ export default {
             if(result.data){
               router.push('/mypage')
             }else{
-              alert('비밀번호가 맞지 않습니다!')
+              alert('비밀번호가 맞지 않습니다!(누구세요?)')
             }
           })
         }

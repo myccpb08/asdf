@@ -35,7 +35,14 @@ export default {
     console.log("Create!!!!!!!!!!")
     if (localStorage.getItem("token") !== undefined && localStorage.getItem("token") !== null) {
       var result = this.getSession(localStorage.getItem('token')).then(function(value){
-        console.log(value)
+        console.log(store.state.user)
+        if(router.currentRoute.path=='/admin'){
+          console.log("Path is : admin")
+          if(store.state.user.is_staff!=true){
+            alert('경고했습니다?!')
+            window.location.replace('/')
+          }
+        }
         if(value==false){
           router.push('/')
         }
