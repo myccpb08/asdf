@@ -1,4 +1,4 @@
-from .models import Profile, Movie, User, Board, Notice, NoticeComment, BoardComment, Policy
+from .models import Profile, User, Board, Notice, NoticeComment, BoardComment, Policy
 from rest_framework import serializers
 
 
@@ -189,13 +189,6 @@ class NoticeCommentSerializer(serializers.ModelSerializer):
         when =str(obj.when)[:10]
         return when
 
-<<<<<<< HEAD
-class BoardCommentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = BoardComment
-        fields = ('id', 'user', 'post', 'content', 'edit')
-
-
 class PolicySerializer(serializers.ModelSerializer):
     target = serializers.SerializerMethodField('get_target')
 
@@ -221,5 +214,3 @@ class PolicySerializer(serializers.ModelSerializer):
                 temp += str[i]
         print(temp)
         return temp
-=======
->>>>>>> 3a25dd8970934e43d670c2167fca98a502a2da11
