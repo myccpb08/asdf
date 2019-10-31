@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="54e946d9-7b00-4101-a69e-a58a3d56c91f" name="Default Changelist" comment="" />
+    <list default="true" id="54e946d9-7b00-4101-a69e-a58a3d56c91f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +26,7 @@
         <counts>
           <entry key="dat" value="4" />
           <entry key="js" value="5" />
-          <entry key="py" value="100" />
+          <entry key="py" value="102" />
           <entry key="txt" value="4" />
           <entry key="vue" value="4" />
         </counts>
@@ -31,13 +35,13 @@
         <counts>
           <entry key="JavaScript" value="5" />
           <entry key="PLAIN_TEXT" value="12" />
-          <entry key="Python" value="100" />
+          <entry key="Python" value="102" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="js" value="54" />
-          <entry key="py" value="8634" />
+          <entry key="py" value="8645" />
           <entry key="txt" value="6" />
           <entry key="vue" value="2" />
         </counts>
@@ -46,7 +50,7 @@
         <counts>
           <entry key="JavaScript" value="54" />
           <entry key="PLAIN_TEXT" value="8" />
-          <entry key="Python" value="8634" />
+          <entry key="Python" value="8645" />
         </counts>
       </usages-collector>
     </session>
@@ -54,10 +58,23 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/api/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="69">
+              <caret line="50" selection-start-line="50" selection-end-line="50" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+                <marker date="1572482636650" expanded="true" signature="2616:3175" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/api/views/crawling_views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="542">
-              <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
+              <caret line="47" selection-start-line="47" selection-end-line="47" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
               </folding>
@@ -68,11 +85,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/backend/api/serializers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="148" column="33" lean-forward="true" selection-start-line="148" selection-start-column="33" selection-end-line="148" selection-end-column="33" />
+            <state relative-caret-position="327">
+              <caret line="222" lean-forward="true" selection-start-line="222" selection-end-line="222" />
               <folding>
                 <element signature="e#0#92#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/django/core/management/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="156">
+              <caret line="381" selection-start-line="381" selection-end-line="381" />
             </state>
           </provider>
         </entry>
@@ -158,9 +184,8 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-24" />
-    <option name="y" value="-29" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-18" />
     <option name="width" value="1534" />
     <option name="height" value="1039" />
   </component>
@@ -271,7 +296,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.db_policy">
+  <component name="RunManager" selected="Python.crawling1">
     <configuration name="crawling (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="s1p4151007" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -386,8 +411,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.db_policy" />
         <item itemvalue="Python.crawling1" />
+        <item itemvalue="Python.db_policy" />
         <item itemvalue="Python.crawling (1)" />
         <item itemvalue="Python.crawling" />
         <item itemvalue="Python.test" />
@@ -417,22 +442,22 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-14" y="0" width="1227" height="831" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2194316" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2789916" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49966952" visible="true" weight="0.27272728" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49966952" weight="0.4900568" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32670453" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.3252841" />
       <window_info anchor="bottom" id="Python Console" order="8" weight="0.32386363" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49865592" weight="0.37642047" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.49865592" visible="true" weight="0.30129126" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50033045" side_tool="true" weight="0.33664772" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -600,17 +625,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/api/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-            <marker date="1572411859313" expanded="true" signature="1930:2489" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/api/views/post_views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
@@ -662,7 +676,7 @@
     <entry file="file://$PROJECT_DIR$/backend/api/views/crawling_views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="542">
-          <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
+          <caret line="47" selection-start-line="47" selection-end-line="47" />
           <folding>
             <element signature="e#0#33#0" expanded="true" />
           </folding>
@@ -679,10 +693,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/backend/api/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="50" selection-start-line="50" selection-end-line="50" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+            <marker date="1572482636650" expanded="true" signature="2616:3175" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/django/core/management/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="381" selection-start-line="381" selection-end-line="381" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/backend/api/serializers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="148" column="33" lean-forward="true" selection-start-line="148" selection-start-column="33" selection-end-line="148" selection-end-column="33" />
+        <state relative-caret-position="327">
+          <caret line="222" lean-forward="true" selection-start-line="222" selection-end-line="222" />
           <folding>
             <element signature="e#0#92#0" expanded="true" />
           </folding>

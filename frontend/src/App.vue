@@ -53,6 +53,12 @@ export default {
 </script>
 
 <style>
+.v-content__wrap{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #keep .v-navigation-drawer__border {
   display: none;
 }
