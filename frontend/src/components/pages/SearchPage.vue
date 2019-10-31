@@ -4,7 +4,6 @@
 
       <!-- 검색 폼 -->
       <v-flex xs6>
-        <div class="display-2 pa-10">영화 검색</div>
         <SearchForm :submit="searchPolicy" />
       </v-flex>
 
@@ -20,7 +19,7 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import SearchForm from "../SearchForm";
+import SearchForm from "./SearchForm";
 // import MovieList from "../MovieList";
 
 export default {

@@ -189,12 +189,6 @@ class NoticeCommentSerializer(serializers.ModelSerializer):
         when =str(obj.when)[:10]
         return when
 
-class BoardCommentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = BoardComment
-        fields = ('id', 'user', 'post', 'content', 'edit')
-
-
 class PolicySerializer(serializers.ModelSerializer):
     target = serializers.SerializerMethodField('get_target')
 

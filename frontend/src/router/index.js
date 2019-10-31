@@ -16,6 +16,8 @@ import BoardDetailPage from '../components/pages/BoardDetailPage'
 import BoardUpdatePage from '../components/pages/BoardUpdatePage'
 import FavoritePage from '../components/pages/FavoritePage'
 
+import Chat from '../components/pages/Chat'
+
 import DetailPolicyPage from '../components/pages/DetailPolicyPage'
 // admin
 import DashBoard from "../admins/DashBoard.vue"
@@ -45,6 +47,7 @@ const router = new VueRouter({
     { path: '/boardupdate/:boardId', component: BoardUpdatePage, name:'boardUpdate', props:true},
     { path: '/noticeupdate/:noticeId', component: NoticeUpdatePage, name:'noticeUpdate', props:true},
     { path: '/noticeDetail/:noticeId',component: NoticeDetailPage, name: 'noticeDetail', props: true},
+    { path: '/chat',component: Chat, name: 'chat', props: true},
     { 
       path: '/admin', 
       component: AdminPage, 
