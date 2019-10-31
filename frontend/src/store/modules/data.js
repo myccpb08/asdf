@@ -156,6 +156,10 @@ const actions = {
 
   async editNoticeComment({commit}, params){
     await api.editNoticeComment(params)
+  },
+
+  async getService({commit}, params){
+    return await api.getService(params)
   }
 }
 

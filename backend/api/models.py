@@ -83,12 +83,20 @@ class BoardComment(models.Model):
 
 class Policy(models.Model):
     id = models.CharField(max_length=5, primary_key=True)
-    name = models.CharField(max_length=500)
+    title = models.TextField()
+    brief = models.TextField()
+    target = models.TextField()
+    criteria = models.TextField(null=True, blank=True)
+    content = models.TextField(null=True, blank=True)
+    supply_way = models.TextField(null=True, blank=True)
+    procedure = models.TextField(null=True, blank=True)
+    site =models.TextField(null=True, blank=True)
+
 
 class Category(models.Model):
     id = models.CharField(max_length=5, primary_key=True)
     name = models.CharField(max_length=500)
 
 class Category_Policy(models.Model):
-    category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
-    policy_id = models.ForeignKey(Policy, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    policy = models.ForeignKey(Policy, on_delete=models.CASCADE)

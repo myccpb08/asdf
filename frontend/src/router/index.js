@@ -15,6 +15,7 @@ import BoardDetailPage from '../components/pages/BoardDetailPage'
 import BoardUpdatePage from '../components/pages/BoardUpdatePage'
 import FavoritePage from '../components/pages/FavoritePage'
 
+import DetailPolicyPage from '../components/pages/DetailPolicyPage'
 // admin
 import DashBoard from "../admins/DashBoard.vue"
 import UserList from "../admins/UserList.vue"
@@ -36,6 +37,8 @@ const router = new VueRouter({
     { path: '/board', component: BoardPage, name: 'Board'},
     { path: '/board/write', component: BoardWritePage, name: 'BoardWrite'},
     { path: '/favorite', component: FavoritePage, name: 'Favorite'},
+
+    { path: '/detailPolicy/:policyId', component: DetailPolicyPage, name: 'DetailPolicy', props: true},
     { path: '/boardDetail/:boardId',component: BoardDetailPage, name: 'boardDetail', props: true},
     { path: '/boardupdate/:boardId', component: BoardUpdatePage, name:'boardUpdate', props:true},
     { path: '/noticeupdate/:noticeId', component: NoticeUpdatePage, name:'noticeUpdate', props:true},
