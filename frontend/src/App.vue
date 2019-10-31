@@ -31,20 +31,20 @@ export default {
     'Mainheader': Mainheader,
     'MainFooter': MainFooter,
   },
-  // created() {
-  //   console.log("Create!!!!!!!!!!")
-  //   if (localStorage.getItem("token") !== undefined && localStorage.getItem("token") !== null) {
-  //     var result = this.getSession(localStorage.getItem('token')).then(function(value){
-  //       console.log(value)
-  //       if(value==false){
-  //         router.push('/')
-  //       }
-  //     });
-  //   }
-  //   else{
-  //     router.push("/");
-  //   }
-  // },
+  created() {
+    console.log("Create!!!!!!!!!!")
+    if (localStorage.getItem("token") !== undefined && localStorage.getItem("token") !== null) {
+      var result = this.getSession(localStorage.getItem('token')).then(function(value){
+        console.log(value)
+        if(value==false){
+          router.push('/')
+        }
+      });
+    }
+    else{
+      router.push("/");
+    }
+  },
   methods: {
     ...mapActions("data", ["getSession"]),
   }
@@ -70,5 +70,10 @@ export default {
   top: 50%;
   left: 2%;
   transform: translateY(-50%);
+}
+.v-content__wrap{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
