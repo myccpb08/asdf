@@ -53,9 +53,3 @@ def setCategory_Policy(request):
     return Response(status=status.HTTP_200_OK)
 
 
-@api_view(['GET'])
-def getService(request):
-    serviceId = int(request.GET.get('0'))
-    service = Policy.objects.get(id=serviceId)
-    serializer = PolicySerializer(service)
-    return Response(data=serializer.data, status=status.HTTP_200_OK)

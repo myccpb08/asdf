@@ -6,6 +6,7 @@ import AdminPage from '../components/pages/AdminPage'
 import SignUpPage from '../components/pages/SignUpPage'
 import LoginPage from '../components/pages/LoginPage'
 import NoticePage from '../components/pages/NoticePage'
+import PolicySearchPage from '../components/pages/PolicySearchPage'
 import NoticeDetailPage from '../components/pages/NoticeDetailPage'
 import NoticeWritePage from '../components/pages/NoticeWritePage'
 import NoticeUpdatePage from '../components/pages/NoticeUpdatePage'
@@ -33,6 +34,7 @@ const router = new VueRouter({
     { path: '/signup', component: SignUpPage, name: 'SignUp' },
     { path: '/login', component: LoginPage, name: 'Login'},
     { path: '/notice', component: NoticePage, name: 'Notice'},
+    { path: '/policy/search/:categoryId', component: PolicySearchPage, name: 'PolicySearch'},
     { path: '/notice/write', component: NoticeWritePage, name: 'NoticeWrite'},
     { path: '/board', component: BoardPage, name: 'Board'},
     { path: '/board/write', component: BoardWritePage, name: 'BoardWrite'},

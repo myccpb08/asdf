@@ -53,6 +53,12 @@ export default {
 </script>
 
 <style>
+.v-content__wrap{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #keep .v-navigation-drawer__border {
   display: none;
 }
@@ -70,5 +76,10 @@ export default {
   top: 50%;
   left: 2%;
   transform: translateY(-50%);
+}
+.v-content__wrap{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

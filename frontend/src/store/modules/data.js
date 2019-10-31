@@ -41,10 +41,10 @@ const actions = {
     });
   },
   async logoutUser({ commit }) {
-      await api.logoutUser(state.user.username).then(() => {
-          localStorage.removeItem("token");
-          commit('setUser', null);
-      })
+    await api.logoutUser(state.user.username).then(() => {
+      localStorage.removeItem("token");
+      commit('setUser', null);
+    })
   },
   async checkPassword({commit}, params) {
     console.log("enter checkPassword!!")
@@ -160,6 +160,10 @@ const actions = {
 
   async getService({commit}, params){
     return await api.getService(params)
+  },
+  
+  async policySearch({commit}, params){
+    return await api.policySearch(params)
   }
 }
 
