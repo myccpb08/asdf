@@ -77,4 +77,9 @@ export default {
   left: 2%;
   transform: translateY(-50%);
 }
+.v-content__wrap{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>
