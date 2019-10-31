@@ -39,6 +39,7 @@ export default {
             };
             this.submit(params).then(data => {
                 if(data){
+                    console.log(data)
                     window.location.replace('/')
                 }else{
                     alert('ID 또는 Password가 맞지 않습니다.')

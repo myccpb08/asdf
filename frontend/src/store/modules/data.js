@@ -46,6 +46,15 @@ const actions = {
           commit('setUser', null);
       })
   },
+  async checkPassword({commit}, params) {
+    console.log("enter checkPassword!!")
+    console.log(params)
+    return await api.checkPassword(params)
+  },
+  async editUser({commit}, params) {
+    console.log(params)
+    return await api.editUser(params)
+  },
   async getSession({ commit }, param) {
     console.log("getSession")
     return await api.getSession(param).then((result) => {

@@ -2,11 +2,13 @@ from django.db import models
 from django.contrib.auth.models import User
 from datetime import date
 import re
+from datetime import date
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=20)
     favorite = models.CharField(max_length=500, default="00")
+    when = models.DateTimeField(default=date.today())
 
     # @property
     # def favorite_array(self):
@@ -24,10 +26,28 @@ def create_profile(**kwargs):
         is_active=True,
     )
     print(user)
+    # print(kwargs['favorite'])
     profile = Profile.objects.create(
         user=user,
         name=kwargs['name'],
         favorite=kwargs['favorite']
+    )
+    print("finish create_profile")
+    return profile
+
+def create_profile_none(**kwargs):
+    print("enter create_profile_none")
+    print(kwargs)
+    user = User.objects.create_user(
+        username=kwargs['username'],
+        password=kwargs['password'],
+        is_active=True,
+    )
+    print(user)
+    # print(kwargs['favorite'])
+    profile = Profile.objects.create(
+        user=user,
+        name=kwargs['name']
     )
     print("finish create_profile")
     return profile

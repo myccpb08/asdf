@@ -14,6 +14,20 @@ export default {
       password: params.password
     })
   },
+  async checkPassword(params) {
+    return await axios.post(`${apiUrl}/auth/checkPassword/`, {
+      username: params.username,
+      inputPass: params.inputPass
+    })
+  },
+  async editUser(params) {
+    await axios.put(`${apiUrl}/auth/user/`, {
+      username: params.username,
+      name: params.name,
+      password: params.password,
+      favorite: params.favoriteValue
+    })
+  },
   async logoutUser(param) {
     return await axios.post(`${apiUrl}/auth/logout/`, {
         username: param
