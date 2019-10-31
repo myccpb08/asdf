@@ -22,9 +22,9 @@
               :to="{ name: 'noticeDetail', params: {noticeId: post.id} }"
             >{{ post.title }}</router-link>
             </td>
-            <td class="name">{{post.content}}</td>
-            <td class="date">2019/10/18</td>
-            <td class="hit">1234</td>
+            <td class="name">{{post.writer}}</td>
+            <td class="date">{{post.when}}</td>
+            <td class="hit">{{post.clicked}}</td>
         </tr>
         <v-pagination v-if="maxPages > 1" v-model="page" :length="maxPages" />
 

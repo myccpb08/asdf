@@ -102,6 +102,7 @@ export default {
 
   boardWrite(params){
     console.log('api index.js')
+    console.log(params)
     return axios.post(`${apiUrl}/board/`, {
       params,
     })
