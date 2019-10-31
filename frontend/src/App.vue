@@ -58,6 +58,12 @@ export default {
 </script>
 
 <style>
+.v-content__wrap{
+  display: table;
+  justify-content: center;
+  align-items: center;
+}
+
 #keep .v-navigation-drawer__border {
   display: none;
 }
@@ -76,4 +82,5 @@ export default {
   left: 2%;
   transform: translateY(-50%);
 }
+
 </style>
