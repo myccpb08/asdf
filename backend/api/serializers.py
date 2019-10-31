@@ -1,4 +1,4 @@
-from .models import Profile, Movie, User, Board, Notice, NoticeComment, BoardComment, Policy
+from .models import Profile, User, Board, Notice, NoticeComment, BoardComment, Policy
 from rest_framework import serializers
 
 
@@ -6,16 +6,27 @@ class ProfileSerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField()
     username = serializers.SerializerMethodField('get_username')
     password = serializers.SerializerMethodField('get_password')
+    is_staff = serializers.SerializerMethodField('get_is_staff')
+    when = serializers.SerializerMethodField('get_when')
 
     class Meta:
         model = Profile
-        fields = ('id', 'username', 'password', 'name', 'favorite', 'when')
+        fields = ('id', 'username', 'password', 'name', 'favorite', 'when', 'is_staff')
         
     def get_username(self, obj):
         return obj.user.username
 
     def get_password(self, obj):
         return obj.user.password
+
+    def get_is_staff(self, obj):
+        if obj.user.is_staff:
+            return "staff"
+        return "user"
+    
+    def get_when(self, obj):
+        print(obj.when)
+        return str(obj.when)[0:10]
 
 class SessionSerializer(serializers.ModelSerializer):
     username = serializers.SerializerMethodField('get_user')
@@ -189,13 +200,6 @@ class NoticeCommentSerializer(serializers.ModelSerializer):
         when =str(obj.when)[:10]
         return when
 
-<<<<<<< HEAD
-class BoardCommentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = BoardComment
-        fields = ('id', 'user', 'post', 'content', 'edit')
-
-
 class PolicySerializer(serializers.ModelSerializer):
     target = serializers.SerializerMethodField('get_target')
 
@@ -221,5 +225,3 @@ class PolicySerializer(serializers.ModelSerializer):
                 temp += str[i]
         print(temp)
         return temp
-=======
->>>>>>> 3a25dd8970934e43d670c2167fca98a502a2da11

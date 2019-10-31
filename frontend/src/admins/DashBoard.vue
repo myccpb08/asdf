@@ -1,27 +1,26 @@
 <template>
-  <v-container grid-list-xl fluid>
-    <div class="boxA">
-      <div class="boxA1">
-        <apexchart width="500" type="line" :options="chartPostOptions" :series="seriesPost"></apexchart>
-      </div>
-
-      <div class="boxA2">
-        <apexchart
+  <v-container fluid>
+    <v-layout row>
+      <v-flex xs12 md6>
+       <apexchart height="350" type="line" :options="chartPostOptions" :series="seriesPost"></apexchart>
+      </v-flex>
+      <v-flex xs12 md6>
+       <apexchart
           type="donut"
-          width="90%"
+          height="350"
           :options="chartFavoriteOptions"
           :series="seriesFavorite"
         />
-      </div>
-    </div>
-    <div class="boxB">
-      <div class="boxB1">
-        <apexchart type="bar" height="350" :options="chartPolicyOptions" :series="seriesPolicy" />
-      </div>
-      <div class="boxB2">
-        <apexchart type="line" height="350" :options="chartUserOptions" :series="seriesUser" />
-      </div>
-    </div>
+      </v-flex>
+    </v-layout>
+    <v-layout row>
+      <v-flex xs12 md6>
+       <apexchart type="bar" height="350" :options="chartPolicyOptions" :series="seriesPolicy" />
+      </v-flex>
+      <v-flex xs12 md6>
+       <apexchart type="line" height="350" :options="chartUserOptions" :series="seriesUser" />
+      </v-flex>
+    </v-layout>
   </v-container>
 </template>
 
@@ -199,7 +198,7 @@ export default {
             "China",
             "Germany"
           ]
-        }
+        },
       },
       // 최근 회원 가입수
       seriesUser: [
@@ -314,31 +313,3 @@ export default {
 };
 </script>
 
-<style>
-.boxA:after {
-  content: "";
-  display: inline-block;
-  clear: both;
-}
-.boxA1 {
-  float: left;
-  width: 50%;
-}
-.boxA2 {
-  float: left;
-  width: 50%;
-}
-.boxB:after {
-  content: "";
-  display: inline-block;
-  clear: both;
-}
-.boxB1 {
-  float: left;
-  width: 50%;
-}
-.boxB2 {
-  float: left;
-  width: 50%;
-}
-</style>

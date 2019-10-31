@@ -25,8 +25,14 @@ export default {
       username: params.username,
       name: params.name,
       password: params.password,
-      favorite: params.favoriteValue
+      favorite: params.favoriteValue,
+      grade: params.grade
     })
+  },
+  async deleteUser(params) {
+    console.log(params)
+    return axios.delete(`${apiUrl}/auth/user/`, 
+    {params})
   },
   async logoutUser(param) {
     return await axios.post(`${apiUrl}/auth/logout/`, {

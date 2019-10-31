@@ -31,20 +31,20 @@ export default {
     'Mainheader': Mainheader,
     'MainFooter': MainFooter,
   },
-  // created() {
-  //   console.log("Create!!!!!!!!!!")
-  //   if (localStorage.getItem("token") !== undefined && localStorage.getItem("token") !== null) {
-  //     var result = this.getSession(localStorage.getItem('token')).then(function(value){
-  //       console.log(value)
-  //       if(value==false){
-  //         router.push('/')
-  //       }
-  //     });
-  //   }
-  //   else{
-  //     router.push("/");
-  //   }
-  // },
+  created() {
+    console.log("Create!!!!!!!!!!")
+    if (localStorage.getItem("token") !== undefined && localStorage.getItem("token") !== null) {
+      var result = this.getSession(localStorage.getItem('token')).then(function(value){
+        console.log(value)
+        if(value==false){
+          router.push('/')
+        }
+      });
+    }
+    else{
+      router.push("/");
+    }
+  },
   methods: {
     ...mapActions("data", ["getSession"]),
   }

@@ -32,7 +32,6 @@ def signup(request):
 def getAllUsers(request):
     print("Enter getAllUser Method")
     profiles = Profile.objects.all()
-    print(profiles)
     serializer = ProfileSerializer(profiles, many=True)
     return Response(data=serializer.data, status=status.HTTP_200_OK)
 
@@ -114,7 +113,7 @@ def chkPass(request):
             result=False
         return Response(data=result, status=status.HTTP_200_OK)
 
-@api_view(['PUT'])
+@api_view(['PUT', 'DELETE'])
 def user(request):
     print("enter user!!")
     if(request.method == 'GET'):
@@ -127,21 +126,32 @@ def user(request):
         name = request.data.get('name', None)
         password = request.data.get('password', None)
         favorite = request.data.get('favorite', None)
+        grade = request.data.get('grade', None)
+        
+        if grade == "staff":
+            is_staff = True
+        else: is_staff = False
+        
         print(username + " " + name + " " + password + " ")
-        print(favorite)
         user = User.objects.get(username=username)
-        print(user)
+        print(user.is_staff)
         print("PPPPP : " + password)
         Profile.objects.filter(user=user).update(
-            name=name, favorite=favorite
+            name=name, favorite=favorite, 
         )
+        user.is_staff = is_staff
+        user.save()
+        
         # user.set_password(password)
         # user.save()
 
         return Response(status=status.HTTP_200_OK)
     
     if(request.method == 'DELETE'):
-        print("enter user delete")
+        print(1111)
+        username = request.GET.get('username', None)
+        user = User.objects.get(username=username)
+        user.delete()
         return Response(status=status.HTTP_200_OK)
 
 
