@@ -5,6 +5,7 @@
         <router-link to="/" style="text-decoration:none;">
           <img src="./images/DdakJeongE.png" style="width:250px;" />
         </router-link>
+        <SearchPage></SearchPage>
       </div>
       <Mainheader />
       <v-content>
@@ -23,28 +24,32 @@
 import router from "./router";
 import Mainheader from './components/Mainheader'
 import MainFooter from './components/MainFooter'
+import SearchPage from "./components/pages/SearchPage";
 import { mapActions } from "vuex";
 import store from "./store/modules/data.js";
+// import Firebaseservice from './services/FirebaseService'
 
 export default {
+  
   components : {
     'Mainheader': Mainheader,
     'MainFooter': MainFooter,
+    'SearchPage': SearchPage,
   },
-  // created() {
-  //   console.log("Create!!!!!!!!!!")
-  //   if (localStorage.getItem("token") !== undefined && localStorage.getItem("token") !== null) {
-  //     var result = this.getSession(localStorage.getItem('token')).then(function(value){
-  //       console.log(value)
-  //       if(value==false){
-  //         router.push('/')
-  //       }
-  //     });
-  //   }
-  //   else{
-  //     router.push("/");
-  //   }
-  // },
+  created() {
+    console.log("Create!!!!!!!!!!")
+    if (localStorage.getItem("token") !== undefined && localStorage.getItem("token") !== null) {
+      var result = this.getSession(localStorage.getItem('token')).then(function(value){
+        console.log(value)
+        if(value==false){
+          router.push('/')
+        }
+      });
+    }
+    else{
+      router.push("/");
+    }
+  },
   methods: {
     ...mapActions("data", ["getSession"]),
   }

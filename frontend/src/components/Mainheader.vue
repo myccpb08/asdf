@@ -63,6 +63,9 @@
               </v-list-item-content>
             </v-list-item>
         </template>
+        <div>
+        <chat></chat>
+        </div>
       </v-list>
       
       <template v-if="isLogin" v-slot:append>
@@ -87,6 +90,8 @@
 import router from "../router";
 import store from "../store/modules/data.js";
 import { mapState, mapActions } from "vuex";
+import Chat from "./pages/Chat"
+
 
 export default {
   data: () => ({
@@ -112,6 +117,10 @@ export default {
       },
     ]
   }),
+  components : {
+    Chat : Chat
+  },
+
   async mounted(){
     this.checkLogin()
   },
