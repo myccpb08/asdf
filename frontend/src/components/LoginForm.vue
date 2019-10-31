@@ -1,7 +1,7 @@
 <template>
     <v-form ref="form">
         <v-text-field v-model="username" label="ID"/>
-        <v-text-field v-model="password" label="PASSWORD"/>
+        <v-text-field v-model="password" label="PASSWORD" type="password" @keyup.enter="onSubmit"/>
         <v-layout justify-center pa-10>
             <v-btn large color="indigo white--text" @click="onSubmit">로그인</v-btn>
             <router-link to="/signup">
@@ -26,8 +26,8 @@ export default {
         username: "",
         password: "",
     }),
-    beforemount() {
-        if(store.state.user=='undefined' || store.state.user==null){
+    created() {
+        if(localStorage.getItem('token')!==null){
             router.push('/')
         }
     },
@@ -39,6 +39,7 @@ export default {
             };
             this.submit(params).then(data => {
                 if(data){
+                    console.log(data)
                     window.location.replace('/')
                 }else{
                     alert('ID 또는 Password가 맞지 않습니다.')

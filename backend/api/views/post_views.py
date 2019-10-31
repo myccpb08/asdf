@@ -1,19 +1,23 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
-from api.models import Board, NoticeComment, Notice, BoardComment
+from api.models import Board, NoticeComment, Notice, BoardComment, Profile
 from rest_framework.response import Response
 from api.serializers import BoardSerializer, NoticeSerializer, NoticeCommentSerializer, BoardCommentSerializer
+from django.contrib.auth.models import User
 
 # 자유게시판 글쓰기
 @api_view(['GET', 'POST'])
 def boards(request):
     if request.method == 'POST':
         params = request.data.get('params', None)
+        writer = User.objects.get(username=request.user.username)
         title = params.get('title', None)
         content = params.get('body', None)
-        Board.objects.create(title=title, content=content)
+        # when = params.get('when', None)
+        Board.objects.create(writer=writer, title=title, content=content)
         return Response(status=status.HTTP_201_CREATED)
     return Response(status=status.HTTP_200_OK)
+
 
 # 자유게시판 전체 글 불러오기
 @api_view(['GET'])
@@ -28,12 +32,18 @@ def getAllBoards(request):
 def getBoard(request):
     if request.method == 'POST':
         params = request.data.get('params', None)
-        title = params.get('title', None)
-        content = params.get('body', None)
         boardid = params.get('id', None)
         item = Board.objects.get(id=boardid)
-        item.title = title
-        item.content = content
+        
+        if params.get('clicked') != None:
+            clicked = params.get('clicked', None)
+            item.clicked = clicked
+        
+        else:
+            title = params.get('title', None)
+            content = params.get('body', None)
+            item.title = title
+            item.content = content
         item.save()
         return Response(status=status.HTTP_201_CREATED)
 
@@ -48,6 +58,7 @@ def getBoard(request):
         if request.method == 'DELETE':
             item.delete()
             return Response(status=status.HTTP_200_OK)
+            
 
 @api_view(['GET'])
 def getBoardComments(request):
@@ -66,11 +77,12 @@ def boardComments(request):
         return Response(status=status.HTTP_200_OK)
 
     if request.method == 'POST':
+        writer = User.objects.get(username=request.user.username)
         params = request.data.get('params', None)
         content = params.get('content', None)
         boardId = params.get('boardId', None)
         board = Board.objects.get(id=boardId)
-        BoardComment.objects.create(user='테스트', post=board, content=content)
+        BoardComment.objects.create(writer=writer, post=board, content=content)
         
         return Response(status=status.HTTP_201_CREATED)
 
@@ -93,10 +105,11 @@ def boardComments(request):
 @api_view(['GET', 'POST', 'DELETE'])
 def notices(request):
     if request.method == 'POST':
+        writer = request.user
         params = request.data.get('params', None)
         title = params.get('title', None)
         content = params.get('body', None)
-        Notice.objects.create(title=title, content=content)
+        Notice.objects.create(writer=writer, title=title, content=content)
         return Response(status=status.HTTP_201_CREATED)
     return Response(status=status.HTTP_200_OK)
 
@@ -121,12 +134,18 @@ def getNoticeComments(request):
 def getNotice(request):
     if request.method == 'POST':
         params = request.data.get('params', None)
-        title = params.get('title', None)
-        content = params.get('body', None)
         boardid = params.get('id', None)
         item = Notice.objects.get(id=boardid)
-        item.title = title
-        item.content = content
+        
+        if params.get('clicked') != None:
+            clicked = params.get('clicked', None)
+            item.clicked = clicked
+        
+        else:
+            title = params.get('title', None)
+            content = params.get('body', None)
+            item.title = title
+            item.content = content
         item.save()
         return Response(status=status.HTTP_201_CREATED)
     
@@ -145,6 +164,7 @@ def getNotice(request):
 # 댓글 삭제 / 작성
 @api_view(['GET', 'POST', 'DELETE', 'PUT'])
 def noticeComments(request):
+    
     if request.method == 'DELETE':
         commentId = int(request.GET.get('0'))
         item = NoticeComment.objects.get(id=commentId)
@@ -152,12 +172,12 @@ def noticeComments(request):
         return Response(status=status.HTTP_200_OK)
 
     if request.method == 'POST':
+        writer = User.objects.get(username=request.user.username)
         params = request.data.get('params', None)
         content = params.get('content', None)
         noticeId = params.get('noticeId', None)
         notice = Notice.objects.get(id=noticeId)
-        NoticeComment.objects.create(user='테스트', post=notice, content=content)
-        
+        NoticeComment.objects.create(writer=writer, post=notice, content=content)
         return Response(status=status.HTTP_201_CREATED)
 
     if request.method == 'PUT':

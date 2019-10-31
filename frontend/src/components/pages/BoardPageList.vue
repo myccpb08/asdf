@@ -19,12 +19,12 @@
         <tr v-for="post in ListSliced" pa-2>
           <td class="title">
             <router-link
-              :to="{ name: 'boardDetail', params: {boardId: post.id} }"
-            >{{ post.title }}</router-link>
+              :to="{ name: 'boardDetail', params: {boardId: post.id} }">
+              {{ post.title }}</router-link>
           </td>
-          <td class="name">글쓴이</td>
-          <td class="date">2019/10/18</td>
-          <td class="hit">1234</td>
+          <td class="name">{{post.writer}}</td>
+          <td class="date">{{post.when}}</td>
+          <td class="hit">{{post.clicked}}</td>
         </tr>
         <v-pagination v-if="maxPages > 1" v-model="page" :length="maxPages" />
       </tbody>
@@ -63,7 +63,7 @@ export default {
       this.boardList = await this.getAllBoards();
       this.boardList = this.boardList.reverse();
       // await this.setLoading()
-    }
+    },
   },
 
   computed: {

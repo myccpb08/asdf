@@ -2,11 +2,12 @@
   <v-container class="mt-3 ml-5">
     <div class="row">
       <div class="span_10">
-        <img class="imgOne" src="../../calendar_row.png" style="width:17%;">
+        <img class="imgOne" src="../../images/calendar_row.png" style="width:17%;">
       </div>
-      <div class="span_2" style="text-align:right;">
+      
+      <div v-if="this.check==true" class="span_2" style="text-align:right;">
         <router-link to="/board/write" style="text-decoration:none;">
-          <v-btn class="ma-2" tile outlined color="success">
+          <v-btn  class="ma-2" tile outlined color="success">
             <v-icon left>mdi-pencil</v-icon>작성
           </v-btn>
         </router-link>
@@ -23,15 +24,28 @@ import { mapState, mapActions } from "vuex";
 import BoardPageList from "./BoardPageList";
 
 export default {
+  data() {
+    return {
+      check: false,
+    };
+  },
+
   components: {
     BoardPageList
   },
 
   methods: {
-    ...mapActions("data", ["getAllBoards"])
+    ...mapActions("data", ["getAllBoards"]),
+
+    async logincheck(){
+      if (localStorage.getItem("token") !== undefined && localStorage.getItem("token") !== null){
+        this.check = true
+      }
+    },
   },
 
-  mounted() {
+  created() {
+    this.logincheck()
     this.boardList = this.$store.dispatch("data/getAllBoards");
   },
 
