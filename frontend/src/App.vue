@@ -7,7 +7,7 @@
         </router-link>
         <SearchPage></SearchPage>
       </div>
-      <Mainheader />
+      <Mainheader style="position:fixed; z-index:1; width:100%; position: sticky; top: 0;" />
       <v-content>
         <router-view />
       </v-content>
