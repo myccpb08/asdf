@@ -4,6 +4,7 @@ from api.views import auth_views
 from api.views import post_views
 from api.views import user_views
 from api.views import crawling_views
+from api.views import policy_views
 from django.urls import path
 from rest_framework_swagger.views import get_swagger_view
 
@@ -22,7 +23,9 @@ urlpatterns = [
     url('crawling/category/$', crawling_views.setCategories, name='set_categories'),
     url('crawling/policy/$', crawling_views.setPolicies, name='set_policies'),
     url('crawling/categoryPolicy/$', crawling_views.setCategory_Policy, name='set_category_policy'),
-    url('getService/$', crawling_views.getService, name='get_service'),
+    
+    url('getService/$', policy_views.getService, name='get_service'),
+    url('policySearch/$', policy_views.policySearch, name='policy_search'),
     
     # 자유게시판 관련 링크
     url('allBoards/$', post_views.getAllBoards, name="get_all_boards"), # 자유게시판 전체 글 로드

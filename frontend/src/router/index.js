@@ -6,6 +6,7 @@ import AdminPage from '../components/pages/AdminPage'
 import SignUpPage from '../components/pages/SignUpPage'
 import LoginPage from '../components/pages/LoginPage'
 import NoticePage from '../components/pages/NoticePage'
+import PolicySearchPage from '../components/pages/PolicySearchPage'
 import NoticeDetailPage from '../components/pages/NoticeDetailPage'
 import NoticeWritePage from '../components/pages/NoticeWritePage'
 import NoticeUpdatePage from '../components/pages/NoticeUpdatePage'
@@ -14,6 +15,8 @@ import BoardWritePage from '../components/pages/BoardWritePage'
 import BoardDetailPage from '../components/pages/BoardDetailPage'
 import BoardUpdatePage from '../components/pages/BoardUpdatePage'
 import FavoritePage from '../components/pages/FavoritePage'
+
+import Chat from '../components/pages/Chat'
 
 import DetailPolicyPage from '../components/pages/DetailPolicyPage'
 // admin
@@ -33,6 +36,7 @@ const router = new VueRouter({
     { path: '/signup', component: SignUpPage, name: 'SignUp' },
     { path: '/login', component: LoginPage, name: 'Login'},
     { path: '/notice', component: NoticePage, name: 'Notice'},
+    { path: '/policy/search/:categoryId', component: PolicySearchPage, name: 'PolicySearch'},
     { path: '/notice/write', component: NoticeWritePage, name: 'NoticeWrite'},
     { path: '/board', component: BoardPage, name: 'Board'},
     { path: '/board/write', component: BoardWritePage, name: 'BoardWrite'},
@@ -43,6 +47,7 @@ const router = new VueRouter({
     { path: '/boardupdate/:boardId', component: BoardUpdatePage, name:'boardUpdate', props:true},
     { path: '/noticeupdate/:noticeId', component: NoticeUpdatePage, name:'noticeUpdate', props:true},
     { path: '/noticeDetail/:noticeId',component: NoticeDetailPage, name: 'noticeDetail', props: true},
+    { path: '/chat',component: Chat, name: 'chat', props: true},
     { 
       path: '/admin', 
       component: AdminPage, 

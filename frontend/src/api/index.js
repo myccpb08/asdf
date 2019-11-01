@@ -165,4 +165,10 @@ export default {
       return result.data
     });
   },
+
+  policySearch(params){
+    return axios.get(`${apiUrl}/policySearch/`,{params}).then((result) => {
+      return result.data
+    });
+  }
 }

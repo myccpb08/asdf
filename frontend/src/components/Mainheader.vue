@@ -2,7 +2,7 @@
   <div>
     <v-app-bar max-width clipped-left color="warning">
       <v-app-bar-nav-icon class="white--text" @click="drawer = !drawer" />
-        <router-link to='/policy/search' style="text-decoration:none;">
+        <router-link to='/policy/search/00' style="text-decoration:none;">
           <span class="title ml-3 mr-5 white--text">복지정책검색</span>
         </router-link>
         <v-spacer/>
@@ -63,6 +63,9 @@
               </v-list-item-content>
             </v-list-item>
         </template>
+        <div>
+        <!-- <chat></chat> -->
+        </div>
       </v-list>
       
       <template v-if="isLogin" v-slot:append>
@@ -87,6 +90,8 @@
 import router from "../router";
 import store from "../store/modules/data.js";
 import { mapState, mapActions } from "vuex";
+import Chat from "./pages/Chat"
+
 
 export default {
   data: () => ({
@@ -112,6 +117,10 @@ export default {
       },
     ]
   }),
+  components : {
+    Chat : Chat
+  },
+
   async mounted(){
     this.checkLogin()
   },

@@ -1,31 +1,30 @@
 <template>
   <v-form ref="form">
-    <v-text-field v-model="title" label="정책명" />
-    <v-layout justify-center pa-10>
-      <v-btn large color="indigo white--text" @click="onSubmit">Search</v-btn>
-    </v-layout>
+    <v-text-field v-model="title" label="정책명" 
+    :append-icon="icons.search" 
+    @click:append="onSubmit" />
   </v-form>
 </template>
 
 <script>
-export default {
-  props: { 
-      submit: 
-      { type: Function, 
-      default: () => {} 
-      } 
-    },
+import { mdiMagnify } from "@mdi/js";
 
-  data: () => ({ 
-      title: "" 
-      }),
+export default {
+  props: {
+    submit: { type: Function, default: () => {} }
+  },
+
+  data: () => ({
+    title: "",
+    icons: { search: mdiMagnify }
+  }),
 
   methods: {
     onSubmit: function() {
       const params = {
-           title: this.title 
-           };
-      this.submit(params);
+        title: this.title
+      };
+      this.submit(params); /* data.searchPolicy : 시행 */
     }
   }
 };

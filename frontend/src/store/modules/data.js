@@ -41,10 +41,10 @@ const actions = {
     });
   },
   async logoutUser({ commit }) {
-      await api.logoutUser(state.user.username).then(() => {
-          localStorage.removeItem("token");
-          commit('setUser', null);
-      })
+    await api.logoutUser(state.user.username).then(() => {
+      localStorage.removeItem("token");
+      commit('setUser', null);
+    })
   },
   async checkPassword({commit}, params) {
     console.log("enter checkPassword!!")
@@ -77,6 +77,34 @@ const actions = {
       return result.data.is_authenticated;
     });
   },
+
+  async chatUser({ commit }, param){
+    {
+      console.log("chatUser")
+      return await api.getSession(param).then((result) => {
+        if (result.data.is_authenticated) {
+          // commit('setUser', {
+          //   username: result.data.username,
+          //   name: result.data.name,
+          //   favorite: result.data.favorite,
+          //   token: result.data.token,
+          //   is_staff: result.data.is_staff,
+          // })
+          const info = {
+            email : result.data.username,
+            name : result.data.name
+          }
+          return info
+        } else {
+          localStorage.removeItem('token');
+          commit('setUser', null);
+        }
+        return result.data.is_authenticated;
+      });
+    }
+  },
+
+
   async getAllUsers() {
     return await api.getAllUsers()
   },
@@ -164,6 +192,10 @@ const actions = {
 
   async getService({commit}, params){
     return await api.getService(params)
+  },
+  
+  async policySearch({commit}, params){
+    return await api.policySearch(params)
   }
 }
 
