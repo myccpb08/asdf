@@ -3,83 +3,99 @@
         <div class="policy_search_main">
             <div class="policy_search_header">
                 <div class="policy_search_head">분류별 검색</div>
-                <div class="policy_search_head" style="cursor:pointer;" @click="goPage(0)">전체 보기</div>
+                <div class="policy_search_head" style="cursor:pointer;" @click="goPage('00')">전체 보기</div>
             </div>
             <div class="policy_search_content">
                 <div class="policy_search_A">
                     <div class="policy_search_A_header">생애주기</div>
                     <div class="policy_search_A_content">
-                        <div @click="goPage(1)">
+                        <div @click="goPage('01')" class="a_div policy">
                             <img   src="../../images/Pregnant_woman.png" style="width:100%;">
-                            aaa
+                            <p>임신·출산</p>
                         </div>
                         
-                        <div @click="goPage(2)">
+                        <div @click="goPage('02')" class="a_div policy">
                             <img   src="../../images/Infants.png" style="width:100%;">
+                            <p>영유아</p>
                         </div>
                         
-                        <div @click="goPage(3)">
+                        <div @click="goPage('03')" class="a_div policy">
                             <img   src="../../images/Teenager.png" style="width:100%;">
+                            <p>아동·청소년</p>
                         </div>
-                        <div @click="goPage(4)">
+                        <div @click="goPage('04')" class="a_div policy">
                             <img   src="../../images/Youth.png" style="width:100%;">
-                            aaa
+                            <p>청년</p>
                         </div>
-                        <div @click="goPage(5)">
+                        <div @click="goPage('05')" class="a_div policy">
                             <img   src="../../images/Middle_age.png" style="width:100%;">
+                            <p>중장년</p>
                         </div>
-                        <div @click="goPage(6)">
+                        <div @click="goPage('06')" class="a_div policy">
                             <img   src="../../images/Old_age.png" style="width:100%;">
+                            <p>노년</p>
                         </div>
                     </div>
                 </div>
                 <div class="policy_search_B">
                     <div class="policy_search_B_header">가구상황</div>
                     <div class="policy_search_B_content">
-                        <div @click="goPage(7)">
+                        <div @click="goPage('07')" class="b_div policy">
                             <img   src="../../images/Disabled.png" style="width:100%;">
+                            <p>장애인</p>
                         </div>
-                        <div @click="goPage(8)">
+                        <div @click="goPage('08')" class="b_div policy">
                             <img   src="../../images/Single_parent.png" style="width:100%;">
+                            <p>한부모</p>
                         </div>
-                        <div @click="goPage(9)">
+                        <div @click="goPage('09')" class="b_div policy">
                             <img   src="../../images/Multicultural.png" style="width:100%;">
+                            <p>다문화(새터민)</p>
                         </div>
-                        <div @click="goPage(10)">
+                        <div @click="goPage('10')" class="b_div policy">
                             <img   src="../../images/Low_income.png" style="width:100%;">
+                            <p>저소득층</p>
                         </div>
                     </div>
                 </div>
                 <div class="policy_search_C">
                     <div class="policy_search_C_header">관심주제</div>
                     <div class="policy_search_C_content">
-                        <div @click="goPage(11)">
+                        <div @click="goPage('11')" class="c_div policy">
                             <img   src="../../images/Education.png" style="width:100%;">
+                            <p>교육</p>
                         </div>
-                        <div @click="goPage(12)">
+                        <div @click="goPage('12')" class="c_div policy">
                             <img   src="../../images/Employ.png" style="width:100%;">
+                            <p>고용</p>
                         </div>
-                        <div @click="goPage(13)">
+                        <div @click="goPage('13')" class="c_div policy">
                             <img   src="../../images/Dwelling.png" style="width:100%;">
+                            <p>주거</p>
                         </div>
-                        <div @click="goPage(14)">
+                        <div @click="goPage('14')" class="c_div policy">
                             <img   src="../../images/Health.png" style="width:100%;">
+                            <p>건강</p>
                         </div>
-                        <div @click="goPage(15)">
+                        <div @click="goPage('15')" class="c_div policy">
                             <img   src="../../images/Population_Finance.png" style="width:100%;">
+                            <p>서민금융</p>
                         </div>
-                        <div @click="goPage(16)">
+                        <div @click="goPage('16')" class="c_div policy">
                             <img   src="../../images/Culture.png" style="width:100%;">
+                            <p>문화</p>
                         </div>
                         </div>
                 </div>
             </div>
         </div>
 
-        <div v-for="policy in ListSliced">
+        <div v-for="policy in ListSliced" :key=policy.id>
             <div class="policy_contents" @click="goService(policy.id)">
-                <h4>{{policy.title}}</h4><br>
-                <a>{{policy.brief}}</a>
+                <a style="text-decorations:none;color:black">
+                    <h4>{{policy.title}}</h4><br>
+                    {{policy.brief}}
+                </a>
             </div>
         </div>
 
@@ -94,32 +110,55 @@ import router from "../../router"
 export default {
     data() {
         return {
-            categoryId: this.$route.params.categoryId,
+            categoryId: "00",
             policies : [],
             listPerPage: 10,
-            page: 1
+            page: 1,
         };
     },
 
   async mounted() {
-    this.getPolicys(this.categoryId).then(result => {
+    this.getPolicys().then(result => {
       this.policies = result;
       console.log(this.policies)
     });
   },
   methods: {
-    async getPolicys(categoryId) {
-        return this.$store.dispatch(
-            "data/policySearch", categoryId
+    async getPolicys() {
+        console.log(this.categoryId)
+        return await this.$store.dispatch(
+            "data/policySearch", this.categoryId
         );
     },
 
     goPage(n){
-        if(n <10){
-            router.push("/policy/search/0"+n);
-        }else{
-            router.push("/policy/search/"+n);
+        
+        var policy = document.querySelectorAll(".policy");
+        var tempInt = parseInt(this.categoryId)-1;
+        if(tempInt>=0){
+            policy[tempInt].classList.remove("colorPink");
+            policy[tempInt].classList.remove("colorYellow");
+            policy[tempInt].classList.remove("colorBlue");
         }
+
+        tempInt = parseInt(n)-1;
+        if(tempInt <6 && tempInt >= 0){
+            policy[tempInt].classList.add("colorPink");
+        }else if(tempInt <9){
+            policy[tempInt].classList.add("colorYellow");
+        }else if(tempInt < 16){
+            policy[tempInt].classList.add("colorBlue");
+        }
+        this.categoryId = n;
+        this.getPolicys(n).then(response => {
+                console.log(response)
+                this.policies = response
+            })
+        // if(n <10){
+        //     router.push("/policy/search/0"+n);
+        // }else{
+        //     router.push("/policy/search/"+n);
+        // }
     },
 
     goService(n){
@@ -227,19 +266,43 @@ export default {
 }
 
 .policy_search_A_content div, .policy_search_C_content div{
-    width: 33% !important;
+    width: 32% !important;
+    height:48%;
     cursor:pointer;
+    border-radius:7px;
+}
+
+.policy_search_A_content div:hover {
+    background-color:#F16F85;
+}
+.policy_search_B_content div:hover {
+    background-color:#FFB60F;
+}
+.policy_search_C_content div:hover {
+    background-color:#57A5FF;
+}
+
+.colorPink{
+    background-color:#F16F85;
+}
+
+.colorYellow{
+    background-color:#FFB60F;
+}
+
+.colorBlue{
+    background-color:#57A5FF;
 }
 
 .policy_search_B_content div{
-    width: 45% !important;
+    width: 49% !important;
+    height:48%;
     cursor:pointer;
+    border-radius:7px;
 }
-.policy_search_A_content img, .policy_search_C_content img{
-    width: 90% !important;
-}
-.policy_search_B_content img{
-    width: 100%  !important;
+
+.policy_search_A_content img, .policy_search_B_content img, .policy_search_C_content img{
+    width: 80% !important;
 }
 
 .policy_contents{
