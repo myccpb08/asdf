@@ -6,16 +6,27 @@ class ProfileSerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField()
     username = serializers.SerializerMethodField('get_username')
     password = serializers.SerializerMethodField('get_password')
+    is_staff = serializers.SerializerMethodField('get_is_staff')
+    when = serializers.SerializerMethodField('get_when')
 
     class Meta:
         model = Profile
-        fields = ('id', 'username', 'password', 'name', 'favorite', 'when')
+        fields = ('id', 'username', 'password', 'name', 'favorite', 'when', 'is_staff')
         
     def get_username(self, obj):
         return obj.user.username
 
     def get_password(self, obj):
         return obj.user.password
+
+    def get_is_staff(self, obj):
+        if obj.user.is_staff:
+            return "staff"
+        return "user"
+    
+    def get_when(self, obj):
+        print(obj.when)
+        return str(obj.when)[0:10]
 
 class SessionSerializer(serializers.ModelSerializer):
     username = serializers.SerializerMethodField('get_user')

@@ -1,7 +1,7 @@
 <template>
   <v-container class="fill-height" fluid>
     <v-layout wrap>
-      <v-flex xs12 sm6>
+      <v-flex xs12 sm8>
         <v-card>
           <v-card-title>
             {{ title }}
@@ -29,15 +29,24 @@
                   </v-card-title>
 
                   <v-card-text>
-                    <v-container>
-                      <v-row>
-                        <v-col cols="12" sm="6" md="4">
-                          <v-text-field v-model="editedItem.username" label="User name"></v-text-field>
-                        </v-col>
-                        <v-col cols="12" sm="6" md="4">
-                          <v-text-field v-model="editedItem.favorite" label="Favorite"></v-text-field>
-                        </v-col>
-                      </v-row>
+                    <v-container fluid>
+                      <!-- <v-layout >
+                        <v-flex xs12>
+                          <v-text-field v-model="editedItem.username" color="info" label="User name"></v-text-field>
+                        </v-flex>
+                      </v-layout>-->
+
+                      <v-layout>
+                        <v-flex xs12>
+                          <v-select
+                            :items="gradeItem"
+                            v-model="editedItem.is_staff"
+                            :label="editedItem.is_staff"
+                            single-line
+                            item-value="text"
+                          ></v-select>
+                        </v-flex>
+                      </v-layout>
                     </v-container>
                   </v-card-text>
 
@@ -50,7 +59,12 @@
               </v-dialog>
             </template>
             <template v-slot:item.action="{ item }">
-              <v-icon small class="mr-2" color="blue darken-2" @click="editItem(item)">{{ "mdi-pencil" }}</v-icon>
+              <v-icon
+                small
+                class="mr-2"
+                color="blue darken-2"
+                @click="editItem(item)"
+              >{{ "mdi-pencil" }}</v-icon>
               <v-icon small color="red" @click="deleteItem(item)">{{ "mdi-delete" }}</v-icon>
             </template>
           </v-data-table>
@@ -77,12 +91,14 @@ export default {
     headers: [
       {
         text: "Id",
-        // align: "left",
-        // sortable: false,
+        align: "left",
+        sortable: false,
         value: "id"
       },
-      { text: "User Name", value: "username" },
-      { text: "Favorite", value: "favorite" },
+      { text: "User Name", align: "left", value: "username" },
+      { text: "Favorite", align: "left", sortable: false, value: "favorite" },
+      { text: "Grade", value: "is_staff" },
+      { text: "Created", value: "when" },
       { text: "Actions", value: "action", sortable: false }
     ],
     editedIndex: -1,
@@ -90,9 +106,11 @@ export default {
       {
         id: "",
         username: "",
-        favorite: ""
+        favorite: "",
+        is_staff: ""
       }
     ],
+    gradeItem: [{ text: "staff" }, { text: "user" }],
     dataLIst: []
   }),
   computed: {},
@@ -104,19 +122,28 @@ export default {
     getUsers() {
       this.getAllUsers().then(response => {
         this.dataLIst = response;
+        console.log(this.dataLIst);
       });
     },
     editItem(item) {
-      console.log(item);
       this.editedIndex = this.dataLIst.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
 
     deleteItem(item, idx) {
-      const index = this.dataLIst.indexOf(item);
-      confirm("Are you sure you want to delete this item?") &&
-        this.dataLIst.splice(index, 1);
+      if (item.is_staff != "staff") {
+        const params = {
+          username: item.username
+        };
+        this.$store.dispatch("data/deleteUser", params).then(response => {
+          const index = this.dataLIst.indexOf(item);
+          confirm("Are you sure you want to delete this item?") &&
+            this.dataLIst.splice(index, 1);
+        });
+      } else {
+        alert("관리자는 삭제할 수 없습니다.");
+      }
       // TODO: 위 라인과 &&로 연결해서 유저 삭제
     },
     close() {
@@ -124,12 +151,26 @@ export default {
     },
 
     save() {
-      if (this.editedIndex > -1) {
-        Object.assign(this.dataLIst[this.editedIndex], this.editedItem);
+      if (this.editedItem.username != "admin") {
+        const params = {
+          username: this.editedItem.username,
+          name: this.editedItem.name,
+          password: this.editedItem.password,
+          favoriteValue: this.editedItem.favorite,
+          grade: this.editedItem.is_staff
+        };
+        this.$store.dispatch("data/editUser", params).then(response => {
+          if (this.editedIndex > -1) {
+            Object.assign(this.dataLIst[this.editedIndex], this.editedItem);
+          } else {
+            this.dataLIst.push(this.editedItem);
+          }
+          this.close();
+        });
       } else {
-        this.dataLIst.push(this.editedItem);
+        alert("해당 계정의 권한은 변경할 수 없습니다.");
+        this.close();
       }
-      this.close();
     }
   }
 };
