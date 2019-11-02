@@ -91,7 +91,7 @@ class Policy(models.Model):
     supply_way = models.TextField(null=True, blank=True)
     procedure = models.TextField(null=True, blank=True)
     site =models.TextField(null=True, blank=True)
-
+    pick_users = models.ManyToManyField(User, related_name='pick_policies', null=True, blank=True)
 
 class Category(models.Model):
     id = models.CharField(max_length=5, primary_key=True)

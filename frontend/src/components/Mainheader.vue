@@ -17,7 +17,7 @@
         </router-link>
         <v-spacer/>
 
-        <router-link to='/favorite' style="text-decoration:none;">
+        <router-link to='/pick' style="text-decoration:none;">
           <span class="title ml-3 mr-5 white--text">딱정함</span>
         </router-link>
         <v-spacer/>

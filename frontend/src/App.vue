@@ -96,5 +96,8 @@ export default {
   left: 2%;
   transform: translateY(-50%);
 }
+.v-toolbar__content{
+      height: 45px !important;
+}
 
 </style>

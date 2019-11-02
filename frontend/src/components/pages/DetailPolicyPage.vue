@@ -15,8 +15,8 @@
         </div>
       </v-flex>
       <v-flex class="">
-        <button style="color:	#FFD700;" @click="is_myPolicy = !is_myPolicy">
-          <i v-if="is_myPolicy" class="fas fa-star fa-lg"></i>
+        <button style="color:	#FFD700;" @click="toggleMyPick">
+          <i v-if="is_myPick" class="fas fa-star fa-lg"></i>
           <i v-else class="far fa-star fa-lg"></i>
         </button>
       </v-flex>
@@ -177,13 +177,14 @@
 
 <script>
 import store from "../../store/modules/data.js";
+import router from "../../router/index.js";
 
 export default {
   data() {
     return {
       policyId: this.$route.params.policyId,
       policy : {},
-      is_myPolicy: true,
+      is_myPick: true,
     };
   },
 
@@ -192,6 +193,7 @@ export default {
       this.policy = result;
       console.log(this.policy);
     });
+    console.log(this.$store.state.data.user)
   },
   methods: {
     async getService(policyId) {
@@ -199,7 +201,17 @@ export default {
         "data/getService",
         policyId
       );
-    }
+    },
+    toggleMyPick(){
+      this.is_myPick = !this.is_myPick;
+      console.log(this.$store.state.data.user.username);
+      console.log(this.policyId)
+      const params = {
+        id: this.policyId,
+        user: this.$store.state.data.user.username
+      };
+      this.$store.dispatch("data/editServicePick", params)
+    },
   }
 };
 </script>

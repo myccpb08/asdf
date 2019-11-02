@@ -180,7 +180,8 @@ def session(request):
                 'when': None,
                 'token': None,
                 'is_authenticated': False,
-                'is_staff':  False
+                'is_staff':  False,
+                'pick_policies': False
             }
 
         else:
@@ -193,7 +194,8 @@ def session(request):
                     'when': Profile.objects.get(user=user).when,
                     'token': token,
                     'is_authenticated': True,
-                    'is_staff': Profile.objects.get(user=user).user.is_staff
+                    'is_staff': Profile.objects.get(user=user).user.is_staff,
+                    'pick_policies': Profile.objects.get(user=user).user.pick_policies.all()
                 }
             else:
                 result = {
@@ -203,7 +205,8 @@ def session(request):
                     'when': None,
                     'token': None,
                     'is_authenticated': False,
-                    'is_staff':  False
+                    'is_staff':  False,
+                    'pick_policies': False
                 }
         serializer = SessionSerializer(result)
         return Response(data=serializer.data, status=status.HTTP_200_OK)

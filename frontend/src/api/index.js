@@ -170,5 +170,10 @@ export default {
     return axios.get(`${apiUrl}/policySearch/`,{params}).then((result) => {
       return result.data
     });
+  },
+
+  editServicePick(params){
+    console.log(params)
+    return axios.put(`${apiUrl}/getService/`, { params})
   }
 }

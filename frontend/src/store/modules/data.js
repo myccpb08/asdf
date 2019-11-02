@@ -69,6 +69,7 @@ const actions = {
           favorite: result.data.favorite,
           token: result.data.token,
           is_staff: result.data.is_staff,
+          pick_policies: result.data.pick_policies,
         })
       } else {
         localStorage.removeItem('token');
@@ -196,6 +197,10 @@ const actions = {
   
   async policySearch({commit}, params){
     return await api.policySearch(params)
+  },
+
+  async editServicePick({commit}, params) {
+    return await api.editServicePick(params)
   }
 }
 
