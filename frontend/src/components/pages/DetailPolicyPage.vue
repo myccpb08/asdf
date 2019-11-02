@@ -1,5 +1,7 @@
 <template>
   <v-container class="pa-2" fluid grid-list-md style="width:80%;">
+    <v-layout>
+      <v-flex>
         <div class="line">
             <div class="detail">
                 <div class="detailrow_icon">
@@ -10,8 +12,16 @@
                     <h4>다양한 복지서비스 정보를 안내해드립니다.</h4>
                 </div>
             </div>
-            
         </div>
+      </v-flex>
+      <v-flex class="">
+        <button style="color:	#FFD700;" @click="is_myPolicy = !is_myPolicy">
+          <i v-if="is_myPolicy" class="fas fa-star fa-lg"></i>
+          <i v-else class="far fa-star fa-lg"></i>
+        </button>
+      </v-flex>
+    </v-layout>
+
         <div class="line">
             <div style="border-top: 2px solid orange; height: 10px; width: 100%;"></div>
             <div style="border: 1px solid rgb(187, 187, 187); min-height:110px;" class="textrow">
@@ -172,7 +182,8 @@ export default {
   data() {
     return {
       policyId: this.$route.params.policyId,
-      policy : {}
+      policy : {},
+      is_myPolicy: true,
     };
   },
 
