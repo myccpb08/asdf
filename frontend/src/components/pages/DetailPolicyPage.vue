@@ -184,16 +184,21 @@ export default {
     return {
       policyId: this.$route.params.policyId,
       policy : {},
-      is_myPick: true,
+      is_myPick: false,
     };
   },
 
   async mounted() {
-    this.getService(this.policyId).then(result => {
+    await this.getService(this.policyId).then(result => {
       this.policy = result;
       console.log(this.policy);
     });
     console.log(this.$store.state.data.user)
+    let vm = this
+    // pick 정책중에 현재 정책이 포함되어 있으면 true
+    this.is_myPick = this.$store.state.data.user.pick_policies.some(function(pick_policy){
+      return pick_policy == vm.policyId
+    })
   },
   methods: {
     async getService(policyId) {
@@ -204,13 +209,13 @@ export default {
     },
     toggleMyPick(){
       this.is_myPick = !this.is_myPick;
-      console.log(this.$store.state.data.user.username);
-      console.log(this.policyId)
       const params = {
         id: this.policyId,
         user: this.$store.state.data.user.username
       };
-      this.$store.dispatch("data/editServicePick", params)
+      this.$store.dispatch("data/editServicePick", params).then((result) => {
+        this.$store.dispatch("data/editSession", localStorage.getItem('token'))
+    });
     },
   }
 };

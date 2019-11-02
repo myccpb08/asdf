@@ -30,8 +30,12 @@ class ProfileSerializer(serializers.ModelSerializer):
         return str(obj.when)[0:10]
 
     def get_pick_policies(self, obj):
-        print(obj.user.pick_policies.all())
-        return str(obj.user.pick_policies.all())
+        pick_policies = list()
+        for item in obj.user.pick_policies.all():
+            pick_policies.append(item.id)
+        print('profile')
+        print(pick_policies)
+        return pick_policies
 
 class SessionSerializer(serializers.ModelSerializer):
     username = serializers.SerializerMethodField('get_user')
@@ -234,7 +238,7 @@ class PolicySerializer(serializers.ModelSerializer):
                 temp += "\n        "
             else:
                 temp += str[i]
-        print(temp)
+        # print(temp)
         return temp
 
 class CategoryPolicySerializer(serializers.ModelSerializer):

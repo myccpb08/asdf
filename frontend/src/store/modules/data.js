@@ -78,7 +78,21 @@ const actions = {
       return result.data.is_authenticated;
     });
   },
-
+  async editSession({commit}, param) {
+    return await api.editSession(param).then((result) => {
+      if (result.data.is_authenticated) {
+        commit('setUser', {
+          username: result.data.username,
+          name: result.data.name,
+          favorite: result.data.favorite,
+          token: result.data.token,
+          is_staff: result.data.is_staff,
+          pick_policies: result.data.pick_policies,
+        })
+      }
+    })
+  },
+  
   async chatUser({ commit }, param){
     {
       console.log("chatUser")
@@ -201,7 +215,13 @@ const actions = {
 
   async editServicePick({commit}, params) {
     return await api.editServicePick(params)
-  }
+  },
+  async getPickPolicies({commit}, params) {
+    return await api.getPickPolicies(params)
+  },
+  async editPickPolicies({commit}, params) {
+    return await api.editPickPolicies(params)
+  },
 }
 
 // mutations

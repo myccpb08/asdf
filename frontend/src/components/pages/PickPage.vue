@@ -16,14 +16,10 @@
             <div class="pickcontents">
               찜 해놓은 정책
               <hr />
-              <div class="pickcontent">
-                <h4>청년내일채움공제</h4>
-              </div>
-              <div class="pickcontent">
-                <h4>청년내일채움공제</h4>
-              </div>
-              <div class="pickcontent">
-                <h4>청년내일채움공제</h4>
+              <div v-for="pick in pick_policies" :key="pick.id">
+                <div class="pickcontent" style="cursor: pointer;" @click="editPickStatus(pick.id)">
+                  <h4>{{ pick.title }}</h4>
+                </div>
               </div>
               <div class="pickcontent">
                 <h4>청년내일채움공제</h4>
@@ -82,8 +78,35 @@ import router from "../../router";
 export default {
   name: "PickPage",
   data: () => ({
-    
-  })
+    user: null,
+    pick_policies: null
+  }),
+  created() {
+    this.user = this.$store.state.data.user;
+    this.getPickPolicies(this.$store.state.data.user.pick_policies);
+  },
+  mounted() {},
+  methods: {
+    // 으아.. Pick, Doing, Finish 각각 다만들어야됨
+    getPickPolicies(params) {
+      this.$store.dispatch("data/getPickPolicies", params).then(result => {
+        this.pick_policies = result;
+      });
+    },
+    goPolicyDetail(id) {
+      router.push("/detailPolicy/"+id)
+    },
+    editPickStatus(id){
+      // params에 진행중인지 / 결과나온정책인지 추가
+
+      const params ={
+        user: this.$store.state.data.user.username,
+        policyId: id
+      }
+      console.log(params)
+      this.$store.dispatch("data/editPickPolicies", params)
+    }
+  }
 };
 </script>
 <style>

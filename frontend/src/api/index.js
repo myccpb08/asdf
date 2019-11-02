@@ -44,6 +44,11 @@ export default {
           token: param
       })
   },
+  async editSession(param){
+    return await axios.put(`${apiUrl}/auth/session/`, {
+      token: param
+  })
+  },
   getAllUsers() {
     return axios.get(`${apiUrl}/auth/allUsers/`).then((result) => {
       return result.data
@@ -174,6 +179,21 @@ export default {
 
   editServicePick(params){
     console.log(params)
-    return axios.put(`${apiUrl}/getService/`, { params})
+    return axios.put(`${apiUrl}/getService/`, { params })
+  },
+
+  getPickPolicies(params){
+    console.log(params)
+    return axios.get(`${apiUrl}/pickPolicies/`, { params }).then((result) => {
+      return result.data
+    });
+  },
+
+  editPickPolicies(params){
+    return axios.put(`${apiUrl}/pickPolicies/`, { params })
+  },
+
+  deletePickPolicies(params){
+    return axios.delete(`${apiUrl}/pickPolicies/`, { params })
   }
 }

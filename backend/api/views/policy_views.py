@@ -17,17 +17,16 @@ def getService(request):
     elif request.method == 'PUT':
         params = request.data.get('params')
         policy_id = params.get('id')
-        print(request.user)
-        print(User.objects.all())
+        # print(request.user)
+        # print(User.objects.all())
         user = User.objects.get(username=request.user)
-        print(user.pick_policies)
         policy = Policy.objects.get(id=policy_id)
-        # user.pick_policies.add(policy)
-        print(user.pick_policies)
+        print(user.pick_policies.all())
         if policy in user.pick_policies.all():
-            user.pick_policies.remove()
+            user.pick_policies.remove(policy)
         else:
             user.pick_policies.add(policy)
+        print(user.pick_policies.all())
         return Response(status=status.HTTP_200_OK)
 
 
