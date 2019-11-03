@@ -17,6 +17,7 @@ urlpatterns = [
     url('auth/logout/$', user_views.logout, name='logout'),
     url('auth/session/$', user_views.session, name='session'),
     url('auth/user/$', user_views.user, name="user"),
+    url('auth/latest/$', user_views.latestView, name="latestView"),
 
 
     # 서비스 & 카탈로그

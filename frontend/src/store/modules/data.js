@@ -29,6 +29,7 @@ const actions = {
           username: resp.username,
           name: resp.name,
           favorite: resp.favorite,
+          lastestView: resp.lastestView,
           token: resp.token,
           is_staff: resp.is_staff,
         }
@@ -45,6 +46,10 @@ const actions = {
       localStorage.removeItem("token");
       commit('setUser', null);
     })
+  },
+  async updateLatestView({commit}, params){
+    console.log("enter updateLatestView!!")
+    return await api.updateLatestView(params)
   },
   async checkPassword({commit}, params) {
     console.log("enter checkPassword!!")
@@ -67,6 +72,7 @@ const actions = {
           username: result.data.username,
           name: result.data.name,
           favorite: result.data.favorite,
+          lastestView: result.data.lastestView,
           token: result.data.token,
           is_staff: result.data.is_staff,
         })

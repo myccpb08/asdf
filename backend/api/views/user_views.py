@@ -18,6 +18,7 @@ def signup(request):
         name = user.get('name', None)
         favorite = user.get('favoriteValue', None)
         when = None
+        lastestView = None
         print(user)
         if favorite=="":
             favorite=None
@@ -66,6 +67,7 @@ def login(request):
                     'name': profile.name,
                     'favorite': profile.favorite,
                     'when': profile.when,
+                    'lastestView': profile.lastestView,
                     'token': newToken,
                     'is_staff': profile.user.is_staff,
                     'is_authenticated': True
@@ -80,6 +82,7 @@ def login(request):
                     'name': profile.name,
                     'favorite': profile.favorite,
                     'when': profile.when,
+                    'lastestView': profile.lastestView,
                     'token': token,
                     'is_staff': profile.user.is_staff,
                     'is_authenticated': True
@@ -91,6 +94,7 @@ def login(request):
                 'name': None,
                 'favorite': None,
                 'when': None,
+                'lastestView': None,
                 'token': None,
                 'is_staff': False,
                 'is_authenticated': False
@@ -113,11 +117,14 @@ def chkPass(request):
             result=False
         return Response(data=result, status=status.HTTP_200_OK)
 
-@api_view(['PUT', 'DELETE'])
+@api_view(['PUT', 'DELETE', 'POST', 'GET'])
 def user(request):
     print("enter user!!")
     if(request.method == 'GET'):
         print("enter user get!!")
+        return Response(status=status.HTTP_200_OK)
+
+    if(request.method == 'POST'):
         return Response(status=status.HTTP_200_OK)
     
     if(request.method == 'PUT'):
@@ -166,6 +173,21 @@ def logout(request):
         auth.logout(request)
     return Response(status=status.HTTP_200_OK)
 
+@api_view(['PUT'])
+def latestView(request):
+    if request.method == 'PUT':
+        print("enter latestView!!")
+        username = request.data.get('username', None)
+        path = request.data.get('path', None)
+        print(username + "  : " + path)
+       
+        user = User.objects.get(username=username)
+        Profile.objects.filter(user=user).update(
+            lastestView = path
+        )
+        
+    return Response(status=status.HTTP_200_OK)
+
 @api_view(['POST'])
 def session(request):
     if request.method == "POST":
@@ -178,6 +200,7 @@ def session(request):
                 'name': None,
                 'favorite': None,
                 'when': None,
+                'lastestView': None,
                 'token': None,
                 'is_authenticated': False,
                 'is_staff':  False
@@ -191,6 +214,7 @@ def session(request):
                     'name': Profile.objects.get(user=user).name,
                     'favorite': Profile.objects.get(user=user).favorite,
                     'when': Profile.objects.get(user=user).when,
+                    'lastestView': Profile.objects.get(user=user).lastestView,
                     'token': token,
                     'is_authenticated': True,
                     'is_staff': Profile.objects.get(user=user).user.is_staff
@@ -201,6 +225,7 @@ def session(request):
                     'name': None,
                     'favorite': None,
                     'when': None,
+                    'lastestView': None,
                     'token': None,
                     'is_authenticated': False,
                     'is_staff':  False

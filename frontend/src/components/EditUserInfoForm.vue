@@ -14,7 +14,8 @@
             @input="setSelected"
         ></v-select>
         <v-layout justify-center pa-10>
-            <v-btn large color="orange white--text" @click="onSubmit">수정</v-btn>
+            <v-btn large color="green white--text" @click="onSubmit">수정</v-btn>
+            <v-btn large color="red white--text" @click="deleteUser">회원탈퇴</v-btn>
         </v-layout>
     </v-form>
 </template>

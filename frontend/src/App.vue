@@ -38,23 +38,12 @@ export default {
   },
   created() {
     console.log("Create!!!!!!!!!!")
+    // localStorage.removeItem('token')
     if (localStorage.getItem("token") !== undefined && localStorage.getItem("token") !== null) {
       var result = this.getSession(localStorage.getItem('token')).then(function(value){
         console.log(value)
-        if(value==false){
-          router.push('/')
-        }
-      });
-    }
-    else{
-      router.push("/");
-    }
-  },
-  created() {
-    console.log("Create!!!!!!!!!!")
-    if (localStorage.getItem("token") !== undefined && localStorage.getItem("token") !== null) {
-      var result = this.getSession(localStorage.getItem('token')).then(function(value){
-        console.log(value)
+        console.log(store.state.user)
+        console.log(store.state.user.username)
         if(value==false){
           router.push('/')
         }

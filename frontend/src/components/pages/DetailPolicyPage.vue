@@ -10,7 +10,7 @@
                     <h4>다양한 복지서비스 정보를 안내해드립니다.</h4>
                 </div>
             </div>
-            
+            ``
         </div>
         <div class="line">
             <div style="border-top: 2px solid orange; height: 10px; width: 100%;"></div>
@@ -167,6 +167,7 @@
 
 <script>
 import store from "../../store/modules/data.js";
+import { mapState, mapActions } from "vuex";
 
 export default {
   data() {
@@ -180,15 +181,26 @@ export default {
     this.getService(this.policyId).then(result => {
       this.policy = result;
       console.log(this.policy);
-    });
+      this.saveLatestView()
+    })
   },
   methods: {
     async getService(policyId) {
       return this.$store.dispatch(
         "data/getService",
         policyId
-      );
-    }
+      )
+    },
+    saveLatestView(){
+      console.log("hihihi : " + this.policy.id)
+      const params = {
+        username : this.$store.state.data.user.username,
+        path : this.policy.id
+      }
+      console.log(params)
+      this.updateLatestView(params)
+    },
+    ...mapActions("data", ["updateLatestView"])
   }
 };
 </script>

@@ -105,7 +105,7 @@ export default {
     this.getPolicys(this.categoryId).then(result => {
       this.policies = result;
       console.log(this.policies)
-    });
+    })
   },
   methods: {
     async getPolicys(categoryId) {
@@ -113,7 +113,6 @@ export default {
             "data/policySearch", categoryId
         );
     },
-
     goPage(n){
         if(n <10){
             router.push("/policy/search/0"+n);

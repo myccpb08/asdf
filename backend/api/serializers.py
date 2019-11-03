@@ -8,10 +8,11 @@ class ProfileSerializer(serializers.ModelSerializer):
     password = serializers.SerializerMethodField('get_password')
     is_staff = serializers.SerializerMethodField('get_is_staff')
     when = serializers.SerializerMethodField('get_when')
+    lastestView = serializers.SerializerMethodField('get_lastestView')
 
     class Meta:
         model = Profile
-        fields = ('id', 'username', 'password', 'name', 'favorite', 'when', 'is_staff')
+        fields = ('id', 'username', 'password', 'name', 'favorite', 'when', 'lastestView', 'is_staff')
         
     def get_username(self, obj):
         return obj.user.username
@@ -28,18 +29,23 @@ class ProfileSerializer(serializers.ModelSerializer):
         print(obj.when)
         return str(obj.when)[0:10]
 
+    def get_lastestView(self, obj):
+        print(obj.lastestView)
+        return str(obj.lastestView)
+
 class SessionSerializer(serializers.ModelSerializer):
     username = serializers.SerializerMethodField('get_user')
     name = serializers.SerializerMethodField('get_name')
     favorite = serializers.SerializerMethodField('get_favorite')
     when = serializers.SerializerMethodField('get_when')
+    lastestView = serializers.SerializerMethodField('get_lastestView')
     token = serializers.SerializerMethodField('get_token')
     is_authenticated = serializers.SerializerMethodField('get_is_authenticated')
     is_staff = serializers.SerializerMethodField('get_is_staff')
 
     class Meta:
         model = Profile
-        fields = ('username', 'name', 'favorite', 'when', 'token', 'is_authenticated', 'is_staff')
+        fields = ('username', 'name', 'favorite', 'when', 'lastestView', 'token', 'is_authenticated', 'is_staff')
 
     def get_user(self, obj):
         return str(obj['username'])
@@ -51,6 +57,10 @@ class SessionSerializer(serializers.ModelSerializer):
     def get_when(self, obj):
         print(obj['when'])
         return str(obj['when'])
+
+    def get_lastestView(self, obj):
+        print(obj['lastestView'])
+        return str(obj['lastestView'])
 
     def get_favorite(self, obj):
         inputFavorite = str(obj['favorite'])
@@ -106,7 +116,6 @@ class SessionSerializer(serializers.ModelSerializer):
     def get_is_staff(self, obj):
         print(obj['is_staff'])
         return obj['is_staff']
-
 
 
 class UserSerializer(serializers.ModelSerializer):

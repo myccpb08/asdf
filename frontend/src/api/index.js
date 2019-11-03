@@ -39,6 +39,13 @@ export default {
         username: param
     })
   },
+  async updateLatestView(params) {
+    console.log("ENTER!!!!")
+    await axios.put(`${apiUrl}/auth/latest/`, {
+      username: params.username,
+      path: params.path
+    }) 
+  },
   async getSession(param) {
       return await axios.post(`${apiUrl}/auth/session/`, {
           token: param
