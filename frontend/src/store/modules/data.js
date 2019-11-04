@@ -3,7 +3,7 @@ import api from '../../api'
 // initial state
 const state = {
   // shape: [{ id, title, genres, viewCnt, rating }]
-  userInfo: "",
+  userInfo: null,
   userPage: true, 
   postList: [],
   user: null,
@@ -55,6 +55,17 @@ const actions = {
     console.log("enter checkPassword!!")
     console.log(params)
     return await api.checkPassword(params)
+  },
+  async getUserInfo({commit}) {
+    var username = state.user.username
+    const userInfo = await api.getUserInfo(username)
+    commit('setUserInfo', userInfo)
+  },
+  async getLatestView({commit}) {
+    console.log("getLatestView")
+    return await api.getLatestView().then((result) => {
+      return result
+    })
   },
   async editUser({commit}, params) {
     console.log(params)

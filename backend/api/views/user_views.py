@@ -173,20 +173,42 @@ def logout(request):
         auth.logout(request)
     return Response(status=status.HTTP_200_OK)
 
-@api_view(['PUT'])
+@api_view(['PUT', 'GET'])
 def latestView(request):
+    if request.method == 'GET':
+        print("enter latestView Get!!")
+        user = request.user
+        print(user)
+        profile = Profile.objects.get(user=user)
+        lv = profile.lastestView.split(' ')
+        lv.pop(0)
+        print(lv)
+        result = {
+            'latestViewList': lv
+        }
+        print(result)
+        return Response(data=result, status=status.HTTP_200_OK)
     if request.method == 'PUT':
         print("enter latestView!!")
         username = request.data.get('username', None)
         path = request.data.get('path', None)
-        print(username + "  : " + path)
+        if path != None:
+            path = ' ' + path
        
-        user = User.objects.get(username=username)
+        user = request.user
+        profile = Profile.objects.get(user=user)
+        temp = profile.lastestView.split(" ")
+        temp.pop(0)
+        lv = ''
+        if len(temp) > 5:
+            temp.pop(0)
+        for t in temp:
+            lv += ' ' + t
         Profile.objects.filter(user=user).update(
-            lastestView = path
+            lastestView = lv + path
         )
+        return Response(status=status.HTTP_200_OK)
         
-    return Response(status=status.HTTP_200_OK)
 
 @api_view(['POST'])
 def session(request):

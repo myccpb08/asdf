@@ -20,6 +20,28 @@ export default {
       inputPass: params.inputPass
     })
   },
+  async getUserInfo(param) {
+    return axios.get(`${apiUrl}/auth/user/`, {
+        params: {
+            username: param
+        }
+    }).then((result) => {
+      // if(result.data[0].subscription == null || result.data[0].subscription == 'undefined'){
+      //   result.data[0].subscription = '미구독'
+      // }else{
+      //   result.data[0].subscription = String(result.data[0].subscription)
+      // }
+      console.log("!!!!!!!!!!!!!!!!!!!")
+      console.log(result)
+      return result
+    })
+  },
+  async getLatestView() {
+    console.log("enter getLatestView index!")
+    return await axios.get(`${apiUrl}/auth/latest`, {
+
+    })
+  },
   async editUser(params) {
     await axios.put(`${apiUrl}/auth/user/`, {
       username: params.username,
