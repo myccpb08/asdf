@@ -1,7 +1,7 @@
 <template>
     <v-form class="editForm" ref="form">
         <v-text-field v-model="name" :label='this.$store.state.data.user.name' type="name" :rules="[nameRules.required]"/>
-        <v-text-field v-model="password" label="PASSWORD" type="password" :rules="[passwordRules.required, passwordRules.min]"/>
+        <!-- <v-text-field v-model="password" label="PASSWORD" type="password" :rules="[passwordRules.required, passwordRules.min]"/> -->
         <v-select
             v-model="this.userSeleted"
             :items="items"
@@ -64,13 +64,10 @@ export default {
     }),
     methods: {
         onSubmit() {
-            console.log("name : " + this.name)
-            console.log("password : " + this.password)
-            console.log(this.selected)
             const params = {
                 username: this.$store.state.data.user.username,
                 name: this.name,
-                password: this.password,
+                // password: this.password,
                 favoriteValue: this.selected,
             }
             this.submit(params)
@@ -90,6 +87,13 @@ export default {
         },
         setSelected(value) {
             this.selected = value
+        },
+        async deleteUser() {
+            if(confirm("탈퇴하겠습니까?")){
+                await this.$store.dispatch('data/deleteUser')
+                localStorage.removeItem('token')
+                window.location.replace("/")
+            }
         }
     }
 }

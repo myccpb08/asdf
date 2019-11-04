@@ -87,9 +87,9 @@ const actions = {
     console.log(params)
     return await api.editUser(params)
   },
-  async deleteUser({commit}, params) {
-    console.log(params)
-    return await api.deleteUser(params)
+  async deleteUser({commit}) {
+    console.log("Del User in data")
+    return await api.deleteUser()
   },
   async getSession({ commit }, param) {
     console.log("getSession")

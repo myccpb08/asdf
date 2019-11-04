@@ -70,15 +70,14 @@ export default {
     await axios.put(`${apiUrl}/auth/user/`, {
       username: params.username,
       name: params.name,
-      password: params.password,
+      // password: params.password,
       favorite: params.favoriteValue,
       grade: params.grade
     })
   },
-  async deleteUser(params) {
-    console.log(params)
-    return axios.delete(`${apiUrl}/auth/user/`, 
-    {params})
+  async deleteUser() {
+    console.log("del user in index.js")
+    return axios.delete(`${apiUrl}/auth/user/`)
   },
   async logoutUser(param) {
     return await axios.post(`${apiUrl}/auth/logout/`, {

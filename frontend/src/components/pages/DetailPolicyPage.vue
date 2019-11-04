@@ -232,13 +232,10 @@
 
 <script>
 import store from "../../store/modules/data.js";
-<<<<<<< HEAD
 import { mapState, mapActions } from "vuex";
-=======
 import router from "../../router/index.js";
 import { mdiChatProcessing, mdiChat, mdiDelete } from "@mdi/js";
 import PolicyChat from './PolicyChat'
->>>>>>> f883762b3032be87128d725c9d4e990ed7c003e9
 
 export default {
   data() {
@@ -258,17 +255,14 @@ export default {
   async mounted() {
     await this.getService(this.policyId).then(result => {
       this.policy = result;
-<<<<<<< HEAD
       console.log(this.policy);
       this.saveLatestView()
-=======
     });
     console.log(this.$store.state.data.user)
     let vm = this
     // pick 정책중에 현재 정책이 포함되어 있으면 true
     this.is_myPick = this.$store.state.data.user.pick_policies.some(function(pick_policy){
       return pick_policy == vm.policyId
->>>>>>> f883762b3032be87128d725c9d4e990ed7c003e9
     })
   },
   methods: {
@@ -284,7 +278,6 @@ export default {
       return this.$store.dispatch(
         "data/getService",
         policyId
-<<<<<<< HEAD
       )
     },
     saveLatestView(){
@@ -296,10 +289,7 @@ export default {
       console.log(params)
       this.updateLatestView(params)
     },
-    ...mapActions("data", ["updateLatestView"])
-=======
-      );
-    },
+    ...mapActions("data", ["updateLatestView"]),
     toggleMyPick(){
       this.is_myPick = !this.is_myPick;
       const params = {
@@ -310,7 +300,6 @@ export default {
         this.$store.dispatch("data/editSession", localStorage.getItem('token'))
     });
     },
->>>>>>> f883762b3032be87128d725c9d4e990ed7c003e9
   }
 };
 </script>
