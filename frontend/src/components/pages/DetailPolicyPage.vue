@@ -15,6 +15,11 @@
                     <v-btn text @click ="this.test">
                       <v-icon large color="warning">{{icons.chat}}</v-icon>
                     </v-btn>
+
+                    <button style="color:	#FFD700;" @click="toggleMyPick">
+                      <i v-if="is_myPick" class="fas fa-star fa-lg"></i>
+                      <i v-else class="far fa-star fa-lg"></i>
+                  </button>
                 </div>
             </div>
             <!-- 채팅 drawer 시작 -->
@@ -23,7 +28,6 @@
                 <v-list-item-avatar>
                   <v-img src="https://randomuser.me/api/portraits/men/78.jpg"></v-img>
                 </v-list-item-avatar>
-
                 <v-list-item-content>
                   <v-list-item-title>{{policy.title}}</v-list-item-title>
                 </v-list-item-content>
@@ -228,6 +232,7 @@
 
 <script>
 import store from "../../store/modules/data.js";
+import router from "../../router/index.js";
 import { mdiChatProcessing, mdiChat, mdiDelete } from "@mdi/js";
 import PolicyChat from './PolicyChat'
 
@@ -235,7 +240,8 @@ export default {
   data() {
     return {
       policyId: this.$route.params.policyId,
-      policy: {},
+      policy : {},
+      is_myPick: false,
       icons: { chat: mdiChat },
       drawer: null
     };
@@ -246,9 +252,15 @@ export default {
   },
 
   async mounted() {
-    this.getService(this.policyId).then(result => {
+    await this.getService(this.policyId).then(result => {
       this.policy = result;
     });
+    console.log(this.$store.state.data.user)
+    let vm = this
+    // pick 정책중에 현재 정책이 포함되어 있으면 true
+    this.is_myPick = this.$store.state.data.user.pick_policies.some(function(pick_policy){
+      return pick_policy == vm.policyId
+    })
   },
   methods: {
 
@@ -260,8 +272,21 @@ export default {
     },
 
     async getService(policyId) {
-      return this.$store.dispatch("data/getService", policyId);
-    }
+      return this.$store.dispatch(
+        "data/getService",
+        policyId
+      );
+    },
+    toggleMyPick(){
+      this.is_myPick = !this.is_myPick;
+      const params = {
+        id: this.policyId,
+        user: this.$store.state.data.user.username
+      };
+      this.$store.dispatch("data/editServicePick", params).then((result) => {
+        this.$store.dispatch("data/editSession", localStorage.getItem('token'))
+    });
+    },
   }
 };
 </script>

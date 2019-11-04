@@ -5,6 +5,7 @@ from api.views import post_views
 from api.views import user_views
 from api.views import crawling_views
 from api.views import policy_views
+from api.views import pick_views
 from django.urls import path
 from rest_framework_swagger.views import get_swagger_view
 
@@ -48,6 +49,8 @@ urlpatterns = [
     url('getNoticeComments/$', post_views.getNoticeComments, name='get_notice_comments'), # 공지사항 댓글 가져오기
     url('noticeComment/$', post_views.noticeComments, name='notice_comment'),
 
+    # 딱정함
+    url('pickPolicies/$', pick_views.pickPolicies, name='pick_policies'),
     # swagger
     path('docs/', get_swagger_view(title='API Docs')),
 ]

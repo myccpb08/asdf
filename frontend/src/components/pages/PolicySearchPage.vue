@@ -168,11 +168,6 @@ export default {
                 console.log(response)
                 this.policies = response
             })
-        // if(n <10){
-        //     router.push("/policy/search/0"+n);
-        // }else{
-        //     router.push("/policy/search/"+n);
-        // }
     },
 
     goService(n){

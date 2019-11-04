@@ -68,6 +68,11 @@ export default {
           token: param
       })
   },
+  async editSession(param){
+    return await axios.put(`${apiUrl}/auth/session/`, {
+      token: param
+  })
+  },
   getAllUsers() {
     return axios.get(`${apiUrl}/auth/allUsers/`).then((result) => {
       return result.data
@@ -200,5 +205,24 @@ export default {
     return axios.get(`${apiUrl}/policySearchByWord/`,{params}).then((result) => {
       return result.data
     });
+  },
+
+  editServicePick(params){
+    console.log(params)
+    return axios.put(`${apiUrl}/getService/`, { params })
+  },
+
+  getPickPolicies(){
+    return axios.get(`${apiUrl}/pickPolicies/`).then((result) => {
+      return result.data  
+    });
+  },
+
+  editPickPolicies(params){
+    return axios.put(`${apiUrl}/pickPolicies/`, { params })
+  },
+
+  deletePickPolicies(params){
+    return axios.delete(`${apiUrl}/pickPolicies/`, { params })
   }
 }
