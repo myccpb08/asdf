@@ -232,6 +232,7 @@
 
 <script>
 import store from "../../store/modules/data.js";
+import { mapState, mapActions } from "vuex";
 import router from "../../router/index.js";
 import { mdiChatProcessing, mdiChat, mdiDelete } from "@mdi/js";
 import PolicyChat from './PolicyChat'
@@ -254,6 +255,8 @@ export default {
   async mounted() {
     await this.getService(this.policyId).then(result => {
       this.policy = result;
+      console.log(this.policy);
+      this.saveLatestView()
     });
     console.log(this.$store.state.data.user)
     let vm = this
@@ -275,8 +278,18 @@ export default {
       return this.$store.dispatch(
         "data/getService",
         policyId
-      );
+      )
     },
+    saveLatestView(){
+      console.log("hihihi : " + this.policy.id)
+      const params = {
+        username : this.$store.state.data.user.username,
+        path : this.policy.id
+      }
+      console.log(params)
+      this.updateLatestView(params)
+    },
+    ...mapActions("data", ["updateLatestView"]),
     toggleMyPick(){
       this.is_myPick = !this.is_myPick;
       const params = {

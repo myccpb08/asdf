@@ -9,7 +9,7 @@
         <SearchPage></SearchPage>
         <v-spacer></v-spacer>
 
-        <div style="padding-bottom:100px; padding-right:5px;" v-for="(choice, i) in choices">
+        <!-- <div style="padding-bottom:100px; padding-right:5px;" v-for="(choice, i) in choices">
           <v-btn
             text
             v-if="(i===1 && isLogin===true) || (i===2 && isLogin===false)"
@@ -24,9 +24,26 @@
             {{ choice.text }}
           </v-btn>
 
-          <v-btn text v-if="(i===0 && isLogin===true)" @click="logout">
+          <v-btn text :v-if="(i===0 && isLogin===true)" @click="logout">
             <v-icon>{{ choice.icon }}</v-icon>
             {{ choice.text }}
+          </v-btn>
+        </div> -->
+        <div style="padding-bottom:100px; padding-right:5px;">
+          <v-btn text v-if="isLogin===false" @click="goTo('Login')">
+            <v-icon>{{ choices[2].icon }}</v-icon>
+            {{isLogin}}
+            {{ choices[2].text }}
+          </v-btn>
+          <v-btn text v-if="isLogin===true && this.$store.state.user.is_staff===true" @click="logout">
+            <v-icon>{{ choices[1].icon }}</v-icon>
+            {{isLogin}}
+            {{ choices[1].text }}
+          </v-btn>
+          <v-btn text v-if="isLogin===false" @click="logout">
+            <v-icon>{{ choices[0].icon }}</v-icon>
+            {{isLogin}}
+            {{ choices[0].text }}
           </v-btn>
         </div>
       </div>
@@ -58,7 +75,7 @@ export default {
     token: "",
     choices: [
       {
-        icon: "mdi-movie",
+        icon: "mdi-door",
         text: "로그아웃",
         path: "policy-search"
       },
@@ -82,22 +99,20 @@ export default {
   },
 
   created() {
-    this.checkLogin();
-    console.log("Create!!!!!!!!!!");
-    if (
-      localStorage.getItem("token") !== undefined &&
-      localStorage.getItem("token") !== null
-    ) {
-      this.login = true;
-      var result = this.getSession(localStorage.getItem("token")).then(function(
-        value
-      ) {
-        console.log(value);
-        if (value == false) {
-          router.push("/");
+    console.log("Create!!!!!!!!!!")
+    // localStorage.removeItem('token')
+    if (localStorage.getItem("token") !== undefined && localStorage.getItem("token") !== null) {
+      console.log("Token is not null")
+      var result = this.getSession(localStorage.getItem('token')).then(function(value){
+        console.log(value)
+        console.log(store.state.user)
+        console.log(store.state.user.username)
+        if(value==false){
+          router.push('/')
         }
       });
-    } else {
+    }
+    else{
       router.push("/");
     }
   },

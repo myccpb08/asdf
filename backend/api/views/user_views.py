@@ -19,6 +19,7 @@ def signup(request):
         name = user.get('name', None)
         favorite = user.get('favoriteValue', None)
         when = None
+        lastestView = None
         print(user)
         if favorite=="":
             favorite=None
@@ -67,6 +68,7 @@ def login(request):
                     'name': profile.name,
                     'favorite': profile.favorite,
                     'when': profile.when,
+                    'lastestView': profile.lastestView,
                     'token': newToken,
                     'is_staff': profile.user.is_staff,
                     'is_authenticated': True
@@ -81,6 +83,7 @@ def login(request):
                     'name': profile.name,
                     'favorite': profile.favorite,
                     'when': profile.when,
+                    'lastestView': profile.lastestView,
                     'token': token,
                     'is_staff': profile.user.is_staff,
                     'is_authenticated': True
@@ -92,6 +95,7 @@ def login(request):
                 'name': None,
                 'favorite': None,
                 'when': None,
+                'lastestView': None,
                 'token': None,
                 'is_staff': False,
                 'is_authenticated': False
@@ -114,18 +118,21 @@ def chkPass(request):
             result=False
         return Response(data=result, status=status.HTTP_200_OK)
 
-@api_view(['PUT', 'DELETE'])
+@api_view(['PUT', 'DELETE', 'POST', 'GET'])
 def user(request):
     print("enter user!!")
     if(request.method == 'GET'):
         print("enter user get!!")
+        return Response(status=status.HTTP_200_OK)
+
+    if(request.method == 'POST'):
         return Response(status=status.HTTP_200_OK)
     
     if(request.method == 'PUT'):
         print("enter user edit")
         username = request.data.get('username', None)
         name = request.data.get('name', None)
-        password = request.data.get('password', None)
+        # password = request.data.get('password', None)
         favorite = request.data.get('favorite', None)
         grade = request.data.get('grade', None)
         
@@ -133,10 +140,7 @@ def user(request):
             is_staff = True
         else: is_staff = False
         
-        print(username + " " + name + " " + password + " ")
         user = User.objects.get(username=username)
-        print(user.is_staff)
-        print("PPPPP : " + password)
         Profile.objects.filter(user=user).update(
             name=name, favorite=favorite, 
         )
@@ -149,9 +153,9 @@ def user(request):
         return Response(status=status.HTTP_200_OK)
     
     if(request.method == 'DELETE'):
-        print(1111)
-        username = request.GET.get('username', None)
-        user = User.objects.get(username=username)
+        print("Del User!!!!")
+        user = request.user
+        print(user)
         user.delete()
         return Response(status=status.HTTP_200_OK)
 
@@ -167,6 +171,48 @@ def logout(request):
         auth.logout(request)
     return Response(status=status.HTTP_200_OK)
 
+@api_view(['PUT', 'GET'])
+def latestView(request):
+    if request.method == 'GET':
+        print("enter latestView Get!!")
+        user = request.user
+        profile = Profile.objects.get(user=user)
+        lv = profile.lastestView.split(' ')
+        print(lv)
+        lv.pop(0)
+        print(lv)
+        result = {
+            'latestViewList': lv
+        }
+        print(result)
+        return Response(data=result, status=status.HTTP_200_OK)
+    if request.method == 'PUT':
+        print("enter latestView!!")
+        username = request.data.get('username', None)
+        path = request.data.get('path', None)
+        if path != None:
+            path = ' ' + path
+       
+        user = request.user
+        profile = Profile.objects.get(user=user)
+        temp = profile.lastestView.split(" ")
+        temp.pop(0)
+        print(temp)
+        print("temp length : ")
+        print(len(temp))
+        lv = ''
+        if len(temp) > 5:
+            print("temp is overflow")
+            temp.pop(0)
+        for t in temp:
+            lv += ' ' + t
+        print(lv+path)
+        Profile.objects.filter(user=user).update(
+            lastestView = lv + path
+        )
+        return Response(status=status.HTTP_200_OK)
+        
+
 @api_view(['POST', 'PUT'])
 def session(request):
     if request.method == "POST":
@@ -179,6 +225,7 @@ def session(request):
                 'name': None,
                 'favorite': None,
                 'when': None,
+                'lastestView': None,
                 'token': None,
                 'is_authenticated': False,
                 'is_staff':  False,
@@ -193,6 +240,7 @@ def session(request):
                     'name': Profile.objects.get(user=user).name,
                     'favorite': Profile.objects.get(user=user).favorite,
                     'when': Profile.objects.get(user=user).when,
+                    'lastestView': Profile.objects.get(user=user).lastestView,
                     'token': token,
                     'is_authenticated': True,
                     'is_staff': Profile.objects.get(user=user).user.is_staff,
@@ -204,6 +252,7 @@ def session(request):
                     'name': None,
                     'favorite': None,
                     'when': None,
+                    'lastestView': None,
                     'token': None,
                     'is_authenticated': False,
                     'is_staff':  False,
@@ -222,6 +271,7 @@ def session(request):
                     'name': Profile.objects.get(user=user).name,
                     'favorite': Profile.objects.get(user=user).favorite,
                     'when': Profile.objects.get(user=user).when,
+                    'lastestView': Profile.objects.get(user=user).lastestView,
                     'token': token,
                     'is_authenticated': True,
                     'is_staff': Profile.objects.get(user=user).user.is_staff,

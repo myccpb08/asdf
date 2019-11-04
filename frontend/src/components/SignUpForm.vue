@@ -83,7 +83,7 @@ export default {
             };
             this.submit(params);
 
-            router.push("/user/list")
+            router.push("/login")
         },
         setSelected(value) {
             this.selected = value

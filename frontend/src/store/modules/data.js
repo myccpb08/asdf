@@ -3,7 +3,7 @@ import api from '../../api'
 // initial state
 const state = {
   // shape: [{ id, title, genres, viewCnt, rating }]
-  userInfo: "",
+  userInfo: null,
   userPage: true, 
   postList: [],
   user: null,
@@ -45,6 +45,7 @@ const actions = {
           username: resp.username,
           name: resp.name,
           favorite: resp.favorite,
+          lastestView: resp.lastestView,
           token: resp.token,
           is_staff: resp.is_staff,
         }
@@ -62,18 +63,33 @@ const actions = {
       commit('setUser', null);
     })
   },
+  async updateLatestView({commit}, params){
+    console.log("enter updateLatestView!!")
+    return await api.updateLatestView(params)
+  },
   async checkPassword({commit}, params) {
     console.log("enter checkPassword!!")
     console.log(params)
     return await api.checkPassword(params)
   },
+  async getUserInfo({commit}) {
+    var username = state.user.username
+    const userInfo = await api.getUserInfo(username)
+    commit('setUserInfo', userInfo)
+  },
+  async getLatestView({commit}) {
+    console.log("getLatestView")
+    return await api.getLatestView().then((result) => {
+      return result
+    })
+  },
   async editUser({commit}, params) {
     console.log(params)
     return await api.editUser(params)
   },
-  async deleteUser({commit}, params) {
-    console.log(params)
-    return await api.deleteUser(params)
+  async deleteUser({commit}) {
+    console.log("Del User in data")
+    return await api.deleteUser()
   },
   async getSession({ commit }, param) {
     console.log("getSession")
@@ -83,6 +99,7 @@ const actions = {
           username: result.data.username,
           name: result.data.name,
           favorite: result.data.favorite,
+          lastestView: result.data.lastestView,
           token: result.data.token,
           is_staff: result.data.is_staff,
           pick_policies: result.data.pick_policies,

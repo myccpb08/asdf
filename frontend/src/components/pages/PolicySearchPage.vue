@@ -119,16 +119,10 @@ export default {
     },
 
   async mounted() {
-      if(this.$route.params.searchWord == undefined){
-        this.getPolicys().then(result => {
-            this.policies = result;
-        });
-      }else{
-        this.getPolicysSearchByWord().then(result => {
-            this.policies = result;
-        });
-      }
-    
+    this.getPolicys(this.categoryId).then(result => {
+      this.policies = result;
+      console.log(this.policies)
+    })
   },
   methods: {
     async getPolicys() {
@@ -141,7 +135,6 @@ export default {
             "data/policySearchByWord", this.$route.params.searchWord
         );
     },
-
     goPage(n){
         
         var policy = document.querySelectorAll(".policy");

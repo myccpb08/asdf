@@ -9,6 +9,8 @@ class Profile(models.Model):
     name = models.CharField(max_length=20)
     favorite = models.CharField(max_length=500, default="00")
     when = models.DateTimeField(default=date.today())
+    lastestView = models.CharField(max_length=10, default="")
+
     mychat = models.CharField(max_length=400, default=',')
 
     # @property
