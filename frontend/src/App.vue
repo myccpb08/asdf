@@ -32,7 +32,7 @@
       </div>
       <Mainheader />
       <v-content>
-        <router-view />
+        <router-view :key="$route.fullPath"/>
       </v-content>
     </template>
 
