@@ -1,8 +1,13 @@
 <template>
   <div>
     <v-card class="mx-auto">
-      <br />
-      <img src="../../images/glass_row.png" class="header_left" style="margin-left:2%" />
+      <v-toolbar color="lightgray" white>
+        <v-app-bar-nav-icon></v-app-bar-nav-icon>
+        <v-toolbar-title>
+          <img src="../../images/glass_row.png" class="header_left" />
+        </v-toolbar-title>
+        <v-spacer></v-spacer>
+      </v-toolbar>
       <br />
       <v-container fluid grid-list-md pa-2>
         <v-layout>
@@ -11,17 +16,10 @@
             <div class="favoritecontents">
               찜 해놓은 정책
               <hr />
-              <div class="favoritecontent">
-                <h4>청년내일채움공제</h4>
-              </div>
-              <div class="favoritecontent">
-                <h4>청년내일채움공제</h4>
-              </div>
-              <div class="favoritecontent">
-                <h4>청년내일채움공제</h4>
-              </div>
-              <div class="favoritecontent">
-                <h4>청년내일채움공제</h4>
+              <div class="favoritecontent" v-for="pick in pick_policies" :key="pick.id">
+                <div class="font-nanum" style="cursor: pointer;" @click="editPickStatus(pick.id)">
+                  <h4 >{{ pick.title }}</h4>
+                </div>
               </div>
             </div>
             <div class="favoritecontents">
@@ -91,28 +89,49 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 import router from "../../router";
 import { mdiDelete, mdiChat } from "@mdi/js";
 import PolicyChat from "./PolicyChat";
-
 export default {
+  name: "PickPage",
   data: () => ({
     mychat: [],
     icons: { del: mdiDelete, chat: mdiChat },
-    drawer: null
+    drawer: null,
+    user: null,
+    pick_policies: null
   }),
-
   components: {
     PolicyChat
   },
-
+  created() {
+    this.getPickPolicies();
+  },
   mounted() {
     this.getChatList().then(result => {
       this.mychat = result.data;
     });
   },
-
   methods: {
+    // 으아.. Pick, Doing, Finish 각각 다만들어야됨
+    getPickPolicies() {
+      this.$store.dispatch("data/getPickPolicies").then(result => {
+        console.log(result)
+        this.pick_policies = result;
+      });
+    },
+
+    editPickStatus(id){
+      // params에 진행중인지 / 결과나온정책인지 추가
+
+      const params ={
+        user: this.$store.state.data.user.username,
+        policyId: id
+      }
+      console.log(params)
+      this.$store.dispatch("data/editPickPolicies", params)
+    },
     async delChat(chatid) {
       return this.$store
         .dispatch("data/delChatList", chatid)
@@ -127,10 +146,20 @@ export default {
     goService(n) {
       router.push("/detailPolicy/" + n);
     }
-  }
+  },
+  watch: {
+    getRefresh() {
+      if (this.user){
+        this.getPickPolicies(this.$store.state.data.user.pick_policies);
+      }
+    }
+  },
 };
 </script>
 <style>
+.font-nanum {
+   font-family: 'Nanum Gothic', sans-serif; 
+}
 .header_left {
   width: 17%;
 }
@@ -156,7 +185,8 @@ export default {
   border-radius: 7px;
   width: 40%;
   border: 1px solid gray;
-  text-align: center;
+  text-align: left;
   display: inline-flex;
 }
+
 </style>

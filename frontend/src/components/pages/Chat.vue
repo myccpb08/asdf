@@ -85,6 +85,7 @@
 </template>
 
 <script>
+// import * as firebase from "firebase/app";
 import firebase from "firebase/app";
 import firebaseservice from './firebaseservice'
 import "firebase/database";

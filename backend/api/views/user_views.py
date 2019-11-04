@@ -167,7 +167,7 @@ def logout(request):
         auth.logout(request)
     return Response(status=status.HTTP_200_OK)
 
-@api_view(['POST'])
+@api_view(['POST', 'PUT'])
 def session(request):
     if request.method == "POST":
         print("enter in session function")
@@ -181,7 +181,8 @@ def session(request):
                 'when': None,
                 'token': None,
                 'is_authenticated': False,
-                'is_staff':  False
+                'is_staff':  False,
+                'pick_policies': None
             }
 
         else:
@@ -194,7 +195,8 @@ def session(request):
                     'when': Profile.objects.get(user=user).when,
                     'token': token,
                     'is_authenticated': True,
-                    'is_staff': Profile.objects.get(user=user).user.is_staff
+                    'is_staff': Profile.objects.get(user=user).user.is_staff,
+                    'pick_policies': Profile.objects.get(user=user).user.pick_policies.all()
                 }
             else:
                 result = {
@@ -204,7 +206,26 @@ def session(request):
                     'when': None,
                     'token': None,
                     'is_authenticated': False,
-                    'is_staff':  False
+                    'is_staff':  False,
+                    'pick_policies': False
+                }
+        serializer = SessionSerializer(result)
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+    elif request.method == "PUT":
+        print('session put')
+        token = request.data.get('token', None)
+        username = request.session.get(str(token), None)
+        user = User.objects.get(username=username)
+        if user.is_authenticated and token == str(Token.objects.get(user=user)):
+                result = {
+                    'username': username,
+                    'name': Profile.objects.get(user=user).name,
+                    'favorite': Profile.objects.get(user=user).favorite,
+                    'when': Profile.objects.get(user=user).when,
+                    'token': token,
+                    'is_authenticated': True,
+                    'is_staff': Profile.objects.get(user=user).user.is_staff,
+                    'pick_policies': Profile.objects.get(user=user).user.pick_policies.all()
                 }
         serializer = SessionSerializer(result)
         return Response(data=serializer.data, status=status.HTTP_200_OK)

@@ -9,26 +9,26 @@
         <div class="policy_search_A">
           <div class="policy_search_A_header">생애주기</div>
           <div class="policy_search_A_content">
-            <div @click="goPage(1)">
+            <div @click="goPage('01')">
               <img src="../../images/Pregnant_woman.png" style="width:100%;" />
               aaa
             </div>
 
-            <div @click="goPage(2)">
+            <div @click="goPage('02')">
               <img src="../../images/Infants.png" style="width:100%;" />
             </div>
 
-            <div @click="goPage(3)">
+            <div @click="goPage('03')">
               <img src="../../images/Teenager.png" style="width:100%;" />
             </div>
-            <div @click="goPage(4)">
+            <div @click="goPage('04')">
               <img src="../../images/Youth.png" style="width:100%;" />
               aaa
             </div>
-            <div @click="goPage(5)">
+            <div @click="goPage('05')">
               <img src="../../images/Middle_age.png" style="width:100%;" />
             </div>
-            <div @click="goPage(6)">
+            <div @click="goPage('06')">
               <img src="../../images/Old_age.png" style="width:100%;" />
             </div>
           </div>
@@ -36,16 +36,16 @@
         <div class="policy_search_B">
           <div class="policy_search_B_header">가구상황</div>
           <div class="policy_search_B_content">
-            <div @click="goPage(7)">
+            <div @click="goPage('07')">
               <img src="../../images/Disabled.png" style="width:100%;" />
             </div>
-            <div @click="goPage(8)">
+            <div @click="goPage('08')">
               <img src="../../images/Single_parent.png" style="width:100%;" />
             </div>
-            <div @click="goPage(9)">
+            <div @click="goPage('09')">
               <img src="../../images/Multicultural.png" style="width:100%;" />
             </div>
-            <div @click="goPage(10)">
+            <div @click="goPage('10')">
               <img src="../../images/Low_income.png" style="width:100%;" />
             </div>
           </div>
@@ -53,22 +53,22 @@
         <div class="policy_search_C">
           <div class="policy_search_C_header">관심주제</div>
           <div class="policy_search_C_content">
-            <div @click="goPage(11)">
+            <div @click="goPage('11')">
               <img src="../../images/Education.png" style="width:100%;" />
             </div>
-            <div @click="goPage(12)">
+            <div @click="goPage('12')">
               <img src="../../images/Employ.png" style="width:100%;" />
             </div>
-            <div @click="goPage(13)">
+            <div @click="goPage('13')">
               <img src="../../images/Dwelling.png" style="width:100%;" />
             </div>
-            <div @click="goPage(14)">
+            <div @click="goPage('14')">
               <img src="../../images/Health.png" style="width:100%;" />
             </div>
-            <div @click="goPage(15)">
+            <div @click="goPage('15')">
               <img src="../../images/Population_Finance.png" style="width:100%;" />
             </div>
-            <div @click="goPage(16)">
+            <div @click="goPage('16')">
               <img src="../../images/Culture.png" style="width:100%;" />
             </div>
           </div>
@@ -76,7 +76,7 @@
       </div>
     </div>
 
-    <div v-for="policy in ListSliced">
+    <div v-for="policy in ListSliced" :key=policy.id>
       <div class="policy_contents">
         <h4>{{policy.title}}</h4>
         <h5 style="text-align:right">조회수: {{policy.clicked}}</h5><br>
@@ -108,15 +108,18 @@ export default {
   },
   methods: {
     async getPolicys(categoryId) {
-      return this.$store.dispatch("data/policySearch", categoryId);
+        console.log(categoryId)
+        return await this.$store.dispatch(
+            "data/policySearch", categoryId
+        );
     },
 
-    goPage(n) {
-      if (n < 10) {
-        router.push("/policy/search/0" + n);
-      } else {
-        router.push("/policy/search/" + n);
-      }
+    goPage(n){
+        this.getPolicys(n).then(response => {
+                console.log(response)
+                this.policies = response
+            })
+        return this.$store.dispatch("data/policySearch", categoryId);
     },
 
     goService(n) {
