@@ -26,3 +26,12 @@ def policySearch(request):
         service = Category_Policy.objects.filter(category=categoryId)
         serializer = CategoryPolicySerializer(service, many=True)
     return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def policyClicked(request):
+    policyid = int(request.GET.get('0'))
+    item = Policy.objects.get(id=policyid)
+    item.clicked += 1
+    item.save()
+    return Response(status=status.HTTP_200_OK)

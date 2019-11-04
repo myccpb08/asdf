@@ -1,179 +1,180 @@
 <template>
   <v-container class="pa-2" fluid grid-list-md style="width:80%;">
-        <div class="line">
-            <div class="detail">
-                <div class="detailrow_icon">
-                    <!-- <img src="../../images/All_view.png" alt="" style="width: 70%;">-->
-                </div>
-                <div class="detailrow">
-                    <h2>한 눈에 보는 복지정보</h2>
-                    <h4>다양한 복지서비스 정보를 안내해드립니다.</h4>
-                </div>
-            </div>
-            
+    <div class="line">
+      <div class="detail">
+        <div class="detailrow_icon">
+          <!-- <img src="../../images/All_view.png" alt="" style="width: 70%;">-->
         </div>
-        <div class="line">
-            <div style="border-top: 2px solid orange; height: 10px; width: 100%;"></div>
-            <div style="border: 1px solid rgb(187, 187, 187); min-height:110px;" class="textrow">
-                <strong class="head" style="text-align: center;">
-                    <h2>{{policy.title}}</h2>
-                </strong>
-                <strong class="head" style="text-align: center;">
-                    <h4>{{policy.brief}}</h4>
-                </strong>
-            </div>
-        </div>
-        <div class="line">
-            <div class="detail">
-                <div class="detailrow_icon">
-                  <!--  <img src="../../images/Eligibility.png" alt="" style="width: 70%;">-->
-                </div>
-                <div class="detailrow">
-                    <h2>누가 받을 수 있나요?</h2>
-                </div>
-            </div>
-            
-        </div>
-        <!-- <div style="border-top: 2px solid orange; height: 10px; width: 100%;"></div> -->
-        <div class="line">
-            <div class="textrow" style="border: 1px solid rgb(187, 187, 187); min-height:110px; border-top: 2px solid orange; border-bottom: 2px solid orange;">
-                <strong class="head">
-                    <strong class="head">
-                        <h2>지원대상</h2>
-                    </strong>
-                </strong>
-                <strong class="head">
-                        <h4>{{policy.target}}</h4>
-                </strong>
+        <div class="detailrow">
+          <h2>한 눈에 보는 복지정보</h2>
+          <h4>다양한 복지서비스 정보를 안내해드립니다.</h4>
+          조회수 {{policy.clicked+1}}
 
-                <strong class="head">
-                    <strong class="head">
-                        <h2>선정기준</h2>
-                    </strong>
-                </strong>
-                <strong class="head">
-                    <li>
-                        {{policy.criteria}}
-                    </li>
-                </strong>
-            </div>
-        </div>
-        <div class="line">
-            <div class="detail">
-                <div class="detailrow_icon">
-                </div>
-                <div class="detailrow textrow">
-                    <h2>어떤 혜택을 받을 수 있나요?</h2>
-                </div>
-            </div>
-        </div>
-        <div class="line">
-            <!-- <div style="border-top: 2px solid orange; height: 10px; width: 100%;"></div> -->
-            <div class="textrow" style="border: 1px solid rgb(187, 187, 187); min-height:110px; border-top: 2px solid orange; border-bottom: 2px solid orange;">
-                <strong class="head">
-                    <h2>지원내용</h2>
-                </strong>
-                <strong class="head">
-                    <h4>{{policy.content}}</h4>
-                </strong>
-            </div>
-        </div>
-        <div class="line">
-            <div class="detail">
-                <div class="detailrow_icon">
-                </div>
-                <div class="detailrow">
-                    <h2>어떻게 신청하나요?</h2>
-                </div>
-            </div>
-        </div>
-        <div class="line">
-            <div class="textrow" style="border: 1px solid rgb(187, 187, 187); min-height:110px; border-top: 2px solid orange; border-bottom: 2px solid orange;">
-            <strong class="head">
-                <h2>신청방법</h2>
-            </strong>
-            <strong class="head">    
-                <h4>{{policy.supply_way}}</h4>
-            </strong>
+          <!-- 채팅 버튼 -->
+          <!-- <v-btn text @click.stop="drawer = !drawer"> -->
+          <v-btn text @click ="this.test">
+            <v-icon large color="warning">{{icons.chat}}</v-icon>
+          </v-btn>
 
-            <strong class="head">
-                <h2>지원절차</h2>
-            </strong>
-            <strong class="head"> 
-                <h4>
-                    다음과 같은 순서로 지원합니다
-                </h4>
-            </strong>
-            <strong class="head">    
-                <h4>{{policy.procedure}}</h4>
-            </strong>
-                
-            </div>
         </div>
-        <div class="line">
-            <div class="detail">
-                <div class="detailrow_icon">
-                </div>
-                <div class="detailrow">
-                     <h2>아직 궁금한 것이 있어요!</h2>
-                </div>
-            </div>
+      </div>
+
+      <!-- 채팅 drawer 시작 -->
+      <v-navigation-drawer v-model="drawer" absolute temporary right width=350 >
+        <v-list-item>
+          <v-list-item-avatar>
+            <v-img src="https://randomuser.me/api/portraits/men/78.jpg"></v-img>
+          </v-list-item-avatar>
+
+          <v-list-item-content>
+            <v-list-item-title>{{policy.title}}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider></v-divider>
+        <PolicyChat :Id="policyId"></PolicyChat>
+      </v-navigation-drawer>
+      <!-- 채팅 drawer 끝 -->
+    </div>
+    <div class="line">
+      <div style="border-top: 2px solid orange; height: 10px; width: 100%;"></div>
+      <div style="border: 1px solid rgb(187, 187, 187); min-height:110px;" class="textrow">
+        <strong class="head" style="text-align: center;">
+          <h2>{{policy.title}}</h2>
+        </strong>
+        <strong class="head" style="text-align: center;">
+          <h4>{{policy.brief}}</h4>
+        </strong>
+      </div>
+    </div>
+    <div class="line">
+      <div class="detail">
+        <div class="detailrow_icon">
+          <!--  <img src="../../images/Eligibility.png" alt="" style="width: 70%;">-->
         </div>
-        <div class="line">
-            <div class="textrow" style="border: 1px solid rgb(187, 187, 187); min-height:110px; border-top: 2px solid orange; border-bottom: 2px solid orange;">
-                <strong class="head"> 
-                    <h2>사이트</h2>
-                </strong>
-                
-                <h4>
-                    {{policy.site}}
-                </h4>
-            </div>
+        <div class="detailrow">
+          <h2>누가 받을 수 있나요?</h2>
         </div>
-        <div class="line">
-            <table class="sub_news" border="2" cellspacing="0">
-                <colgroup>
-                    <col />
-                    <col width="9%" />
-                    <col width="8%" />
-                    <col width="7%" />
-                </colgroup>
-                <thead>
-                    <tr>
-                    <th scope="col">제목</th>
-                    <th scope="col">글쓴이</th>
-                    <th scope="col">날짜</th>
-                    <th scope="col">조회수</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="post in ListSliced" pa-2>
-                        <td class="title">
-                            <router-link
-                            :to="{ name: 'boardDetail', params: {boardId: post.id} }"
-                            >{{ post.title }}</router-link>
-                        </td>
-                        <td class="name">{{post.content}}</td>
-                        <td class="date">2019/10/18</td>
-                        <td class="hit">1234</td>
-                    </tr>
-                    <v-pagination v-if="maxPages > 1" v-model="page" :length="maxPages" />
-                </tbody>
-            </table>
+      </div>
+    </div>
+    <!-- <div style="border-top: 2px solid orange; height: 10px; width: 100%;"></div> -->
+    <div class="line">
+      <div
+        class="textrow"
+        style="border: 1px solid rgb(187, 187, 187); min-height:110px; border-top: 2px solid orange; border-bottom: 2px solid orange;"
+      >
+        <strong class="head">
+          <strong class="head">
+            <h2>지원대상</h2>
+          </strong>
+        </strong>
+        <strong class="head">
+          <h4>{{policy.target}}</h4>
+        </strong>
+
+        <strong class="head">
+          <strong class="head">
+            <h2>선정기준</h2>
+          </strong>
+        </strong>
+        <strong class="head">
+          <li>{{policy.criteria}}</li>
+        </strong>
+      </div>
+    </div>
+    <div class="line">
+      <div class="detail">
+        <div class="detailrow_icon"></div>
+        <div class="detailrow textrow">
+          <h2>어떤 혜택을 받을 수 있나요?</h2>
         </div>
-    </v-container>
+      </div>
+    </div>
+    <div class="line">
+      <!-- <div style="border-top: 2px solid orange; height: 10px; width: 100%;"></div> -->
+      <div
+        class="textrow"
+        style="border: 1px solid rgb(187, 187, 187); min-height:110px; border-top: 2px solid orange; border-bottom: 2px solid orange;"
+      >
+        <strong class="head">
+          <h2>지원내용</h2>
+        </strong>
+        <strong class="head">
+          <h4>{{policy.content}}</h4>
+        </strong>
+      </div>
+    </div>
+    <div class="line">
+      <div class="detail">
+        <div class="detailrow_icon"></div>
+        <div class="detailrow">
+          <h2>어떻게 신청하나요?</h2>
+        </div>
+      </div>
+    </div>
+    <div class="line">
+      <div
+        class="textrow"
+        style="border: 1px solid rgb(187, 187, 187); min-height:110px; border-top: 2px solid orange; border-bottom: 2px solid orange;"
+      >
+        <strong class="head">
+          <h2>신청방법</h2>
+        </strong>
+        <strong class="head">
+          <h4>{{policy.supply_way}}</h4>
+        </strong>
+
+        <strong class="head">
+          <h2>지원절차</h2>
+        </strong>
+        <strong class="head">
+          <h4>다음과 같은 순서로 지원합니다</h4>
+        </strong>
+        <strong class="head">
+          <h4>{{policy.procedure}}</h4>
+        </strong>
+      </div>
+    </div>
+    <div class="line">
+      <div class="detail">
+        <div class="detailrow_icon"></div>
+        <div class="detailrow">
+          <h2>아직 궁금한 것이 있어요!</h2>
+        </div>
+      </div>
+    </div>
+    <div class="line">
+      <div
+        class="textrow"
+        style="border: 1px solid rgb(187, 187, 187); min-height:110px; border-top: 2px solid orange; border-bottom: 2px solid orange;"
+      >
+        <strong class="head">
+          <h2>사이트</h2>
+        </strong>
+
+        <h4>{{policy.site}}</h4>
+      </div>
+    </div>
+  </v-container>
 </template>
 
 
 <script>
 import store from "../../store/modules/data.js";
+import { mdiChatProcessing, mdiChat, mdiDelete } from "@mdi/js";
+import PolicyChat from './PolicyChat'
 
 export default {
   data() {
     return {
       policyId: this.$route.params.policyId,
-      policy : {}
+      policy: {},
+      icons: { chat: mdiChat },
+      drawer: null
     };
+  },
+
+  components :{
+    PolicyChat
   },
 
   async mounted() {
@@ -183,11 +184,16 @@ export default {
     });
   },
   methods: {
+
+    async test(event){
+      this.drawer = !this.drawer
+      event.stopPropagation()
+      return this.$store.dispatch('data/myChat', this.policyId)
+
+    },
+
     async getService(policyId) {
-      return this.$store.dispatch(
-        "data/getService",
-        policyId
-      );
+      return this.$store.dispatch("data/getService", policyId);
     }
   }
 };
@@ -195,42 +201,42 @@ export default {
 
 <style>
 .detail {
-    width: 100%;
-    height: 100%;
-    display:table-row;
+  width: 100%;
+  height: 100%;
+  display: table-row;
 }
 .detailrow_icon {
-    padding-left: 5%;
-    display:table-cell;
-    width: 130px;
+  padding-left: 5%;
+  display: table-cell;
+  width: 130px;
 }
 .detailrow {
-    float:left;
-    width: 87%;
-    min-width: 500px;
+  float: left;
+  width: 87%;
+  min-width: 500px;
 }
 .line {
-    padding-top: 3%;
+  padding-top: 3%;
 }
 .head {
-    padding: 7%
+  padding: 7%;
 }
 .textrow {
-    padding-left: 3%;
-    padding-right: 3%;
-    /* 한 줄 자르기 */ 
-    display: inline-block; 
-    width: 100%; 
-    white-space: nowrap; 
-    overflow: hidden; 
+  padding-left: 3%;
+  padding-right: 3%;
+  /* 한 줄 자르기 */
+  display: inline-block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
 
-    /* 여러 줄 자르기 추가 스타일 */ 
-    white-space: normal; 
-    line-height: 1.2; 
-    text-align: left;
+  /* 여러 줄 자르기 추가 스타일 */
+  white-space: normal;
+  line-height: 1.2;
+  text-align: left;
 }
 li {
-      text-indent: inherit;
+  text-indent: inherit;
 }
 .row {
   overflow: hidden;

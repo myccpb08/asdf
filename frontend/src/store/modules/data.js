@@ -16,6 +16,22 @@ const getters = {
 
 // actions
 const actions = {
+  async policyClicked({commit}, params){
+    return await api.policyClicked(params)
+  },
+
+  async delChatList({commit}, params){
+    return await api.delChatList(params)
+  },
+
+  async getChatList({commit}){
+    return await api.getChatList()
+  },
+
+  async myChat({commit}, params){
+    return await api.myChat(params)
+  },
+
   async signUp({ commit }, params) {
     console.log("enter addMember!!")
     await api.signUp(params)

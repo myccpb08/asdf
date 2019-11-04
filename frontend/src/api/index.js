@@ -8,6 +8,30 @@ export default {
       user: params,
     })
   },
+
+  async policyClicked(params){
+    return await axios.get(`${apiUrl}/policyClicked`, {
+      params
+    })
+  },
+
+  async delChatList(params){
+    return await axios.get(`${apiUrl}/auth/delChat`, {
+      params
+    })
+  },
+
+  async getChatList(){
+    return await axios.get(`${apiUrl}/auth/getChatList`)
+  },
+
+  async myChat(params){
+    console.log(params)
+    return await axios.get(`${apiUrl}/auth/myChat`, {
+      params
+    })
+  },
+
   async checkLogin(params) {
     return await axios.post(`${apiUrl}/auth/checkLogin/`, {
       username: params.username,

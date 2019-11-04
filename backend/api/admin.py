@@ -11,7 +11,7 @@ class NoticeAdmin(admin.ModelAdmin):
     list_display = ('id', 'writer', 'title', 'content', 'when', 'clicked')
 
 class PolicyAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'brief', 'target', 'criteria', 'content', 'supply_way', 'procedure', 'site')
+    list_display = ('id', 'clicked','title', 'brief', 'target', 'criteria', 'content', 'supply_way', 'procedure', 'site')
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
