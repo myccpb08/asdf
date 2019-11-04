@@ -1,10 +1,11 @@
 <template>
   <div>
     <v-app-bar max-width clipped-left color="warning">
-      <router-link to="/policy/search/00" style="text-decoration:none;">
-        <span class="title ml-3 mr-5 white--text">복지정책검색</span>
-      </router-link>
-      <v-spacer />
+      <v-app-bar-nav-icon class="white--text" @click="drawer = !drawer" />
+        <router-link to='/policy/search/' style="text-decoration:none;">
+          <span class="title ml-3 mr-5 white--text">복지정책검색</span>
+        </router-link>
+        <v-spacer/>
 
       <router-link to="/notice" style="text-decoration:none;">
         <span class="title ml-3 mr-5 white--text">공지사항</span>

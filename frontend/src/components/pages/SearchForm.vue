@@ -8,6 +8,7 @@
 
 <script>
 import { mdiMagnify } from "@mdi/js";
+import router from "../../router"
 
 export default {
   props: {
@@ -21,11 +22,9 @@ export default {
 
   methods: {
     onSubmit: function() {
-      const params = {
-        title: this.title
-      };
-      this.submit(params); /* data.searchPolicy : 시행 */
+      this.$emit('reload')
+      router.push("/policy/search/"+this.title);/* data.searchPolicy : 시행 */
     }
-  }
+  }                        
 };
 </script>

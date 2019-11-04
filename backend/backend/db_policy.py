@@ -29,22 +29,3 @@ for row in load.rows:
 
 del policies['policies'][0]
 requests.post(API_URL + 'crawling/policy/', data=json.dumps(policies), headers=headers)
-
-# str = str.replace("|","\n○ ")
-# str = str.replace("&","\n  - ")
-# str = str.replace("@","\n    ＊ ")
-# str = str.replace("+","\n        ")
-
-# temp=""
-# for i in range(0, len(str)):
-#     if(str[i]=="|"):
-#         temp+="\n○ "
-#     elif(str[i]=="&"):
-#         temp+="<br>  -  "
-#     elif (str[i] == "@"):
-#         temp += "\n    ＊ "
-#     elif (str[i] == "+"):
-#         temp += "\n        "
-#     else:
-#         temp+=str[i]
-# print(temp)
