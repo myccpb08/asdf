@@ -315,6 +315,7 @@ class CategoryPolicySerializer(serializers.ModelSerializer):
     title = serializers.SerializerMethodField('get_policy_title')
     brief = serializers.SerializerMethodField('get_policy_brief')
     clicked = serializers.SerializerMethodField('get_policy_clicked')
+
     class Meta:
         model = Category_Policy
         fields = ('id', 'title', 'brief','clicked')
