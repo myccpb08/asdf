@@ -7,17 +7,33 @@ from django.contrib import auth
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
 
-@api_view(['GET'])
+@api_view(['GET', 'PUT'])
 def getService(request):
-    serviceId = int(request.GET.get('0'))
-    service = Policy.objects.get(id=serviceId)
-    serializer = PolicySerializer(service)
-    return Response(data=serializer.data, status=status.HTTP_200_OK)
+    if request.method == 'GET':
+        serviceId = int(request.GET.get('0'))
+        service = Policy.objects.get(id=serviceId)
+        serializer = PolicySerializer(service)
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+    elif request.method == 'PUT':
+        params = request.data.get('params')
+        policy_id = params.get('id')
+        # print(request.user)
+        # print(User.objects.all())
+        user = User.objects.get(username=request.user)
+        policy = Policy.objects.get(id=policy_id)
+        print(user.pick_policies.all())
+        if policy in user.pick_policies.all():
+            user.pick_policies.remove(policy)
+        else:
+            user.pick_policies.add(policy)
+        print(user.pick_policies.all())
+        return Response(status=status.HTTP_200_OK)
 
 
-@api_view(['GET'])
+@api_view(['GET',])
 def policySearch(request):
     categoryId = request.GET.get('0')
+    print(request.GET.get('0'))
 
     if(categoryId=="00"):
         service = Policy.objects.all()

@@ -92,6 +92,8 @@ class Policy(models.Model):
     supply_way = models.TextField(null=True, blank=True)
     procedure = models.TextField(null=True, blank=True)
     site =models.TextField(null=True, blank=True)
+    pick_users = models.ManyToManyField(User, related_name='pick_policies', blank=True)
+    doing_users = models.ManyToManyField(User, related_name='doing_policies', blank=True)
     clicked = models.IntegerField(default=0)
 
 
