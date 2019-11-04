@@ -18,11 +18,18 @@ def getService(request):
 @api_view(['GET'])
 def policySearch(request):
     categoryId = request.GET.get('0')
-
     if(categoryId=="00"):
         service = Policy.objects.all()
         serializer = AllPolicySerializer(service, many=True)
     else:
         service = Category_Policy.objects.filter(category=categoryId)
         serializer = CategoryPolicySerializer(service, many=True)
+    return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def policySearchByWord(request):
+    word = request.GET.get('0')
+    service = Policy.objects.filter(title__contains=word)
+    serializer = AllPolicySerializer(service)
+    print(serializer.data)
     return Response(data=serializer.data, status=status.HTTP_200_OK)

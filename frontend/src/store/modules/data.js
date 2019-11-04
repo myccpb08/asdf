@@ -196,6 +196,10 @@ const actions = {
   
   async policySearch({commit}, params){
     return await api.policySearch(params)
+  },
+
+  async policySearchByWord({commit}, params){
+    return await api.policySearchByWord(params)
   }
 }
 

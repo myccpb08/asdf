@@ -170,5 +170,11 @@ export default {
     return axios.get(`${apiUrl}/policySearch/`,{params}).then((result) => {
       return result.data
     });
+  },
+
+  policySearchByWord(params){
+    return axios.get(`${apiUrl}/policySearchByWord/`,{params}).then((result) => {
+      return result.data
+    });
   }
 }

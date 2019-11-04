@@ -26,7 +26,8 @@ urlpatterns = [
     
     url('getService/$', policy_views.getService, name='get_service'),
     url('policySearch/$', policy_views.policySearch, name='policy_search'),
-    
+    url('policySearchByWord/$', policy_views.policySearchByWord, name='policy_search_by_word'),
+
     # 자유게시판 관련 링크
     url('allBoards/$', post_views.getAllBoards, name="get_all_boards"), # 자유게시판 전체 글 로드
     url('boardDetail/$', post_views.getBoard, name="get_board"), # 자유게시판 자세히 & 삭제 & 수정

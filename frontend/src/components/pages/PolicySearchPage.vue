@@ -118,16 +118,26 @@ export default {
     },
 
   async mounted() {
-    this.getPolicys().then(result => {
-      this.policies = result;
-      console.log(this.policies)
-    });
+      if(this.$route.params.searchWord == undefined){
+        this.getPolicys().then(result => {
+            this.policies = result;
+        });
+      }else{
+        this.getPolicysSearchByWord().then(result => {
+            this.policies = result;
+        });
+      }
+    
   },
   methods: {
     async getPolicys() {
-        console.log(this.categoryId)
         return await this.$store.dispatch(
             "data/policySearch", this.categoryId
+        );
+    },
+    async getPolicysSearchByWord() {
+        return await this.$store.dispatch(
+            "data/policySearchByWord", this.$route.params.searchWord
         );
     },
 
@@ -142,13 +152,16 @@ export default {
         }
 
         tempInt = parseInt(n)-1;
-        if(tempInt <6 && tempInt >= 0){
-            policy[tempInt].classList.add("colorPink");
-        }else if(tempInt <9){
-            policy[tempInt].classList.add("colorYellow");
-        }else if(tempInt < 16){
-            policy[tempInt].classList.add("colorBlue");
+        if(tempInt >= 0){
+            if(tempInt <6){
+                policy[tempInt].classList.add("colorPink");
+            }else if(tempInt <9){
+                policy[tempInt].classList.add("colorYellow");
+            }else if(tempInt < 16){
+                policy[tempInt].classList.add("colorBlue");
+            }
         }
+       
         this.categoryId = n;
         this.getPolicys(n).then(response => {
                 console.log(response)
@@ -307,8 +320,7 @@ export default {
 
 .policy_contents{
     width:80vw;
-    margin-top: 5%;
-    margin-bottom: 5%;
+    margin-top: 2%;
     padding: 4vh;
     border: 1px solid gray;
     border-radius: 7px;

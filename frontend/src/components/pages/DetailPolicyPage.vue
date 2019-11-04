@@ -3,7 +3,7 @@
         <div class="line">
             <div class="detail">
                 <div class="detailrow_icon">
-                    <!-- <img src="../../images/All_view.png" alt="" style="width: 70%;">-->
+                    <img src="../../images/All_view.png" alt="" style="width: 70%;">
                 </div>
                 <div class="detailrow">
                     <h2>한 눈에 보는 복지정보</h2>
@@ -26,7 +26,7 @@
         <div class="line">
             <div class="detail">
                 <div class="detailrow_icon">
-                  <!--  <img src="../../images/Eligibility.png" alt="" style="width: 70%;">-->
+                  <img src="../../images/Eligibility.png" alt="" style="width: 70%;">
                 </div>
                 <div class="detailrow">
                     <h2>누가 받을 수 있나요?</h2>
@@ -43,24 +43,53 @@
                     </strong>
                 </strong>
                 <strong class="head">
-                        <h4>{{policy.target}}</h4>
+                  <ul>
+                    <li v-for="pol in policy.target">
+                      <span style="font-size:large;">{{pol.content}}</span>
+                      <ul>
+                        <li v-for="po in pol.body">
+                          {{po.content}}
+                          <ul>
+                            <li v-for="p in po.body">
+                              {{p.content}}
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                      <br>
+                    </li>
+                  </ul>
                 </strong>
 
-                <strong class="head">
+                <strong class="head"  v-if="policy.criteria">
                     <strong class="head">
                         <h2>선정기준</h2>
                     </strong>
                 </strong>
-                <strong class="head">
-                    <li>
-                        {{policy.criteria}}
+                <strong class="head" v-if="policy.criteria">
+                    <ul>
+                    <li v-for="pol in policy.criteria">
+                      <span style="font-size:large;">{{pol.content}}</span>
+                      <ul>
+                        <li v-for="po in pol.body">
+                          {{po.content}}
+                          <ul>
+                            <li v-for="p in po.body">
+                              {{p.content}}
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                      <br>
                     </li>
+                  </ul>
                 </strong>
             </div>
         </div>
         <div class="line">
             <div class="detail">
                 <div class="detailrow_icon">
+                  <img src="../../images/Benefits.png" alt="" style="width: 70%;">
                 </div>
                 <div class="detailrow textrow">
                     <h2>어떤 혜택을 받을 수 있나요?</h2>
@@ -74,13 +103,29 @@
                     <h2>지원내용</h2>
                 </strong>
                 <strong class="head">
-                    <h4>{{policy.content}}</h4>
+                  <ul>
+                    <li v-for="pol in policy.content">
+                      <span style="font-size:large;">{{pol.content}}</span>
+                      <ul>
+                        <li v-for="po in pol.body">
+                          {{po.content}}
+                          <ul>
+                            <li v-for="p in po.body">
+                              {{p.content}}
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                      <br>
+                    </li>
+                  </ul>
                 </strong>
             </div>
         </div>
         <div class="line">
             <div class="detail">
                 <div class="detailrow_icon">
+                  <img src="../../images/Apply.png" alt="" style="width: 70%;">
                 </div>
                 <div class="detailrow">
                     <h2>어떻게 신청하나요?</h2>
@@ -89,84 +134,67 @@
         </div>
         <div class="line">
             <div class="textrow" style="border: 1px solid rgb(187, 187, 187); min-height:110px; border-top: 2px solid orange; border-bottom: 2px solid orange;">
-            <strong class="head">
+            <strong class="head" v-if="policy.supply_way">
                 <h2>신청방법</h2>
             </strong>
-            <strong class="head">    
-                <h4>{{policy.supply_way}}</h4>
+            <strong class="head" v-if="policy.supply_way">
+              <ul>
+                    <li v-for="pol in policy.supply_way">
+                      <span style="font-size:large;">{{pol.content}}</span>
+                      <ul>
+                        <li v-for="po in pol.body">
+                          {{po.content}}
+                          <ul>
+                            <li v-for="p in po.body">
+                              {{p.content}}
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                      <br>
+                    </li>
+                  </ul>
             </strong>
 
-            <strong class="head">
+            <strong class="head" v-if="policy.supply_way">
                 <h2>지원절차</h2>
             </strong>
-            <strong class="head"> 
-                <h4>
-                    다음과 같은 순서로 지원합니다
-                </h4>
-            </strong>
-            <strong class="head">    
+            <strong class="head" v-if="policy.procedure">    
                 <h4>{{policy.procedure}}</h4>
             </strong>
                 
             </div>
         </div>
-        <div class="line">
+        <div class="line" v-if="policy.site">
             <div class="detail">
                 <div class="detailrow_icon">
+                  <img src="../../images/Questions.png" alt="" style="width: 70%;">
                 </div>
                 <div class="detailrow">
                      <h2>아직 궁금한 것이 있어요!</h2>
                 </div>
             </div>
         </div>
-        <div class="line">
+        <div class="line" v-if="policy.site">
             <div class="textrow" style="border: 1px solid rgb(187, 187, 187); min-height:110px; border-top: 2px solid orange; border-bottom: 2px solid orange;">
                 <strong class="head"> 
                     <h2>사이트</h2>
                 </strong>
                 
-                <h4>
-                    {{policy.site}}
-                </h4>
+                <ul>
+                  <li>
+                    {{policy.site[0]}} : <a v-bind:href=policy.site[1]> {{policy.site[1]}} </a>
+                  </li>
+                </ul>
+                
             </div>
-        </div>
-        <div class="line">
-            <table class="sub_news" border="2" cellspacing="0">
-                <colgroup>
-                    <col />
-                    <col width="9%" />
-                    <col width="8%" />
-                    <col width="7%" />
-                </colgroup>
-                <thead>
-                    <tr>
-                    <th scope="col">제목</th>
-                    <th scope="col">글쓴이</th>
-                    <th scope="col">날짜</th>
-                    <th scope="col">조회수</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="post in ListSliced" pa-2>
-                        <td class="title">
-                            <router-link
-                            :to="{ name: 'boardDetail', params: {boardId: post.id} }"
-                            >{{ post.title }}</router-link>
-                        </td>
-                        <td class="name">{{post.content}}</td>
-                        <td class="date">2019/10/18</td>
-                        <td class="hit">1234</td>
-                    </tr>
-                    <v-pagination v-if="maxPages > 1" v-model="page" :length="maxPages" />
-                </tbody>
-            </table>
         </div>
     </v-container>
 </template>
 
 
 <script>
-import store from "../../store/modules/data.js";
+import store from "../../store/modules/data.js"
 
 export default {
   data() {
@@ -351,5 +379,10 @@ li {
   color: #f00;
   font-size: 12px;
   font-weight: bold;
+}
+
+ul li { 
+  line-height:160%;
+  font-weight: 400 ;
 }
 </style>

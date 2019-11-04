@@ -202,6 +202,11 @@ class NoticeCommentSerializer(serializers.ModelSerializer):
 
 class PolicySerializer(serializers.ModelSerializer):
     target = serializers.SerializerMethodField('get_target')
+    criteria = serializers.SerializerMethodField('get_criteria')
+    content = serializers.SerializerMethodField('get_content')
+    supply_way = serializers.SerializerMethodField('get_supply_way')
+    procedure = serializers.SerializerMethodField('get_procedure')
+    site = serializers.SerializerMethodField('get_site')
 
     class Meta:
         model = Policy
@@ -209,22 +214,69 @@ class PolicySerializer(serializers.ModelSerializer):
 
 
     def get_target(self, obj):
-        str = obj.target
+        print(obj.target)
+        return strSplit(obj.target)
+    
+    def get_criteria(self, obj):
+        return strSplit(obj.criteria)
 
-        temp = ""
-        for i in range(0, len(str)):
-            if (str[i] == "|"):
-                temp += "\n○ "
-            elif (str[i] == "&"):
-                temp += "\n  -  "
-            elif (str[i] == "@"):
-                temp += "\n    ＊ "
-            elif (str[i] == "+"):
-                temp += "\n        "
-            else:
-                temp += str[i]
-        print(temp)
-        return temp
+    def get_content(self, obj):
+        return strSplit(obj.content)
+
+    def get_supply_way(self, obj):
+        return strSplit(obj.supply_way)
+
+    def get_procedure(self, obj):
+        return strSplit(obj.procedure)
+
+    def get_site(self, obj):
+        if obj.site is None:
+            return None
+        return obj.site.split("|")
+
+    
+
+def strSplit(str):
+    if str is None:
+        return None
+    str = str.split("|")
+    arr=[]
+    for i in range(1, len(str)):
+        arr.append({
+            'content': str[i],
+            'body': []
+        })
+                
+        temp = arr[i-1]['content'].split('&')
+        if len(temp)>1 :
+            arr[i-1]['content']=temp[0]
+
+            for j in range(1, len(temp)):
+                arr[i-1]['body'].append({
+                    'content': temp[j],
+                    'body': []
+                })
+
+                temp1 = arr[i-1]['body'][j-1]['content'].split('@')
+                if len(temp1)>1 :
+                    arr[i-1]['body'][j-1]['content']=temp1[0]
+
+                    for k in range(1, len(temp1)):
+                        arr[i-1]['body'][j-1]['body'].append({
+                            'content': temp1[k],
+                            'body': []
+                        })
+
+                        temp2 = arr[i-1]['body'][j-1]['body'][k-1]['content'].split('+')
+                        if len(temp2)>1 :
+                            arr[i-1]['body'][j-1]['body'][k-1]['content']=temp2[0]
+
+                            for z in range(1, len(temp1)):
+                                arr[i-1]['body'][j-1]['body'][k-1]['body'].append({
+                                    'content': temp2[z],
+                                    'body': []
+                                })
+    return arr
 
 class CategoryPolicySerializer(serializers.ModelSerializer):
     id = serializers.SerializerMethodField('get_policy_id')
