@@ -11,7 +11,6 @@
           <div class="policy_search_A_content">
             <div @click="goPage('01')">
               <img src="../../images/Pregnant_woman.png" style="width:100%;" />
-              aaa
             </div>
 
             <div @click="goPage('02')">
@@ -23,7 +22,6 @@
             </div>
             <div @click="goPage('04')">
               <img src="../../images/Youth.png" style="width:100%;" />
-              aaa
             </div>
             <div @click="goPage('05')">
               <img src="../../images/Middle_age.png" style="width:100%;" />
