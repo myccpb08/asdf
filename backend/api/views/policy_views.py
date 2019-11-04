@@ -40,7 +40,9 @@ def policySearch(request):
         serializer = AllPolicySerializer(service, many=True)
     else:
         service = Category_Policy.objects.filter(category=categoryId)
+        print(service)
         serializer = CategoryPolicySerializer(service, many=True)
+        
     return Response(data=serializer.data, status=status.HTTP_200_OK)
 
 
