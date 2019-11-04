@@ -42,7 +42,6 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-
 import UserList from "../../admins/UserList";
 import router from "../../router";
 

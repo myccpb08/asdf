@@ -3,15 +3,42 @@
         <div class="line">
             <div class="detail">
                 <div class="detailrow_icon">
-                    <!-- <img src="../../images/All_view.png" alt="" style="width: 70%;">-->
+                    <img src="../../images/All_view.png" alt="" style="width: 70%;">
                 </div>
                 <div class="detailrow">
                     <h2>한 눈에 보는 복지정보</h2>
                     <h4>다양한 복지서비스 정보를 안내해드립니다.</h4>
+                    <span>조회수 {{policy.clicked+1}}</span>
+
+                    <!-- 채팅 버튼 -->
+                    <!-- <v-btn text @click.stop="drawer = !drawer"> -->
+                    <v-btn text @click ="this.test">
+                      <v-icon large color="warning">{{icons.chat}}</v-icon>
+                    </v-btn>
+
+                    <button style="color:	#FFD700;" @click="toggleMyPick">
+                      <i v-if="is_myPick" class="fas fa-star fa-lg"></i>
+                      <i v-else class="far fa-star fa-lg"></i>
+                  </button>
                 </div>
             </div>
-            ``
+            <!-- 채팅 drawer 시작 -->
+            <v-navigation-drawer v-model="drawer" absolute temporary right width=350 >
+              <v-list-item>
+                <v-list-item-avatar>
+                  <v-img src="https://randomuser.me/api/portraits/men/78.jpg"></v-img>
+                </v-list-item-avatar>
+                <v-list-item-content>
+                  <v-list-item-title>{{policy.title}}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              <v-divider></v-divider>
+              <PolicyChat :Id="policyId"></PolicyChat>
+            </v-navigation-drawer>
+      <!-- 채팅 drawer 끝 -->
         </div>
+
+
         <div class="line">
             <div style="border-top: 2px solid orange; height: 10px; width: 100%;"></div>
             <div style="border: 1px solid rgb(187, 187, 187); min-height:110px;" class="textrow">
@@ -26,7 +53,7 @@
         <div class="line">
             <div class="detail">
                 <div class="detailrow_icon">
-                  <!--  <img src="../../images/Eligibility.png" alt="" style="width: 70%;">-->
+                  <img src="../../images/Eligibility.png" alt="" style="width: 70%;">
                 </div>
                 <div class="detailrow">
                     <h2>누가 받을 수 있나요?</h2>
@@ -43,24 +70,53 @@
                     </strong>
                 </strong>
                 <strong class="head">
-                        <h4>{{policy.target}}</h4>
+                  <ul>
+                    <li v-for="pol in policy.target">
+                      <span style="font-size:large;">{{pol.content}}</span>
+                      <ul>
+                        <li v-for="po in pol.body">
+                          {{po.content}}
+                          <ul>
+                            <li v-for="p in po.body">
+                              {{p.content}}
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                      <br>
+                    </li>
+                  </ul>
                 </strong>
 
-                <strong class="head">
+                <strong class="head"  v-if="policy.criteria">
                     <strong class="head">
                         <h2>선정기준</h2>
                     </strong>
                 </strong>
-                <strong class="head">
-                    <li>
-                        {{policy.criteria}}
+                <strong class="head" v-if="policy.criteria">
+                    <ul>
+                    <li v-for="pol in policy.criteria">
+                      <span style="font-size:large;">{{pol.content}}</span>
+                      <ul>
+                        <li v-for="po in pol.body">
+                          {{po.content}}
+                          <ul>
+                            <li v-for="p in po.body">
+                              {{p.content}}
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                      <br>
                     </li>
+                  </ul>
                 </strong>
             </div>
         </div>
         <div class="line">
             <div class="detail">
                 <div class="detailrow_icon">
+                  <img src="../../images/Benefits.png" alt="" style="width: 70%;">
                 </div>
                 <div class="detailrow textrow">
                     <h2>어떤 혜택을 받을 수 있나요?</h2>
@@ -74,13 +130,29 @@
                     <h2>지원내용</h2>
                 </strong>
                 <strong class="head">
-                    <h4>{{policy.content}}</h4>
+                  <ul>
+                    <li v-for=" pol in policy.content" >
+                      <span style="font-size:large;">{{pol.content}}</span>
+                      <ul>
+                        <li v-for="po in pol.body">
+                          {{po.content}}
+                          <ul>
+                            <li v-for="p in po.body">
+                              {{p.content}}
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                      <br>
+                    </li>
+                  </ul>
                 </strong>
             </div>
         </div>
         <div class="line">
             <div class="detail">
                 <div class="detailrow_icon">
+                  <img src="../../images/Apply.png" alt="" style="width: 70%;">
                 </div>
                 <div class="detailrow">
                     <h2>어떻게 신청하나요?</h2>
@@ -89,77 +161,70 @@
         </div>
         <div class="line">
             <div class="textrow" style="border: 1px solid rgb(187, 187, 187); min-height:110px; border-top: 2px solid orange; border-bottom: 2px solid orange;">
-            <strong class="head">
+            <strong class="head" v-if="policy.supply_way">
                 <h2>신청방법</h2>
             </strong>
-            <strong class="head">    
-                <h4>{{policy.supply_way}}</h4>
+            <strong class="head" v-if="policy.supply_way">
+              <ul>
+                    <li v-for="pol in policy.supply_way">
+                      <span style="font-size:large;">{{pol.content}}</span>
+                      <ul>
+                        <li v-for="po in pol.body">
+                          {{po.content}}
+                          <ul>
+                            <li v-for="p in po.body">
+                              {{p.content}}
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                      <br>
+                    </li>
+                  </ul>
             </strong>
 
-            <strong class="head">
+            <strong class="head" v-if="policy.procedure">
                 <h2>지원절차</h2>
             </strong>
-            <strong class="head"> 
-                <h4>
-                    다음과 같은 순서로 지원합니다
-                </h4>
-            </strong>
-            <strong class="head">    
-                <h4>{{policy.procedure}}</h4>
+            <strong class="head" v-if="policy.procedure" style="width:100%; text-align:center;">
+                <div  v-for="(pol, i) in policy.procedure">
+                  <div v-if="i>0" class="procedureImg">
+                    <div></div>
+                    <div><img src="../../images/Arrow.png" alt="" style="width:100%;"></div>
+                    <div></div>
+                  </div>
+                  <div class="procedureDiv">
+                    <div >{{pol.content}}</div><hr>
+                    <div>{{pol.body[0].content}}</div>
+                  </div>
+                </div>
             </strong>
                 
             </div>
         </div>
-        <div class="line">
+        <div class="line" v-if="policy.site">
             <div class="detail">
                 <div class="detailrow_icon">
+                  <img src="../../images/Questions.png" alt="" style="width: 70%;">
                 </div>
                 <div class="detailrow">
                      <h2>아직 궁금한 것이 있어요!</h2>
                 </div>
             </div>
         </div>
-        <div class="line">
+        <div class="line" v-if="policy.site">
             <div class="textrow" style="border: 1px solid rgb(187, 187, 187); min-height:110px; border-top: 2px solid orange; border-bottom: 2px solid orange;">
                 <strong class="head"> 
                     <h2>사이트</h2>
                 </strong>
                 
-                <h4>
-                    {{policy.site}}
-                </h4>
+                <ul>
+                  <li>
+                    {{policy.site[0]}} : <a v-bind:href=policy.site[1]> {{policy.site[1]}} </a>
+                  </li>
+                </ul>
+                
             </div>
-        </div>
-        <div class="line">
-            <table class="sub_news" border="2" cellspacing="0">
-                <colgroup>
-                    <col />
-                    <col width="9%" />
-                    <col width="8%" />
-                    <col width="7%" />
-                </colgroup>
-                <thead>
-                    <tr>
-                    <th scope="col">제목</th>
-                    <th scope="col">글쓴이</th>
-                    <th scope="col">날짜</th>
-                    <th scope="col">조회수</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="post in ListSliced" pa-2>
-                        <td class="title">
-                            <router-link
-                            :to="{ name: 'boardDetail', params: {boardId: post.id} }"
-                            >{{ post.title }}</router-link>
-                        </td>
-                        <td class="name">{{post.content}}</td>
-                        <td class="date">2019/10/18</td>
-                        <td class="hit">1234</td>
-                    </tr>
-                    <v-pagination v-if="maxPages > 1" v-model="page" :length="maxPages" />
-                </tbody>
-            </table>
         </div>
     </v-container>
 </template>
@@ -167,28 +232,59 @@
 
 <script>
 import store from "../../store/modules/data.js";
+<<<<<<< HEAD
 import { mapState, mapActions } from "vuex";
+=======
+import router from "../../router/index.js";
+import { mdiChatProcessing, mdiChat, mdiDelete } from "@mdi/js";
+import PolicyChat from './PolicyChat'
+>>>>>>> f883762b3032be87128d725c9d4e990ed7c003e9
 
 export default {
   data() {
     return {
       policyId: this.$route.params.policyId,
-      policy : {}
+      policy : {},
+      is_myPick: false,
+      icons: { chat: mdiChat },
+      drawer: null
     };
   },
 
+  components :{
+    PolicyChat
+  },
+
   async mounted() {
-    this.getService(this.policyId).then(result => {
+    await this.getService(this.policyId).then(result => {
       this.policy = result;
+<<<<<<< HEAD
       console.log(this.policy);
       this.saveLatestView()
+=======
+    });
+    console.log(this.$store.state.data.user)
+    let vm = this
+    // pick 정책중에 현재 정책이 포함되어 있으면 true
+    this.is_myPick = this.$store.state.data.user.pick_policies.some(function(pick_policy){
+      return pick_policy == vm.policyId
+>>>>>>> f883762b3032be87128d725c9d4e990ed7c003e9
     })
   },
   methods: {
+
+    async test(event){
+      this.drawer = !this.drawer
+      event.stopPropagation()
+      return this.$store.dispatch('data/myChat', this.policyId)
+
+    },
+
     async getService(policyId) {
       return this.$store.dispatch(
         "data/getService",
         policyId
+<<<<<<< HEAD
       )
     },
     saveLatestView(){
@@ -201,48 +297,62 @@ export default {
       this.updateLatestView(params)
     },
     ...mapActions("data", ["updateLatestView"])
+=======
+      );
+    },
+    toggleMyPick(){
+      this.is_myPick = !this.is_myPick;
+      const params = {
+        id: this.policyId,
+        user: this.$store.state.data.user.username
+      };
+      this.$store.dispatch("data/editServicePick", params).then((result) => {
+        this.$store.dispatch("data/editSession", localStorage.getItem('token'))
+    });
+    },
+>>>>>>> f883762b3032be87128d725c9d4e990ed7c003e9
   }
 };
 </script>
 
 <style>
 .detail {
-    width: 100%;
-    height: 100%;
-    display:table-row;
+  width: 100%;
+  height: 100%;
+  display: table-row;
 }
 .detailrow_icon {
-    padding-left: 5%;
-    display:table-cell;
-    width: 130px;
+  padding-left: 5%;
+  display: table-cell;
+  width: 130px;
 }
 .detailrow {
-    float:left;
-    width: 87%;
-    min-width: 500px;
+  float: left;
+  width: 87%;
+  min-width: 500px;
 }
 .line {
-    padding-top: 3%;
+  padding-top: 3%;
 }
 .head {
-    padding: 7%
+  padding: 7%;
 }
 .textrow {
-    padding-left: 3%;
-    padding-right: 3%;
-    /* 한 줄 자르기 */ 
-    display: inline-block; 
-    width: 100%; 
-    white-space: nowrap; 
-    overflow: hidden; 
+  padding-left: 3%;
+  padding-right: 3%;
+  /* 한 줄 자르기 */
+  display: inline-block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
 
-    /* 여러 줄 자르기 추가 스타일 */ 
-    white-space: normal; 
-    line-height: 1.2; 
-    text-align: left;
+  /* 여러 줄 자르기 추가 스타일 */
+  white-space: normal;
+  line-height: 1.2;
+  text-align: left;
 }
 li {
-      text-indent: inherit;
+  text-indent: inherit;
 }
 .row {
   overflow: hidden;
@@ -364,4 +474,37 @@ li {
   font-size: 12px;
   font-weight: bold;
 }
+
+ul li { 
+  line-height:160%;
+  font-weight: 400 ;
+}
+
+.procedureDiv{
+    width:18%;
+    height: 160px;
+    border: 1px solid gray;
+    border-radius: 7px;
+    float: left;
+    background-color:
+}
+
+.procedureDiv div{
+    padding: 1vh;
+}
+
+.procedureImg{
+  height: 160px;
+  margin-left:1%;
+  margin-right:1%;
+  margin-bottom:2%;
+  width: 5%;
+  float: left;
+}
+
+.procedureImg div{
+  height: 33%;
+}
+
+
 </style>

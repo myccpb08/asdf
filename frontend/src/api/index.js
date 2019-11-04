@@ -8,6 +8,30 @@ export default {
       user: params,
     })
   },
+
+  async policyClicked(params){
+    return await axios.get(`${apiUrl}/policyClicked`, {
+      params
+    })
+  },
+
+  async delChatList(params){
+    return await axios.get(`${apiUrl}/auth/delChat`, {
+      params
+    })
+  },
+
+  async getChatList(){
+    return await axios.get(`${apiUrl}/auth/getChatList`)
+  },
+
+  async myChat(params){
+    console.log(params)
+    return await axios.get(`${apiUrl}/auth/myChat`, {
+      params
+    })
+  },
+
   async checkLogin(params) {
     return await axios.post(`${apiUrl}/auth/checkLogin/`, {
       username: params.username,
@@ -72,6 +96,11 @@ export default {
       return await axios.post(`${apiUrl}/auth/session/`, {
           token: param
       })
+  },
+  async editSession(param){
+    return await axios.put(`${apiUrl}/auth/session/`, {
+      token: param
+  })
   },
   getAllUsers() {
     return axios.get(`${apiUrl}/auth/allUsers/`).then((result) => {
@@ -199,5 +228,30 @@ export default {
     return axios.get(`${apiUrl}/policySearch/`,{params}).then((result) => {
       return result.data
     });
+  },
+
+  policySearchByWord(params){
+    return axios.get(`${apiUrl}/policySearchByWord/`,{params}).then((result) => {
+      return result.data
+    });
+  },
+
+  editServicePick(params){
+    console.log(params)
+    return axios.put(`${apiUrl}/getService/`, { params })
+  },
+
+  getPickPolicies(){
+    return axios.get(`${apiUrl}/pickPolicies/`).then((result) => {
+      return result.data  
+    });
+  },
+
+  editPickPolicies(params){
+    return axios.put(`${apiUrl}/pickPolicies/`, { params })
+  },
+
+  deletePickPolicies(params){
+    return axios.delete(`${apiUrl}/pickPolicies/`, { params })
   }
 }

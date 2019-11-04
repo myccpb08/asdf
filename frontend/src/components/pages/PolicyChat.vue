@@ -5,32 +5,6 @@
         <div style="width:400px;">
           <!-- <template v-if="uid"> -->
           <template>
-            <!-- <div id="_top"> -->
-            <!-- 회원리스트 -->
-            <!-- <div class="text-center">
-                <v-menu offset-y>
-                  <template v-slot:activator="{ on }">
-                    <v-btn color="white" v-on="on" style="cursor: pointer; margin-top:10px">
-                      User List
-                    </v-btn>
-                  </template>
-
-                  <v-list>
-                    <v-list-tile v-for="(item, index) in users" :key="index" @click="">
-
-                      <v-list-tile-action>
-                        <v-icon>account_circle</v-icon>
-                      </v-list-tile-action>
-                      <v-list-tile-content>{{ item.email }}<br>마지막 접속: {{item.datetime}} <br>
-                        <hr>
-                      </v-list-tile-content>
-                      </v-list-item-title>
-                    </v-list-tile>
-                  </v-list>
-                </v-menu>
-              </div>
-            </div>-->
-           
             <div id="_chat">
               <div v-for="v in chat" class="_chat" :class="{_right: (v.email == email)}">
                 <div class="_msg" v-if="v.msg">
@@ -85,15 +59,16 @@
 </template>
 
 <script>
-// import * as firebase from "firebase/app";
 import firebase from "firebase/app";
 import firebaseservice from './firebaseservice'
 import "firebase/database";
 import { mapActions } from "vuex";
 
+
+
 const database = firebase.database();
 var users_ref = database.ref("users");
-var chat_ref = database.ref("chat");
+
 
 function setScrollToBottom(id) {
   var target = document.getElementById(id);
@@ -101,6 +76,11 @@ function setScrollToBottom(id) {
 }
 
 export default {
+
+  props: {
+    Id: {}
+  },
+
   data() {
     return {
       me: this.$store.state.data.user,
@@ -111,7 +91,9 @@ export default {
       chat: {},
       users: {},
       msg: "",
-      user_list_show: false
+      user_list_show: false,
+      room_number : ''
+      
     };
   },
 
@@ -135,7 +117,10 @@ export default {
     }
 
     var z = this;
-
+    console.log('몇 번째방?')
+    console.log(this.Id)
+    var chat_ref = database.ref(this.Id); 
+    this.room_number = this.Id
     // 새로 들어온 메시지 입력하기
     chat_ref.on("child_added", d => {
       // 새로 추가된 행위
@@ -144,6 +129,9 @@ export default {
         setScrollToBottom("_chat");
       });
     });
+  },
+  mounted(){
+    console.log(this.Id)
   },
 
   methods: {
@@ -157,8 +145,7 @@ export default {
       var timestamp = month + "/" + day + " " + hour + ":" + min;
 
       if (!this.msg || event.ctrlKey) return;
-      console.log('야')
-      console.log(this.uid)
+      var chat_ref = database.ref(this.Id); 
       chat_ref.push().set({
         msg: this.msg,
         datetime: timestamp,

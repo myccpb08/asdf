@@ -16,11 +16,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="post in ListSliced" pa-2>
+        <tr v-for="post in ListSliced" pa-2 style="font-family:WONDotum">
           <td class="title">
-            <router-link
-              :to="{ name: 'boardDetail', params: {boardId: post.id} }">
-              {{ post.title }}</router-link>
+            <router-link :to="{ name: 'boardDetail', params: {boardId: post.id} }">{{ post.title }}  
+              
+            </router-link>
+            <span style="font-size:small" v-if="post.comments">[{{post.comments}}]</span>
           </td>
           <td class="name">{{post.writer}}</td>
           <td class="date">{{post.when}}</td>
@@ -63,7 +64,7 @@ export default {
       this.boardList = await this.getAllBoards();
       this.boardList = this.boardList.reverse();
       // await this.setLoading()
-    },
+    }
   },
 
   computed: {
@@ -108,6 +109,13 @@ export default {
 </script>
 
 <style>
+@font-face {
+  font-family: "WONDotum";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/WONDotum.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 /* .container {
           margin: 2%;
           padding: 0;

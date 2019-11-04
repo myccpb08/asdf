@@ -1,11 +1,12 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
-from api.models import create_profile, create_profile_none, Profile
+from api.models import create_profile, create_profile_none, Profile, Policy
 from rest_framework.response import Response
 from api.serializers import ProfileSerializer, SessionSerializer
 from django.contrib import auth
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
+
 
 
 @api_view(['POST'])
@@ -211,6 +212,7 @@ def latestView(request):
         
 
 @api_view(['POST'])
+@api_view(['POST', 'PUT'])
 def session(request):
     if request.method == "POST":
         print("enter in session function")
@@ -225,7 +227,8 @@ def session(request):
                 'lastestView': None,
                 'token': None,
                 'is_authenticated': False,
-                'is_staff':  False
+                'is_staff':  False,
+                'pick_policies': None
             }
 
         else:
@@ -239,7 +242,8 @@ def session(request):
                     'lastestView': Profile.objects.get(user=user).lastestView,
                     'token': token,
                     'is_authenticated': True,
-                    'is_staff': Profile.objects.get(user=user).user.is_staff
+                    'is_staff': Profile.objects.get(user=user).user.is_staff,
+                    'pick_policies': Profile.objects.get(user=user).user.pick_policies.all()
                 }
             else:
                 result = {
@@ -250,9 +254,88 @@ def session(request):
                     'lastestView': None,
                     'token': None,
                     'is_authenticated': False,
-                    'is_staff':  False
+                    'is_staff':  False,
+                    'pick_policies': False
+                }
+        serializer = SessionSerializer(result)
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+    elif request.method == "PUT":
+        print('session put')
+        token = request.data.get('token', None)
+        username = request.session.get(str(token), None)
+        user = User.objects.get(username=username)
+        if user.is_authenticated and token == str(Token.objects.get(user=user)):
+                result = {
+                    'username': username,
+                    'name': Profile.objects.get(user=user).name,
+                    'favorite': Profile.objects.get(user=user).favorite,
+                    'when': Profile.objects.get(user=user).when,
+                    'token': token,
+                    'is_authenticated': True,
+                    'is_staff': Profile.objects.get(user=user).user.is_staff,
+                    'pick_policies': Profile.objects.get(user=user).user.pick_policies.all()
                 }
         serializer = SessionSerializer(result)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
 
+@api_view(['GET'])
+def mychat(request):
+    chat_num = request.GET.get('0')
+    now_user = request.user
+    now_users_chat = now_user.profile.mychat
+    now_users_chat += chat_num + ','
+    now_user.profile.mychat = now_users_chat
+    now_user.profile.save()
+    return Response(status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def getChatList(request):
+    now_user = request.user
+    chat_list = now_user.profile.mychat
+    chat_list = list(set(chat_list.split(',')))
+    print(chat_list)
+    data = []
+    for i in chat_list:
+        if i:
+            data += [i]
+
+    data2 = []
+    for i in data:
+        id = int(i)
+        policy = Policy.objects.get(id=id)
+        temp = {'id':int(id), 'title':policy.title, 'drawer':False}
+        data2 += [temp]
+    print(data2)    
+
+    return Response(data=data2, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def delChat(request):
+    chat_num = request.GET.get('0')
+    now_user = request.user
+    now_users_chat = now_user.profile.mychat
+    print(now_users_chat)
+    new = ','
+    for i in range(1,len(now_users_chat),2):
+        if now_users_chat[i] != chat_num:
+            print(now_users_chat[i])
+            new += (now_users_chat[i]+',')
+    now_user.profile.mychat = new
+    now_user.profile.save()
+    
+    chat_list = now_user.profile.mychat
+    chat_list = list(set(chat_list.split(',')))
+    data = []
+    for i in chat_list:
+        if i:
+            data += [i]
+
+    data2 = []
+    for i in data:
+        id = int(i)
+        policy = Policy.objects.get(id=id)
+        temp = {'id':int(id), 'title':policy.title}
+        data2 += [temp]   
+
+    return Response(data=data2, status=status.HTTP_200_OK)

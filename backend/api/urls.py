@@ -5,6 +5,7 @@ from api.views import post_views
 from api.views import user_views
 from api.views import crawling_views
 from api.views import policy_views
+from api.views import pick_views
 from django.urls import path
 from rest_framework_swagger.views import get_swagger_view
 
@@ -18,6 +19,10 @@ urlpatterns = [
     url('auth/session/$', user_views.session, name='session'),
     url('auth/user/$', user_views.user, name="user"),
     url('auth/latest/$', user_views.latestView, name="latestView"),
+    url('auth/myChat/$', user_views.mychat, name="mychat"),
+    url('auth/getChatList/$', user_views.getChatList, name="getchatlist"),
+    url('auth/delChat/$', user_views.delChat, name="delChat"),
+
 
 
     # 서비스 & 카탈로그
@@ -27,6 +32,9 @@ urlpatterns = [
     
     url('getService/$', policy_views.getService, name='get_service'),
     url('policySearch/$', policy_views.policySearch, name='policy_search'),
+    url('policySearchByWord/$', policy_views.policySearchByWord, name='policy_search_by_word'),
+    url('policyClicked/$', policy_views.policyClicked, name='policyClicked'),
+
     
     # 자유게시판 관련 링크
     url('allBoards/$', post_views.getAllBoards, name="get_all_boards"), # 자유게시판 전체 글 로드
@@ -42,6 +50,8 @@ urlpatterns = [
     url('getNoticeComments/$', post_views.getNoticeComments, name='get_notice_comments'), # 공지사항 댓글 가져오기
     url('noticeComment/$', post_views.noticeComments, name='notice_comment'),
 
+    # 딱정함
+    url('pickPolicies/$', pick_views.pickPolicies, name='pick_policies'),
     # swagger
     path('docs/', get_swagger_view(title='API Docs')),
 ]

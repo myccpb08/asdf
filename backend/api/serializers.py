@@ -9,10 +9,11 @@ class ProfileSerializer(serializers.ModelSerializer):
     is_staff = serializers.SerializerMethodField('get_is_staff')
     when = serializers.SerializerMethodField('get_when')
     lastestView = serializers.SerializerMethodField('get_lastestView')
+    pick_policies = serializers.SerializerMethodField('get_pick_policies')
 
     class Meta:
         model = Profile
-        fields = ('id', 'username', 'password', 'name', 'favorite', 'when', 'lastestView', 'is_staff')
+        fields = ('id', 'username', 'password', 'name', 'favorite', 'when', 'lastestView', 'is_staff', 'pick_policies')
         
     def get_username(self, obj):
         return obj.user.username
@@ -32,6 +33,13 @@ class ProfileSerializer(serializers.ModelSerializer):
     def get_lastestView(self, obj):
         print(obj.lastestView)
         return str(obj.lastestView)
+    def get_pick_policies(self, obj):
+        pick_policies = list()
+        for item in obj.user.pick_policies.all():
+            pick_policies.append(item.id)
+        print('profile')
+        print(pick_policies)
+        return pick_policies
 
 class SessionSerializer(serializers.ModelSerializer):
     username = serializers.SerializerMethodField('get_user')
@@ -42,10 +50,11 @@ class SessionSerializer(serializers.ModelSerializer):
     token = serializers.SerializerMethodField('get_token')
     is_authenticated = serializers.SerializerMethodField('get_is_authenticated')
     is_staff = serializers.SerializerMethodField('get_is_staff')
+    pick_policies = serializers.SerializerMethodField('get_pick_policies')
 
     class Meta:
         model = Profile
-        fields = ('username', 'name', 'favorite', 'when', 'lastestView', 'token', 'is_authenticated', 'is_staff')
+        fields = ('username', 'name', 'favorite', 'when', 'lastestView', 'token', 'is_authenticated', 'is_staff', 'pick_policies')
 
     def get_user(self, obj):
         return str(obj['username'])
@@ -117,6 +126,15 @@ class SessionSerializer(serializers.ModelSerializer):
         print(obj['is_staff'])
         return obj['is_staff']
 
+    def get_pick_policies(self, obj):
+        pick_policies = list()
+        print(obj)
+        if obj.get('pick_policies') != None:
+            for item in obj['pick_policies']:
+                pick_policies.append(item.id)
+            print(pick_policies)
+        return pick_policies
+        
 
 class UserSerializer(serializers.ModelSerializer):
     genres_array = serializers.ReadOnlyField()
@@ -130,9 +148,11 @@ class BoardSerializer(serializers.ModelSerializer):
     writer = serializers.SerializerMethodField('get_writer')
     email = serializers.SerializerMethodField('get_email')
     when = serializers.SerializerMethodField('get_when')
+    comments = serializers.SerializerMethodField('get_comments')
+
     class Meta:
         model = Board
-        fields = ('id', 'when', 'clicked','writer', 'email', 'title', 'content')
+        fields = ('id', 'when', 'clicked','writer', 'email', 'title', 'content','comments')
     
     def get_writer(self, obj):
         return obj.writer.profile.name
@@ -143,6 +163,12 @@ class BoardSerializer(serializers.ModelSerializer):
     def get_when(self, obj):
         when =str(obj.when)[:10]
         return when
+        
+    def get_comments(self, obj):
+        print(obj)
+        items = BoardComment.objects.filter(post__id=obj.id)
+        comments = len(items)
+        return comments
 
 
 class BoardCommentSerializer(serializers.ModelSerializer):
@@ -171,10 +197,11 @@ class NoticeSerializer(serializers.ModelSerializer):
     is_staff = serializers.SerializerMethodField('get_is_staff')
     when = serializers.SerializerMethodField('get_when')
     email = serializers.SerializerMethodField('get_email')
+    comments = serializers.SerializerMethodField('get_comments')
 
     class Meta:
         model = Notice
-        fields = ('id', 'when', 'email', 'clicked', 'writer', 'is_staff', 'title', 'content')
+        fields = ('id', 'comments','when', 'email', 'clicked', 'writer', 'is_staff', 'title', 'content')
 
     def get_writer(self, obj):
         return obj.writer.profile.name
@@ -188,6 +215,12 @@ class NoticeSerializer(serializers.ModelSerializer):
 
     def get_email(self, obj):
         return obj.writer.username 
+
+    def get_comments(self, obj):
+        print(obj)
+        items = NoticeComment.objects.filter(post__id=obj.id)
+        comments = len(items)
+        return comments
 
 
 class NoticeCommentSerializer(serializers.ModelSerializer):
@@ -211,38 +244,89 @@ class NoticeCommentSerializer(serializers.ModelSerializer):
 
 class PolicySerializer(serializers.ModelSerializer):
     target = serializers.SerializerMethodField('get_target')
+    criteria = serializers.SerializerMethodField('get_criteria')
+    content = serializers.SerializerMethodField('get_content')
+    supply_way = serializers.SerializerMethodField('get_supply_way')
+    procedure = serializers.SerializerMethodField('get_procedure')
+    site = serializers.SerializerMethodField('get_site')
 
     class Meta:
         model = Policy
-        fields = ('id', 'title', 'brief', 'target', 'criteria', 'content', 'supply_way', 'procedure', 'site')
+        fields = ('id', 'title', 'brief', 'target', 'criteria', 'content', 'supply_way', 'procedure', 'site', 'clicked')
 
 
     def get_target(self, obj):
-        str = obj.target
+        return strSplit(obj.target)
+    
+    def get_criteria(self, obj):
+        return strSplit(obj.criteria)
 
-        temp = ""
-        for i in range(0, len(str)):
-            if (str[i] == "|"):
-                temp += "\n○ "
-            elif (str[i] == "&"):
-                temp += "\n  -  "
-            elif (str[i] == "@"):
-                temp += "\n    ＊ "
-            elif (str[i] == "+"):
-                temp += "\n        "
-            else:
-                temp += str[i]
-        print(temp)
-        return temp
+    def get_content(self, obj):
+        return strSplit(obj.content)
+
+    def get_supply_way(self, obj):
+        return strSplit(obj.supply_way)
+
+    def get_procedure(self, obj):
+        return strSplit(obj.procedure)
+
+    def get_site(self, obj):
+        if obj.site is None:
+            return None
+        return obj.site.split("|")
+
+    
+
+def strSplit(str):
+    if str is None:
+        return None
+    str = str.split("|")
+    arr=[]
+    for i in range(1, len(str)):
+        arr.append({
+            'content': str[i],
+            'body': []
+        })
+                
+        temp = arr[i-1]['content'].split('&')
+        if len(temp)>1 :
+            arr[i-1]['content']=temp[0]
+
+            for j in range(1, len(temp)):
+                arr[i-1]['body'].append({
+                    'content': temp[j],
+                    'body': []
+                })
+
+                temp1 = arr[i-1]['body'][j-1]['content'].split('@')
+                if len(temp1)>1 :
+                    arr[i-1]['body'][j-1]['content']=temp1[0]
+
+                    for k in range(1, len(temp1)):
+                        arr[i-1]['body'][j-1]['body'].append({
+                            'content': temp1[k],
+                            'body': []
+                        })
+
+                        temp2 = arr[i-1]['body'][j-1]['body'][k-1]['content'].split('+')
+                        if len(temp2)>1 :
+                            arr[i-1]['body'][j-1]['body'][k-1]['content']=temp2[0]
+
+                            for z in range(1, len(temp1)):
+                                arr[i-1]['body'][j-1]['body'][k-1]['body'].append({
+                                    'content': temp2[z],
+                                    'body': []
+                                })
+    return arr
 
 class CategoryPolicySerializer(serializers.ModelSerializer):
     id = serializers.SerializerMethodField('get_policy_id')
     title = serializers.SerializerMethodField('get_policy_title')
     brief = serializers.SerializerMethodField('get_policy_brief')
-
+    clicked = serializers.SerializerMethodField('get_policy_clicked')
     class Meta:
         model = Category_Policy
-        fields = ('id', 'title', 'brief')
+        fields = ('id', 'title', 'brief','clicked')
     
     def get_policy_id(self, obj):
         return obj.policy.id
@@ -253,11 +337,14 @@ class CategoryPolicySerializer(serializers.ModelSerializer):
     def get_policy_brief(self, obj):
         return obj.policy.brief
 
+    def get_policy_clicked(self, obj):
+        return obj.policy.clicked
+
 
 class AllPolicySerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Policy
-        fields = ('id', 'title', 'brief')
+        fields = ('id', 'title', 'brief', 'clicked')
 
     
