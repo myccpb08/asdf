@@ -1,13 +1,8 @@
 <template>
   <div>
     <v-card class="mx-auto">
-      <v-toolbar color="lightgray" white>
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
-        <v-toolbar-title>
-          <img src="../../images/glass_row.png" class="header_left" />
-        </v-toolbar-title>
-        <v-spacer></v-spacer>
-      </v-toolbar>
+      <br />
+        <img src="../../images/glass_row.png" class="header_left" style="margin-left:2%"/>
       <br />
       <v-container fluid grid-list-md pa-2>
         <v-layout>
@@ -183,7 +178,7 @@ export default {
   margin: 2%;
   padding: 1%;
   border-radius: 7px;
-  width: 40%;
+  width: 95%;
   border: 1px solid gray;
   text-align: left;
   display: inline-flex;
