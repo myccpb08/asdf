@@ -8,10 +8,33 @@
                 <div class="detailrow">
                     <h2>한 눈에 보는 복지정보</h2>
                     <h4>다양한 복지서비스 정보를 안내해드립니다.</h4>
+                    <span>조회수 {{policy.clicked+1}}</span>
+
+                    <!-- 채팅 버튼 -->
+                    <!-- <v-btn text @click.stop="drawer = !drawer"> -->
+                    <v-btn text @click ="this.test">
+                      <v-icon large color="warning">{{icons.chat}}</v-icon>
+                    </v-btn>
                 </div>
             </div>
-            
+            <!-- 채팅 drawer 시작 -->
+            <v-navigation-drawer v-model="drawer" absolute temporary right width=350 >
+              <v-list-item>
+                <v-list-item-avatar>
+                  <v-img src="https://randomuser.me/api/portraits/men/78.jpg"></v-img>
+                </v-list-item-avatar>
+
+                <v-list-item-content>
+                  <v-list-item-title>{{policy.title}}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              <v-divider></v-divider>
+              <PolicyChat :Id="policyId"></PolicyChat>
+            </v-navigation-drawer>
+      <!-- 채팅 drawer 끝 -->
         </div>
+
+
         <div class="line">
             <div style="border-top: 2px solid orange; height: 10px; width: 100%;"></div>
             <div style="border: 1px solid rgb(187, 187, 187); min-height:110px;" class="textrow">
@@ -104,7 +127,7 @@
                 </strong>
                 <strong class="head">
                   <ul>
-                    <li v-for="pol in policy.content">
+                    <li v-for=" pol in policy.content" >
                       <span style="font-size:large;">{{pol.content}}</span>
                       <ul>
                         <li v-for="po in pol.body">
@@ -156,11 +179,21 @@
                   </ul>
             </strong>
 
-            <strong class="head" v-if="policy.supply_way">
+            <strong class="head" v-if="policy.procedure">
                 <h2>지원절차</h2>
             </strong>
-            <strong class="head" v-if="policy.procedure">    
-                <h4>{{policy.procedure}}</h4>
+            <strong class="head" v-if="policy.procedure" style="width:100%; text-align:center;">
+                <div  v-for="(pol, i) in policy.procedure">
+                  <div v-if="i>0" class="procedureImg">
+                    <div></div>
+                    <div><img src="../../images/Arrow.png" alt="" style="width:100%;"></div>
+                    <div></div>
+                  </div>
+                  <div class="procedureDiv">
+                    <div >{{pol.content}}</div><hr>
+                    <div>{{pol.body[0].content}}</div>
+                  </div>
+                </div>
             </strong>
                 
             </div>
@@ -194,28 +227,40 @@
 
 
 <script>
-import store from "../../store/modules/data.js"
+import store from "../../store/modules/data.js";
+import { mdiChatProcessing, mdiChat, mdiDelete } from "@mdi/js";
+import PolicyChat from './PolicyChat'
 
 export default {
   data() {
     return {
       policyId: this.$route.params.policyId,
-      policy : {}
+      policy: {},
+      icons: { chat: mdiChat },
+      drawer: null
     };
+  },
+
+  components :{
+    PolicyChat
   },
 
   async mounted() {
     this.getService(this.policyId).then(result => {
       this.policy = result;
-      console.log(this.policy);
     });
   },
   methods: {
+
+    async test(event){
+      this.drawer = !this.drawer
+      event.stopPropagation()
+      return this.$store.dispatch('data/myChat', this.policyId)
+
+    },
+
     async getService(policyId) {
-      return this.$store.dispatch(
-        "data/getService",
-        policyId
-      );
+      return this.$store.dispatch("data/getService", policyId);
     }
   }
 };
@@ -223,42 +268,42 @@ export default {
 
 <style>
 .detail {
-    width: 100%;
-    height: 100%;
-    display:table-row;
+  width: 100%;
+  height: 100%;
+  display: table-row;
 }
 .detailrow_icon {
-    padding-left: 5%;
-    display:table-cell;
-    width: 130px;
+  padding-left: 5%;
+  display: table-cell;
+  width: 130px;
 }
 .detailrow {
-    float:left;
-    width: 87%;
-    min-width: 500px;
+  float: left;
+  width: 87%;
+  min-width: 500px;
 }
 .line {
-    padding-top: 3%;
+  padding-top: 3%;
 }
 .head {
-    padding: 7%
+  padding: 7%;
 }
 .textrow {
-    padding-left: 3%;
-    padding-right: 3%;
-    /* 한 줄 자르기 */ 
-    display: inline-block; 
-    width: 100%; 
-    white-space: nowrap; 
-    overflow: hidden; 
+  padding-left: 3%;
+  padding-right: 3%;
+  /* 한 줄 자르기 */
+  display: inline-block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
 
-    /* 여러 줄 자르기 추가 스타일 */ 
-    white-space: normal; 
-    line-height: 1.2; 
-    text-align: left;
+  /* 여러 줄 자르기 추가 스타일 */
+  white-space: normal;
+  line-height: 1.2;
+  text-align: left;
 }
 li {
-      text-indent: inherit;
+  text-indent: inherit;
 }
 .row {
   overflow: hidden;
@@ -385,4 +430,32 @@ ul li {
   line-height:160%;
   font-weight: 400 ;
 }
+
+.procedureDiv{
+    width:18%;
+    height: 160px;
+    border: 1px solid gray;
+    border-radius: 7px;
+    float: left;
+    background-color:
+}
+
+.procedureDiv div{
+    padding: 1vh;
+}
+
+.procedureImg{
+  height: 160px;
+  margin-left:1%;
+  margin-right:1%;
+  margin-bottom:2%;
+  width: 5%;
+  float: left;
+}
+
+.procedureImg div{
+  height: 33%;
+}
+
+
 </style>

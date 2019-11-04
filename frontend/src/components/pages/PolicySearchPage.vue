@@ -93,13 +93,14 @@
         <div v-for="policy in ListSliced" :key=policy.id>
             <div class="policy_contents" @click="goService(policy.id)">
                 <a style="text-decorations:none;color:black">
-                    <h4>{{policy.title}}</h4><br>
+                    <h4>{{policy.title}}</h4>
+                    <h5 style="text-align:right">조회수: {{policy.clicked}}</h5><br>
                     {{policy.brief}}
                 </a>
             </div>
         </div>
 
-        <v-pagination v-if="maxPages > 1" v-model="page" :length="maxPages" />
+        <v-pagination v-if="maxPages > 1" v-model="page" :length="maxPages" :total-visible="10" circle />
         
         
     </v-container>
@@ -176,6 +177,7 @@ export default {
 
     goService(n){
         router.push("/detailPolicy/"+n);
+        return this.$store.dispatch("data/policyClicked", n);
     }
   },
 
