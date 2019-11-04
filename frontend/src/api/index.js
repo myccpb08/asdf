@@ -182,9 +182,8 @@ export default {
     return axios.put(`${apiUrl}/getService/`, { params })
   },
 
-  getPickPolicies(params){
-    console.log(params)
-    return axios.get(`${apiUrl}/pickPolicies/`, { params }).then((result) => {
+  getPickPolicies(){
+    return axios.get(`${apiUrl}/pickPolicies/`).then((result) => {
       return result.data
     });
   },

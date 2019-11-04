@@ -119,10 +119,13 @@ class SessionSerializer(serializers.ModelSerializer):
 
     def get_pick_policies(self, obj):
         pick_policies = list()
-        for item in obj['pick_policies']:
-            pick_policies.append(item.id)
-        print(pick_policies)
+        print(obj)
+        if obj.get('pick_policies') != None:
+            for item in obj['pick_policies']:
+                pick_policies.append(item.id)
+            print(pick_policies)
         return pick_policies
+        
 
 class UserSerializer(serializers.ModelSerializer):
     genres_array = serializers.ReadOnlyField()

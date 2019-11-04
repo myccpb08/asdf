@@ -216,8 +216,8 @@ const actions = {
   async editServicePick({commit}, params) {
     return await api.editServicePick(params)
   },
-  async getPickPolicies({commit}, params) {
-    return await api.getPickPolicies(params)
+  async getPickPolicies({commit}) {
+    return await api.getPickPolicies()
   },
   async editPickPolicies({commit}, params) {
     return await api.editPickPolicies(params)

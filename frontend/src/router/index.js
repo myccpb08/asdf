@@ -14,7 +14,7 @@ import BoardPage from '../components/pages/BoardPage'
 import BoardWritePage from '../components/pages/BoardWritePage'
 import BoardDetailPage from '../components/pages/BoardDetailPage'
 import BoardUpdatePage from '../components/pages/BoardUpdatePage'
-import PickPage from '../components/pages/PickPage'
+import FavoritePage from '../components/pages/FavoritePage'
 
 import Chat from '../components/pages/Chat'
 
@@ -40,7 +40,7 @@ const router = new VueRouter({
     { path: '/notice/write', component: NoticeWritePage, name: 'NoticeWrite'},
     { path: '/board', component: BoardPage, name: 'Board'},
     { path: '/board/write', component: BoardWritePage, name: 'BoardWrite'},
-    { path: '/pick', component: PickPage, name: 'Pick'},
+    { path: '/favorite', component: FavoritePage, name: 'Favorite'},
 
     { path: '/detailPolicy/:policyId', component: DetailPolicyPage, name: 'DetailPolicy', props: true},
     { path: '/boardDetail/:boardId',component: BoardDetailPage, name: 'boardDetail', props: true},

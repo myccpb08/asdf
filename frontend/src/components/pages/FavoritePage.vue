@@ -10,19 +10,16 @@
       </v-toolbar>
       <br />
       <v-container fluid grid-list-md pa-2>
-        <v-layout style="margin-left:10%;">
+        <v-layout>
           <div class="pickbox">
             <!-- <v-flex class="pickbox" v-for="i in totalpick"> -->
             <div class="pickcontents">
               찜 해놓은 정책
               <hr />
-              <div v-for="pick in pick_policies" :key="pick.id">
-                <div class="pickcontent" style="cursor: pointer;" @click="editPickStatus(pick.id)">
-                  <h4>{{ pick.title }}</h4>
+              <div class="pickcontent" v-for="pick in pick_policies" :key="pick.id">
+                <div class="font-nanum" style="cursor: pointer;" @click="editPickStatus(pick.id)">
+                  <h4 >{{ pick.title }}</h4>
                 </div>
-              </div>
-              <div class="pickcontent">
-                <h4>청년내일채움공제</h4>
               </div>
             </div>
             <div class="pickcontents">
@@ -82,14 +79,15 @@ export default {
     pick_policies: null
   }),
   created() {
-    this.user = this.$store.state.data.user;
-    this.getPickPolicies(this.$store.state.data.user.pick_policies);
+    this.getPickPolicies();
   },
-  mounted() {},
+  mounted() {
+  },
   methods: {
     // 으아.. Pick, Doing, Finish 각각 다만들어야됨
-    getPickPolicies(params) {
-      this.$store.dispatch("data/getPickPolicies", params).then(result => {
+    getPickPolicies() {
+      this.$store.dispatch("data/getPickPolicies").then(result => {
+        console.log(result)
         this.pick_policies = result;
       });
     },
@@ -106,10 +104,20 @@ export default {
       console.log(params)
       this.$store.dispatch("data/editPickPolicies", params)
     }
-  }
+  },
+  watch: {
+    getRefresh() {
+      if (this.user){
+        this.getPickPolicies(this.$store.state.data.user.pick_policies);
+      }
+    }
+  },
 };
 </script>
 <style>
+.font-nanum {
+   font-family: 'Nanum Gothic', sans-serif; 
+}
 .header_left {
   width: 17%;
 }
@@ -133,9 +141,10 @@ export default {
   margin: 2%;
   padding: 1%;
   border-radius: 7px;
-  width: 40%;
+  width: 95%;
   border: 1px solid gray;
-  text-align: center;
+  text-align: left;
   display: inline-flex;
 }
+
 </style>

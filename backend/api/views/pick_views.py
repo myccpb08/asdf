@@ -15,9 +15,8 @@ def pickPolicies(request):
     print("딱정함")
     if request.method == 'GET':
         policies = []
-        for value in request.GET.values():
-            policies.append(value)
-        pick_policies = Policy.objects.filter(id__in=policies)
+        user = request.user;
+        pick_policies = user.pick_policies.all()
         serializer = PolicySerializer(pick_policies, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
         
@@ -25,7 +24,6 @@ def pickPolicies(request):
         # 진행중 정책 / 결과나온 정책 분기문 작성
         params = request.data.get('params')
         policy_id = params.get('policyId')
-        print(request.user)
         user = User.objects.get(username=request.user)
         policy = Policy.objects.get(id=policy_id)
         print(policy)
