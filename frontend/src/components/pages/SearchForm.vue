@@ -22,6 +22,7 @@ export default {
 
   methods: {
     onSubmit: function() {
+      this.$emit('reload')
       router.push("/policy/search/"+this.title);/* data.searchPolicy : 시행 */
     }
   }                        
