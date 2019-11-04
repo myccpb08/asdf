@@ -9,6 +9,7 @@ class Profile(models.Model):
     name = models.CharField(max_length=20)
     favorite = models.CharField(max_length=500, default="00")
     when = models.DateTimeField(default=date.today())
+    mychat = models.CharField(max_length=400, default=',')
 
     # @property
     # def favorite_array(self):
@@ -93,6 +94,8 @@ class Policy(models.Model):
     site =models.TextField(null=True, blank=True)
     pick_users = models.ManyToManyField(User, related_name='pick_policies', blank=True)
     doing_users = models.ManyToManyField(User, related_name='doing_policies', blank=True)
+    clicked = models.IntegerField(default=0)
+
 
 class Category(models.Model):
     id = models.CharField(max_length=5, primary_key=True)
