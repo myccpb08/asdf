@@ -229,6 +229,10 @@ const actions = {
     return await api.policySearch(params)
   },
 
+  async policySearchByWord({commit}, params){
+    return await api.policySearchByWord(params)
+  },
+  
   async editServicePick({commit}, params) {
     return await api.editServicePick(params)
   },

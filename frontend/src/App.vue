@@ -81,26 +81,26 @@ export default {
     SearchPage: SearchPage
   },
 
-  created() {
-    this.checkLogin();
-    console.log("Create!!!!!!!!!!");
-    if (
-      localStorage.getItem("token") !== undefined &&
-      localStorage.getItem("token") !== null
-    ) {
-      this.login = true;
-      var result = this.getSession(localStorage.getItem("token")).then(function(
-        value
-      ) {
-        console.log(value);
-        if (value == false) {
-          router.push("/");
-        }
-      });
-    } else {
-      router.push("/");
-    }
-  },
+  // created() {
+  //   this.checkLogin();
+  //   console.log("Create!!!!!!!!!!");
+  //   if (
+  //     localStorage.getItem("token") !== undefined &&
+  //     localStorage.getItem("token") !== null
+  //   ) {
+  //     this.login = true;
+  //     var result = this.getSession(localStorage.getItem("token")).then(function(
+  //       value
+  //     ) {
+  //       console.log(value);
+  //       if (value == false) {
+  //         router.push("/");
+  //       }
+  //     });
+  //   } else {
+  //     router.push("/");
+  //   }
+  // },
 
   methods: {
     ...mapActions("data", ["getSession"]),

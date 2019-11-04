@@ -201,6 +201,12 @@ export default {
     });
   },
 
+  policySearchByWord(params){
+    return axios.get(`${apiUrl}/policySearchByWord/`,{params}).then((result) => {
+      return result.data
+    });
+  },
+
   editServicePick(params){
     console.log(params)
     return axios.put(`${apiUrl}/getService/`, { params })
@@ -208,7 +214,7 @@ export default {
 
   getPickPolicies(){
     return axios.get(`${apiUrl}/pickPolicies/`).then((result) => {
-      return result.data
+      return result.data  
     });
   },
 

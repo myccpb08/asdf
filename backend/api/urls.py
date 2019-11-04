@@ -31,6 +31,7 @@ urlpatterns = [
     
     url('getService/$', policy_views.getService, name='get_service'),
     url('policySearch/$', policy_views.policySearch, name='policy_search'),
+    url('policySearchByWord/$', policy_views.policySearchByWord, name='policy_search_by_word'),
     url('policyClicked/$', policy_views.policyClicked, name='policyClicked'),
 
     
