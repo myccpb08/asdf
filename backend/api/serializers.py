@@ -287,4 +287,17 @@ class AllPolicySerializer(serializers.ModelSerializer):
         model = Policy
         fields = ('id', 'title', 'brief', 'clicked')
 
+
+class PickPolicySerializer(serializers.ModelSerializer):
+
+    modal = serializers.SerializerMethodField('get_modal')
+    class Meta:
+        model = Policy
+        fields = ('id', 'title', 'brief', 'target', 'criteria', 'content', 'modal')
+
+    def get_modal(self, obj):
+        return False
+
     
+    
+

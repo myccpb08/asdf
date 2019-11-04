@@ -50,6 +50,8 @@ urlpatterns = [
 
     # 딱정함
     url('pickPolicies/$', pick_views.pickPolicies, name='pick_policies'),
+    url('doingPolicies/$', pick_views.doingPolicies, name='doing_policies'),
+    url('finishPolicies/$', pick_views.finishPolicies, name='finish_policies'),
     # swagger
     path('docs/', get_swagger_view(title='API Docs')),
 ]

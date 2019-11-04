@@ -3,7 +3,7 @@
     <div class="policy_search_main">
       <div class="policy_search_header">
         <div class="policy_search_head">분류별 검색</div>
-        <div class="policy_search_head" style="cursor:pointer;" @click="goPage(0)">전체 보기</div>
+        <div class="policy_search_head" style="cursor:pointer;" @click="goPage('00')">전체 보기</div>
       </div>
       <div class="policy_search_content">
         <div class="policy_search_A">

@@ -206,6 +206,7 @@ export default {
     return axios.put(`${apiUrl}/getService/`, { params })
   },
 
+  // 딱정함 pick
   getPickPolicies(){
     return axios.get(`${apiUrl}/pickPolicies/`).then((result) => {
       return result.data
@@ -218,5 +219,35 @@ export default {
 
   deletePickPolicies(params){
     return axios.delete(`${apiUrl}/pickPolicies/`, { params })
-  }
+  },
+
+  // 딱정함 doing
+  getDoingPolicies(){
+    return axios.get(`${apiUrl}/doingPolicies/`).then((result) => {
+      return result.data
+    });
+  },
+
+  editDoingPolicies(params){
+    return axios.put(`${apiUrl}/doingPolicies/`, { params })
+  },
+
+  deleteDoingPolicies(params){
+    return axios.delete(`${apiUrl}/doingPolicies/`, { params })
+  },
+  
+  // 딱정함 finish finishPolicies
+  getFinishPolicies(){
+    return axios.get(`${apiUrl}/finishPolicies/`).then((result) => {
+      return result.data
+    });
+  },
+
+  editFinishPolicies(params){
+    return axios.put(`${apiUrl}/finishPolicies/`, { params })
+  },
+
+  deleteFinishPolicies(params){
+    return axios.delete(`${apiUrl}/finishPolicies/`, { params })
+  },
 }

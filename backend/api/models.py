@@ -94,6 +94,7 @@ class Policy(models.Model):
     site =models.TextField(null=True, blank=True)
     pick_users = models.ManyToManyField(User, related_name='pick_policies', blank=True)
     doing_users = models.ManyToManyField(User, related_name='doing_policies', blank=True)
+    finish_users = models.ManyToManyField(User, related_name='finish_policies', blank=True)
     clicked = models.IntegerField(default=0)
 
 
