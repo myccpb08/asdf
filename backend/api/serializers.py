@@ -263,7 +263,7 @@ class CategoryPolicySerializer(serializers.ModelSerializer):
     id = serializers.SerializerMethodField('get_policy_id')
     title = serializers.SerializerMethodField('get_policy_title')
     brief = serializers.SerializerMethodField('get_policy_brief')
-
+    clicked = serializers.SerializerMethodField('get_policy_clicked')
     class Meta:
         model = Category_Policy
         fields = ('id', 'title', 'brief','clicked')
@@ -276,6 +276,9 @@ class CategoryPolicySerializer(serializers.ModelSerializer):
 
     def get_policy_brief(self, obj):
         return obj.policy.brief
+
+    def get_policy_clicked(self, obj):
+        return obj.policy.clicked
 
 
 class AllPolicySerializer(serializers.ModelSerializer):

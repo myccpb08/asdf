@@ -33,6 +33,7 @@ def getService(request):
 @api_view(['GET',])
 def policySearch(request):
     categoryId = request.GET.get('0')
+    print(111111)
     print(request.GET.get('0'))
 
     if(categoryId=="00"):
