@@ -116,7 +116,9 @@ export default {
         this.pick_policies = result;
       });
     },
-
+    getPickModal(id){
+      
+    },
     editPickStatus(id){
       // params에 진행중인지 / 결과나온정책인지 추가
 
