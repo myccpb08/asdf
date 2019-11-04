@@ -7,7 +7,7 @@
           <div>
             <v-layout column>
               <v-flex xs12>
-                <div>
+                <div style="font-family:WONDotum">
                   <br />
                   <div style="min-width:20px; text-align:center;">
                     <strong
@@ -28,15 +28,14 @@
                   {{notice.content}}
                 </div>
               </v-flex>
-              <v-flex xs12 text-xs-center round my-5>
-                <v-btn
+              <v-flex xs12 text-xs-center round my-5 style='text-align:right'>
+                <v-btn text style="margin:0px; padding:0px"
                   :to="{ name: 'noticeUpdate', params: {noticeId: this.noticeId} }"
-                  color="gray"
-                  class="movebtn"
-                >update</v-btn>
-                <v-btn color="gray" @click="deleteNotice()" class="movebtn">delete</v-btn>
-                <v-btn color="gray" @click="$router.go(-1)" class="movebtn">back</v-btn>
+                ><v-icon style="color:57A5FF;">{{ icons.edit2 }}</v-icon></v-btn>
+                <v-btn text @click="deleteNotice()" style="margin:0px; padding:0px"><v-icon style="color:F16F85;">{{ icons.del }}</v-icon></v-btn>
+                <v-btn text @click="$router.go(-1)" style="margin:0px; padding:0px"> <v-icon style="color:FFB60F;">{{icons.back}}</v-icon></v-btn>
               </v-flex>
+              <hr><br>
 
               <!-- 댓글영역 -->
               <div>
@@ -46,7 +45,7 @@
                 <div v-else>
                   <div v-for="comment in commentsgroup" v-bind:key="comment.id">
                     <div v-if="!comment.edit" style="min-height:40px">
-                      {{comment.writer}} - {{comment.content}} - {{comment.when}}
+                      {{comment.writer}} - {{comment.content}}
                       
                       <!-- 댓글수정버튼 -->
                       
@@ -92,7 +91,13 @@
 
 <script>
 import store from "../../store/modules/data.js";
-import { mdiPencil, mdiDelete, mdiCheck } from "@mdi/js";
+import {
+  mdiSquareEditOutline,
+  mdiUndoVariant,
+  mdiPencil,
+  mdiDelete,
+  mdiCheck
+} from "@mdi/js";
 import NoticeCommentForm from "./NoticeCommentForm";
 import { mapState, mapActions } from "vuex";
 
@@ -107,7 +112,14 @@ export default {
       update_content: "",
       check: false,
       commentsgroup: {},
-      icons: { edit: mdiPencil, del: mdiDelete, editsubmit: mdiCheck },
+            icons: {
+        edit: mdiPencil,
+        del: mdiDelete,
+        editsubmit: mdiCheck,
+        back: mdiUndoVariant,
+        edit2: mdiSquareEditOutline
+      },
+      
       user : this.$store.state.data.user
     };
   },
@@ -172,7 +184,6 @@ export default {
         content : content,
         commentId : commentId
       }
-      console.log(2222)
       this.$store.dispatch("data/editNoticeComment", params);
       this.getComments(noticeId)
       // window.location.reload()
@@ -180,3 +191,13 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+@font-face {
+  font-family: "WONDotum";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/WONDotum.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+</style>

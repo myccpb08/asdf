@@ -8,14 +8,19 @@
         <div class="detailrow">
           <h2>한 눈에 보는 복지정보</h2>
           <h4>다양한 복지서비스 정보를 안내해드립니다.</h4>
-          <v-btn text @click.stop="drawer = !drawer">
+          조회수 {{policy.clicked+1}}
+
+          <!-- 채팅 버튼 -->
+          <!-- <v-btn text @click.stop="drawer = !drawer"> -->
+          <v-btn text @click ="this.test">
             <v-icon large color="warning">{{icons.chat}}</v-icon>
           </v-btn>
+
         </div>
       </div>
 
-      <!--drawer 테스트 -->
-      <v-navigation-drawer v-model="drawer" absolute temporary right width=350>
+      <!-- 채팅 drawer 시작 -->
+      <v-navigation-drawer v-model="drawer" absolute temporary right width=350 >
         <v-list-item>
           <v-list-item-avatar>
             <v-img src="https://randomuser.me/api/portraits/men/78.jpg"></v-img>
@@ -28,8 +33,7 @@
         <v-divider></v-divider>
         <PolicyChat :Id="policyId"></PolicyChat>
       </v-navigation-drawer>
-
-      <!-- drawer 테스트 -->
+      <!-- 채팅 drawer 끝 -->
     </div>
     <div class="line">
       <div style="border-top: 2px solid orange; height: 10px; width: 100%;"></div>
@@ -156,7 +160,7 @@
 
 <script>
 import store from "../../store/modules/data.js";
-import { mdiChatProcessing, mdiChat } from "@mdi/js";
+import { mdiChatProcessing, mdiChat, mdiDelete } from "@mdi/js";
 import PolicyChat from './PolicyChat'
 
 export default {
@@ -180,6 +184,14 @@ export default {
     });
   },
   methods: {
+
+    async test(event){
+      this.drawer = !this.drawer
+      event.stopPropagation()
+      return this.$store.dispatch('data/myChat', this.policyId)
+
+    },
+
     async getService(policyId) {
       return this.$store.dispatch("data/getService", policyId);
     }

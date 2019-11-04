@@ -20,7 +20,10 @@
             <td class="title">
               <router-link
               :to="{ name: 'noticeDetail', params: {noticeId: post.id} }"
-            >{{ post.title }}</router-link>
+            >{{ post.title }}
+            
+            </router-link>
+            <span style="font-size:small" v-if="post.comments">[{{post.comments}}]</span>
             </td>
             <td class="name">{{post.writer}}</td>
             <td class="date">{{post.when}}</td>

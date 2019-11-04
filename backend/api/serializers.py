@@ -121,9 +121,11 @@ class BoardSerializer(serializers.ModelSerializer):
     writer = serializers.SerializerMethodField('get_writer')
     email = serializers.SerializerMethodField('get_email')
     when = serializers.SerializerMethodField('get_when')
+    comments = serializers.SerializerMethodField('get_comments')
+
     class Meta:
         model = Board
-        fields = ('id', 'when', 'clicked','writer', 'email', 'title', 'content')
+        fields = ('id', 'when', 'clicked','writer', 'email', 'title', 'content','comments')
     
     def get_writer(self, obj):
         return obj.writer.profile.name
@@ -134,6 +136,12 @@ class BoardSerializer(serializers.ModelSerializer):
     def get_when(self, obj):
         when =str(obj.when)[:10]
         return when
+        
+    def get_comments(self, obj):
+        print(obj)
+        items = BoardComment.objects.filter(post__id=obj.id)
+        comments = len(items)
+        return comments
 
 
 class BoardCommentSerializer(serializers.ModelSerializer):
@@ -162,10 +170,11 @@ class NoticeSerializer(serializers.ModelSerializer):
     is_staff = serializers.SerializerMethodField('get_is_staff')
     when = serializers.SerializerMethodField('get_when')
     email = serializers.SerializerMethodField('get_email')
+    comments = serializers.SerializerMethodField('get_comments')
 
     class Meta:
         model = Notice
-        fields = ('id', 'when', 'email', 'clicked', 'writer', 'is_staff', 'title', 'content')
+        fields = ('id', 'comments','when', 'email', 'clicked', 'writer', 'is_staff', 'title', 'content')
 
     def get_writer(self, obj):
         return obj.writer.profile.name
@@ -179,6 +188,12 @@ class NoticeSerializer(serializers.ModelSerializer):
 
     def get_email(self, obj):
         return obj.writer.username 
+
+    def get_comments(self, obj):
+        print(obj)
+        items = NoticeComment.objects.filter(post__id=obj.id)
+        comments = len(items)
+        return comments
 
 
 class NoticeCommentSerializer(serializers.ModelSerializer):
@@ -205,7 +220,7 @@ class PolicySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Policy
-        fields = ('id', 'title', 'brief', 'target', 'criteria', 'content', 'supply_way', 'procedure', 'site')
+        fields = ('id', 'title', 'brief', 'target', 'criteria', 'content', 'supply_way', 'procedure', 'site', 'clicked')
 
 
     def get_target(self, obj):
@@ -233,7 +248,7 @@ class CategoryPolicySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category_Policy
-        fields = ('id', 'title', 'brief')
+        fields = ('id', 'title', 'brief','clicked')
     
     def get_policy_id(self, obj):
         return obj.policy.id
@@ -249,6 +264,6 @@ class AllPolicySerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Policy
-        fields = ('id', 'title', 'brief')
+        fields = ('id', 'title', 'brief', 'clicked')
 
     
