@@ -32,6 +32,7 @@ urlpatterns = [
     url('getService/$', policy_views.getService, name='get_service'),
     url('policySearch/$', policy_views.policySearch, name='policy_search'),
     url('policyClicked/$', policy_views.policyClicked, name='policyClicked'),
+    url('getMostPolicy/$', policy_views.getMostPolicy, name= 'get_most_policy'),
 
     
     # 자유게시판 관련 링크

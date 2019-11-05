@@ -44,6 +44,11 @@ export default {
       inputPass: params.inputPass
     })
   },
+  getUser () {
+    return axios.get(`${apiUrl}/auth/user/`).then((result) => {
+      return result.data
+    });
+  },
   async editUser(params) {
     await axios.put(`${apiUrl}/auth/user/`, {
       username: params.username,
@@ -250,4 +255,10 @@ export default {
   deleteFinishPolicies(params){
     return axios.delete(`${apiUrl}/finishPolicies/`, { params })
   },
+
+  getMostPolicy() {
+    return axios.get(`${apiUrl}/getMostPolicy/`).then((result) => {
+      return result.data
+    });
+  }
 }

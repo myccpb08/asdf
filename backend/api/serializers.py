@@ -9,7 +9,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     is_staff = serializers.SerializerMethodField('get_is_staff')
     when = serializers.SerializerMethodField('get_when')
     pick_policies = serializers.SerializerMethodField('get_pick_policies')
-
+    favorite = serializers.SerializerMethodField('get_favorite')
     class Meta:
         model = Profile
         fields = ('id', 'username', 'password', 'name', 'favorite', 'when', 'is_staff', 'pick_policies')
@@ -24,6 +24,15 @@ class ProfileSerializer(serializers.ModelSerializer):
         if obj.user.is_staff:
             return "staff"
         return "user"
+    
+    def get_favorite(self, obj):
+        print(obj.favorite)
+        inputFavorite = str(obj.favorite)
+        strFavorite = inputFavorite.replace('\', \'', " ").strip('[\'\']')
+        objFavorite = strFavorite.split(" ")
+        return objFavorite
+
+
     
     def get_when(self, obj):
         print(obj.when)
@@ -128,11 +137,37 @@ class SessionSerializer(serializers.ModelSerializer):
         
 
 class UserSerializer(serializers.ModelSerializer):
-    genres_array = serializers.ReadOnlyField()
+    name = serializers.SerializerMethodField('get_name')
+    pick_policies = serializers.SerializerMethodField('get_pick_policies')
+    doing_policies = serializers.SerializerMethodField('get_doing_policies')
+    finish_policies = serializers.SerializerMethodField('get_finish_policies')
     class Meta:
         model = User
-        fields = ('id', 'username', 'password', 'email')
+        fields = ('id', 'username', 'name', 'pick_policies', 'doing_policies', 'finish_policies')
+    
+    def get_name(self, obj):
+        return obj.profile.name
 
+    def get_pick_policies(self, obj):
+        pick_policies = list()
+        if obj.pick_policies.all():
+            for item in obj.pick_policies.all():
+                pick_policies.append(item.id)
+        return pick_policies
+
+    def get_doing_policies(self, obj):
+        doing_policies = list()
+        if obj.doing_policies.all():
+            for item in obj.doing_policies.all():
+                doing_policies.append(item.id)
+        return doing_policies
+
+    def get_finish_policies(self, obj):
+        finish_policies = list()
+        if obj.finish_policies.all():
+            for item in obj.finish_policies.all():
+                finish_policies.append(item.id)
+        return finish_policies
 
 ''' 💓💓💓💓💓 자유게시판 Serializers '''
 class BoardSerializer(serializers.ModelSerializer):

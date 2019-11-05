@@ -25,7 +25,7 @@
                   <div slot="body">
                     <div class="row">
                       <div class="col">
-                      <v-btn @click="goService(pick.id)">상세보기</v-btn>
+                      <v-btn outlined color="#42b983" @click="goService(pick.id)">상세보기</v-btn>
                       </div>
                       <div >
                         <v-radio-group v-model="radio_pick">
@@ -35,9 +35,9 @@
                     </div>
                   </div>
                   <div slot="footer">
-                    <button @click="pickSave(pick, 0, radio_pick)">저장</button>
-                    <button @click="pickDelete(pick, 0)" style="padding-left:60px;">삭제</button>
-                    <button class="modal-default-button" @click="pick.modal = false; radio_pick=0">닫기</button>
+                    <button @click="pickSave(pick, 0, radio_pick)" style="width:33%" >저장</button>
+                    <button @click="pickDelete(pick, 0)" style="width:33%">삭제</button>
+                    <button @click="pick.modal = false; radio_pick=0" style="width:33%">닫기</button>
                   </div>
                 </FavoriteModal>
               </div>
@@ -59,7 +59,7 @@
                   <div slot="body">
                     <div class="row">
                       <div class="col">
-                      <v-btn @click="goService(pick.id)">상세보기</v-btn>
+                      <v-btn outlined color="#42b983" @click="goService(pick.id)">상세보기</v-btn>
                       </div>
                       <div >
                         <v-radio-group v-model="radio_doing">
@@ -69,9 +69,9 @@
                     </div>
                   </div>
                   <div slot="footer">
-                    <button @click="pickSave(pick, 1, radio_doing)">저장</button>
-                    <button @click="pickDelete(pick, 1)" style="padding-left:60px;">삭제</button>
-                    <button class="modal-default-button" @click="pick.modal = false; radio_doing=1">닫기</button>
+                    <button @click="pickSave(pick, 1, radio_doing)" style="width:33%">저장</button>
+                    <button @click="pickDelete(pick, 1)" style="width:33%">삭제</button>
+                    <button class="modal-default-button" @click="pick.modal = false; radio_doing=1" style="width:33%">닫기</button>
                   </div>
                 </FavoriteModal>
               </div>
@@ -93,7 +93,7 @@
                   <div slot="body">
                     <div class="row">
                       <div class="col">
-                      <v-btn @click="goService(pick.id)">상세보기</v-btn>
+                      <v-btn outlined color="#42b983" @click="goService(pick.id)">상세보기</v-btn>
                       </div>
                       <div >
                         <v-radio-group v-model="radio_finish">
@@ -103,9 +103,9 @@
                     </div>
                   </div>
                   <div slot="footer">
-                    <button @click="pickSave(pick, 2, radio_finish)">저장</button>
-                    <button @click="pickDelete(pick, 2)" style="padding-left:60px;">삭제</button>
-                    <button class="modal-default-button" @click="pick.modal = false; radio_finish=2">닫기</button>
+                    <button @click="pickSave(pick, 2, radio_finish)" style="width:33%;">저장</button>
+                    <button @click="pickDelete(pick, 2)" style="width:33%;">삭1제</button>
+                    <button class="modal-default-button" @click="pick.modal = false; radio_finish=2" style="width:33%;">닫기</button>
                   </div>
                 </FavoriteModal>
               </div>
@@ -186,6 +186,10 @@ export default {
     FavoriteModal
   },
   created() {
+    if (localStorage.getItem("token") == null) {
+      alert("로그인이 필요합니다.")
+      router.push("/login")
+    }
     this.getFavoriteData();
   },
   mounted() {
@@ -251,18 +255,21 @@ export default {
           now: now
         }
       if (now == 0){
+          confirm("Are you sure you want to delete this item?")&&
           this.$store.dispatch("data/deletePickPolicies", params).then(response => {
             this.getFavoriteData()
           })
 
         }
         else if (now == 1){
+          confirm("Are you sure you want to delete this item?")&&
           this.$store.dispatch("data/deleteDoingPolicies", params).then(response => {
             this.getFavoriteData()
           })
           
         }
         else{
+          confirm("Are you sure you want to delete this item?")&&
           this.$store.dispatch("data/deleteFinishPolicies", params).then(response => {
             this.getFavoriteData()
           })
@@ -298,11 +305,7 @@ export default {
     }
   },
   watch: {
-    // getRefresh() {
-    //   if (this.user) {
-    //     this.getPickPolicies(this.$store.state.data.user.pick_policies);
-    //   }
-    // }
+
   }
 };
 </script>

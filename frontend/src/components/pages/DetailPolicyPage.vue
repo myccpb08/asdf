@@ -188,12 +188,24 @@ export default {
       this.policy = result;
       console.log(this.policy);
     });
-    console.log(this.$store.state.data.user)
-    let vm = this
-    // pick 정책중에 현재 정책이 포함되어 있으면 true
-    this.is_myPick = this.$store.state.data.user.pick_policies.some(function(pick_policy){
-      return pick_policy == vm.policyId
-    })
+    this.$store.dispatch("data/getUser").then(response => {
+
+            this.is_myPick = response['pick_policies'].some(pick_policy=> {
+              return pick_policy == this.policyId
+            }) || 
+            response['doing_policies'].some(pick_policy=> {
+              return pick_policy == this.policyId
+            }) ||
+            response['finish_policies'].some(pick_policy=> {
+              return pick_policy == this.policyId
+            })
+          })
+    // console.log(this.$store.state.data.user)
+    // let vm = this
+    // // pick 정책중에 현재 정책이 포함되어 있으면 true
+    // this.is_myPick = this.$store.state.data.user.pick_policies.some(function(pick_policy){
+    //   return pick_policy == vm.policyId
+    // })
   },
   methods: {
 
@@ -211,14 +223,28 @@ export default {
       );
     },
     toggleMyPick(){
-      this.is_myPick = !this.is_myPick;
+      
       const params = {
         id: this.policyId,
         user: this.$store.state.data.user.username
       };
-      this.$store.dispatch("data/editServicePick", params).then((result) => {
-        this.$store.dispatch("data/editSession", localStorage.getItem('token'))
-    });
+    
+      if ( this.$store.dispatch("data/getUser").then(response => {
+            response['doing_policies'].some(pick_policy=> {
+                return pick_policy == this.policyId
+            }) ||
+            response['finish_policies'].some(pick_policy=> {
+              return pick_policy == this.policyId
+            }) 
+            }) ) {
+            alert('딱정함에서 제거해주세요')
+          }
+      else {
+        this.is_myPick = !this.is_myPick;
+        this.$store.dispatch("data/editServicePick", params).then((result) => {
+          this.$store.dispatch("data/editSession", localStorage.getItem('token'))
+      });
+      }
     },
   }
 };

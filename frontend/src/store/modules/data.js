@@ -67,6 +67,9 @@ const actions = {
     console.log(params)
     return await api.checkPassword(params)
   },
+  async getUser({commit}) {
+    return await api.getUser()
+  },
   async editUser({commit}, params) {
     console.log(params)
     return await api.editUser(params)
@@ -265,6 +268,10 @@ const actions = {
   async deleteFinishPolicies({commit}, params) {
     return await api.deleteFinishPolicies(params)
   },
+
+  async getMostPolicy({commit}, params) {
+    return await api.getMostPolicy()
+  }
 }
 
 // mutations

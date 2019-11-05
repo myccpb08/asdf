@@ -52,3 +52,11 @@ def policyClicked(request):
     item.clicked += 1
     item.save()
     return Response(status=status.HTTP_200_OK)
+
+@api_view(['GET',])
+def getMostPolicy(request):
+    policies = Policy.objects.order_by('-clicked')[0:5]
+    print(policies)
+    serializer = AllPolicySerializer(policies, many=True)
+    return Response(data=serializer.data, status=status.HTTP_200_OK)
+
