@@ -118,81 +118,81 @@ export default {
         };
     },
 
-  async mounted() {
-      if(this.$route.params.searchWord == undefined){
-        this.getPolicys().then(result => {
-            this.policies = result;
+    async mounted() {
+        console.log(this.$route.params.searchWord);
+        if(this.$route.params.searchWord == undefined){
+            this.getPolicys().then(result => {
+                this.policies = result;
         });
-      }else{
-        this.getPolicysSearchByWord().then(result => {
-            this.policies = result;
+        }else{
+            this.getPolicysSearchByWord().then(result => {
+                this.policies = result;
         });
-      }
-    
-  },
-  methods: {
-    async getPolicys() {
-        return await this.$store.dispatch(
-            "data/policySearch", this.categoryId
-        );
-    },
-    async getPolicysSearchByWord() {
-        return await this.$store.dispatch(
-            "data/policySearchByWord", this.$route.params.searchWord
-        );
-    },
-
-    goPage(n){
-        
-        var policy = document.querySelectorAll(".policy");
-        var tempInt = parseInt(this.categoryId)-1;
-        if(tempInt>=0){
-            policy[tempInt].classList.remove("colorPink");
-            policy[tempInt].classList.remove("colorYellow");
-            policy[tempInt].classList.remove("colorBlue");
         }
+    },
 
-        tempInt = parseInt(n)-1;
-        if(tempInt >= 0){
-            if(tempInt <6){
-                policy[tempInt].classList.add("colorPink");
-            }else if(tempInt <9){
-                policy[tempInt].classList.add("colorYellow");
-            }else if(tempInt < 16){
-                policy[tempInt].classList.add("colorBlue");
+    methods: {
+        async getPolicys() {
+            return await this.$store.dispatch(
+                "data/policySearch", this.categoryId
+            );
+        },
+        async getPolicysSearchByWord() {
+            return await this.$store.dispatch(
+                "data/policySearchByWord", this.$route.params.searchWord
+            );
+        },
+
+        goPage(n){
+            
+            var policy = document.querySelectorAll(".policy");
+            var tempInt = parseInt(this.categoryId)-1;
+            if(tempInt>=0){
+                policy[tempInt].classList.remove("colorPink");
+                policy[tempInt].classList.remove("colorYellow");
+                policy[tempInt].classList.remove("colorBlue");
             }
+
+            tempInt = parseInt(n)-1;
+            if(tempInt >= 0){
+                if(tempInt <6){
+                    policy[tempInt].classList.add("colorPink");
+                }else if(tempInt <10){
+                    policy[tempInt].classList.add("colorYellow");
+                }else if(tempInt < 16){
+                    policy[tempInt].classList.add("colorBlue");
+                }
+            }
+        
+            this.categoryId = n;
+            this.getPolicys(n).then(response => {
+                    this.policies = response
+                })
+        },
+
+        goService(n){
+            router.push("/detailPolicy/"+n);
+            return this.$store.dispatch("data/policyClicked", n);
         }
-       
-        this.categoryId = n;
-        this.getPolicys(n).then(response => {
-                console.log(response)
-                this.policies = response
-            })
     },
 
-    goService(n){
-        router.push("/detailPolicy/"+n);
-        return this.$store.dispatch("data/policyClicked", n);
+    computed: {
+        // pagination related variables
+        ListEmpty: function() {
+        return this.policies.length === 0;
+        },
+        maxPages: function() {
+        return Math.floor(
+            (this.policies.length + this.listPerPage - 1) / this.listPerPage
+        );
+        },
+        ListSliced: function() {
+        return this.policies.slice(
+            this.listPerPage * (this.page - 1),
+            this.listPerPage * this.page
+        );
+        }
     }
-  },
-
-  computed: {
-    // pagination related variables
-    ListEmpty: function() {
-      return this.policies.length === 0;
-    },
-    maxPages: function() {
-      return Math.floor(
-        (this.policies.length + this.listPerPage - 1) / this.listPerPage
-      );
-    },
-    ListSliced: function() {
-      return this.policies.slice(
-        this.listPerPage * (this.page - 1),
-        this.listPerPage * this.page
-      );
-    }
-  }
 };
 
 </script>
