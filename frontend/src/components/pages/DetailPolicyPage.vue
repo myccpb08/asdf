@@ -1,6 +1,6 @@
 <template>
   <v-container class="pa-2" fluid grid-list-md style="width:80%;">
-        <div class="line">
+        <div class="line" style="width:70%; ">
             <div class="detail">
                 <div class="detailrow_icon">
                     <img src="../../images/All_view.png" alt="" style="width: 70%;">
@@ -8,7 +8,13 @@
                 <div class="detailrow">
                     <h2>한 눈에 보는 복지정보</h2>
                     <h4>다양한 복지서비스 정보를 안내해드립니다.</h4>
-                    <span>조회수 {{policy.clicked+1}}</span>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="additional">
+                  <span<strong>조회수 {{policy.clicked+1}}</strong></span>
 
                     <!-- 채팅 버튼 -->
                     <!-- <v-btn text @click.stop="drawer = !drawer"> -->
@@ -19,9 +25,9 @@
                     <button style="color:	#FFD700;" @click="toggleMyPick">
                       <i v-if="is_myPick" class="fas fa-star fa-lg"></i>
                       <i v-else class="far fa-star fa-lg"></i>
-                  </button>
-                </div>
+                    </button>
             </div>
+
             <!-- 채팅 drawer 시작 -->
             <v-navigation-drawer v-model="drawer" absolute temporary right width=350 >
               <v-list-item>
@@ -36,7 +42,6 @@
               <PolicyChat :Id="policyId"></PolicyChat>
             </v-navigation-drawer>
       <!-- 채팅 drawer 끝 -->
-        </div>
 
 
         <div class="line">
@@ -319,6 +324,11 @@ export default {
   float: left;
   width: 87%;
   min-width: 500px;
+}
+.additional{
+  float: right;
+  width:20%;
+  text-align:right;
 }
 .line {
   padding-top: 3%;
