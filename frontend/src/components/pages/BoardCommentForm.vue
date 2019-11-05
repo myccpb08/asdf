@@ -2,10 +2,10 @@
   <v-layout wrap>
     <v-flex pa-1>
       <form>
-        <v-text-field v-model="content" placeholder="내용을 입력해주세요"></v-text-field>
+        <v-text-field v-model="content" placeholder="내용을 입력해주세요" @keypress.enter.prevent="onSubmit"></v-text-field>
       </form>
     </v-flex>
-    <v-btn rounded color="primary" dark @click="onSubmit">작성</v-btn>
+    <v-btn rounded color="primary" dark @click="onSubmit" >작성</v-btn>
   </v-layout>
 </template>
 
@@ -20,23 +20,26 @@ export default {
   },
 
   data: () => ({
-    content:''
+    content: "",
+    pageIndex: 0,
+    preUrl: ""
   }),
 
-    mounted() {
-    },
+  mounted() {},
 
   methods: {
     onSubmit: function() {
       const params = {
-        content : this.content,
-        boardId : this.Id,
-        writer : this.$store.state.data.user
+        content: this.content,
+        boardId: this.Id,
+        writer: this.$store.state.data.user
       };
-      console.log(params);
       this.submit(params);
+      this.content=''
+      this.$emit('reload')
+
       // window.location.reload()
-    }
+    },
   }
 };
 </script>

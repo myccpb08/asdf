@@ -73,7 +73,7 @@
 
                 <!-- 댓글 작성 폼 -->
                 <div v-if="this.check == true">
-                <NoticeCommentForm :Id="noticeId" :submit="noticeCommentWrite" />
+                <NoticeCommentForm :Id="noticeId" :submit="noticeCommentWrite" v-on:reload="reload()"/>
                 </div>
               </div>
               <!-- 댓글 끝 -->
@@ -142,6 +142,10 @@ export default {
   methods: {
     ...mapActions("data", ["noticeCommentWrite"]),
 
+    async reload(){
+      this.$router.push(this.$router.currentRoute.fullPath+'?'+'0')
+    },
+
     logincheck(){
       if (localStorage.getItem("token") !== undefined && localStorage.getItem("token") !== null){
         this.check = true
@@ -162,7 +166,7 @@ export default {
 
     async deleteNotice() {
       this.$store.dispatch("data/deleteNotice", this.noticeId);
-      this.$router.go(-1);
+      this.$router.push('/notice');
     },
 
     async getComments(id) {
@@ -175,7 +179,7 @@ export default {
 
     async deleteComment(id) {
       this.$store.dispatch("data/deleteNoticeComment", id);
-      window.location.reload();
+      this.$router.push(this.$router.currentRoute.fullPath+'?'+'0')
     },
 
     async editCommentContents(noticeId, content, commentId){
