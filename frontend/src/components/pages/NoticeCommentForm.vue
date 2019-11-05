@@ -2,7 +2,7 @@
   <v-layout wrap>
     <v-flex pa-1>
       <form>
-        <v-text-field v-model="content" placeholder="내용을 입력해주세요"></v-text-field>
+        <v-text-field v-model="content" placeholder="내용을 입력해주세요" @keypress.enter.prevent="onSubmit"></v-text-field>
       </form>
     </v-flex>
     <v-btn rounded color="primary" dark @click="onSubmit">작성</v-btn>
@@ -36,7 +36,8 @@ export default {
       };
       console.log(params);
       this.submit(params);
-      window.location.reload()
+      this.content=''
+      this.$emit('reload')
     }
   }
 };

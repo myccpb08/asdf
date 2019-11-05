@@ -4,7 +4,7 @@
 
       <!-- 검색 폼 -->
       <v-flex xs6>
-        <SearchForm :submit="searchPolicy" />
+        <SearchForm :submit="searchPolicy" v-on:reload="reload()"/>
       </v-flex>
 
       <!-- 검색 결과 -->
@@ -32,6 +32,10 @@ export default {
 //           movieList: state => state.data.movieSearchList 
 //         }) 
 //     },
-  methods: mapActions("data", ["searchPolicy"])
-};
+  methods: {
+    ...mapActions("data", ["searchPolicy"]),
+    async reload(){
+      console.log('들어옴?')
+    },
+}};
 </script>

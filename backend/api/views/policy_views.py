@@ -6,6 +6,7 @@ from api.serializers import PolicySerializer, CategoryPolicySerializer, AllPolic
 from django.contrib import auth
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
+from urllib import parse
 
 @api_view(['GET', 'PUT'])
 def getService(request):
@@ -33,17 +34,24 @@ def getService(request):
 @api_view(['GET',])
 def policySearch(request):
     categoryId = request.GET.get('0')
-    print(111111)
-    print(request.GET.get('0'))
-
     if(categoryId=="00"):
         service = Policy.objects.all()
         serializer = AllPolicySerializer(service, many=True)
     else:
         service = Category_Policy.objects.filter(category=categoryId)
+        print(service)
         serializer = CategoryPolicySerializer(service, many=True)
+        
     return Response(data=serializer.data, status=status.HTTP_200_OK)
 
+@api_view(['GET'])
+def policySearchByWord(request):
+    word = request.GET.get('0')
+    print(parse.quote(word))
+    service = Policy.objects.filter(title__contains=word)
+    print(service)
+    serializer = AllPolicySerializer(service, many=True)
+    return Response(data=serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 def policyClicked(request):

@@ -1,6 +1,6 @@
 <template>
   <v-form ref="form">
-    <v-text-field v-model="title" label="정책명" 
+    <v-text-field v-model="searchWord" label="정책명" 
     :append-icon="icons.search" 
     @click:append="onSubmit" />
   </v-form>
@@ -8,6 +8,7 @@
 
 <script>
 import { mdiMagnify } from "@mdi/js";
+import router from "../../router"
 
 export default {
   props: {
@@ -15,17 +16,15 @@ export default {
   },
 
   data: () => ({
-    title: "",
+    searchWord: "",
     icons: { search: mdiMagnify }
   }),
 
   methods: {
     onSubmit: function() {
-      const params = {
-        title: this.title
-      };
-      this.submit(params); /* data.searchPolicy : 시행 */
+      router.push("/policy/search/"+this.searchWord);
+      this.searchWord="";
     }
-  }
+  }                        
 };
 </script>

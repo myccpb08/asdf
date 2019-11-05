@@ -96,7 +96,7 @@
 
                 <!-- 댓글 작성 폼 -->
                 <div v-if="this.check == true">
-                  <BoardCommentForm :Id="boardId" :submit="boardCommentWrite" />
+                  <BoardCommentForm :Id="boardId" :submit="boardCommentWrite" v-on:reload="reload()" />
                 </div>
               </div>
               <!-- 댓글 끝 -->
@@ -149,7 +149,6 @@ export default {
 
   mounted() {
     this.logincheck();
-
     this.getBoard(this.boardId).then(result => {
       this.board = result;
       this.board.id = this.boardId;
@@ -164,6 +163,11 @@ export default {
 
   methods: {
     ...mapActions("data", ["boardCommentWrite"]),
+
+    async reload(){
+      this.$router.push(this.$router.currentRoute.fullPath+'?'+'0')
+    },
+
 
     async logincheck() {
       if (
@@ -189,17 +193,19 @@ export default {
     async deleteBoard() {
       console.log(this.boardId);
       this.$store.dispatch("data/deleteBoard", this.boardId);
-      this.$router.go(-1);
+      this.$router.push('/board');
     },
 
     async getComments(id) {
+      console.log('hi')
       /* 해당 글 id 로 글을 조회해서, 거기에 달린 댓글을 가져와야 함 */
       return this.$store.dispatch("data/getBoardComments", id);
+      
     },
 
     async deleteComment(id) {
       this.$store.dispatch("data/deleteBoardComment", id);
-      window.location.reload();
+      this.$router.push(this.$router.currentRoute.fullPath+'?'+'0')
     },
 
     async editCommentContents(boardId, content, commentId) {

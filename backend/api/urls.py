@@ -18,6 +18,7 @@ urlpatterns = [
     url('auth/logout/$', user_views.logout, name='logout'),
     url('auth/session/$', user_views.session, name='session'),
     url('auth/user/$', user_views.user, name="user"),
+    url('auth/latest/$', user_views.latestView, name="latestView"),
     url('auth/myChat/$', user_views.mychat, name="mychat"),
     url('auth/getChatList/$', user_views.getChatList, name="getchatlist"),
     url('auth/delChat/$', user_views.delChat, name="delChat"),
@@ -31,6 +32,7 @@ urlpatterns = [
     
     url('getService/$', policy_views.getService, name='get_service'),
     url('policySearch/$', policy_views.policySearch, name='policy_search'),
+    url('policySearchByWord/$', policy_views.policySearchByWord, name='policy_search_by_word'),
     url('policyClicked/$', policy_views.policyClicked, name='policyClicked'),
     url('getMostPolicy/$', policy_views.getMostPolicy, name= 'get_most_policy'),
 

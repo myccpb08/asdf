@@ -4,7 +4,6 @@
         <v-layout justify-center wrap>
             <!-- 로그인 폼-->
             <v-flex xs6>
-                <div>로그인!!</div>
                 <LoginForm :submit="checkLogin"/>
             </v-flex>
         </v-layout> 

@@ -1,6 +1,5 @@
 <template>
 <div class="hihi">
-  <!-- <img class="imgTwo" src="../../wood.jpg" style="opacity: 0.64; position:absolute; width:100%; height:100%;"> -->
   <div class="aboutme">
     <div class="left-content">
       <div style="align-items: top;">
@@ -33,12 +32,6 @@
           <div class="btn_hover_line_down"></div>
         </div>
         <div class="divider"></div>
-        <!-- <div class="mypage_button">
-          <div class="btn_hover_line_up"></div>
-          <button class="mypage_btn">내 정보</button>
-          <div class="btn_hover_line_down"></div>
-        </div>
-        <div class="divider"></div> -->
         <div class="mypage_button" @click="EditInfo">
           <div class="btn_hover_line_up"></div>
           <button class="mypage_btn">내 정보 수정</button>
@@ -48,101 +41,7 @@
       <div class="subabout">
         <EditUserInfoForm :submit="editUser" v-if="toglePage"/>
         <SearchListForm v-if="!toglePage"/>
-        <!-- <div style="width:100%;">
-          <div class="sub_contents_left">
-            <h2 class="my-name">
-              Your name
-            </h2>
-          </div>
-          <div class="sub_contents_right">
-            <h2>Right</h2>
-          </div>
-        </div> -->
       </div>
-      
-    </div>
-
-    <!-- <div class="bottom-content" >
-      <v-dialog
-        v-model="passchange"
-        width="400"
-        v-if="this.$store.state.user.type!='facebook'&&this.$store.state.user.type!='google'"
-      >
-        <template v-slot:activator="{on}">
-          <v-btn  v-on="on" color="#fcc6f7">
-            비밀번호 변경</v-btn>
-        </template>
-        <v-card>
-          <h2 class="lining regiheight">
-            비밀번호 변경</h2>
-          <div class="form-wrap" style="position: relative;">
-            <div class="form-group">
-              <div class="relative">
-                <v-text-field
-                  v-model="pass"
-                  type="password"
-                  label="PassWord"
-                  :rules="passRules"
-                  required
-                  class="formcon notranslate"
-                  @keyup.enter="changePass"
-                ></v-text-field>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <div class="relative">
-                <v-text-field
-                  v-model="passchk"
-                  type="password"
-                  label="PassWord Confirm"
-                  :rules="passcheckRules"
-                  required
-                  class="formcon notranslate"
-                  @keyup.enter="changePass"
-                ></v-text-field>
-              </div>
-            </div>
-
-            <button class="buttons movebtn movebtnsu " @click="changePass">
-              Change PassWord
-              <i class="fa fa-fw fa-lock"></i>
-            </button >
-
-          </div>
-        </v-card>
-      </v-dialog> -->
-    
-      <!-- <v-btn v-if="modifymode==false" v-on:click="modifymode=true" color="#fcc6f7">
-        수정하기
-      </v-btn>
-      <v-btn v-else v-on:click="modify"  color="#fcc6f7">
-        수정하기
-      </v-btn> -->
-    
-
-      <!-- admin@admin.com 은 탈퇴하지 못함 -->
-      <!-- <v-btn>탈퇴하기</v-btn>
-      <v-btn
-        v-if="this.$store.state.user.email!='admin@admin.com'"
-        @click.stop="withdraw=true" color="#fcc6f7">
-          탈퇴하기</v-btn>
-      <v-dialog v-model="withdraw" max-width="400">
-        <v-card>
-          <v-card-title> 탈퇴 하시겠습니까?</v-card-title>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn
-              text
-              @click="Leaving(true)">
-              예</v-btn>
-            <v-btn
-              text
-              @click="Leaving(false)">
-              아니오</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog> -->
     </div>
   </div>
 </div>

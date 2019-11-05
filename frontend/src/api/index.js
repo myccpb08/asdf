@@ -49,24 +49,52 @@ export default {
       return result.data
     });
   },
+  async getUserInfo(param) {
+    return axios.get(`${apiUrl}/auth/user/`, {
+        params: {
+            username: param
+        }
+    }).then((result) => {
+      // if(result.data[0].subscription == null || result.data[0].subscription == 'undefined'){
+      //   result.data[0].subscription = '미구독'
+      // }else{
+      //   result.data[0].subscription = String(result.data[0].subscription)
+      // }
+      console.log("!!!!!!!!!!!!!!!!!!!")
+      console.log(result)
+      return result
+    })
+  },
+  async getLatestView() {
+    console.log("enter getLatestView index!")
+    return await axios.get(`${apiUrl}/auth/latest`, {
+
+    })
+  },
   async editUser(params) {
     await axios.put(`${apiUrl}/auth/user/`, {
       username: params.username,
       name: params.name,
-      password: params.password,
+      // password: params.password,
       favorite: params.favoriteValue,
       grade: params.grade
     })
   },
-  async deleteUser(params) {
-    console.log(params)
-    return axios.delete(`${apiUrl}/auth/user/`, 
-    {params})
+  async deleteUser() {
+    console.log("del user in index.js")
+    return axios.delete(`${apiUrl}/auth/user/`)
   },
   async logoutUser(param) {
     return await axios.post(`${apiUrl}/auth/logout/`, {
         username: param
     })
+  },
+  async updateLatestView(params) {
+    console.log("ENTER!!!!")
+    await axios.put(`${apiUrl}/auth/latest/`, {
+      username: params.username,
+      path: params.path
+    }) 
   },
   async getSession(param) {
       return await axios.post(`${apiUrl}/auth/session/`, {
@@ -206,6 +234,12 @@ export default {
     });
   },
 
+  policySearchByWord(params){
+    return axios.get(`${apiUrl}/policySearchByWord/`,{params}).then((result) => {
+      return result.data
+    });
+  },
+
   editServicePick(params){
     console.log(params)
     return axios.put(`${apiUrl}/getService/`, { params })
@@ -214,7 +248,7 @@ export default {
   // 딱정함 pick
   getPickPolicies(){
     return axios.get(`${apiUrl}/pickPolicies/`).then((result) => {
-      return result.data
+      return result.data  
     });
   },
 
