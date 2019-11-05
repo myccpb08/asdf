@@ -104,7 +104,7 @@
                   </div>
                   <div slot="footer">
                     <button @click="pickSave(pick, 2, radio_finish)" style="width:33%;">저장</button>
-                    <button @click="pickDelete(pick, 2)" style="width:33%;">삭1제</button>
+                    <button @click="pickDelete(pick, 2)" style="width:33%;">삭제</button>
                     <button class="modal-default-button" @click="pick.modal = false; radio_finish=2" style="width:33%;">닫기</button>
                   </div>
                 </FavoriteModal>
