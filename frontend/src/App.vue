@@ -30,19 +30,16 @@
           </v-btn>
         </div> -->
         <div style="padding-bottom:100px; padding-right:5px;">
-          <v-btn text v-if="isLogin===false" @click="goTo('Login')">
+          <v-btn text v-if="isLogin==false" @click="goTo('Login')">
             <v-icon>{{ choices[2].icon }}</v-icon>
-            {{isLogin}}
             {{ choices[2].text }}
           </v-btn>
-          <v-btn text v-if="isLogin===true && this.$store.state.user.is_staff===true" @click="logout">
+          <v-btn text v-if="isLogin==true" @click="goTo('Admin')">
             <v-icon>{{ choices[1].icon }}</v-icon>
-            {{isLogin}}
             {{ choices[1].text }}
           </v-btn>
-          <v-btn text v-if="isLogin===false" @click="logout">
+          <v-btn text v-if="isLogin==true" @click="logout">
             <v-icon>{{ choices[0].icon }}</v-icon>
-            {{isLogin}}
             {{ choices[0].text }}
           </v-btn>
         </div>
@@ -97,16 +94,12 @@ export default {
     MainFooter: MainFooter,
     SearchPage: SearchPage
   },
-
   created() {
     console.log("Create!!!!!!!!!!")
     // localStorage.removeItem('token')
     if (localStorage.getItem("token") !== undefined && localStorage.getItem("token") !== null) {
       console.log("Token is not null")
       var result = this.getSession(localStorage.getItem('token')).then(function(value){
-        console.log(value)
-        console.log(store.state.user)
-        console.log(store.state.user.username)
         if(value==false){
           router.push('/')
         }
@@ -116,35 +109,35 @@ export default {
       router.push("/");
     }
   },
-
+  mounted() {
+    this.checkLogin()
+  },
   methods: {
     ...mapActions("data", ["getSession"]),
     ...mapActions("data", ["logoutUser", "checkPassword"]),
     goTo: function(path) {
-      if (store.state.user != null) {
-        if (store.state.user.is_staff != true && path == "admin") {
-          alert("관계자 외 출입금지 입니다(경고함)");
-          router.push("/");
-        } else {
-          router.push({ name: path });
-        }
-      } else {
-        if (path == "Login") {
-          router.push({ name: path });
-        } else {
-          alert("로그인 후 이용 가능합니다!");
-          router.push("/login");
+      if(path == 'Login'){
+        router.push('/login')
+      }else if(path == 'Admin'){
+        console.log(store.state.user.is_staff)
+        var is_staff = store.state.user.is_staff
+        if(is_staff){
+          router.push('/admin')
+        }else{
+          alert('관리자만 접근 가능합니다(경고함!)')
         }
       }
-      // router.push({ name: path });
     },
     checkLogin() {
       this.token = localStorage.getItem("token");
       console.log("checkLogin!!");
+      console.log(this.token)
       if (this.token !== null) {
         this.isLogin = true;
+        console.log(this.isLogin)
       } else {
         this.isLogin = false;
+        console.log(this.isLogin)
       }
     },
     checkPass() {
