@@ -3,9 +3,9 @@
         <v-text-field v-model="username" label="ID"/>
         <v-text-field v-model="password" label="PASSWORD" type="password" @keyup.enter="onSubmit"/>
         <v-layout justify-center pa-10>
-            <v-btn large color="indigo white--text" @click="onSubmit">로그인</v-btn>
+            <v-btn style="margin-right: 20px;" large color="orange white--text" @click="onSubmit">로그인</v-btn>
             <router-link to="/signup">
-                <v-btn large color="indigo white--text">회원가입</v-btn>
+                <v-btn large color="orange white--text">회원가입</v-btn>
             </router-link>
         </v-layout>
     </v-form>

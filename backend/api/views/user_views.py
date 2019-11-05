@@ -19,7 +19,7 @@ def signup(request):
         name = user.get('name', None)
         favorite = user.get('favoriteValue', None)
         when = None
-        lastestView = None
+        latestView = None
         print(user)
         if favorite=="":
             favorite=None
@@ -68,7 +68,7 @@ def login(request):
                     'name': profile.name,
                     'favorite': profile.favorite,
                     'when': profile.when,
-                    'lastestView': profile.lastestView,
+                    'latestView': profile.latestView,
                     'token': newToken,
                     'is_staff': profile.user.is_staff,
                     'is_authenticated': True
@@ -83,7 +83,7 @@ def login(request):
                     'name': profile.name,
                     'favorite': profile.favorite,
                     'when': profile.when,
-                    'lastestView': profile.lastestView,
+                    'latestView': profile.latestView,
                     'token': token,
                     'is_staff': profile.user.is_staff,
                     'is_authenticated': True
@@ -95,7 +95,7 @@ def login(request):
                 'name': None,
                 'favorite': None,
                 'when': None,
-                'lastestView': None,
+                'latestView': None,
                 'token': None,
                 'is_staff': False,
                 'is_authenticated': False
@@ -177,7 +177,7 @@ def latestView(request):
         print("enter latestView Get!!")
         user = request.user
         profile = Profile.objects.get(user=user)
-        lv = profile.lastestView.split(' ')
+        lv = profile.latestView.split(' ')
         print(lv)
         lv.pop(0)
         print(lv)
@@ -195,7 +195,7 @@ def latestView(request):
        
         user = request.user
         profile = Profile.objects.get(user=user)
-        temp = profile.lastestView.split(" ")
+        temp = profile.latestView.split(" ")
         temp.pop(0)
         print(temp)
         print("temp length : ")
@@ -208,7 +208,7 @@ def latestView(request):
             lv += ' ' + t
         print(lv+path)
         Profile.objects.filter(user=user).update(
-            lastestView = lv + path
+            latestView = lv + path
         )
         return Response(status=status.HTTP_200_OK)
         
@@ -225,7 +225,7 @@ def session(request):
                 'name': None,
                 'favorite': None,
                 'when': None,
-                'lastestView': None,
+                'latestView': None,
                 'token': None,
                 'is_authenticated': False,
                 'is_staff':  False,
@@ -240,7 +240,7 @@ def session(request):
                     'name': Profile.objects.get(user=user).name,
                     'favorite': Profile.objects.get(user=user).favorite,
                     'when': Profile.objects.get(user=user).when,
-                    'lastestView': Profile.objects.get(user=user).lastestView,
+                    'latestView': Profile.objects.get(user=user).latestView,
                     'token': token,
                     'is_authenticated': True,
                     'is_staff': Profile.objects.get(user=user).user.is_staff,
@@ -252,7 +252,7 @@ def session(request):
                     'name': None,
                     'favorite': None,
                     'when': None,
-                    'lastestView': None,
+                    'latestView': None,
                     'token': None,
                     'is_authenticated': False,
                     'is_staff':  False,
@@ -271,7 +271,7 @@ def session(request):
                     'name': Profile.objects.get(user=user).name,
                     'favorite': Profile.objects.get(user=user).favorite,
                     'when': Profile.objects.get(user=user).when,
-                    'lastestView': Profile.objects.get(user=user).lastestView,
+                    'latestView': Profile.objects.get(user=user).latestView,
                     'token': token,
                     'is_authenticated': True,
                     'is_staff': Profile.objects.get(user=user).user.is_staff,
