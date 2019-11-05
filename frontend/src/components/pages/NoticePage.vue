@@ -1,5 +1,5 @@
 <template>
-  <v-container class="mt-3 ml-5">
+  <v-container>
     <div class="row">
       <div class="span_10">
         <img class="imgOne" src="../../images/loudspeaker_gray_row.png" style="width:17%;">

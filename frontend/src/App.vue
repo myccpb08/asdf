@@ -13,15 +13,15 @@
         </div>
         <v-spacer></v-spacer>
         <div style="padding-bottom:40px; padding-right:5px; width: 40%; text-align: right">
-          <v-btn color="orange white--text" text v-if="isLogin==false" @click="goTo('Login')">
+          <v-btn  text v-if="isLogin==false" @click="goTo('Login')">
             <v-icon>{{ choices[2].icon }}</v-icon>
             {{ choices[2].text }}
           </v-btn>
-          <v-btn color="orange white--text" text v-if="isLogin==true" @click="goTo('Admin')">
+          <v-btn  text v-if="isLogin==true" @click="goTo('Admin')">
             <v-icon>{{ choices[1].icon }}</v-icon>
             {{ choices[1].text }}
           </v-btn>
-          <v-btn color="orange white--text" text v-if="isLogin==true" @click="logout">
+          <v-btn  text v-if="isLogin==true" @click="logout">
             <v-icon>{{ choices[0].icon }}</v-icon>
             {{ choices[0].text }}
           </v-btn>
