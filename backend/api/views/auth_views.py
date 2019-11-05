@@ -6,7 +6,6 @@ from api.models import create_profile
 
 @api_view(['POST'])
 def signup_many(request):
-
     if request.method == 'POST':
         profiles = request.data.get('profiles', None)
         for profile in profiles:

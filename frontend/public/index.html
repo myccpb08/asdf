@@ -1,19 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>영화 추천 서비스</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but frontend doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>dje.ico">
+  <title>복지 정책 서비스</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
+  <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but frontend doesn't work properly without JavaScript enabled. Please enable it to
+      continue.</strong>
+  </noscript>
+
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+
+
+
+
+</body>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCqi3t1HLv-HqGvrzyfMrgYLFUNpwlbxsw",
+    authDomain: "ddak-chat-7f183.firebaseapp.com",
+    databaseURL: "https://ddak-chat-7f183.firebaseio.com",
+    projectId: "ddak-chat-7f183",
+    storageBucket: "ddak-chat-7f183.appspot.com",
+    messagingSenderId: "877392631850",
+    appId: "1:877392631850:web:517e65cddb39c570404b53",
+    measurementId: "G-YGM27EY53J"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+
+
 </html>
