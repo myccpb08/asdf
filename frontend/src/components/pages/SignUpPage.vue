@@ -4,7 +4,6 @@
         <v-layout justify-center wrap>
             <!-- 회원가입 폼-->
             <v-flex xs6>
-                <div>회원가입!!</div>
                 <SignUpForm :submit="signUp"/>
             </v-flex>
         </v-layout> 

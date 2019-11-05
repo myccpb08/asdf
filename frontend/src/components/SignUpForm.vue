@@ -25,7 +25,7 @@
             @input="setSelected"
         ></v-select>
         <v-layout justify-center pa-10>
-            <v-btn large color="indigo white--text" @click="onSubmit">Join</v-btn>
+            <v-btn large color="orange white--text" @click="onSubmit">등록</v-btn>
         </v-layout>
     </v-form>
 </template>

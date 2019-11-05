@@ -2,43 +2,26 @@
   <v-app id="app">
     <template v-if="this.$store.state.data.userPage">
       <div class="header">
-        <router-link to="/" style="text-decoration:none;">
-          <img src="./images/DdakJeongE.png" style="width:250px;" />
-        </router-link>
+        <div style="width: 40%;">
+          <router-link to="/" style="text-decoration:none;">
+            <img src="./images/DdakJeongE.png" style="width:250px;" />
+          </router-link>
+        </div>
         <v-spacer></v-spacer>
-        <SearchPage></SearchPage>
+        <div style="width: 100%; text-align: right">
+          <SearchPage></SearchPage>
+        </div>
         <v-spacer></v-spacer>
-
-        <!-- <div style="padding-bottom:100px; padding-right:5px;" v-for="(choice, i) in choices">
-          <v-btn
-            text
-            v-if="(i===1 && isLogin===true) || (i===2 && isLogin===false)"
-            :key="i"
-            @click="() => {
-                if (choice.path) {
-                  goTo(choice.path)
-                }
-              }"
-          >
-            <v-icon>{{ choice.icon }}</v-icon>
-            {{ choice.text }}
-          </v-btn>
-
-          <v-btn text :v-if="(i===0 && isLogin===true)" @click="logout">
-            <v-icon>{{ choice.icon }}</v-icon>
-            {{ choice.text }}
-          </v-btn>
-        </div> -->
-        <div style="padding-bottom:100px; padding-right:5px;">
-          <v-btn text v-if="isLogin==false" @click="goTo('Login')">
+        <div style="padding-bottom:40px; padding-right:5px; width: 40%; text-align: right">
+          <v-btn color="orange white--text" text v-if="isLogin==false" @click="goTo('Login')">
             <v-icon>{{ choices[2].icon }}</v-icon>
             {{ choices[2].text }}
           </v-btn>
-          <v-btn text v-if="isLogin==true" @click="goTo('Admin')">
+          <v-btn color="orange white--text" text v-if="isLogin==true" @click="goTo('Admin')">
             <v-icon>{{ choices[1].icon }}</v-icon>
             {{ choices[1].text }}
           </v-btn>
-          <v-btn text v-if="isLogin==true" @click="logout">
+          <v-btn color="orange white--text" text v-if="isLogin==true" @click="logout">
             <v-icon>{{ choices[0].icon }}</v-icon>
             {{ choices[0].text }}
           </v-btn>
