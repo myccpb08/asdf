@@ -2,7 +2,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from api.models import create_profile, create_profile_none, Profile, Policy
 from rest_framework.response import Response
-from api.serializers import ProfileSerializer, SessionSerializer
+from api.serializers import ProfileSerializer, SessionSerializer, UserSerializer
 from django.contrib import auth
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
@@ -123,11 +123,10 @@ def user(request):
     print("enter user!!")
     if(request.method == 'GET'):
         print("enter user get!!")
-        return Response(status=status.HTTP_200_OK)
+        user = request.user
+        serializer = UserSerializer(user)
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
 
-    if(request.method == 'POST'):
-        return Response(status=status.HTTP_200_OK)
-    
     if(request.method == 'PUT'):
         print("enter user edit")
         username = request.data.get('username', None)

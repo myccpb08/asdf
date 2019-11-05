@@ -37,11 +37,15 @@ export default {
       seriesPost: [
         {
           name: "notice",
-          data: [28, 29, 33, 36, 32]
+          data: [2,0,0,2,1]
         },
         {
           name: "board",
-          data: [12, 11, 14, 18, 17]
+          data: [5,8,9,13,3]
+        },
+        {
+          name: "policy",
+          data: [0, 0, 0, 0, 0]
         }
       ],
       chartPostOptions: {
@@ -58,7 +62,7 @@ export default {
             show: false
           }
         },
-        colors: ["#77B6EA", "#545454"],
+        colors: ["#77B6EA", "#545454", "#FF7F50"],
         dataLabels: {
           enabled: true
         },
@@ -66,7 +70,7 @@ export default {
           curve: "smooth"
         },
         title: {
-          text: "Average High & Low Temperature",
+          text: "일별 작성된 게시글 수",
           align: "left"
         },
         grid: {
@@ -82,15 +86,15 @@ export default {
         xaxis: {
           categories: ["Jan", "Feb", "Mar", "Apr", "May"],
           title: {
-            text: "Month"
+            text: "date"
           }
         },
         yaxis: {
           title: {
-            text: "Temperature"
+            text: "작성 수"
           },
-          min: 5,
-          max: 40
+          min: 0,
+          max: 20
         },
         legend: {
           position: "top",
@@ -168,14 +172,19 @@ export default {
               }
             }
           }
-        ]
+        ],
+        title: {
+          text: "유저들의 선호 복지정책 선택 수",
+          align: "left"
+        },
       },
       // 정책 가로 막대 차트
       seriesPolicy: [
         {
-          data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+          data: [40, 22, 10, 5, 3]
         }
       ],
+      
       chartPolicyOptions: {
         plotOptions: {
           bar: {
@@ -192,19 +201,18 @@ export default {
             "United Kingdom",
             "Netherlands",
             "Italy",
-            "France",
-            "Japan",
-            "United States",
-            "China",
-            "Germany"
           ]
+        },
+        title: {
+          text: "가장 많이 본 정책",
+          align: "left"
         },
       },
       // 최근 회원 가입수
       seriesUser: [
         {
-          name: "Desktops",
-          data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+          name: "Signup",
+          data: [0, 0, 0, 5, 13]
         }
       ],
       chartUserOptions: {
@@ -221,7 +229,7 @@ export default {
           curve: "straight"
         },
         title: {
-          text: "Product Trends by Month",
+          text: "최근 회원가입 수",
           align: "left"
         },
         grid: {
@@ -239,8 +247,6 @@ export default {
             "May",
             "Jun",
             "Jul",
-            "Aug",
-            "Sep"
           ]
         }
       },
@@ -248,12 +254,15 @@ export default {
       categories: [],
       notices: [],
       boards: [],
-      users: []
+      users: [],
+      policies: [],
     };
   },
+  created() {
+  },
   mounted() {
-    this.setAxis();
-    // this.plot();
+    this.setAxis();    
+    this.draw();
   },
   methods: {
     ...mapActions("data", ["getAllUsers", "getAllNotices", "getAllBoards"]),
@@ -268,17 +277,33 @@ export default {
             this.now.getMonth() + 1 + "-" + this.now.getDate()
           ],
           title: {
-            text: "Month"
+            text: "date"
           }
         }
       };
+      this.chartUserOptions = {
+        xaxis: {
+          categories: [
+            this.now.getMonth() + 1 + "-" + (this.now.getDate() - 4),
+            this.now.getMonth() + 1 + "-" + (this.now.getDate() - 3),
+            this.now.getMonth() + 1 + "-" + (this.now.getDate() - 2),
+            this.now.getMonth() + 1 + "-" + (this.now.getDate() - 1),
+            this.now.getMonth() + 1 + "-" + this.now.getDate()
+          ]
+        }
+      }
       console.log(this.chartPostOptions.xaxis.categories);
+    },
+    async draw() {
+      await this.getNotices()
+      await this.getBoards()
+      await this.getUsers()
+      await this.getPolicies()
+      await this.setPostChart()    
     },
     async getNotices() {
       await this.getAllNotices().then(response => {
-        this.notices = response;
-        console.log("notice");
-        console.log(this.notices);
+        this.notices = response
         return;
       });
     },
@@ -292,18 +317,92 @@ export default {
         this.users = response;
       });
     },
+    async getPolicies() {
+      await this.$store.dispatch("data/policySearch", '00').then(response => {
+        this.policies = response
+        // console.log(this.policies)
+      });
+    },
     async setPostChart() {
-      let len = this.notices.length;
-      if (this.notices.length >= 5) {
-        len = 5;
+        let notice_cnt = [0, 0, 0, 0, 0]
+        let board_cnt = [0, 0, 0, 0, 0]
+        for(let i=4; i >= 0; i--){
+          let yyyy = this.now.getFullYear().toString();
+          let mm = (this.now.getMonth() + 1).toString();
+          let dd = (this.now.getDate() - i).toString();
+          const date = yyyy + "-" + (mm[1] ? mm : "0" + mm[0]) + "-" + (dd[1] ? dd : "0" + dd[0]);
+          
+          for(let j=0; j < this.notices.length; j++){
+            if (date == this.notices[j].when){
+              notice_cnt[4-i] += 1  
+            }
+          }
+          for(let j=0; j < this.boards.length; j++){
+            if (date == this.boards[j].when){
+              board_cnt[4-i] += 1  
+            }
+          }
+        }
+      this.seriesPost[0].data = notice_cnt
+      this.seriesPost[1].data = board_cnt
+
+      // 유저 선호 정책 수
+      let favorite_cnt = [0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0,]
+
+      for(let i=0;i < this.users.length; i++){
+        let Favorite = this.users[i].favorite
+        for(let j =0; j <Favorite.length; j++){
+            let f = Favorite[j]
+            if (f=='00') continue;
+            else if (f=='01'){favorite_cnt[0] += 1} 
+            else if (f=='02'){favorite_cnt[1] += 1}
+            else if (f=='03'){favorite_cnt[2] += 1}
+            else if (f=='04'){favorite_cnt[3] += 1}
+            else if (f=='05'){favorite_cnt[4] += 1}
+            else if (f=='06'){favorite_cnt[5] += 1}
+            else if (f=='07'){favorite_cnt[6] += 1}
+            else if (f=='08'){favorite_cnt[7] += 1}
+            else if (f=='09'){favorite_cnt[8] += 1}
+            else if (f=='10'){favorite_cnt[9] += 1}
+            else if (f=='11'){favorite_cnt[10] += 1}
+            else if (f=='12'){favorite_cnt[11] += 1}
+            else if (f=='13'){favorite_cnt[12] += 1}
+            else if (f=='14'){favorite_cnt[13] += 1}
+            else if (f=='15'){favorite_cnt[14] += 1}
+            else if (f=='16'){favorite_cnt[15] += 1}
+            else continue
+        }
       }
-      for (let i = 0; i < len; i++) {
-        this.seriesPost[0].data[i] = i;
-      }
-      console.log(this.series[0].data);
-      for (let i = 0; i < len; i++) {
-        this.seriesPost[1].data[i] = i;
-      }
+      this.seriesFavorite = favorite_cnt
+
+      // 조회수 높은 정책 5개
+      let views = [0, 0, 0, 0, 0]
+      this.$store.dispatch("data/getMostPolicy").then(response => {
+        for(let i =0 ; i <response.length; i++){
+          console.log(response[i].clicked)
+          this.seriesPolicy[0].data[i] = response[i].clicked;
+          this.chartPolicyOptions.xaxis.categories[i] = response[i].title;
+        }
+      })
+
+      // 최근 가입한 유저 수
+      let user_cnt = [0, 0, 0, 0, 0]
+      for(let i=4; i >= 0; i--){
+          let yyyy = this.now.getFullYear().toString();
+          let mm = (this.now.getMonth() + 1).toString();
+          let dd = (this.now.getDate() - i).toString();
+          const date = yyyy + "-" + (mm[1] ? mm : "0" + mm[0]) + "-" + (dd[1] ? dd : "0" + dd[0]);
+          
+          for(let j=0; j < this.users.length; j++){
+            if (date == this.users[j].when){
+              user_cnt[4-i] += 1  
+            }
+          }
+        }
+      this.seriesUser[0].data = user_cnt
+      
+
     },
     async plot() {
       await this.getNotices();

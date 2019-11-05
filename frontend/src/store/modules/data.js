@@ -72,6 +72,9 @@ const actions = {
     console.log(params)
     return await api.checkPassword(params)
   },
+  async getUser({commit}) {
+    return await api.getUser()
+  },
   async getUserInfo({commit}) {
     var username = state.user.username
     const userInfo = await api.getUserInfo(username)
@@ -253,12 +256,43 @@ const actions = {
   async editServicePick({commit}, params) {
     return await api.editServicePick(params)
   },
+
+  // 딱정함 pick
   async getPickPolicies({commit}) {
     return await api.getPickPolicies()
   },
   async editPickPolicies({commit}, params) {
     return await api.editPickPolicies(params)
   },
+  async deletePickPolicies({commit}, params) {
+    return await api.deletePickPolicies(params)
+  },
+
+  // 딱정함 doing
+  async getDoingPolicies({commit}) {
+    return await api.getDoingPolicies()
+  },
+  async editDoingPolicies({commit}, params) {
+    return await api.editDoingPolicies(params)
+  },
+  async deleteDoingPolicies({commit}, params) {
+    return await api.deleteDoingPolicies(params)
+  },
+
+  // 딱정함 finish
+  async getFinishPolicies({commit}) {
+    return await api.getFinishPolicies()
+  },
+  async editFinishPolicies({commit}, params) {
+    return await api.editFinishPolicies(params)
+  },
+  async deleteFinishPolicies({commit}, params) {
+    return await api.deleteFinishPolicies(params)
+  },
+
+  async getMostPolicy({commit}, params) {
+    return await api.getMostPolicy()
+  }
 }
 
 // mutations

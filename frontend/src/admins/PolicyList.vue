@@ -1,7 +1,7 @@
 <template>
   <v-container class="fill-height" fluid>
     <v-layout wrap>
-      <v-flex xs12 sm6>
+      <v-flex xs12 sm8>
         <v-card>
           <v-card-title>
             {{ title }}
@@ -21,7 +21,7 @@
             sort-by="calories"
             class="elevation-1"
           >
-            <template v-slot:top>
+            <!-- <template v-slot:top>
               <v-dialog v-model="dialog" max-width="500px">
                 <v-card>
                   <v-card-title>
@@ -51,10 +51,10 @@
                   </v-card-actions>
                 </v-card>
               </v-dialog>
-            </template>
+            </template> -->
             <template v-slot:item.action="{ item }">
-              <v-icon small class="mr-2" @click="editItem(item)">{{ "mdi-pencil" }}</v-icon>
-              <v-icon small @click="deleteItem(item)">{{ "mdi-delete" }}</v-icon>
+              <!-- <v-icon small class="mr-2" @click="editItem(item)">{{ "mdi-pencil" }}</v-icon> -->
+              <v-icon small color="red" @click="deleteItem(item)">{{ "mdi-delete" }}</v-icon>
             </template>
           </v-data-table>
         </v-card>
@@ -69,7 +69,37 @@ import router from "../router";
 import store from "../store/modules/data.js";
 
 export default {
-    name: "PolicyList"
+    name: "PolicyList",
+    data: () =>({
+      title: "Policy",
+      dataLIst: [],
+      search: "",
+      dialog: false,
+      headers: [
+        { text: "Id", value: "id" },
+        { text: "Title", value: "title" },
+        { text: "Brief", value: "brief" },
+        { text: "Actions", value: "action", sortable: false }
+      ],
+    }),
+    mounted() {
+      this.getNotices()
+    },
+    methods: {
+      async getNotices() {
+          await this.$store.dispatch("data/policySearch", '00').then(response => {
+            this.dataLIst = response
+          // console.log(this.policies)
+          });
+      },
+
+      deleteItem(item, idx) {
+        const index = this.dataLIst.indexOf(item);
+        confirm("Are you sure you want to delete this item?") &&
+          this.dataLIst.splice(index, 1) 
+          // && this.$store.dispatch("data/deleteNotice", item.id);
+      },
+    },
 }
 </script>
 

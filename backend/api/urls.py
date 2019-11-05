@@ -34,6 +34,7 @@ urlpatterns = [
     url('policySearch/$', policy_views.policySearch, name='policy_search'),
     url('policySearchByWord/$', policy_views.policySearchByWord, name='policy_search_by_word'),
     url('policyClicked/$', policy_views.policyClicked, name='policyClicked'),
+    url('getMostPolicy/$', policy_views.getMostPolicy, name= 'get_most_policy'),
 
     
     # 자유게시판 관련 링크
@@ -52,6 +53,8 @@ urlpatterns = [
 
     # 딱정함
     url('pickPolicies/$', pick_views.pickPolicies, name='pick_policies'),
+    url('doingPolicies/$', pick_views.doingPolicies, name='doing_policies'),
+    url('finishPolicies/$', pick_views.finishPolicies, name='finish_policies'),
     # swagger
     path('docs/', get_swagger_view(title='API Docs')),
 ]
