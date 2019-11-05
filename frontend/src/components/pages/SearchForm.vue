@@ -1,6 +1,6 @@
 <template>
   <v-form ref="form">
-    <v-text-field v-model="title" label="정책명" 
+    <v-text-field v-model="searchWord" label="정책명" 
     :append-icon="icons.search" 
     @click:append="onSubmit" />
   </v-form>
@@ -16,14 +16,14 @@ export default {
   },
 
   data: () => ({
-    title: "",
+    searchWord: "",
     icons: { search: mdiMagnify }
   }),
 
   methods: {
     onSubmit: function() {
-      this.$emit('reload')
-      router.push("/policy/search/"+this.title);/* data.searchPolicy : 시행 */
+      router.push("/policy/search/"+this.searchWord);
+      this.searchWord="";
     }
   }                        
 };
