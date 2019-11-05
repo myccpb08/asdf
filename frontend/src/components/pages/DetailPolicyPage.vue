@@ -249,7 +249,9 @@ export default {
       policy : {},
       is_myPick: false,
       icons: { chat: mdiChat },
-      drawer: null
+      drawer: null,
+      doing: null,
+      finish: null,
     };
   },
 
@@ -313,23 +315,27 @@ export default {
         id: this.policyId,
         user: this.$store.state.data.user.username
       };
-    
-      if ( this.$store.dispatch("data/getUser").then(response => {
-            response['doing_policies'].some(pick_policy=> {
+      this.$store.dispatch("data/getUser").then(response => {
+          // console.log(response)
+            this.doing = (response['doing_policies'].some(pick_policy=> {
                 return pick_policy == this.policyId
-            }) ||
-            response['finish_policies'].some(pick_policy=> {
+            }) )
+            this.finish = (response['finish_policies'].some(pick_policy=> {
               return pick_policy == this.policyId
-            }) 
-            }) ) {
-            alert('딱정함에서 제거해주세요')
-          }
-      else {
-        this.is_myPick = !this.is_myPick;
-        this.$store.dispatch("data/editServicePick", params).then((result) => {
-          this.$store.dispatch("data/editSession", localStorage.getItem('token'))
-      });
-      }
+            }) ) 
+
+            if (this.doing || this.finish){
+              alert('딱정함에서 제거해주세요')
+            }
+            else {
+              this.is_myPick = !this.is_myPick;
+              this.$store.dispatch("data/editServicePick", params).then((result) => {
+                this.$store.dispatch("data/editSession", localStorage.getItem('token'))
+            });
+            }
+        }) 
+      
+      
     },
   }
 };
